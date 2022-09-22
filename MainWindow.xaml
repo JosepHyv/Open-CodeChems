@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/imageCodeChems.jpg"/>
+        </Grid.Background>
+        <Label Content="Open CodeChems" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Width="528" FontSize="48" HorizontalContentAlignment="Center" Foreground="#FFCCCBCB" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label Content="Una adaptación de codenames basado en la cultura de chems" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" Foreground="#FFFFDE00" FontFamily="Comic Sans MS" FontSize="20">
+            <Label.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                    <GradientStop Color="#FF141414" Offset="0.193"/>
+                </LinearGradientBrush>
+            </Label.BorderBrush>
+        </Label>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Center" Margin="0,236,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="240" TextChanged="TextBox_TextChanged"/>
+        <PasswordBox HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Width="240" Height="20" Password=""/>
+        <Button Content="Login" HorizontalAlignment="Center" Margin="0,350,0,0" VerticalAlignment="Top" Height="39" Width="80" Click="Button_Click" FontFamily="Comic Sans MS" FontSize="18" Foreground="Black" BorderBrush="#FFF1FF00" Background="#FFFFF500"/>
+        <Label Content="Username" HorizontalAlignment="Left" Margin="280,0,0,0" VerticalAlignment="Center"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="280,261,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
