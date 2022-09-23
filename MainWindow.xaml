@@ -11,7 +11,7 @@
             <ImageBrush ImageSource="/imageCodeChems.jpg"/>
         </Grid.Background>
         <Label Content="Open CodeChems" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Top" Width="528" FontSize="48" HorizontalContentAlignment="Center" Foreground="#FFCCCBCB" FontFamily="Comic Sans MS" FontWeight="Bold"/>
-        <Label Content="Una adaptación de codenames basado en la cultura de chems" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" Foreground="#FFFFDE00" FontFamily="Comic Sans MS" FontSize="20">
+        <Label x:Name="lbSubTittle" Content="Una Chemsificacion del juego codenames" HorizontalAlignment="Center" Margin="0,117,0,0" VerticalAlignment="Top" Foreground="#FFFFDE00" FontFamily="Comic Sans MS" FontSize="20">
             <Label.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>

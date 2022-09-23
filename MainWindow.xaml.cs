@@ -29,5 +29,10 @@ namespace Open_CodeChems
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
