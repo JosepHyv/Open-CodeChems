@@ -13,5 +13,6 @@ namespace Open_CodeChems
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
