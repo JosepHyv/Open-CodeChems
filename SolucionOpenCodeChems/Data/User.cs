@@ -10,16 +10,22 @@
 namespace Data
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Profiles = new HashSet<Profile>();
+        }
+    
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
         public string name { get; set; }
-        public string nickname { get; set; }
     
-        public virtual Profile Profile { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profile> Profiles { get; set; }
     }
 }

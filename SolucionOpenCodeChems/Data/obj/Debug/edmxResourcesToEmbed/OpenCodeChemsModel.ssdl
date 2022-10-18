@@ -5,9 +5,11 @@
       <PropertyRef Name="nickname" />
     </Key>
     <Property Name="nickname" Type="nvarchar" MaxLength="40" Nullable="false" />
-    <Property Name="victories" Type="int" Nullable="false" />
+    <Property Name="victories" Type="int" />
     <Property Name="imageProfile" Type="varbinary(max)" />
     <Property Name="avatar" Type="varbinary(max)" />
+    <Property Name="defaults" Type="int" />
+    <Property Name="username" Type="nvarchar" MaxLength="40" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -17,28 +19,27 @@
     <Property Name="password" Type="nvarchar" MaxLength="32" Nullable="false" />
     <Property Name="email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="nickname" Type="nvarchar" MaxLength="40" Nullable="false" />
   </EntityType>
-  <Association Name="FK_dbo_User_dbo_Profile_nickname">
-    <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+  <Association Name="FK_dbo_Profile_dbo_User_username">
+    <End Role="User" Type="Self.User" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Profile">
-        <PropertyRef Name="nickname" />
+      <Principal Role="User">
+        <PropertyRef Name="username" />
       </Principal>
-      <Dependent Role="User">
-        <PropertyRef Name="nickname" />
+      <Dependent Role="Profile">
+        <PropertyRef Name="username" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="OpenCodeChemsModelStoreContainer">
     <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_dbo_User_dbo_Profile_nickname" Association="Self.FK_dbo_User_dbo_Profile_nickname">
-      <End Role="Profile" EntitySet="Profile" />
+    <AssociationSet Name="FK_dbo_Profile_dbo_User_username" Association="Self.FK_dbo_Profile_dbo_User_username">
       <End Role="User" EntitySet="User" />
+      <End Role="Profile" EntitySet="Profile" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

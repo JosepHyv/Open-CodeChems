@@ -10,9 +10,11 @@
             <PropertyRef Name="nickname" />
           </Key>
           <Property Name="nickname" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="victories" Type="int" Nullable="false" />
+          <Property Name="victories" Type="int" />
           <Property Name="imageProfile" Type="varbinary(max)" />
           <Property Name="avatar" Type="varbinary(max)" />
+          <Property Name="defaults" Type="int" />
+          <Property Name="username" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -22,28 +24,27 @@
           <Property Name="password" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="nickname" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
-        <Association Name="FK_dbo_User_dbo_Profile_nickname">
-          <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+        <Association Name="FK_dbo_Profile_dbo_User_username">
+          <End Role="User" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="nickname" />
+            <Principal Role="User">
+              <PropertyRef Name="username" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="nickname" />
+            <Dependent Role="Profile">
+              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OpenCodeChemsModelStoreContainer">
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_User_dbo_Profile_nickname" Association="Self.FK_dbo_User_dbo_Profile_nickname">
-            <End Role="Profile" EntitySet="Profile" />
+          <AssociationSet Name="FK_dbo_Profile_dbo_User_username" Association="Self.FK_dbo_Profile_dbo_User_username">
             <End Role="User" EntitySet="User" />
+            <End Role="Profile" EntitySet="Profile" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -56,10 +57,12 @@
             <PropertyRef Name="nickname" />
           </Key>
           <Property Name="nickname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="victories" Type="Int32" Nullable="false" />
+          <Property Name="victories" Type="Int32" />
           <Property Name="imageProfile" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_User_dbo_Profile_nickname" FromRole="Profile" ToRole="User" />
+          <Property Name="defaults" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Profile_dbo_User_username" FromRole="Profile" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -69,29 +72,28 @@
           <Property Name="password" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="nickname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Profile" Relationship="Self.FK_dbo_User_dbo_Profile_nickname" FromRole="User" ToRole="Profile" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK_dbo_Profile_dbo_User_username" FromRole="User" ToRole="Profile" />
         </EntityType>
-        <Association Name="FK_dbo_User_dbo_Profile_nickname">
-          <End Role="Profile" Type="Self.Profile" Multiplicity="1">
+        <Association Name="FK_dbo_Profile_dbo_User_username">
+          <End Role="User" Type="Self.User" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="nickname" />
+            <Principal Role="User">
+              <PropertyRef Name="username" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="nickname" />
+            <Dependent Role="Profile">
+              <PropertyRef Name="username" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OpenCodeChemsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OpenCodeChemsContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_dbo_User_dbo_Profile_nickname" Association="Self.FK_dbo_User_dbo_Profile_nickname">
-            <End Role="Profile" EntitySet="Profiles" />
+          <AssociationSet Name="FK_dbo_Profile_dbo_User_username" Association="Self.FK_dbo_Profile_dbo_User_username">
             <End Role="User" EntitySet="Users" />
+            <End Role="Profile" EntitySet="Profiles" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -99,7 +101,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OpenCodeChemsModelStoreContainer" CdmEntityContainer="OpenCodeChemsEntities">
+        <EntityContainerMapping StorageEntityContainer="OpenCodeChemsModelStoreContainer" CdmEntityContainer="OpenCodeChemsContext">
           <EntitySetMapping Name="Profiles">
             <EntityTypeMapping TypeName="OpenCodeChemsModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
@@ -107,6 +109,8 @@
                 <ScalarProperty Name="victories" ColumnName="victories" />
                 <ScalarProperty Name="imageProfile" ColumnName="imageProfile" />
                 <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="defaults" ColumnName="defaults" />
+                <ScalarProperty Name="username" ColumnName="username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -117,7 +121,6 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="nickname" ColumnName="nickname" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

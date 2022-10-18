@@ -13,10 +13,10 @@ namespace Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class OpenCodeChemsEntities : DbContext
+    public partial class OpenCodeChemsContext : DbContext
     {
-        public OpenCodeChemsEntities()
-            : base("name=OpenCodeChemsEntities")
+        public OpenCodeChemsContext()
+            : base("name=OpenCodeChemsContext")
         {
         }
     
