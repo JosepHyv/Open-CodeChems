@@ -51,16 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Contracts\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\OpenCodeChems.Server.DataAccess.csproj">
+    <ProjectReference Include="..\OpenCodeChems.Server.DataAccess\OpenCodeChems.Server.DataAccess.csproj">
       <Project>{ed3aa902-9469-42d7-9515-aa8b5035a4d0}</Project>
       <Name>OpenCodeChems.Server.DataAccess</Name>
     </ProjectReference>
