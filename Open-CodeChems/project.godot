@@ -12,7 +12,6 @@ config_version=4
 
 config/name="Open- Code Chems"
 run/main_scene="res://Node2D.tscn"
-config/icon="res://icon.png"
 
 [gui]
 
@@ -21,6 +20,8 @@ common/drop_mouse_on_gui_input_disabled=true
 [mono]
 
 project/assembly_name="Open- Code Chems"
+profiler/enabled=true
+debugger_agent/wait_for_debugger=true
 
 [physics]
 
