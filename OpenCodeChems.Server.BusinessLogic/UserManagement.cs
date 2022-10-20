@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using OpenCodeChems.Server.DataAccess;
+using OpenCodeChems.Server.BusinessLogic.OpenCodeChems.Server.Contracts;
 
 namespace OpenCodeChems.Server.BusinessLogic
 {
-    internal class UserManagement
+    internal class UserManagement : IUserManagement
     {
-        public static string ComputeSHA256Hash(string text)
+        public string ComputeSHA256Hash(string text)
         {
             using (var sha256 = new SHA256Managed())
             {
