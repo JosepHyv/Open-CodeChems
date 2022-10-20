@@ -16,6 +16,12 @@
 
 OpenCodeChems.Client/.idea/**
 OpenCodeChems.Client/.idea
+OpenCodeChems.Server/.idea/**
+OpenCodeChems.Server/.idea
+OpenCodeChems.Server.DataAcess/.idea/**
+OpenCodeChems.Server.DataAcess/.idea
+OpenCodeChems.Server.BusinessLogic/.idea/**
+OpenCodeChems.Server.BusinessLogic/.idea
 
 # Only for Rider
 # Rider auto-generates .iml files, and contentModel.xml
