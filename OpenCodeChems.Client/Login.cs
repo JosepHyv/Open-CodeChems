@@ -1,7 +1,7 @@
-using Godot;
+﻿using Godot;
 using System;
 
-public class login : Node2D
+public class Login : Node2D
 {
     // Declare member variables here. Examples:
     // private int a = 2;
@@ -10,7 +10,7 @@ public class login : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        GD.Print("Testeando la vista del login");
+        GD.Print("Imprimiendo");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
