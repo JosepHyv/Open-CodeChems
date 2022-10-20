@@ -12,6 +12,11 @@
 # intellijIdea Rider C# files unnecesary 
 # ============================
 
+#Project OpenCodeChems Using Rider
+
+OpenCodeChems.Client/.idea/**
+OpenCodeChems.Client/.idea
+
 # Only for Rider
 # Rider auto-generates .iml files, and contentModel.xml
 **/.idea/**/*.iml
