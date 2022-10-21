@@ -9,7 +9,6 @@ namespace OpenCodeChems.Server.BusinessLogic.OpenCodeChems.Server.Contracts
 {
     internal interface IUserManagement
     {
-        string ComputeSHA256Hash(string text);
 
         bool RegisterUser(User user, string nickname);
 
