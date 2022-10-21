@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenCodeChems.Server", "OpenCodeChems.Server.csproj", "{3D3B1BB4-3C03-4501-B9D4-BA60886E6F33}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.Server.DataAccess", "..\OpenCodeChems.Server.DataAccess\OpenCodeChems.Server.DataAccess.csproj", "{AE0E2F90-F247-49FF-93D0-61D866DE5A3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.Server.BusinessLogic", "..\OpenCodeChems.Server.BusinessLogic\OpenCodeChems.Server.BusinessLogic.csproj", "{E9954D32-3812-45D6-B2C7-8B0AF68FAC4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.Service", "OpenCodeChems.Service\OpenCodeChems.Service.csproj", "{C2723385-1BE8-495E-946D-30B7DEAC0BC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3D3B1BB4-3C03-4501-B9D4-BA60886E6F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D3B1BB4-3C03-4501-B9D4-BA60886E6F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D3B1BB4-3C03-4501-B9D4-BA60886E6F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D3B1BB4-3C03-4501-B9D4-BA60886E6F33}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE0E2F90-F247-49FF-93D0-61D866DE5A3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE0E2F90-F247-49FF-93D0-61D866DE5A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE0E2F90-F247-49FF-93D0-61D866DE5A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{E9954D32-3812-45D6-B2C7-8B0AF68FAC4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9954D32-3812-45D6-B2C7-8B0AF68FAC4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9954D32-3812-45D6-B2C7-8B0AF68FAC4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2723385-1BE8-495E-946D-30B7DEAC0BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2723385-1BE8-495E-946D-30B7DEAC0BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2723385-1BE8-495E-946D-30B7DEAC0BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2723385-1BE8-495E-946D-30B7DEAC0BC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
