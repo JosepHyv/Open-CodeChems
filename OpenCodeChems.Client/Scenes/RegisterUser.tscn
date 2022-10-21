@@ -59,7 +59,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=15]
 font_data = ExtResource( 2 )
 
-[node name="Control" type="Control"]
+[node name="RegisterUser" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
@@ -216,6 +216,7 @@ margin_left = 62.0
 margin_top = 437.0
 margin_right = 327.0
 margin_bottom = 512.0
+action_mode = 0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 expand = true
