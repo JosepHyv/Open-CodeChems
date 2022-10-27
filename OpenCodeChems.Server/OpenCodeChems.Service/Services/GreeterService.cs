@@ -1,7 +1,7 @@
 using Grpc.Core;
-using OpenCodeChems.Server;
+using OpenCodeChems.Service;
 
-namespace OpenCodeChems.Server.Services;
+namespace OpenCodeChems.Service.Services;
 
 public class GreeterService : Greeter.GreeterBase
 {

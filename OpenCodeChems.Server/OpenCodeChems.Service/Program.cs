@@ -1,4 +1,4 @@
-using OpenCodeChems.Server.Services;
+using OpenCodeChems.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

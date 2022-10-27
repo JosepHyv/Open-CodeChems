@@ -1,10 +1,10 @@
 ﻿{
   "profiles": {
-    "OpenCodeChems.Server": {
+    "OpenCodeChems.Service": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5015;https://localhost:7111",
+      "applicationUrl": "http://localhost:5007;https://localhost:7290",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
