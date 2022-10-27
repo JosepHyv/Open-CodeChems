@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.Service", "Op
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.DataAccess", "OpenCodeChems.DataAccess\OpenCodeChems.DataAccess.csproj", "{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.BusinessLogic", "OpenCodeChems.BusinessLogic\OpenCodeChems.BusinessLogic.csproj", "{8A02872B-1E28-4932-97EC-266FD1902D51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A02872B-1E28-4932-97EC-266FD1902D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A02872B-1E28-4932-97EC-266FD1902D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A02872B-1E28-4932-97EC-266FD1902D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A02872B-1E28-4932-97EC-266FD1902D51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
