@@ -11,8 +11,7 @@ config_version=4
 [application]
 
 config/name="OpenCodeChems.Client"
-run/main_scene="res://Scenes/BusinessLogic/Main.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/LogIn.tscn"
 
 [gui]
 

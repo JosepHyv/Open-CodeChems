@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Resources/image.png" type="Texture" id=1]
-[ext_resource path="res://Resources/buttonTexture.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/UserInterface/LogIn.cs" type="Script" id=3]
 
 [node name="LogIn" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchor_right = 1.0
