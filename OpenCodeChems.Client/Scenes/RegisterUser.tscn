@@ -230,3 +230,5 @@ custom_fonts/font = SubResource( 15 )
 text = "Cancelar"
 align = 1
 valign = 1
+
+[connection signal="pressed" from="BackgroundRegisterNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
