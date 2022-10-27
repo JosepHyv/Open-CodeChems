@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenCodeChems.Client.Resources
 {
-    internal class Validation
+    public class Validation
     {
         public string ComputeSHA256Hash(string text)
         {
@@ -15,6 +15,11 @@ namespace OpenCodeChems.Client.Resources
             {
                 return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(text))).Replace("-", "");
             }
+        }
+
+        public bool EmailValidate(string email)
+        {
+            return false;
         }
     }
 }
