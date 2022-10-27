@@ -11,10 +11,8 @@ config_version=4
 [application]
 
 config/name="OpenCodeChems.Client"
-
-config/icon="res://Scenes/Resources/Icons/icon.png"
 run/main_scene="res://Scenes/LogIn.tscn"
-
+config/icon="res://Scenes/Resources/Icons/icon.png"
 
 [gui]
 
