@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Fonts/comic.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Icons/imagePerfilDefault.jpg" type="Texture" id=2]
-[ext_resource path="res://Icons/image.png" type="Texture" id=3]
-[ext_resource path="res://Icons/buttonTexture.png" type="Texture" id=4]
-[ext_resource path="res://Icons/settingsButton.png" type="Texture" id=5]
-[ext_resource path="res://Icons/logout.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Resources/Fonts/comic.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scenes/Resources/Icons/imagePerfilDefault.jpg" type="Texture" id=2]
+[ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Resources/Icons/settingsButton.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Resources/Icons/logout.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )

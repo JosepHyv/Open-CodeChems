@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/logout.png-d907f6d71d5e0228619d5ba03b306165.stex"
+path="res://.import/logout.png-83908aa1ba505953fd801648793b1759.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Icons/logout.png"
-dest_files=[ "res://.import/logout.png-d907f6d71d5e0228619d5ba03b306165.stex" ]
+source_file="res://Scenes/Resources/Icons/logout.png"
+dest_files=[ "res://.import/logout.png-83908aa1ba505953fd801648793b1759.stex" ]
 
 [params]
 
