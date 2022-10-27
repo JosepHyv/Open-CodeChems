@@ -1,25 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Godot;
+using System;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using EmailValidation;
+
 
 namespace OpenCodeChems.Client.Resources
 {
     public class Validation
     {
-        public string ComputeSHA256Hash(string text)
+        public bool ValidatePassword(string password)
         {
-            using (var sha256 = new SHA256Managed())
-            {
-                return BitConverter.ToString(sha256.ComputeHash(Encoding.UTF8.GetBytes(text))).Replace("-", "");
-            }
+            bool isValid = true;
+            isValid = isValid & !String.IsNullOrWhiteSpace(password);
+            isValid = isValid & (password.Length >= 8);
+            return isValid;
         }
 
-        public bool EmailValidate(string email)
+        public bool ValidateEmail(string email)
         {
-            return false;
+            bool isValid = true;
+            isValid = isValid & !String.IsNullOrWhiteSpace(email);
+            isValid = isValid & (email.Length <= 255);
+            isValid = isValid & EmailValidator.Validate(email);
+            return isValid;
         }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.Remoting.Messaging;
 using OpenCodeChems.Client.Resources;
 
 public class LogIn : Control
@@ -34,11 +35,24 @@ public class LogIn : Control
         string email = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
         string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 
+        Validation validator = new Validation();
+        
+        if(validator.ValidateEmail(email))
+            GD.Print("SOy valido");
+        else
+            GD.Print("No soy valido");
 
 
-        if (ValidateEmail(email) && ValidatePassword(password))
+        if (validator.ValidatePassword(password))
         {
-            Validation PasswordHasher = new Validation();
+            GD.Print("Soy una contra valida");
+        }
+        else 
+            GD.Print("No soy una contra valida");
+
+        if (validator.ValidateEmail(email) && validator.ValidatePassword(password))
+        {
+            Encryption PasswordHasher = new Encryption();
             string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
             GD.Print("Usuario atenticado");
             GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
@@ -46,19 +60,7 @@ public class LogIn : Control
 
     }
 
-    public bool ValidateEmail(string email)
-    {
-        bool IsOk = true;
-        if (String.IsNullOrEmpty(email))
-            IsOk = false;
-
-        return IsOk;
-    }
-
-    private bool ValidatePassword(string password)
-    {
-        return !String.IsNullOrEmpty(password);
-    }
+    
 }   
 
 
