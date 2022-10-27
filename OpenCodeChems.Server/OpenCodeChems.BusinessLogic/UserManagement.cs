@@ -4,22 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using OpenCodeChems.Server.DataAccess;
-using OpenCodeChems.Server.BusinessLogic.OpenCodeChems.Server.Contracts;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using OpenCodeChems.BusinessLogic.Interface;
+using OpenCodeChems.DataAccess;
 
-namespace OpenCodeChems.Server.BusinessLogic
+namespace OpenCodeChems.BusinessLogic
 {
     internal class UserManagement : IUserManagement
     {
-
-        public bool RegisterUser(User user, string nickname)
+        public bool RegisterUser(User user, string nikname)
         {
             bool status = false;
             using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                User newUser = context.Users.Add(new User() { username = user.username, email = user.email, name = user.name, password = user.password });
+               EntityEntry<User> newUser = context.User.Add(new User
+               {
+                   username = user.username, email = user.email, name = user.name, password = user.password
+               });
                 context.SaveChanges();
-                Profile newProfile = context.Profiles.Add(new Profile() { nickname = nickname, username = user.username });
+                EntityEntry<Profile> newProfile = context.Profile.Add(new Profile { nickname = user.name, username = user.username });
                 if (newUser != null && newProfile != null)
                 {
                     status = true;
@@ -33,9 +36,9 @@ namespace OpenCodeChems.Server.BusinessLogic
             bool status = false;
             using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                int foundUser = (from User in context.Users
-                                 where User.username == username && User.password == password
-                                 select User).Count();
+                int foundUser = (from User in context.User
+                    where User.username == username && User.password == password
+                    select User).Count();
                 if (foundUser > 0)
                 {
                     status = true;
@@ -43,7 +46,5 @@ namespace OpenCodeChems.Server.BusinessLogic
             }
             return status;
         }
-
     }
 }
-
