@@ -36,20 +36,6 @@ public class LogIn : Control
         string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 
         Validation validator = new Validation();
-        
-        if(validator.ValidateEmail(email))
-            GD.Print("SOy valido");
-        else
-            GD.Print("No soy valido");
-
-
-        if (validator.ValidatePassword(password))
-        {
-            GD.Print("Soy una contra valida");
-        }
-        else 
-            GD.Print("No soy una contra valida");
-
         if (validator.ValidateEmail(email) && validator.ValidatePassword(password))
         {
             Encryption PasswordHasher = new Encryption();
