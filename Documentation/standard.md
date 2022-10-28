@@ -57,7 +57,47 @@ public T SomeMethod<T>(int someNumber, bool isValid)
 }
 ```
 
+## Comennting conventions
+* Place the comment on a separate line, not at the end of a line of code.
+
+* Begin comment text with an uppercase letter.
+* End comment text with a period.
+* Don't create formatted blocks of asterisks around comments.
+
+``` cs
+// The following declaration creates a query. It does not run
+// the query.
+```
+
+Insert one space between the comment delimiter (//) and the comment text, as shown in the following example.
 ## Layout conventions
-As working on diferent text editor due to having different operative systems we created a configuration file, click [here](https://github.com/JosepHyv/Open-CodeChems/blob/main/.editorconfig) to watch it.
+* As working on diferent text editor due to having different operative systems we created a configuration file, click [here](https://github.com/JosepHyv/Open-CodeChems/blob/main/.editorconfig) to watch it.
 
 ## try-catch
+* Use a try-catch statement for most exception handling.
+```cs
+static string GetValueFromArray(string[] array, int index)
+{
+    try
+    {
+        return array[index];
+    }
+    catch (System.IndexOutOfRangeException ex)
+    {
+        Console.WriteLine("Index is out of range: {0}", index);
+        throw;
+    }
+}
+```
+
+## new operator
+* Use one of the concise forms of object instantiation, as shown in the following declarations. 
+
+```cs
+var instance1 = new ExampleClass();
+```
+* Use object initializers to simplify object creation, as shown in the following example.
+````cs
+var instance3 = new ExampleClass { Name = "Desktop", ID = 37414,
+    Location = "Redmond", Age = 2.3 };
+```
