@@ -21,6 +21,8 @@ public class MainMenu : Control
     public void _on_LogOutTextureButton_pressed()
     {
         GetTree().ChangeScene("res://Scenes/LogIn.tscn");
+        // ToDo
+        // implementing logout in server for secure connection
     }
     public void _on_CreateGameTextureButton_pressed()
     {
@@ -48,4 +50,9 @@ public class MainMenu : Control
 //  {
 //      
 //  }
+
+    public void _on_FriendsRequestButton_pressed()
+    {
+        GD.Print("No Implemented Yet");
+    }
 }

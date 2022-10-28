@@ -32,11 +32,11 @@ public class LogIn : Control
     {
         GD.Print("Hola Mundo andamos en el login");
 
-        string email = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
+        string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
         string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 
-        Validation validator = new Validation();
-        if (validator.ValidateEmail(email) && validator.ValidatePassword(password))
+        
+        if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
         {
             Encryption PasswordHasher = new Encryption();
             string hashPassword = PasswordHasher.ComputeSHA256Hash(password);

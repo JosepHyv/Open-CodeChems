@@ -18,4 +18,12 @@ public class AddFriend : Control
 //  {
 //      
 //  }
+
+
+    public void _on_CancelTextureButton_pressed()
+    {
+        GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+    }
+    
+    
 }
