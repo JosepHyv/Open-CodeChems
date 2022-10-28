@@ -70,7 +70,7 @@ margin_top = 144.0
 margin_right = 204.388
 margin_bottom = 78.376
 custom_fonts/font = SubResource( 2 )
-text = "Añadir amigo"
+text = "Add friends"
 
 [node name="FriendsRequestButton" type="Button" parent="BackgroundMenuNinePatchRect/MenuColorRect"]
 anchor_right = 0.125
@@ -80,7 +80,7 @@ margin_top = 218.0
 margin_right = 203.75
 margin_bottom = 124.75
 custom_fonts/font = SubResource( 3 )
-text = "Solucitudes de amistad"
+text = "Friend requests"
 
 [node name="FriendsItemList" type="ItemList" parent="BackgroundMenuNinePatchRect/MenuColorRect"]
 anchor_right = 0.085
@@ -88,7 +88,7 @@ anchor_bottom = 0.268
 margin_left = 2.0
 margin_top = 326.0
 margin_right = 214.11
-margin_bottom = 435.004
+margin_bottom = 436.004
 
 [node name="FriendsVScrollBar2" type="VScrollBar" parent="BackgroundMenuNinePatchRect/MenuColorRect/FriendsItemList"]
 anchor_right = 0.2
@@ -115,7 +115,7 @@ margin_right = 175.0
 margin_bottom = 52.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Crear partida"
+text = "Create game"
 align = 1
 valign = 1
 
@@ -135,7 +135,7 @@ margin_right = 192.0
 margin_bottom = 50.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 6 )
-text = "Unirse a partida"
+text = "Join game"
 align = 1
 valign = 1
 
