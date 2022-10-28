@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\OpenCodeChems.BusinessLogic\OpenCodeChems.BusinessLogic.csproj" />
       <ProjectReference Include="..\OpenCodeChems.DataAccess\OpenCodeChems.DataAccess.csproj" />
     </ItemGroup>
 
