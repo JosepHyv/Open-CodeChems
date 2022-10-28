@@ -15,7 +15,36 @@ namespace OpenCodeChems.Client.Resources
             bool isValid = true;
             isValid = isValid & !String.IsNullOrWhiteSpace(password);
             isValid = isValid & (password.Length >= 8);
-            return isValid;
+
+            string especialCharacters = "*#+-_;.@%&/()=!?¿¡{}[]^<>";
+
+            bool probeEspecial = false, probeNumber = false, probeUpperCase = false, probeLowerCase = false;
+            foreach (char character in password)
+            {
+                foreach (char especialCharacter in especialCharacters)
+                {
+                    if (character == especialCharacter)
+                    {
+                        probeEspecial = true;
+                    }
+                        
+                }
+
+                if (probeEspecial)
+                {
+                    break;
+                }
+            }
+            
+            foreach(char character in password)
+            {
+                probeNumber |= (character >= '0' && character <= '9');
+                probeUpperCase |= (character >= 'A' && character <= 'Z');
+                probeLowerCase |= (character >= 'a' && character <= 'z');
+                
+            }
+            
+            return isValid & probeNumber & probeEspecial & probeLowerCase & probeUpperCase;
         }
 
         public bool ValidateEmail(string email)
