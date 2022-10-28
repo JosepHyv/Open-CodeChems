@@ -4,10 +4,7 @@
 [ext_resource path="res://Scenes/Resources/Fonts/comic.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/UserInterface/RegisterUser.cs" type="Script" id=4]
-
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/image.png-3dd795f1a6223cfc33ffc5be3ab8ad83.stex"
+[ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 42
@@ -47,16 +44,18 @@ font_data = ExtResource( 2 )
 size = 25
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=9]
-size = 18
-font_data = ExtResource( 2 )
-
 [sub_resource type="Theme" id=12]
 
 [sub_resource type="DynamicFont" id=14]
+size = 20
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=15]
+size = 20
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 20
 font_data = ExtResource( 2 )
 
 [node name="RegisterUser" type="Control"]
@@ -67,7 +66,7 @@ script = ExtResource( 4 )
 [node name="BackgroundRegisterNinePatchRect" type="NinePatchRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = SubResource( 1 )
+texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 1898, 845 )
 
 [node name="TitleRegisterLabel" type="Label" parent="BackgroundRegisterNinePatchRect"]
@@ -78,9 +77,11 @@ margin_top = 2.0
 margin_right = 1025.0
 margin_bottom = 62.0
 custom_fonts/font = SubResource( 2 )
-text = "Register New User"
+text = "REGISTER_TITTLE"
 align = 1
 valign = 1
+autowrap = true
+clip_text = true
 
 [node name="NameLabel" type="Label" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 30.0
@@ -89,7 +90,9 @@ margin_right = 170.0
 margin_bottom = 114.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 3 )
-text = "Name"
+text = "NAME_LABEL"
+autowrap = true
+clip_text = true
 
 [node name="NameLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -105,7 +108,9 @@ margin_right = 261.0
 margin_bottom = 157.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 4 )
-text = "Email"
+text = "EMAIL_LABEL"
+autowrap = true
+clip_text = true
 
 [node name="EmailLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -121,7 +126,9 @@ margin_right = 279.0
 margin_bottom = 199.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 5 )
-text = "User Name"
+text = "USERNAME_LABEL"
+autowrap = true
+clip_text = true
 
 [node name="UsernameLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -137,7 +144,9 @@ margin_right = 263.0
 margin_bottom = 244.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 6 )
-text = "Player Name"
+text = "NICKNAME_LABEL"
+autowrap = true
+clip_text = true
 
 [node name="NicknameLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -153,7 +162,9 @@ margin_right = 195.0
 margin_bottom = 290.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 7 )
-text = "Password"
+text = "PASSWORD_LABEL"
+autowrap = true
+clip_text = true
 
 [node name="PasswordLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -170,7 +181,9 @@ margin_right = 302.0
 margin_bottom = 335.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 8 )
-text = "Repeat Password"
+text = "CONFIRMPASS_LABEL"
+autowrap = true
+clip_text = true
 
 [node name="ConfirmPasswordLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -179,16 +192,6 @@ margin_right = 950.0
 margin_bottom = 330.0
 custom_fonts/font = SubResource( 11 )
 secret = true
-
-[node name="PasswordInformationRichTextLabel" type="RichTextLabel" parent="BackgroundRegisterNinePatchRect"]
-margin_left = 30.0
-margin_top = 340.0
-margin_right = 630.0
-margin_bottom = 450.0
-custom_fonts/normal_font = SubResource( 9 )
-text = "The password must contain
-uppercase, lowercase,
-numbers and special characters."
 
 [node name="RegisterTextureButton" type="TextureButton" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 625.0
@@ -202,14 +205,17 @@ texture_pressed = ExtResource( 3 )
 expand = true
 
 [node name="RegisterLabel" type="Label" parent="BackgroundRegisterNinePatchRect/RegisterTextureButton"]
-margin_left = 94.0
-margin_top = 22.0
-margin_right = 166.0
-margin_bottom = 45.0
+margin_left = 77.0
+margin_top = 20.0
+margin_right = 188.0
+margin_bottom = 49.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 14 )
-text = "Register"
+text = "SINGIN_BUTTON"
 align = 1
 valign = 1
+autowrap = true
+clip_text = true
 
 [node name="CancelTextureButton" type="TextureButton" parent="BackgroundRegisterNinePatchRect"]
 light_mask = 431
@@ -223,14 +229,28 @@ texture_pressed = ExtResource( 3 )
 expand = true
 
 [node name="CancelLabel" type="Label" parent="BackgroundRegisterNinePatchRect/CancelTextureButton"]
-margin_left = 102.0
-margin_top = 24.0
-margin_right = 149.0
-margin_bottom = 47.0
+margin_left = 85.0
+margin_top = 21.0
+margin_right = 165.0
+margin_bottom = 50.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 15 )
-text = "Cancel"
+text = "CANCEL_BUTTON"
 align = 1
 valign = 1
+autowrap = true
+clip_text = true
+
+[node name="Label" type="Label" parent="BackgroundRegisterNinePatchRect"]
+margin_left = 38.0
+margin_top = 348.0
+margin_right = 289.0
+margin_bottom = 432.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "PASSWORD_INSTRUCTION"
+autowrap = true
+clip_text = true
 
 [connection signal="pressed" from="BackgroundRegisterNinePatchRect/RegisterTextureButton" to="." method="_on_RegisterTextureButton_pressed"]
 [connection signal="pressed" from="BackgroundRegisterNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]

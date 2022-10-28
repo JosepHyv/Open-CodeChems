@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://Scenes/Resources/Internacionalization/internacionalization.en.translation", "res://Scenes/Resources/Internacionalization/internacionalization.es.translation" ]
+
+source_file="res://Scenes/Resources/Internacionalization/internacionalization.csv"
+dest_files=[ "res://Scenes/Resources/Internacionalization/internacionalization.en.translation", "res://Scenes/Resources/Internacionalization/internacionalization.es.translation" ]
+
+[params]
+
+compress=true
+delimiter=0

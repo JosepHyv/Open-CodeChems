@@ -1,0 +1,38 @@
+﻿,en,es
+LENGUAGE_INSTRUCTION,Select lenguage,Selecciona el lenguaje
+CANCEL_BUTTON,Cancel,Cancelar
+FRIEND_REQUEST_INSTRUCTION,Type your friend's username to send a friend request,Escribe el nombre de usuario de tu amigo para enviar una solicitud de amistad
+ADDFRIEND_BUTTON,Add friend,Agregar amigo
+FRIENDREQUEST_BUTTON,Friend requests,Solicitudes de amistad
+CREATEGAME_BUTTON,Create game,Crear partida
+JOINGAME_BUTTON,Join game,Unirse a partida
+RANDOMIZE_BUTTON,Randomize teams,Randomizar equipos
+SPYMASTER_LABEL,Spy master,Espía maestro
+SPYMASTER_BUTTON,Enter as a spy master,Entrar como esía maestro
+SPIES_LABEL,Spies,Espías
+SPIES_BUTTON,Enter as a soy,Entrar como espía maestro
+ROOM_LABEL,Room:,Sala:
+INVITATIONCODE_LABEL,Invitation code,Código de invitación
+START_BUTTON,Start game,Empezar partida
+RULES_BUTTON,Rules,Reglas
+DELETEFRIEND_ADVICE,Are you sure you want to delete this friend?,¿Estás seguro que quieres eliminar este amigo?
+ACCEPT_BUTTON,Accept,Aceptar
+PROFILEINFO_LABEL,Profile Information,Información del perfil
+UPDATEPASSWORD_LABEL,Update password,Cambiar contraseña
+NICKNAME_LABEL,Nickname,Nombre de jugador
+EMAIL_LABEL,Email,Correo eletrónico
+PHOTO_LABEL,Profile photo,Foto de perfil
+SAVE_BUTTON,Save,Guardar
+ACTUALPASS_LABEL,Actual password,Contraseña actual
+NEWPASS_LABEL,New password,Nueva contraseña
+CONFIRMPASS_LABEL,Confirm password,Confirmar contraseña
+JOINGAME_INSTRUCTION,Enter a room code to be able to join with other players,Ingrese un código de sala para unise con otros jugadores.
+USERNAME_LABEL,Username,Nombre de usuario
+PASSWORD_LABEL,Password,Contraseña actual
+SINGIN_BUTTON,Sing In,Registrarse
+LOGIN_BUTTON,Log In,Ingresar
+REGISTER_TITTLE,Register New User,Registrar Usuario Nuevo
+NAME_LABEL,Name,Nombre
+PASSWORD_INSTRUCTION,"The password must contain uppercase, lowercase, numbers, and special characters","La contrseña debe contener mayúsculas, minúsculas, números y caractéres especiales"
+NAMEROOM_LABEL,Name of the room,Nombre de la sala
+CODEJOINROOM_LABEL,Code to join the room,Código para unirse a la sala
