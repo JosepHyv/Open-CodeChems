@@ -12,7 +12,7 @@ public class LogIn : Control
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-        
+		
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,34 +20,34 @@ public class LogIn : Control
 //  {
 //      
 //  }
-    private void _on_RegisterButton_pressed()
-    {
-        // Replace with function body.
-        //Owo?	
-        GetTree().ChangeScene("res://Scenes/RegisterUser.tscn");
-        
-    }
+	private void _on_RegisterButton_pressed()
+	{
+		// Replace with function body.
+		//Owo?	
+		GetTree().ChangeScene("res://Scenes/RegisterUser.tscn");
+		
+	}
 
-    private void _on_LogInButton_pressed()
-    {
-        GD.Print("Hola Mundo andamos en el login");
+	private void _on_LogInButton_pressed()
+	{
+		GD.Print("Hola Mundo andamos en el login");
 
-        string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
-        string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
+		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
+		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 
-        
-        if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
-        {
-            GD.Print("Intentando la conexion");
-            Encryption PasswordHasher = new Encryption();
-            string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-            GD.Print("Usuario atenticado");
-            GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-        }
+		
+		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
+		{
+			GD.Print("Intentando la conexion");
+			Encryption PasswordHasher = new Encryption();
+			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
+			GD.Print("Usuario atenticado");
+			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+		}
 
-    }
+	}
 
-    
+	
 }   
 
 
