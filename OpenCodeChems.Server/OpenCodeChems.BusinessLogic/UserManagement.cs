@@ -10,19 +10,17 @@ using OpenCodeChems.DataAccess;
 
 namespace OpenCodeChems.BusinessLogic
 {
-    internal class UserManagement : IUserManagement
+    public class UserManagement : IUserManagement
     {
-        public bool RegisterUser(User user, string nikname)
+        public bool RegisterUser(User user, string nickname)
         {
             bool status = false;
             using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-               EntityEntry<User> newUser = context.User.Add(new User
-               {
-                   username = user.username, email = user.email, name = user.name, password = user.password
-               });
+                EntityEntry<User> newUser = context.User.Add(new User (user.username, user.password, user.name, user.email));
                 context.SaveChanges();
-                EntityEntry<Profile> newProfile = context.Profile.Add(new Profile { nickname = user.name, username = user.username });
+                EntityEntry<Profile> newProfile = context.Profile.Add(new Profile (nickname, 0, null, 0, user.username));
+                context.SaveChanges();
                 if (newUser != null && newProfile != null)
                 {
                     status = true;

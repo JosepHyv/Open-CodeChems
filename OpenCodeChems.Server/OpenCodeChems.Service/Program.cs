@@ -1,4 +1,7 @@
-using OpenCodeChems.Service.Services;
+﻿using OpenCodeChems.Service.Services;
+using OpenCodeChems.BusinessLogic;
+using OpenCodeChems.DataAccess;
+using OpenCodeChems.BusinessLogic.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,7 @@ builder.Services.AddGrpc();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 app.MapGrpcService<GreeterService>();
 app.MapGet("/",
     () =>

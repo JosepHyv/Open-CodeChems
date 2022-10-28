@@ -2,4 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net47</TargetFramework>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EmailValidation" Version="1.0.8" />
+  </ItemGroup>
 </Project>

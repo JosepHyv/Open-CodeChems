@@ -48,6 +48,7 @@ margin_left = 160.0
 margin_top = 273.0
 margin_right = 587.0
 margin_bottom = 297.0
+secret = true
 
 [node name="LogInButton" type="TextureButton" parent="NinePatchRect"]
 margin_left = 451.0
@@ -85,3 +86,6 @@ margin_top = 13.0
 margin_right = 78.0
 margin_bottom = 27.0
 text = "Sing In"
+
+[connection signal="pressed" from="NinePatchRect/LogInButton" to="." method="_on_LogInButton_pressed"]
+[connection signal="pressed" from="NinePatchRect/RegisterButton" to="." method="_on_RegisterButton_pressed"]

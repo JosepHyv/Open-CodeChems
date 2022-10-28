@@ -78,7 +78,7 @@ margin_top = 2.0
 margin_right = 1025.0
 margin_bottom = 62.0
 custom_fonts/font = SubResource( 2 )
-text = "Registrar Usuario Nuevo"
+text = "Register New User"
 align = 1
 valign = 1
 
@@ -89,7 +89,7 @@ margin_right = 170.0
 margin_bottom = 114.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 3 )
-text = "Nombre"
+text = "Name"
 
 [node name="NameLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -105,7 +105,7 @@ margin_right = 261.0
 margin_bottom = 157.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 4 )
-text = "Correo electrónico"
+text = "Email"
 
 [node name="EmailLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -121,7 +121,7 @@ margin_right = 279.0
 margin_bottom = 199.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 5 )
-text = "Nombre de usuario"
+text = "User Name"
 
 [node name="UsernameLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -137,7 +137,7 @@ margin_right = 263.0
 margin_bottom = 244.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 6 )
-text = "Nombre de jugador"
+text = "Player Name"
 
 [node name="NicknameLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -153,7 +153,7 @@ margin_right = 195.0
 margin_bottom = 290.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 7 )
-text = "Contraseña"
+text = "Password"
 
 [node name="PasswordLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -161,6 +161,7 @@ margin_top = 250.0
 margin_right = 950.0
 margin_bottom = 285.0
 custom_fonts/font = SubResource( 11 )
+secret = true
 
 [node name="ConfirmPasswordLabel" type="Label" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 30.0
@@ -169,7 +170,7 @@ margin_right = 302.0
 margin_bottom = 335.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 8 )
-text = "Confirmar contraseña"
+text = "Repeat Password"
 
 [node name="ConfirmPasswordLineEdit" type="LineEdit" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 350.0
@@ -177,6 +178,7 @@ margin_top = 295.0
 margin_right = 950.0
 margin_bottom = 330.0
 custom_fonts/font = SubResource( 11 )
+secret = true
 
 [node name="PasswordInformationRichTextLabel" type="RichTextLabel" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 30.0
@@ -184,10 +186,9 @@ margin_top = 340.0
 margin_right = 630.0
 margin_bottom = 450.0
 custom_fonts/normal_font = SubResource( 9 )
-text = "La contrseña debe contener
-mayúsculas, minúsculas, 
-números y caractéres especiales.
-"
+text = "The password must contain
+uppercase, lowercase,
+numbers and special characters."
 
 [node name="RegisterTextureButton" type="TextureButton" parent="BackgroundRegisterNinePatchRect"]
 margin_left = 625.0
@@ -206,7 +207,7 @@ margin_top = 22.0
 margin_right = 166.0
 margin_bottom = 45.0
 custom_fonts/font = SubResource( 14 )
-text = "Registrar"
+text = "Register"
 align = 1
 valign = 1
 
@@ -227,6 +228,9 @@ margin_top = 24.0
 margin_right = 149.0
 margin_bottom = 47.0
 custom_fonts/font = SubResource( 15 )
-text = "Cancelar"
+text = "Cancel"
 align = 1
 valign = 1
+
+[connection signal="pressed" from="BackgroundRegisterNinePatchRect/RegisterTextureButton" to="." method="_on_RegisterTextureButton_pressed"]
+[connection signal="pressed" from="BackgroundRegisterNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
