@@ -38,6 +38,7 @@ public class LogIn : Control
         
         if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
         {
+            GD.Print("Intentando la conexion");
             Encryption PasswordHasher = new Encryption();
             string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
             GD.Print("Usuario atenticado");
