@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Resources/Icons/optionBackground.jpg" type="Texture" id=1]
 [ext_resource path="res://Scenes/Resources/Fonts/comic.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/UserInterface/JoinGame.cs" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 22
@@ -22,6 +23,7 @@ font_data = ExtResource( 2 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 4 )
 
 [node name="JoinGameNinePatchRect" type="NinePatchRect" parent="."]
 margin_left = 186.0
@@ -37,8 +39,9 @@ margin_right = 526.0
 margin_bottom = 89.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Enter a room code to be able to join with 
-other players"
+text = "JOINGAME_INSTRUCTION"
+autowrap = true
+clip_text = true
 
 [node name="CancelTextureButton" type="TextureButton" parent="JoinGameNinePatchRect"]
 margin_left = 76.0
@@ -52,11 +55,13 @@ expand = true
 [node name="CancelLabel" type="Label" parent="JoinGameNinePatchRect/CancelTextureButton"]
 margin_left = 45.0
 margin_top = 11.0
-margin_right = 92.0
+margin_right = 108.0
 margin_bottom = 34.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "Cancel"
+text = "CANCEL_BUTTON"
+autowrap = true
+clip_text = true
 
 [node name="JoinTextureButton" type="TextureButton" parent="JoinGameNinePatchRect"]
 margin_left = 361.0
@@ -68,15 +73,17 @@ texture_pressed = ExtResource( 3 )
 expand = true
 
 [node name="JoinLabel" type="Label" parent="JoinGameNinePatchRect/JoinTextureButton"]
-margin_left = 48.0
-margin_top = 10.0
-margin_right = 88.0
-margin_bottom = 34.0
+margin_left = 44.0
+margin_top = 11.0
+margin_right = 103.0
+margin_bottom = 35.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 3 )
-text = "Join"
+text = "JOINGAME_BUTTON"
 align = 1
 valign = 1
+autowrap = true
+clip_text = true
 
 [node name="CodeLineEdit" type="LineEdit" parent="JoinGameNinePatchRect"]
 margin_left = 78.0
@@ -84,3 +91,6 @@ margin_top = 123.0
 margin_right = 512.0
 margin_bottom = 203.0
 custom_fonts/font = SubResource( 4 )
+
+[connection signal="pressed" from="JoinGameNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
+[connection signal="pressed" from="JoinGameNinePatchRect/JoinTextureButton" to="." method="_on_JoinTextureButton_pressed"]

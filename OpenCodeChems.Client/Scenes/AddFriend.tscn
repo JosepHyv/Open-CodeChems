@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Resources/Fonts/comic.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scenes/Resources/Icons/optionBackground.jpg" type="Texture" id=2]
 [ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/UserInterface/AddFriend.cs" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 22
@@ -21,6 +22,11 @@ font_data = ExtResource( 1 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 1.0
+margin_right = 5.0
+margin_bottom = 1.0
+script = ExtResource( 4 )
 
 [node name="AddFriendNinePatchRect" type="NinePatchRect" parent="."]
 margin_left = 186.0
@@ -36,8 +42,9 @@ margin_right = 477.0
 margin_bottom = 104.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Type your friend's username to send 
-a friend request"
+text = "FRIEND_REQUEST_INSTRUCTION"
+autowrap = true
+clip_text = true
 
 [node name="UsernameLineEdit" type="LineEdit" parent="AddFriendNinePatchRect"]
 margin_left = 31.0
@@ -58,11 +65,12 @@ expand = true
 [node name="AddFriendLabel" type="Label" parent="AddFriendNinePatchRect/AddFriendTextureButton"]
 margin_left = 30.0
 margin_top = 14.0
-margin_right = 111.0
+margin_right = 210.0
 margin_bottom = 37.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 3 )
-text = "Add friend"
+text = "ADDFRIEND_BUTTON"
+clip_text = true
 
 [node name="CancelTextureButton" type="TextureButton" parent="."]
 margin_left = 219.0
@@ -76,8 +84,11 @@ expand = true
 [node name="CancelLabel" type="Label" parent="CancelTextureButton"]
 margin_left = 48.0
 margin_top = 11.0
-margin_right = 95.0
+margin_right = 110.0
 margin_bottom = 34.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 4 )
-text = "Cancel"
+text = "CANCEL_BUTTON"
+clip_text = true
+
+[connection signal="pressed" from="CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
