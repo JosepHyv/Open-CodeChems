@@ -1,7 +1,7 @@
 # Open-CodeChems
 ## Index
-* [Standard](Documentation/stadard.md)
-* [gameRules](Documentation/gameRules.md)
+* [Standard](https://github.com/JosepHyv/Open-CodeChems/blob/main/Documentation/standard.md)
+* [gameRules](https://github.com/JosepHyv/Open-CodeChems/blob/main/Documentation/gameRules.md)
 
 ## Introduction
 This is Open-CodeChems, an open source implementation of the Codenames board game but based on the famous dog from the internet **Chems**.
