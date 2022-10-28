@@ -232,4 +232,5 @@ text = "Cancel"
 align = 1
 valign = 1
 
+[connection signal="pressed" from="BackgroundRegisterNinePatchRect/RegisterTextureButton" to="." method="_on_RegisterTextureButton_pressed"]
 [connection signal="pressed" from="BackgroundRegisterNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]

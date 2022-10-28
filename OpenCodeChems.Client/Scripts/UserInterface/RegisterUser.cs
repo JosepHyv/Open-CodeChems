@@ -22,4 +22,21 @@ public class RegisterUser : Control
     {
         GetTree().ChangeScene("res://Scenes/LogIn.tscn");
     }
+
+    public void _on_RegisterTextureButton_pressed()
+    {
+        GD.Print("Registrando");
+        string name = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NameLineEdit").Text;
+        string email = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/EmailLineEdit").Text;
+        string userName = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/UsernameLineEdit").Text;
+        string playerName = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
+        string password = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/PasswordLineEdit").Text;
+        string confirmPassword =
+            GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
+
+        string ans = name + "\n" + email + "\n" + userName + "\n" + playerName + "\n" + password + "\n" +
+                     confirmPassword;
+        GD.Print(ans);
+    }
+
 }
