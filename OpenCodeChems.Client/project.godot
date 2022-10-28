@@ -18,6 +18,11 @@ config/icon="res://Scenes/Resources/Icons/icon.png"
 
 common/drop_mouse_on_gui_input_disabled=true
 
+[locale]
+
+test="es"
+translations=PoolStringArray( "res://Scenes/Resources/Internacionalization/internacionalization.en.translation", "res://Scenes/Resources/Internacionalization/internacionalization.es.translation" )
+
 [mono]
 
 project/assembly_name="OpenCodeChems.Client"

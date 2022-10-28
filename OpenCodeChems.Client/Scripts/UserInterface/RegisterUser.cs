@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using OpenCodeChems.Client.Resources;
 
 public class RegisterUser : Control
 {
@@ -33,10 +34,16 @@ public class RegisterUser : Control
         string password = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/PasswordLineEdit").Text;
         string confirmPassword =
             GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
-
-        string ans = name + "\n" + email + "\n" + userName + "\n" + playerName + "\n" + password + "\n" +
-                     confirmPassword;
-        GD.Print(ans);
+        Validation validator = new Validation();
+        if(validator.ValidateEmail(email) && validator.ValidatePassword(password) && confirmPassword.Equals(password))
+        {
+            
+        }
+        else
+        {
+            GD.Print("Validar los datos porfi");
+        }
+        
     }
 
 }
