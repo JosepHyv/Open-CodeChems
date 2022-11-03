@@ -37,12 +37,15 @@ public class LogIn : Control
 
 		
 		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
-		{
-			GD.Print("Intentando la conexion");
+        {
+
+
+            var peer = new NetworkedMultiplayerENet();
+            peer.CreateClient("localhost", 7290);
+            GetTree().NetworkPeer = peer;
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-			GD.Print("Usuario atenticado");
-			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+            GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 		}
 
 	}
