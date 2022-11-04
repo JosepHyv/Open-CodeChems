@@ -5,7 +5,11 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
-
+    
+  <ItemGroup>
+    <Protobuf Include="Protos\users.proto" GrpcServices="Server" Link="Protos\users.proto" />
+  </ItemGroup>
+    
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     </ItemGroup>

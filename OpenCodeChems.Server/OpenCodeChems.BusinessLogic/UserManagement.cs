@@ -12,18 +12,34 @@ namespace OpenCodeChems.BusinessLogic
 {
     public class UserManagement : IUserManagement
     {
-        public bool RegisterUser(User user, string nickname)
+
+        public bool UserExists(User currentUser)
         {
             bool status = false;
             using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                EntityEntry<User> newUser = context.User.Add(new User (user.username, user.password, user.name, user.email));
-                context.SaveChanges();
-                EntityEntry<Profile> newProfile = context.Profile.Add(new Profile (nickname, 0, null, 0, user.username));
-                context.SaveChanges();
-                if (newUser != null && newProfile != null)
+                int foundUser = (from User in context.User 
+                    where User.username == currentUser.username || User.email == currentUser.email
+                    select User).Count();
+                status = foundUser > 0 ;
+            }
+            return status;
+        }
+        public bool RegisterUser(User user, string nickname)
+        {
+            bool status = false;
+            if (!UserExists(user))
+            {
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
-                    status = true;
+                    EntityEntry<User> newUser = context.User.Add(new User (user.username, user.password, user.name, user.email));
+                    context.SaveChanges();
+                    EntityEntry<Profile> newProfile = context.Profile.Add(new Profile (nickname, 0, null, 0, user.username));
+                    context.SaveChanges();
+                    if (newUser != null && newProfile != null)
+                    {
+                        status = true;
+                    }
                 }
             }
             return status;
