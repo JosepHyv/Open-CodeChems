@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System;
 using System.Resources;
 using  OpenCodeChems;
@@ -20,6 +20,23 @@ public class Network : Node
         
     }
 
+    public void ConnectToServer()
+    {
+        var peer = new NetworkedMultiplayerENet();
+        peer.CreateClient(ADDRESS, DEFAULT_PORT);
+        GetTree().SetNetworkPeer(peer);
+        peer.Connect("Connection failed", this, "OnConnectionFailed");
+        peer.Connect("Connection succeded", this, "OnConnectionSucceded");
+    }
+
+    public void OnConnectionFailed()
+    {
+        GD.Print("Failed to connect");
+    }
+    public void OnConnectionSucceded()
+    {
+        GD.Print("Succesfully connected");
+    }
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
 //  public override void _Process(float delta)
 //  {
