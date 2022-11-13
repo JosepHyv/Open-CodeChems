@@ -1,0 +1,11 @@
+﻿<Project Sdk="Godot.NET.Sdk/3.3.0">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenCodeChems.Server.DataAccess\OpenCodeChems.Server.DataAccess.csproj" />
+  </ItemGroup>
+</Project>

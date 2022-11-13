@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OpenCodeChems.Server.Properties {
+namespace OpenCodeChems.Server.DataAccess.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -26,11 +26,11 @@ namespace OpenCodeChems.Server.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=openchemsserver.database.windows.net;Initial Catalog=opencodechems;Us" +
-            "er ID=chemsito;Password=MasterKey$123")]
-        public string opencodechemsConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=DatabaseOpenCodeChems;Integrated Securit" +
+            "y=True")]
+        public string DatabaseOpenCodeChemsConnectionString {
             get {
-                return ((string)(this["opencodechemsConnectionString"]));
+                return ((string)(this["DatabaseOpenCodeChemsConnectionString"]));
             }
         }
     }

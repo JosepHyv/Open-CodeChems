@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace OpenCodeChems.Server {
+namespace OpenCodeChems.Server.DataAccess {
     
     
     /// <summary>
@@ -20,9 +20,9 @@ namespace OpenCodeChems.Server {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("opencodechemsDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("DatabaseOpenCodeChemsDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class opencodechemsDataSet : global::System.Data.DataSet {
+    public partial class DatabaseOpenCodeChemsDataSet : global::System.Data.DataSet {
         
         private ProfileDataTable tableProfile;
         
@@ -34,7 +34,7 @@ namespace OpenCodeChems.Server {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public opencodechemsDataSet() {
+        public DatabaseOpenCodeChemsDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -45,7 +45,7 @@ namespace OpenCodeChems.Server {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        protected opencodechemsDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected DatabaseOpenCodeChemsDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -144,7 +144,7 @@ namespace OpenCodeChems.Server {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            opencodechemsDataSet cln = ((opencodechemsDataSet)(base.Clone()));
+            DatabaseOpenCodeChemsDataSet cln = ((DatabaseOpenCodeChemsDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -226,9 +226,9 @@ namespace OpenCodeChems.Server {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "opencodechemsDataSet";
+            this.DataSetName = "DatabaseOpenCodeChemsDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/opencodechemsDataSet.xsd";
+            this.Namespace = "http://tempuri.org/DatabaseOpenCodeChemsDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableProfile = new ProfileDataTable();
@@ -264,7 +264,7 @@ namespace OpenCodeChems.Server {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            opencodechemsDataSet ds = new opencodechemsDataSet();
+            DatabaseOpenCodeChemsDataSet ds = new DatabaseOpenCodeChemsDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -327,7 +327,9 @@ namespace OpenCodeChems.Server {
             
             private global::System.Data.DataColumn columnimageProfile;
             
-            private global::System.Data.DataColumn columndefault;
+            private global::System.Data.DataColumn columnavatar;
+            
+            private global::System.Data.DataColumn columndefaults;
             
             private global::System.Data.DataColumn columnusername;
             
@@ -390,9 +392,17 @@ namespace OpenCodeChems.Server {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn defaultColumn {
+            public global::System.Data.DataColumn avatarColumn {
                 get {
-                    return this.columndefault;
+                    return this.columnavatar;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn defaultsColumn {
+                get {
+                    return this.columndefaults;
                 }
             }
             
@@ -441,16 +451,17 @@ namespace OpenCodeChems.Server {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public ProfileRow AddProfileRow(string nickname, int victories, byte[] imageProfile, int _default, UserRow _parentUserRowByFK_dbo_Profile_dbo_User_username) {
+            public ProfileRow AddProfileRow(string nickname, int victories, byte[] imageProfile, byte[] avatar, int defaults, UserRow _parentUserRowByFK_dbo_Profile_dbo_User_username) {
                 ProfileRow rowProfileRow = ((ProfileRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         nickname,
                         victories,
                         imageProfile,
-                        _default,
+                        avatar,
+                        defaults,
                         null};
                 if ((_parentUserRowByFK_dbo_Profile_dbo_User_username != null)) {
-                    columnValuesArray[4] = _parentUserRowByFK_dbo_Profile_dbo_User_username[0];
+                    columnValuesArray[5] = _parentUserRowByFK_dbo_Profile_dbo_User_username[0];
                 }
                 rowProfileRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowProfileRow);
@@ -484,7 +495,8 @@ namespace OpenCodeChems.Server {
                 this.columnnickname = base.Columns["nickname"];
                 this.columnvictories = base.Columns["victories"];
                 this.columnimageProfile = base.Columns["imageProfile"];
-                this.columndefault = base.Columns["default"];
+                this.columnavatar = base.Columns["avatar"];
+                this.columndefaults = base.Columns["defaults"];
                 this.columnusername = base.Columns["username"];
             }
             
@@ -497,11 +509,10 @@ namespace OpenCodeChems.Server {
                 base.Columns.Add(this.columnvictories);
                 this.columnimageProfile = new global::System.Data.DataColumn("imageProfile", typeof(byte[]), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnimageProfile);
-                this.columndefault = new global::System.Data.DataColumn("default", typeof(int), null, global::System.Data.MappingType.Element);
-                this.columndefault.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "defaultColumn");
-                this.columndefault.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columndefault");
-                this.columndefault.ExtendedProperties.Add("Generator_UserColumnName", "default");
-                base.Columns.Add(this.columndefault);
+                this.columnavatar = new global::System.Data.DataColumn("avatar", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnavatar);
+                this.columndefaults = new global::System.Data.DataColumn("defaults", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndefaults);
                 this.columnusername = new global::System.Data.DataColumn("username", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnusername);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -578,7 +589,7 @@ namespace OpenCodeChems.Server {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                opencodechemsDataSet ds = new opencodechemsDataSet();
+                DatabaseOpenCodeChemsDataSet ds = new DatabaseOpenCodeChemsDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -885,7 +896,7 @@ namespace OpenCodeChems.Server {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                opencodechemsDataSet ds = new opencodechemsDataSet();
+                DatabaseOpenCodeChemsDataSet ds = new DatabaseOpenCodeChemsDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -1003,17 +1014,33 @@ namespace OpenCodeChems.Server {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int _default {
+            public byte[] avatar {
                 get {
                     try {
-                        return ((int)(this[this.tableProfile.defaultColumn]));
+                        return ((byte[])(this[this.tableProfile.avatarColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'default\' de la tabla \'Profile\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'avatar\' de la tabla \'Profile\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableProfile.defaultColumn] = value;
+                    this[this.tableProfile.avatarColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int defaults {
+                get {
+                    try {
+                        return ((int)(this[this.tableProfile.defaultsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'defaults\' de la tabla \'Profile\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProfile.defaultsColumn] = value;
                 }
             }
             
@@ -1065,14 +1092,26 @@ namespace OpenCodeChems.Server {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Is_defaultNull() {
-                return this.IsNull(this.tableProfile.defaultColumn);
+            public bool IsavatarNull() {
+                return this.IsNull(this.tableProfile.avatarColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Set_defaultNull() {
-                this[this.tableProfile.defaultColumn] = global::System.Convert.DBNull;
+            public void SetavatarNull() {
+                this[this.tableProfile.avatarColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdefaultsNull() {
+                return this.IsNull(this.tableProfile.defaultsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdefaultsNull() {
+                this[this.tableProfile.defaultsColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1215,7 +1254,7 @@ namespace OpenCodeChems.Server {
         }
     }
 }
-namespace OpenCodeChems.Server.opencodechemsDataSetTableAdapters {
+namespace OpenCodeChems.Server.DataAccess.DatabaseOpenCodeChemsDataSetTableAdapters {
     
     
     /// <summary>
@@ -1342,44 +1381,47 @@ namespace OpenCodeChems.Server.opencodechemsDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("nickname", "nickname");
             tableMapping.ColumnMappings.Add("victories", "victories");
             tableMapping.ColumnMappings.Add("imageProfile", "imageProfile");
-            tableMapping.ColumnMappings.Add("default", "default");
+            tableMapping.ColumnMappings.Add("avatar", "avatar");
+            tableMapping.ColumnMappings.Add("defaults", "defaults");
             tableMapping.ColumnMappings.Add("username", "username");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Profile] WHERE (([nickname] = @Original_nickname) AND ((@IsNull_victories = 1 AND [victories] IS NULL) OR ([victories] = @Original_victories)) AND ((@IsNull_default = 1 AND [default] IS NULL) OR ([default] = @Original_default)) AND ([username] = @Original_username))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Profile] WHERE (([nickname] = @Original_nickname) AND ((@IsNull_victories = 1 AND [victories] IS NULL) OR ([victories] = @Original_victories)) AND ((@IsNull_defaults = 1 AND [defaults] IS NULL) OR ([defaults] = @Original_defaults)) AND ([username] = @Original_username))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nickname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nickname", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_victories", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "victories", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_victories", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "victories", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_default", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "default", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_default", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "default", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_defaults", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "defaults", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_defaults", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "defaults", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_username", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Profile] ([nickname], [victories], [imageProfile], [default], [username]) VALUES (@nickname, @victories, @imageProfile, @default, @username);
-SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE (nickname = @nickname)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[Profile] ([nickname], [victories], [imageProfile], [avatar], [defaults], [username]) VALUES (@nickname, @victories, @imageProfile, @avatar, @defaults, @username);
+SELECT nickname, victories, imageProfile, avatar, defaults, username FROM Profile WHERE (nickname = @nickname)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nickname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nickname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@victories", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "victories", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@imageProfile", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "imageProfile", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@default", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "default", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@avatar", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "avatar", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@defaults", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "defaults", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@username", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Profile] SET [nickname] = @nickname, [victories] = @victories, [imageProfile] = @imageProfile, [default] = @default, [username] = @username WHERE (([nickname] = @Original_nickname) AND ((@IsNull_victories = 1 AND [victories] IS NULL) OR ([victories] = @Original_victories)) AND ((@IsNull_default = 1 AND [default] IS NULL) OR ([default] = @Original_default)) AND ([username] = @Original_username));
-SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE (nickname = @nickname)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Profile] SET [nickname] = @nickname, [victories] = @victories, [imageProfile] = @imageProfile, [avatar] = @avatar, [defaults] = @defaults, [username] = @username WHERE (([nickname] = @Original_nickname) AND ((@IsNull_victories = 1 AND [victories] IS NULL) OR ([victories] = @Original_victories)) AND ((@IsNull_defaults = 1 AND [defaults] IS NULL) OR ([defaults] = @Original_defaults)) AND ([username] = @Original_username));
+SELECT nickname, victories, imageProfile, avatar, defaults, username FROM Profile WHERE (nickname = @nickname)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nickname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nickname", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@victories", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "victories", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@imageProfile", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "imageProfile", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@default", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "default", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@avatar", global::System.Data.SqlDbType.VarBinary, 0, global::System.Data.ParameterDirection.Input, 0, 0, "avatar", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@defaults", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "defaults", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@username", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nickname", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nickname", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_victories", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "victories", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_victories", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "victories", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_default", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "default", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_default", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "default", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_defaults", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "defaults", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_defaults", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "defaults", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_username", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "username", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -1387,7 +1429,7 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::OpenCodeChems.Server.Properties.Settings.Default.opencodechemsConnectionString;
+            this._connection.ConnectionString = global::OpenCodeChems.Server.DataAccess.Properties.Settings.Default.DatabaseOpenCodeChemsConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1396,7 +1438,8 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT nickname, victories, imageProfile, [default], username FROM dbo.Profile";
+            this._commandCollection[0].CommandText = "SELECT nickname, victories, imageProfile, avatar, defaults, username FROM dbo.Pro" +
+                "file";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1404,7 +1447,7 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(opencodechemsDataSet.ProfileDataTable dataTable) {
+        public virtual int Fill(DatabaseOpenCodeChemsDataSet.ProfileDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1417,9 +1460,9 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual opencodechemsDataSet.ProfileDataTable GetData() {
+        public virtual DatabaseOpenCodeChemsDataSet.ProfileDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            opencodechemsDataSet.ProfileDataTable dataTable = new opencodechemsDataSet.ProfileDataTable();
+            DatabaseOpenCodeChemsDataSet.ProfileDataTable dataTable = new DatabaseOpenCodeChemsDataSet.ProfileDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1427,14 +1470,14 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(opencodechemsDataSet.ProfileDataTable dataTable) {
+        public virtual int Update(DatabaseOpenCodeChemsDataSet.ProfileDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(opencodechemsDataSet dataSet) {
+        public virtual int Update(DatabaseOpenCodeChemsDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Profile");
         }
         
@@ -1457,7 +1500,7 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_nickname, global::System.Nullable<int> Original_victories, global::System.Nullable<int> Original_default, string Original_username) {
+        public virtual int Delete(string Original_nickname, global::System.Nullable<int> Original_victories, global::System.Nullable<int> Original_defaults, string Original_username) {
             if ((Original_nickname == null)) {
                 throw new global::System.ArgumentNullException("Original_nickname");
             }
@@ -1472,9 +1515,9 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((Original_default.HasValue == true)) {
+            if ((Original_defaults.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_default.Value));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_defaults.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
@@ -1506,7 +1549,7 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string nickname, global::System.Nullable<int> victories, byte[] imageProfile, global::System.Nullable<int> _default, string username) {
+        public virtual int Insert(string nickname, global::System.Nullable<int> victories, byte[] imageProfile, byte[] avatar, global::System.Nullable<int> defaults, string username) {
             if ((nickname == null)) {
                 throw new global::System.ArgumentNullException("nickname");
             }
@@ -1525,17 +1568,23 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = ((byte[])(imageProfile));
             }
-            if ((_default.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(_default.Value));
+            if ((avatar == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[3].Value = ((byte[])(avatar));
+            }
+            if ((defaults.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(defaults.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             if ((username == null)) {
                 throw new global::System.ArgumentNullException("username");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(username));
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(username));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1557,7 +1606,7 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string nickname, global::System.Nullable<int> victories, byte[] imageProfile, global::System.Nullable<int> _default, string username, string Original_nickname, global::System.Nullable<int> Original_victories, global::System.Nullable<int> Original_default, string Original_username) {
+        public virtual int Update(string nickname, global::System.Nullable<int> victories, byte[] imageProfile, byte[] avatar, global::System.Nullable<int> defaults, string username, string Original_nickname, global::System.Nullable<int> Original_victories, global::System.Nullable<int> Original_defaults, string Original_username) {
             if ((nickname == null)) {
                 throw new global::System.ArgumentNullException("nickname");
             }
@@ -1576,45 +1625,51 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = ((byte[])(imageProfile));
             }
-            if ((_default.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(_default.Value));
+            if ((avatar == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((byte[])(avatar));
+            }
+            if ((defaults.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(defaults.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             if ((username == null)) {
                 throw new global::System.ArgumentNullException("username");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(username));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(username));
             }
             if ((Original_nickname == null)) {
                 throw new global::System.ArgumentNullException("Original_nickname");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_nickname));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_nickname));
             }
             if ((Original_victories.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_victories.Value));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_victories.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((Original_default.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_default.Value));
+            if ((Original_defaults.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_defaults.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             if ((Original_username == null)) {
                 throw new global::System.ArgumentNullException("Original_username");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_username));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_username));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1636,8 +1691,8 @@ SELECT nickname, victories, imageProfile, [default], username FROM Profile WHERE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> victories, byte[] imageProfile, global::System.Nullable<int> _default, string username, string Original_nickname, global::System.Nullable<int> Original_victories, global::System.Nullable<int> Original_default, string Original_username) {
-            return this.Update(Original_nickname, victories, imageProfile, _default, username, Original_nickname, Original_victories, Original_default, Original_username);
+        public virtual int Update(global::System.Nullable<int> victories, byte[] imageProfile, byte[] avatar, global::System.Nullable<int> defaults, string username, string Original_nickname, global::System.Nullable<int> Original_victories, global::System.Nullable<int> Original_defaults, string Original_username) {
+            return this.Update(Original_nickname, victories, imageProfile, avatar, defaults, username, Original_nickname, Original_victories, Original_defaults, Original_username);
         }
     }
     
@@ -1803,7 +1858,7 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::OpenCodeChems.Server.Properties.Settings.Default.opencodechemsConnectionString;
+            this._connection.ConnectionString = global::OpenCodeChems.Server.DataAccess.Properties.Settings.Default.DatabaseOpenCodeChemsConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1820,7 +1875,7 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(opencodechemsDataSet.UserDataTable dataTable) {
+        public virtual int Fill(DatabaseOpenCodeChemsDataSet.UserDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1833,9 +1888,9 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual opencodechemsDataSet.UserDataTable GetData() {
+        public virtual DatabaseOpenCodeChemsDataSet.UserDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            opencodechemsDataSet.UserDataTable dataTable = new opencodechemsDataSet.UserDataTable();
+            DatabaseOpenCodeChemsDataSet.UserDataTable dataTable = new DatabaseOpenCodeChemsDataSet.UserDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1843,14 +1898,14 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(opencodechemsDataSet.UserDataTable dataTable) {
+        public virtual int Update(DatabaseOpenCodeChemsDataSet.UserDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(opencodechemsDataSet dataSet) {
+        public virtual int Update(DatabaseOpenCodeChemsDataSet dataSet) {
             return this.Adapter.Update(dataSet, "User");
         }
         
@@ -2139,7 +2194,7 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private int UpdateUpdatedRows(opencodechemsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(DatabaseOpenCodeChemsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._userTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.User.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -2167,7 +2222,7 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private int UpdateInsertedRows(opencodechemsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(DatabaseOpenCodeChemsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._userTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.User.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -2193,7 +2248,7 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private int UpdateDeletedRows(opencodechemsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(DatabaseOpenCodeChemsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._profileTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Profile.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -2243,7 +2298,7 @@ SELECT username, password, email, name FROM [User] WHERE (username = @username)"
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        public virtual int UpdateAll(opencodechemsDataSet dataSet) {
+        public virtual int UpdateAll(DatabaseOpenCodeChemsDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

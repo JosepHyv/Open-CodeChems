@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="opencodechemsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="OpenCodeChemsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Profile">
           <Key>
             <PropertyRef Name="nickname" />
@@ -12,7 +12,8 @@
           <Property Name="nickname" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="victories" Type="int" />
           <Property Name="imageProfile" Type="varbinary(max)" />
-          <Property Name="default" Type="int" />
+          <Property Name="avatar" Type="varbinary(max)" />
+          <Property Name="defaults" Type="int" />
           <Property Name="username" Type="nvarchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -38,7 +39,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="opencodechemsModelStoreContainer">
+        <EntityContainer Name="OpenCodeChemsModelStoreContainer">
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_Profile_dbo_User_username" Association="Self.FK_dbo_Profile_dbo_User_username">
@@ -50,7 +51,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="opencodechemsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="OpenCodeChemsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Profile">
           <Key>
             <PropertyRef Name="nickname" />
@@ -58,7 +59,8 @@
           <Property Name="nickname" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="victories" Type="Int32" />
           <Property Name="imageProfile" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="default" Type="Int32" />
+          <Property Name="avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="defaults" Type="Int32" />
           <Property Name="username" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_dbo_Profile_dbo_User_username" FromRole="Profile" ToRole="User" />
         </EntityType>
@@ -86,7 +88,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="opencodechemsContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OpenCodeChemsContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_dbo_Profile_dbo_User_username" Association="Self.FK_dbo_Profile_dbo_User_username">
@@ -99,20 +101,21 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="opencodechemsModelStoreContainer" CdmEntityContainer="opencodechemsContext">
+        <EntityContainerMapping StorageEntityContainer="OpenCodeChemsModelStoreContainer" CdmEntityContainer="OpenCodeChemsContext">
           <EntitySetMapping Name="Profiles">
-            <EntityTypeMapping TypeName="opencodechemsModel.Profile">
+            <EntityTypeMapping TypeName="OpenCodeChemsModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
                 <ScalarProperty Name="nickname" ColumnName="nickname" />
                 <ScalarProperty Name="victories" ColumnName="victories" />
                 <ScalarProperty Name="imageProfile" ColumnName="imageProfile" />
-                <ScalarProperty Name="default" ColumnName="default" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="defaults" ColumnName="defaults" />
                 <ScalarProperty Name="username" ColumnName="username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="opencodechemsModel.User">
+            <EntityTypeMapping TypeName="OpenCodeChemsModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
@@ -138,6 +141,7 @@
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
