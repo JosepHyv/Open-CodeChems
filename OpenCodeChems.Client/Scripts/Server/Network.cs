@@ -13,6 +13,7 @@ public class Network : Node
     private readonly int MAX_PLAYERS = 8;
 
     private readonly string ADDRESS = "localhost";
+    private readonly NetworkedMultiplayerENet network = new NetworkedMultiplayerENet();
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -22,18 +23,18 @@ public class Network : Node
 
     public void ConnectToServer()
     {
-        var peer = new NetworkedMultiplayerENet();
-        peer.CreateClient(ADDRESS, DEFAULT_PORT);
-        GetTree().SetNetworkPeer(peer);
-        peer.Connect("Connection failed", this, "OnConnectionFailed");
-        peer.Connect("Connection succeded", this, "OnConnectionSucceded");
+        
+        network.CreateClient(ADDRESS, DEFAULT_PORT);
+        GetTree().SetNetworkPeer(network);
+        network.Connect("Connection failed", this, "OnConnectionFailed");
+        network.Connect("Connection succeded", this, "OnConnectionSucceded");
     }
 
-    public void OnConnectionFailed()
+    public void _OnConnectionFailed()
     {
         GD.Print("Failed to connect");
     }
-    public void OnConnectionSucceded()
+    public void _OnConnectionSucceded()
     {
         GD.Print("Succesfully connected");
     }

@@ -14,7 +14,9 @@ public class Server : Node
     private readonly int MAX_PLAYERS = 8;
     public override void _Ready()
     {
-        StartServer();
+        GD.Print("intentando iniciar el servidor");
+        GD.Print("Qué esta pasando aqui?");
+        //StartServer();
     }
 
     public void StartServer()
