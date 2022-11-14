@@ -16,8 +16,7 @@ public class SpyPlayer : Control
     /*private void _on_CodeNamesItemList_item_selected(InputEventMouseButton e)
     {
         
-        GD.Print("aqui va la palabra");
-        
+       
         
         var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
         string[] listElements = new string[itemNode.GetItemCount()];
