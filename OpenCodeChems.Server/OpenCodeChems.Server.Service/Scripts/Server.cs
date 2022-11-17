@@ -10,12 +10,13 @@ public class Server : Node
 
     // Called when the node enters the scene tree for the first time.
     private readonly int DEFAULT_PORT = 8000;
-
+    
     private readonly int MAX_PLAYERS = 8;
     public override void _Ready()
     {
         GD.Print("intentando iniciar el servidor");
         GD.Print("Qué esta pasando aqui?");
+        GD.Print("que esta pasando, porque no sale nada :(, me quiero morir ya");
         //StartServer();
     }
 
