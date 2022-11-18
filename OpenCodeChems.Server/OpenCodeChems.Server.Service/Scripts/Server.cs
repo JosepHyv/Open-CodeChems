@@ -5,7 +5,7 @@ public class Server : Node
 {
     private int DEFAULT_PORT = 5500;
     private string ADDRESS = "localhost";
-    private int MAX_PLAYERS = 8;
+    private int MAX_PLAYERS = 200;
     public override void _Ready()
     {
         GD.Print("Entrando al server Godot");
@@ -20,12 +20,18 @@ public class Server : Node
         }
 
         GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
+        GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
 
     }
 
     private void PlayerConnected(int peerId)
     {
         GD.Print($"Jugador = {peerId} Conectado");
+    }
+
+    private void PlayerDisconnected(int peerId)
+    {
+    	GD.Print($"Jugador = {peerId} Desconectado");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

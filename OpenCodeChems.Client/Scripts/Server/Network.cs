@@ -12,7 +12,7 @@ namespace OpenCodeChems.Client.Server
         // private string b = "text";
         private int DEFAULT_PORT = 5500;
 
-        private int MAX_PLAYERS = 8;
+        private int MAX_PLAYERS = 200;
 
         private string ADDRESS = "localhost";
         
