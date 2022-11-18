@@ -19,6 +19,13 @@ public class Server : Node
             GD.Print(GetTree().NetworkPeer);
         }
 
+        GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
+
+    }
+
+    private void PlayerConnected(int peerId)
+    {
+        GD.Print($"Jugador = {peerId} Conectado");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
