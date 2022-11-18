@@ -3,40 +3,27 @@ using System;
 
 public class Server : Node
 {
-     
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
-    private readonly int DEFAULT_PORT = 8000;
-    
-    private readonly int MAX_PLAYERS = 8;
+    private int DEFAULT_PORT = 5500;
+    private string ADDRESS = "localhost";
+    private int MAX_PLAYERS = 8;
     public override void _Ready()
     {
-        GD.Print("intentando iniciar el servidor");
-        GD.Print("Qué esta pasando aqui?");
-        GD.Print("que esta pasando, porque no sale nada :(, me quiero morir ya");
-        //StartServer();
+        GD.Print("Entrando al server Godot");
+        var server = new NetworkedMultiplayerENet();
+        var result = server.CreateServer(DEFAULT_PORT, MAX_PLAYERS);
+        GD.Print(result);
+        if(result == 0 )
+        {
+            GetTree().NetworkPeer = server;
+            GD.Print($"Hosteando server en {ADDRESS}:{DEFAULT_PORT}.");
+            GD.Print(GetTree().NetworkPeer);
+        }
+
     }
 
-    public void StartServer()
-    {
-        var network = new NetworkedMultiplayerENet();
-        network.CreateServer(DEFAULT_PORT, MAX_PLAYERS);
-        GetTree().SetNetworkPeer(network);
-        GD.Print("Server started");
-        network.Connect("peerConnected", this, "PeerConnected");
-        network.Connect("peerDisconnected", this, "PeerDisconnected");
-    }
-
-    public void PeerConnected()
-    {
-        GD.Print("User connected");
-    }
-    public void PeerDisconected()
-    {
-        GD.Print("User disconected");
-    }
-
+//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+//  public override void _Process(float delta)
+//  {
+//      
+//  }
 }
