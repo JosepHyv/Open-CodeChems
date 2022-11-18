@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using OpenCodeChems.Server.Models;
+using OpenCodeChems.Server.Context;
 
 public class Server : Node
 {
@@ -32,6 +34,11 @@ public class Server : Node
     private void PlayerDisconnected(int peerId)
     {
     	GD.Print($"Jugador = {peerId} Desconectado");
+    }
+
+    private void LoginPlayer(string username, string password)
+    {
+        
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
