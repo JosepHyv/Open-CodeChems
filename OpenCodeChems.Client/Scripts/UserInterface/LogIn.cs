@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Runtime.Remoting.Messaging;
 using OpenCodeChems.Client.Resources;
+using OpenCodeChems.Client.Server;
 
 public class LogIn : Control
 {
@@ -10,8 +11,12 @@ public class LogIn : Control
 	// private string b = "text";
 
 	// Called when the node enters the scene tree for the first time.
+    private Network serverClient = new Network();
 	public override void _Ready()
 	{
+        // GD.Print("Intentando conectar al server");
+        
+            // serverClient.ConnectToServer();
 		
 	}
 
@@ -36,7 +41,7 @@ public class LogIn : Control
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 
 		
-		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
+		/*if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
         {
 
 
@@ -46,7 +51,7 @@ public class LogIn : Control
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
             GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-		}
+		}*/
 
 	}
 
