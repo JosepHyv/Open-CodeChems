@@ -1,19 +1,32 @@
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace OpenCodeChems.DataAccess
 {
-    public class OpenCodeChemsContext:DbContext
+    public class OpenCodeChemsContext: DbContext
     {
+
+        private readonly string _connectionString;
+
+        public OpenCodeChemsContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+    }
+
         public DbSet<User> User { get; set; }
         public DbSet <Profile> Profile { get; set; }
-        protected override void OnConfiguring (DbContextOptionsBuilder optionsBuilder)
-        {
-           // base.OnConfiguring (optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=tcp:opencodechems.database.windows.net,1433;Initial Catalog=OpenCodeChems;" +
-                "Persist Security Info=False;User ID=administrador;Password=MasterKey$123;MultipleActiveResultSets=False;" +
-                "Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-        }
+        
     }
     public class User
     {
