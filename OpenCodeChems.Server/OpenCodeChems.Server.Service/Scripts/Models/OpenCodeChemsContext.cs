@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Core;
+using System.Data.Entity.Repository;
 
 namespace OpenCodeChems.Server.Models
 {
