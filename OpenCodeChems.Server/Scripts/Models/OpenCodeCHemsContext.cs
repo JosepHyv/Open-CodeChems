@@ -11,21 +11,14 @@ namespace OpenCodeChems.DataAccess
 {
     public class OpenCodeChemsContext: DbContext
     {
-
-        private readonly string _connectionString;
-
-        public OpenCodeChemsContext(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
-    }
+       
 
         public DbSet<User> User { get; set; }
-        public DbSet <Profile> Profile { get; set; }
+        public DbSet<Profile> Profile { get; set; }
+
+        public OpenCodeChemsContext(DbContextOptions<OpenCodeChemsContext> options) : base(options)
+        {
+        }
         
     }
     public class User
