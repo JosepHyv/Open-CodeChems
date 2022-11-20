@@ -23,10 +23,10 @@ namespace OpenCodeChems.BussinesLogic
          public bool RegisterUser(User user, string nickname)
         {
 
-            optionsBuilder.UseSqlServer(connectionstring);
+        //    optionsBuilder.UseSqlServer(connectionstring);
             
             bool status = false;
-            using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+         /*   using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
             {
                 EntityEntry<User> newUser = context.User.Add(new User (user.username, user.password, user.name, user.email));
                 context.SaveChanges();
@@ -36,15 +36,15 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     status = true;
                 }
-            }
+            }*/
             return status;
         }
 
         public bool Login(string username, string password)
         {
-            optionsBuilder.UseSqlServer(connectionstring);
+            //optionsBuilder.UseSqlServer(connectionstring);
             bool status = false;
-            using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+            /*using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
             {
                 int foundUser = (from User in context.User
                     where User.username == username && User.password == password
@@ -53,7 +53,7 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     status = true;
                 }
-            }
+            }*/
             return status;
         }
 

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Server : Node
+public class Network : Node
 {
     private int DEFAULT_PORT = 5500;
     private string ADDRESS = "localhost";
@@ -18,7 +18,8 @@ public class Server : Node
             GD.Print($"Hosteando server en {ADDRESS}:{DEFAULT_PORT}.");
             GD.Print(GetTree().NetworkPeer);
         }
-
+        GD.Print($"Estoy escuchando? {GetTree().IsNetworkServer()}");
+        GD.Print($"Mi network ID = {GetTree().GetNetworkUniqueId()}");
         GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
         GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
 
@@ -34,9 +35,13 @@ public class Server : Node
     	GD.Print($"Jugador = {peerId} Desconectado");
     }
 
-    private void LoginPlayer(string username, string password)
+    [Remote]
+    public void LoginPlayer(string username, string password)
     {
-        
+        int senderId = GetTree().GetRpcSenderId();
+       //int senderId = 1;
+        GD.Print($"quien me envia el l request = {senderId}");
+        GD.Print($"Se conecto {username} con un password de {password}");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
