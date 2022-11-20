@@ -11,12 +11,15 @@ public class LogIn : Control
 	// private string b = "text";
 
 	// Called when the node enters the scene tree for the first time.
-    private Network serverClient = new Network();
+    Network serverClient;
 	public override void _Ready()
 	{
+        serverClient = GetNode<Network>("/root/Network") as Network;
+        serverClient.ConnectToServer();
+      
         // GD.Print("Intentando conectar al server");
         
-            // serverClient.ConnectToServer();
+       // serverClient.ConnectToServer();
 		
 	}
 
@@ -35,12 +38,16 @@ public class LogIn : Control
 
 	private void _on_LogInButton_pressed()
 	{
+      
+        
 		GD.Print("Hola Mundo andamos en el login");
-
+       // GD.Print($"Estoy conectado? {serverClient.estaConectado()}");
+        serverClient.estaConectado();
 		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
-
-		
+        GD.Print($"en el cliente tengo username = {username} password = {password}");
+		//serverClient.LoginPlayer(username, password);
+        serverClient.login(username, password);
 		/*if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
         {
 
