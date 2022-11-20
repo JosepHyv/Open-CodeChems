@@ -13,12 +13,12 @@ namespace OpenCodeChems.DataAccess
     {
        
 
-       /* public DbSet<User> User { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<Profile> Profile { get; set; }
 
         public OpenCodeChemsContext(DbContextOptions<OpenCodeChemsContext> options) : base(options)
         {
-        }*/
+        }
         
     }
     public class User
