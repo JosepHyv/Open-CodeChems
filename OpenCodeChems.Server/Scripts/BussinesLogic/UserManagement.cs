@@ -9,25 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 
+
 namespace OpenCodeChems.BussinesLogic
 {
     public class UserManagement : IUserManagement
     {
-        private string connectionstring = "Connection string";
-
-        private DbContextOptionsBuilder<OpenCodeChemsContext> optionsBuilder = new DbContextOptionsBuilder<OpenCodeChemsContext>();
-        /*optionsBuilder.UseSqlServer(connectionstring);
-
-
-        OpenCodeChemsContext dbContext = new OpenCodeChemsContext(optionsBuilder.Options);*/
+        
 
         public bool RegisterUser(User user, Profile profile)
         {
 
-            optionsBuilder.UseSqlServer(connectionstring);
             
             bool status = false;
-            using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+            using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
                 EntityEntry<User> newUser = context.User.Add(new User (user.username, user.password, user.name, user.email));
                 context.SaveChanges();
@@ -41,11 +35,12 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public bool Login(string username, string password)
+
+        public bool Login(string username, string password) 
         {
-            optionsBuilder.UseSqlServer(connectionstring);
+            
             bool status = false;
-            using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+            using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
                 int foundUser = (from User in context.User
                     where User.username == username && User.password == password
@@ -64,8 +59,7 @@ namespace OpenCodeChems.BussinesLogic
             try
             {
                 string username = profile.username;
-                optionsBuilder.UseSqlServer(connectionstring);
-                using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile
                                     where Profile.username == username
@@ -88,8 +82,7 @@ namespace OpenCodeChems.BussinesLogic
             try
             {
                 string username = profile.username;
-                optionsBuilder.UseSqlServer(connectionstring);
-                using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile
                                     where Profile.username == username
@@ -111,8 +104,7 @@ namespace OpenCodeChems.BussinesLogic
             try
             {
                 string username = user.username;
-                optionsBuilder.UseSqlServer(connectionstring);
-                using (OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var users = (from User in context.User
                                     where User.username == username
@@ -128,12 +120,11 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
-        public string getOldPassword(User user)
+        public string GetOldPassword(User user)
         {
             string username = user.username;
             string oldHashedPassword;
-            optionsBuilder.UseSqlServer(connectionstring);
-            using(OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+            using(OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
                 oldHashedPassword = (from User in context.User
                                             where User.username == username
@@ -148,9 +139,8 @@ namespace OpenCodeChems.BussinesLogic
             try
             {
                 string username = user.username;
-                string oldHashedPassword = getOldPassword(user);
-                optionsBuilder.UseSqlServer(connectionstring);
-                using(OpenCodeChemsContext context = new OpenCodeChemsContext(optionsBuilder.Options))
+                string oldHashedPassword = GetOldPassword(user);
+                using(OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
                     if (oldHashedPassword == actualHashedPassword)
                     {

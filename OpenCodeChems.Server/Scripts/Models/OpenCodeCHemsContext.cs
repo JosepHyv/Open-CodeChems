@@ -11,13 +11,16 @@ namespace OpenCodeChems.DataAccess
 {
     public class OpenCodeChemsContext: DbContext
     {
-       
+        
 
         public DbSet<User> User { get; set; }
         public DbSet<Profile> Profile { get; set; }
 
-        public OpenCodeChemsContext(DbContextOptions<OpenCodeChemsContext> options) : base(options)
+        
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer("Server=tcp:openchemsserver.database.windows.net,1433;Initial Catalog=opencodechems;Persist Security Info=False;User ID=chemsito;Password=MasterKey$123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");   
         }
         
     }
@@ -32,6 +35,7 @@ namespace OpenCodeChems.DataAccess
             this.email = email;
         }
 
+        [Key]
         public string username { get; set; }
         public string password { get; set; }
         public string name { get; set; }
@@ -48,6 +52,7 @@ namespace OpenCodeChems.DataAccess
             this.username = username;
         }
 
+        [Key]
         public string nickname { get; set; }
         public int victories { get; set; }
         public byte[] imageProfile { get; set; }

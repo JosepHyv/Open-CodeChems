@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using OpenCodeChems.BussinesLogic;
 
 public class Network : Node
 {
     private int DEFAULT_PORT = 5500;
     private string ADDRESS = "localhost";
     private int MAX_PLAYERS = 200;
+    private int PEERID = 1;
     public override void _Ready()
     {
         GD.Print("Entrando al server Godot");
@@ -35,18 +37,24 @@ public class Network : Node
     	GD.Print($"Jugador = {peerId} Desconectado");
     }
 
-    [Remote]
-    public void LoginPlayer(string username, string password)
+    
+    
+    [Master]
+    private void LoginRequest(string username, string password)
     {
         int senderId = GetTree().GetRpcSenderId();
-       //int senderId = 1;
-        GD.Print($"quien me envia el l request = {senderId}");
-        GD.Print($"Se conecto {username} con un password de {password}");
+        UserManagement userManagement = new UserManagement();
+        bool status = false;
+        if(userManagement.Login(username, password) == true)
+        {
+            status = true;
+            RpcId(senderId, "LoginResponse", status);
+            GD.Print($"Player no. {senderId} logged in successfully.");
+        }
+        else
+        {
+            RpcId(senderId, "LoginResponse", status);
+            GD.Print($"Player no. {senderId} logged in failed.");
+        }
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

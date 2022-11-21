@@ -10,7 +10,7 @@ namespace OpenCodeChems.BusinessLogic.Interface
         bool EditProfileImage(Profile profile, byte[] imageProfile);
         bool EditUserEmail(User user, string email);
         bool EditUserPassword(User user, string actualHashedPassword, string newHashedPassword);
-        string getOldPassword(User user);
+        string GetOldPassword(User user);
         
     }
 

@@ -6,60 +6,68 @@ using OpenCodeChems.Client.Server;
 
 public class LogIn : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
 
-	// Called when the node enters the scene tree for the first time.
     Network serverClient;
+	int PEER_ID = 1; 
 	public override void _Ready()
 	{
         serverClient = GetNode<Network>("/root/Network") as Network;
         serverClient.ConnectToServer();
-      
-        // GD.Print("Intentando conectar al server");
-        
-       // serverClient.ConnectToServer();
-		
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+
 	private void _on_RegisterButton_pressed()
 	{
-		// Replace with function body.
-		//Owo?	
+		
 		GetTree().ChangeScene("res://Scenes/RegisterUser.tscn");
 		
 	}
 
-	private void _on_LogInButton_pressed()
+	
+    private void _on_LogInButton_pressed()
 	{
-      
-        
-		GD.Print("Hola Mundo andamos en el login");
-       // GD.Print($"Estoy conectado? {serverClient.estaConectado()}");
-        serverClient.estaConectado();
 		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
-        GD.Print($"en el cliente tengo username = {username} password = {password}");
-		//serverClient.LoginPlayer(username, password);
-        serverClient.login(username, password);
-		/*if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
+		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
         {
-
-
-            var peer = new NetworkedMultiplayerENet();
-            peer.CreateClient("localhost", 7290);
-            GetTree().NetworkPeer = peer;
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-            GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-		}*/
+			serverClient.Login(username, hashPassword);
+			bool status = serverClient.GetLoggedResponse();
+			if (status == true)
+			{
+				GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+			}
+			else
+			{
+				GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("WRONG_CREDENTIALS");
+				GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
+			}
+			
+		}
+		else
+		{
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("EMPTY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
+			GD.Print("Empty fields");
+		}
 
+	}
+
+	private void LoginRequest(string username, string hashPassword)
+	{
+		RpcId(PEER_ID, "LoginRequest", username, hashPassword);
+	}
+	private void ReturnLoginRequest(bool results)
+	{
+		if(results == true)
+		{
+			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+		}
+		else 
+		{
+			GD.Print("Login error");
+		}
 	}
 
 	
