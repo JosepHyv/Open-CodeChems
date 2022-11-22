@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using OpenCodeChems.Client.Resources;
 using OpenCodeChems.Client.Server;
 using System.IO;
@@ -12,10 +15,13 @@ public class RegisterUser : Control
 	Network serverClient;
 	int PEER_ID = 1; 
 	AcceptDialog dialogAccept = new AcceptDialog();
+	Task<bool> registeredStatus = Task<bool>.FromResult(false);
 	public override void _Ready()
 	{
-        serverClient = GetNode<Network>("/root/Network") as Network;
-        serverClient.ConnectToServer();
+		serverClient = GetNode<Network>("/root/Network") as Network;
+		serverClient.ConnectToServer();
+		serverClient.Connect("Registered", this, nameof(RegisteredAccepted));
+		serverClient.Connect("RegisteredFail", this, nameof(RegisteredFail));
 	}
 
 	public void _on_CancelTextureButton_pressed()
@@ -23,7 +29,7 @@ public class RegisterUser : Control
 		GetTree().ChangeScene("res://Scenes/LogIn.tscn");
 	}
 
-	public void _on_RegisterTextureButton_pressed()
+	public async void _on_RegisterTextureButton_pressed()
 	{
 		string name = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NameLineEdit").Text;
 		string email = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/EmailLineEdit").Text;
@@ -49,8 +55,8 @@ public class RegisterUser : Control
 			newProfile.imageProfile = imageProfile;
 			newProfile.victories = 0;
 			serverClient.RegisterUser(newUser, newProfile);
-			bool status = serverClient.GetRegisteresResponse();
-			if (status == true)
+			await registeredStatus;
+			if (registeredStatus.Result)
 			{
 				dialogAccept.SetText("REGISTER_SUCCESFULLY");
 				dialogAccept.PopupCentered();
@@ -77,6 +83,16 @@ public class RegisterUser : Control
 		var profilePicturePath = Path.GetDirectoryName("../../Icons/imagePerfilDefault.png");
 		byte[] imageProfile = File.ReadAllBytes(profilePicturePath);
 		return imageProfile;
+	}
+	
+	public void RegisteredAccepted()
+	{
+		registeredStatus = Task<bool>.FromResult(true);
+	}
+	
+	public void RegisteredFail()
+	{
+		registeredStatus = Task<bool>.FromResult(false);
 	}
 
 }

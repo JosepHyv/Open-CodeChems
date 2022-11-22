@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using OpenCodeChems.Client.Resources;
 using OpenCodeChems.Client.Server;
@@ -7,12 +10,15 @@ using OpenCodeChems.Client.Server;
 public class LogIn : Control
 {
 
-    Network serverClient;
+	Network serverClient;
 	int PEER_ID = 1; 
+	Task<bool> loggedStatus = Task<bool>.FromResult(false);
 	public override void _Ready()
 	{
-        serverClient = GetNode<Network>("/root/Network") as Network;
-        serverClient.ConnectToServer();
+		serverClient = GetNode<Network>("/root/Network") as Network;
+		serverClient.ConnectToServer();
+		serverClient.Connect("LoggedIn", this, nameof(LoggedAcepted));
+		serverClient.Connect("LoggedFail", this, nameof(LoggedFailed));
 	}
 
 
@@ -24,18 +30,17 @@ public class LogIn : Control
 	}
 
 	
-    private void _on_LogInButton_pressed()
+	private async void _on_LogInButton_pressed()
 	{
 		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
-        {
+		{
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
 			serverClient.Login(username, hashPassword);
-			bool status = serverClient.GetLoggedResponse();
-			GD.Print(serverClient.GetLoggedResponse());
-			if (status == true)
+			await loggedStatus;
+			if (loggedStatus.Result)
 			{
 				GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 			}
@@ -69,6 +74,16 @@ public class LogIn : Control
 		{
 			GD.Print("Login error");
 		}
+	}
+	
+	public void LoggedAcepted()
+	{
+		loggedStatus = Task<bool>.FromResult(true);
+	}
+	
+	public void LoggedFailed()
+	{
+		loggedStatus = Task<bool>.FromResult(false);
 	}
 
 	
