@@ -11,6 +11,7 @@ namespace OpenCodeChems.BusinessLogic.Interface
         bool EditUserEmail(User user, string email);
         bool EditUserPassword(User user, string actualHashedPassword, string newHashedPassword);
         string GetOldPassword(User user);
+        User GetUser(string username);
         
     }
 

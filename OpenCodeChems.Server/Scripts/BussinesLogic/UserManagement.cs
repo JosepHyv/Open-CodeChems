@@ -168,5 +168,25 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
+        public User GetUser(string username)
+        {
+            try
+            {
+                using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {
+                    User userObteined = (from User in context.User
+                                        where User.username == username
+                                        select User).First();
+                    context.SaveChanges();
+                    return userObteined;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                Exception exception = new Exception("USER_NOT_FOUND");
+                throw exception;
+            }
+        }
+
     }
 }

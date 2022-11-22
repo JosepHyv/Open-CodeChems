@@ -47,7 +47,7 @@ public class RegisterUser : Control
 			await registeredStatus;
 			if (registeredStatus.Result == true)
 			{
-				GD.Print("REGISTER_SUCCESFULLY");
+				GD.Print("REGISTER_SUCCESFULLY");	
 			}
 			else
 			{
