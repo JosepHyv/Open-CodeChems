@@ -31,6 +31,7 @@ public class RegisterUser : Control
 
 	public async void _on_RegisterTextureButton_pressed()
 	{
+		GD.Print("Precionaon el Register Texture Buton");
 		string name = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NameLineEdit").Text;
 		string email = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/EmailLineEdit").Text;
 		string username = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/UsernameLineEdit").Text;
@@ -38,6 +39,7 @@ public class RegisterUser : Control
 		string password = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/PasswordLineEdit").Text;
 		string confirmPassword = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
 		Validation validator = new Validation();
+		GD.Print($"Obtengo name:{name} email:{email} username:{username} nickname:{nickname} password:{password} confirmPass:{confirmPassword}");
 		if(validator.ValidateEmail(email) && validator.ValidatePassword(password) && confirmPassword.Equals(password) && !String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(nickname) && !String.IsNullOrWhiteSpace(name))
 		{
 			Encryption PasswordHasher = new Encryption();
