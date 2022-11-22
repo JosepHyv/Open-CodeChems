@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace OpenCodeChems.DataAccess
@@ -57,6 +58,7 @@ namespace OpenCodeChems.DataAccess
         public int victories { get; set; }
         public byte[] imageProfile { get; set; }
         public int defaults { get; set; }
+        [ForeignKey("UserRefusername")]
         public string username { get; set; }
     }
 }

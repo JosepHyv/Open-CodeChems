@@ -17,19 +17,25 @@ namespace OpenCodeChems.BussinesLogic
         
 
         public bool RegisterUser(User user, Profile profile)
-        {
-
-            
+        {  
             bool status = false;
             using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                EntityEntry<User> newUser = context.User.Add(new User (user.username, user.password, user.name, user.email));
-                context.SaveChanges();
-                EntityEntry<Profile> newProfile = context.Profile.Add(new Profile (profile.nickname, profile.victories, profile.imageProfile, profile.defaults, user.username));
-                context.SaveChanges();
-                if (newUser != null && newProfile != null)
+                
+                try
                 {
-                    status = true;
+                    context.User.Add(user);
+                    context.SaveChanges();
+                    context.Profile.Add(profile);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateException)
+                {
+                    status = false;
+                }
+                catch (NullReferenceException)
+                {
+                    status = false;
                 }
             }
             return status;

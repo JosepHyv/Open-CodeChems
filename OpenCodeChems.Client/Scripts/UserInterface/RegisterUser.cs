@@ -8,7 +8,6 @@ using OpenCodeChems.Client.Server;
 using System.IO;
 using Path = System.IO.Path;
 using File = System.IO.File;
-using OpenCodeChems.Objects;
 
 public class RegisterUser : Control
 {
@@ -19,7 +18,6 @@ public class RegisterUser : Control
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		serverClient.ConnectToServer();
 		serverClient.Connect("Registered", this, nameof(RegisteredAccepted));
 		serverClient.Connect("RegisteredFail", this, nameof(RegisteredFail));
 	}
@@ -44,38 +42,23 @@ public class RegisterUser : Control
 		{
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-			byte[] imageProfile = GetDefaultImage();
-			User newUser = new User();
-			newUser.username = username;
-			newUser.name = name;
-			newUser.email = email;
-			newUser.password = password;
-			Profile newProfile = new Profile();
-			newProfile.defaults = 0;
-			newProfile.nickname = nickname;
-			newProfile.username = username;
-			newProfile.imageProfile = imageProfile;
-			newProfile.victories = 0;
-			serverClient.RegisterUser(newUser, newProfile);
+			byte[] imageProfile = null;
+			int victories = 0;
+			int defaults = 0;
+			serverClient.RegisterUser(name, email, username, hashPassword, nickname, imageProfile, victories, defaults);
 			await registeredStatus;
 			if (registeredStatus.Result)
 			{
-				dialogAccept.SetText("REGISTER_SUCCESFULLY");
-				dialogAccept.PopupCentered();
-				dialogAccept.Visible = true;
+				GD.Print("REGISTER_SUCCESFULLY");
 			}
 			else
 			{
-				dialogAccept.SetText("WRONG_REGISTER");
-				dialogAccept.PopupCentered();
-				dialogAccept.Visible = true;
+				GD.Print("WRONG_REGISTER");
 			}
 		}
 		else
 		{
-			dialogAccept.SetText("VERIFY_FIELDS");
-			dialogAccept.PopupCentered();
-			dialogAccept.Visible = true;
+			GD.Print("VERIFY_FIELDS");
 		}
 		
 	}

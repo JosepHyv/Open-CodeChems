@@ -59,21 +59,32 @@ public class Network : Node
         }
     }
     [Master]
-    private void RegisterUserRequest(User newUser, Profile newProfile)
+    private void RegisterUserRequest(string name, string email, string username, string hashPassword,  string nickname, byte[] imageProfile, int victories, int defaults)
     {
         int senderId = GetTree().GetRpcSenderId();
         UserManagement userManagement = new UserManagement();
         bool status = false;
-        if(userManagement.RegisterUser(newUser, newProfile) == true)
+        try
         {
-            status = true;
-            RpcId(senderId, "RegisterUserResponse", status);
-            GD.Print($"Player no. {senderId} registered in successfully.");
+            User newUser = new User(username, hashPassword, name, email);
+            Profile newProfile = new Profile(nickname, victories, imageProfile, defaults, username);
+
+
+            if(userManagement.RegisterUser(newUser, newProfile) == true)
+            {
+                status = true;
+                RpcId(senderId, "RegisterUserResponse", status);
+                GD.Print($"Player no. {senderId} registered in successfully.");
+            }
+            else
+            {
+                RpcId(senderId, "RegisterUserResponse", status);
+                GD.Print($"Player no. {senderId} registered in failed.");
+            }
         }
-        else
+        catch 
         {
-            RpcId(senderId, "RegisterUserResponse", status);
-            GD.Print($"Player no. {senderId} registered in failed.");
+
         }
     }
 }

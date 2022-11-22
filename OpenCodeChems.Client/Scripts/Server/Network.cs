@@ -81,10 +81,10 @@ namespace OpenCodeChems.Client.Server
 			}
 		}
 
-		public void RegisterUser(User newUser, Profile newProfile)
+		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, byte [] imageProfile, int victories, int defaults)
 		{
 			GD.Print("Enviando Request al server");
-			RpcId(PEER_ID,"RegisterUserRequest", newUser, newProfile);
+			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname, imageProfile, victories, defaults);
 			GD.Print("Request enviado");
 			
 		}
