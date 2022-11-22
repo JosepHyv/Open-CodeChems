@@ -9,8 +9,8 @@ namespace OpenCodeChems.Client.Server
 	{
 		private int SERVER_ID = 1;
 		private int DEFAULT_PORT = 5500;
-		private int MAX_PLAYERS = 200;
-		private string ADDRESS = "localhost";
+		private int MAX_PLAYERS = 200; 
+		private string ADDRESS = "192.168.127.241";
 		private int PEER_ID = 1;
 		private bool connected = false;
 //        private bool logged = false;

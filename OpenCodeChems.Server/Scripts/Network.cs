@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 public class Network : Node
 {
 	private int DEFAULT_PORT = 5500;
-	private string ADDRESS = "localhost";
+	private string ADDRESS = "192.168.127.93";
 	private int MAX_PLAYERS = 200;
 	private int PEERID = 1;
 	public override void _Ready()
@@ -46,16 +46,15 @@ public class Network : Node
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		UserManagement userManagement = new UserManagement();
-		bool status = false;
 		if(userManagement.Login(username, password) == true)
 		{
-			status = true;
-			RpcId(senderId, "LoginSuccesful", status);
+			
+			RpcId(senderId, "LoginSuccesful");
 			GD.Print($"Player no. {senderId} logged in successfully.");
 		}
 		else
 		{
-			RpcId(senderId, "LoginFailed", status);
+			RpcId(senderId, "LoginFailed");
 			GD.Print($"Player no. {senderId} logged in failed.");
 		}
 	}
@@ -71,12 +70,12 @@ public class Network : Node
 			if(userManagement.RegisterUser(newUser) == true)
 			{
 				status = true;
-				RpcId(senderId, "RegisterUserResponse", status);
+				RpcId(senderId, "RegisterSuccesful");
 				GD.Print($"Player no. {senderId} registered in successfully.");             
 			}
 			else
 			{
-				RpcId(senderId, "RegisterUserResponse", status);
+				RpcId(senderId, "RegisterFail");
 				GD.Print($"Player no. {senderId} registered in failed.");
 			}
 		}
