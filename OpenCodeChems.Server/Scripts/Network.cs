@@ -46,11 +46,10 @@ public class Network : Node
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		UserManagement userManagement = new UserManagement();
-		bool status = false;
 		if(userManagement.Login(username, password) == true)
 		{
-			status = true;
-			RpcId(senderId, "LoginSuccesful", status);
+			
+			RpcId(senderId, "LoginSuccesful");
 			GD.Print($"Player no. {senderId} logged in successfully.");
 		}
 		else

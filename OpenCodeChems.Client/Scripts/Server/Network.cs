@@ -10,7 +10,7 @@ namespace OpenCodeChems.Client.Server
 		private int SERVER_ID = 1;
 		private int DEFAULT_PORT = 5500;
 		private int MAX_PLAYERS = 200;
-		private string ADDRESS = "localhost";
+		private string ADDRESS = "192.168.127.93";
 		private int PEER_ID = 1;
 		private bool connected = false;
 //        private bool logged = false;
@@ -86,19 +86,19 @@ namespace OpenCodeChems.Client.Server
 			
 		}
 		
+		
 		[Puppet]
-		public void RegisterUserResponse(bool status)
+		public void RegisterSuccesful()
 		{
-			if(status)
-			{
-				GD.Print("Register successfully");
+			GD.Print("Register successfully");
 				EmitSignal(nameof(Registered));
-			}
-			else
-			{
-				GD.Print("Register failed");
-				EmitSignal(nameof(RegisteredFail));
-			}
+		}
+		
+		[Puppet]
+		public void RegisterFail()
+		{
+			GD.Print("Register failed");
+			EmitSignal(nameof(RegisteredFail));
 		}
 
 		public bool GetRegisteresResponse()
