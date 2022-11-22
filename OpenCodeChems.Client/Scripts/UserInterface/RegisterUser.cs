@@ -1,24 +1,23 @@
 using Godot;
 using System;
 using OpenCodeChems.Client.Resources;
+using OpenCodeChems.Client.Server;
+using System.IO;
+using Path = System.IO.Path;
+using File = System.IO.File;
+using OpenCodeChems.Objects;
 
 public class RegisterUser : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-
-	// Called when the node enters the scene tree for the first time.
+	Network serverClient;
+	int PEER_ID = 1; 
+	AcceptDialog dialogAccept = new AcceptDialog();
 	public override void _Ready()
 	{
-		
+        serverClient = GetNode<Network>("/root/Network") as Network;
+        serverClient.ConnectToServer();
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 	public void _on_CancelTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/LogIn.tscn");
@@ -26,24 +25,58 @@ public class RegisterUser : Control
 
 	public void _on_RegisterTextureButton_pressed()
 	{
-		GD.Print("Registrando");
 		string name = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NameLineEdit").Text;
 		string email = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/EmailLineEdit").Text;
-		string userName = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/UsernameLineEdit").Text;
-		string playerName = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
+		string username = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/UsernameLineEdit").Text;
+		string nickname = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/PasswordLineEdit").Text;
-		string confirmPassword =
-			GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
+		string confirmPassword = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
 		Validation validator = new Validation();
-		if(validator.ValidateEmail(email) && validator.ValidatePassword(password) && confirmPassword.Equals(password))
+		if(validator.ValidateEmail(email) && validator.ValidatePassword(password) && confirmPassword.Equals(password) && !String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(nickname) && !String.IsNullOrWhiteSpace(name))
 		{
-			
+			Encryption PasswordHasher = new Encryption();
+			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
+			byte[] imageProfile = GetDefaultImage();
+			User newUser = new User();
+			newUser.username = username;
+			newUser.name = name;
+			newUser.email = email;
+			newUser.password = password;
+			Profile newProfile = new Profile();
+			newProfile.defaults = 0;
+			newProfile.nickname = nickname;
+			newProfile.username = username;
+			newProfile.imageProfile = imageProfile;
+			newProfile.victories = 0;
+			serverClient.RegisterUser(newUser, newProfile);
+			bool status = serverClient.GetRegisteresResponse();
+			if (status == true)
+			{
+				dialogAccept.SetText("REGISTER_SUCCESFULLY");
+				dialogAccept.PopupCentered();
+				dialogAccept.Visible = true;
+			}
+			else
+			{
+				dialogAccept.SetText("WRONG_REGISTER");
+				dialogAccept.PopupCentered();
+				dialogAccept.Visible = true;
+			}
 		}
 		else
 		{
-			GD.Print("Validar los datos porfi");
+			dialogAccept.SetText("VERIFY_FIELDS");
+			dialogAccept.PopupCentered();
+			dialogAccept.Visible = true;
 		}
 		
+	}
+
+	public byte[] GetDefaultImage()
+	{
+		var profilePicturePath = Path.GetDirectoryName("../../Icons/imagePerfilDefault.png");
+		byte[] imageProfile = File.ReadAllBytes(profilePicturePath);
+		return imageProfile;
 	}
 
 }

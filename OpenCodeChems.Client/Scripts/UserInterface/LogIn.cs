@@ -34,6 +34,7 @@ public class LogIn : Control
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
 			serverClient.Login(username, hashPassword);
 			bool status = serverClient.GetLoggedResponse();
+			GD.Print(serverClient.GetLoggedResponse());
 			if (status == true)
 			{
 				GetTree().ChangeScene("res://Scenes/MainMenu.tscn");

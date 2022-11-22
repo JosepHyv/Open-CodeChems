@@ -1,6 +1,7 @@
 ﻿using Godot;
 using System;
 using System.Resources;
+using OpenCodeChems.Objects;
 
 
 namespace OpenCodeChems.Client.Server
@@ -11,8 +12,10 @@ namespace OpenCodeChems.Client.Server
         private int DEFAULT_PORT = 5500;
         private int MAX_PLAYERS = 200;
         private string ADDRESS = "localhost";
+        private int PEER_ID = 1;
         private bool connected = false;
         private bool logged = false;
+        private bool regitered = false;
         
         private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
         public override void _Ready()
@@ -48,7 +51,7 @@ namespace OpenCodeChems.Client.Server
         public void Login(string username, string password )
         {
             GD.Print("Enviando Request al server");
-            RpcId(1,"LoginRequest", username, password);
+            RpcId(PEER_ID,"LoginRequest", username, password);
             GD.Print("Request enviado");
             
         }
@@ -63,6 +66,24 @@ namespace OpenCodeChems.Client.Server
         {
             return this.logged;
         }
+        public void RegisterUser(User newUser, Profile newProfile)
+        {
+            GD.Print("Enviando Request al server");
+            RpcId(PEER_ID,"RegisterUserRequest", newUser, newProfile);
+            GD.Print("Request enviado");
+            
+        }
+        [Puppet]
+        public void RegisterUserResponse(bool status)
+        {
+            this.regitered = status;
+        }
+
+        public bool GetRegisteresResponse()
+        {
+            return this.regitered;
+        }
+
     }
     
 }

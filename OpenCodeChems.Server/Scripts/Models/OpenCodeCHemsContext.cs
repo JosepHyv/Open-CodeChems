@@ -20,7 +20,7 @@ namespace OpenCodeChems.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=tcp:openchemsserver.database.windows.net,1433;Initial Catalog=opencodechems;Persist Security Info=False;User ID=chemsito;Password=MasterKey$123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");   
+            optionsBuilder.UseSqlServer("Server=tcp:openchemsserver.database.windows.net,1433;Initial Catalog=opencodechems;Persist Security Info=False;User ID=chemsito;Password=MasterKey$123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30");   
         }
         
     }

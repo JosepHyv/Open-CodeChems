@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using OpenCodeChems.BussinesLogic;
+using OpenCodeChems.DataAccess;
 
 public class Network : Node
 {
@@ -55,6 +56,24 @@ public class Network : Node
         {
             RpcId(senderId, "LoginResponse", status);
             GD.Print($"Player no. {senderId} logged in failed.");
+        }
+    }
+    [Master]
+    private void RegisterUserRequest(User newUser, Profile newProfile)
+    {
+        int senderId = GetTree().GetRpcSenderId();
+        UserManagement userManagement = new UserManagement();
+        bool status = false;
+        if(userManagement.RegisterUser(newUser, newProfile) == true)
+        {
+            status = true;
+            RpcId(senderId, "RegisterUserResponse", status);
+            GD.Print($"Player no. {senderId} registered in successfully.");
+        }
+        else
+        {
+            RpcId(senderId, "RegisterUserResponse", status);
+            GD.Print($"Player no. {senderId} registered in failed.");
         }
     }
 }
