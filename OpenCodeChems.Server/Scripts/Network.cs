@@ -2,6 +2,7 @@ using Godot;
 using System;
 using OpenCodeChems.BussinesLogic;
 using OpenCodeChems.DataAccess;
+using System.Data.SqlClient;
 
 public class Network : Node
 {
@@ -59,22 +60,19 @@ public class Network : Node
         }
     }
     [Master]
-    private void RegisterUserRequest(string name, string email, string username, string hashPassword,  string nickname, byte[] imageProfile, int victories, int defaults)
+    private void RegisterUserRequest(string name, string email, string username, string hashPassword,byte[] imageProfile, int victories, int defeats)
     {
         int senderId = GetTree().GetRpcSenderId();
         UserManagement userManagement = new UserManagement();
         bool status = false;
         try
         {
-            User newUser = new User(username, hashPassword, name, email);
-            Profile newProfile = new Profile(nickname, victories, imageProfile, defaults, username);
-
-
-            if(userManagement.RegisterUser(newUser, newProfile) == true)
+            User newUser = new User(username, hashPassword, name, email, victories, defeats, imageProfile);
+            if(userManagement.RegisterUser(newUser) == true)
             {
                 status = true;
                 RpcId(senderId, "RegisterUserResponse", status);
-                GD.Print($"Player no. {senderId} registered in successfully.");
+                GD.Print($"Player no. {senderId} registered in successfully.");             
             }
             else
             {
@@ -84,7 +82,7 @@ public class Network : Node
         }
         catch 
         {
-
+            
         }
     }
 }

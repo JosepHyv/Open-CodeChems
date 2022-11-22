@@ -33,21 +33,19 @@ public class RegisterUser : Control
 		string name = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NameLineEdit").Text;
 		string email = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/EmailLineEdit").Text;
 		string username = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/UsernameLineEdit").Text;
-		string nickname = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/PasswordLineEdit").Text;
 		string confirmPassword = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
 		Validation validator = new Validation();
-		GD.Print($"Obtengo name:{name} email:{email} username:{username} nickname:{nickname} password:{password} confirmPass:{confirmPassword}");
-		if(validator.ValidateEmail(email) && validator.ValidatePassword(password) && confirmPassword.Equals(password) && !String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(nickname) && !String.IsNullOrWhiteSpace(name))
+		if(validator.ValidateEmail(email) && validator.ValidatePassword(password) && confirmPassword.Equals(password) && !String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(name))
 		{
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
 			byte[] imageProfile = null;
 			int victories = 0;
 			int defaults = 0;
-			serverClient.RegisterUser(name, email, username, hashPassword, nickname, imageProfile, victories, defaults);
+			serverClient.RegisterUser(name, email, username, hashPassword, imageProfile, victories, defaults);
 			await registeredStatus;
-			if (registeredStatus.Result)
+			if (registeredStatus.Result == true)
 			{
 				GD.Print("REGISTER_SUCCESFULLY");
 			}

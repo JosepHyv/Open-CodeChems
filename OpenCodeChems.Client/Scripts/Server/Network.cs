@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Resources;
-using OpenCodeChems.Objects;
 
 
 namespace OpenCodeChems.Client.Server
@@ -81,10 +80,10 @@ namespace OpenCodeChems.Client.Server
 			}
 		}
 
-		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, byte [] imageProfile, int victories, int defaults)
+		public void RegisterUser(string name, string email, string username, string hashPassword, byte [] imageProfile, int victories, int defaults)
 		{
 			GD.Print("Enviando Request al server");
-			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname, imageProfile, victories, defaults);
+			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword,  imageProfile, victories, defaults);
 			GD.Print("Request enviado");
 			
 		}

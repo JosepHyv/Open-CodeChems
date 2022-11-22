@@ -15,7 +15,6 @@ namespace OpenCodeChems.DataAccess
         
 
         public DbSet<User> User { get; set; }
-        public DbSet<Profile> Profile { get; set; }
 
         
 
@@ -28,12 +27,15 @@ namespace OpenCodeChems.DataAccess
     public class User
     {
 
-        public User(string username, string password, string name, string email)
+        public User(string username, string password, string name, string email, int victories, int defeats, byte[] imageProfile)
         {
             this.username = username;
             this.password = password;
             this.name = name;
             this.email = email;
+            this.victories = victories;
+            this.defeats = defeats;
+            this.imageProfile = imageProfile;
         }
 
         [Key]
@@ -41,24 +43,10 @@ namespace OpenCodeChems.DataAccess
         public string password { get; set; }
         public string name { get; set; }
         public string email { get; set; }
-    }
-    public class Profile
-    {
-        public Profile(string nickname, int victories, byte[] imageProfile, int defaults, string username)
-        {
-            this.nickname = nickname;
-            this.victories = victories;
-            this.imageProfile = imageProfile;
-            this.defaults = defaults;
-            this.username = username;
-        }
-
-        [Key]
-        public string nickname { get; set; }
         public int victories { get; set; }
+        public int defeats { get; set; }
         public byte[] imageProfile { get; set; }
-        public int defaults { get; set; }
-        [ForeignKey("UserRefusername")]
-        public string username { get; set; }
+
     }
+
 }

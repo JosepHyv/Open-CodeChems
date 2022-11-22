@@ -7,8 +7,8 @@ using OpenCodeChems.DataAccess;
 using OpenCodeChems.BusinessLogic.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-
-
+using System.Data.SqlClient;
+using Godot;
 
 namespace OpenCodeChems.BussinesLogic
 {
@@ -16,7 +16,7 @@ namespace OpenCodeChems.BussinesLogic
     {
         
 
-        public bool RegisterUser(User user, Profile profile)
+        public bool RegisterUser(User user)
         {  
             bool status = false;
             using (OpenCodeChemsContext context = new OpenCodeChemsContext())
@@ -26,8 +26,7 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     context.User.Add(user);
                     context.SaveChanges();
-                    context.Profile.Add(profile);
-                    context.SaveChanges();
+                    status = true;
                 }
                 catch (DbUpdateException)
                 {
@@ -40,6 +39,7 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+
 
 
         public bool Login(string username, string password) 
@@ -59,18 +59,18 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public bool EditProfileNickname(Profile profile, string nickname)
+        public bool EditProfileNickname(User user, string newUsername)
         {
             bool status = false;
             try
             {
-                string username = profile.username;
+                string username = user.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
-                    var profiles = (from Profile in context.Profile
-                                    where Profile.username == username
-                                    select Profile).First();
-                    profiles.nickname = nickname;
+                    var users = (from User in context.User
+                                    where User.username == username
+                                    select User).First();
+                    users.username = newUsername;
                     context.SaveChanges();
                     status = true;
                 }
@@ -82,18 +82,18 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public bool EditProfileImage(Profile profile, byte[] imageProfile)
+        public bool EditProfileImage(User user, byte[] imageProfile)
         {
             bool status = false;
             try
             {
-                string username = profile.username;
+                string username = user.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
-                    var profiles = (from Profile in context.Profile
-                                    where Profile.username == username
-                                    select Profile).First();
-                    profiles.imageProfile = imageProfile;
+                    var users = (from User in context.User
+                                    where User.username == username
+                                    select User).First();
+                    users.imageProfile = imageProfile;
                     context.SaveChanges();
                     status = true;
                 }
