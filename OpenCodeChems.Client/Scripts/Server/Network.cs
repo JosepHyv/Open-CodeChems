@@ -67,16 +67,16 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void LoginSuccesful()
 		{
-            GD.Print("Loggueado Correctamente");
-            EmitSignal(nameof(LoggedIn));
-        }
+			GD.Print("Loggueado Correctamente");
+			EmitSignal(nameof(LoggedIn));
+		}
 
-        [Puppet]
-        public void LoginFailed()
-        {
-            GD.Print("Loggeo fallido ");
-            EmitSignal(nameof(LoggedFail));
-        }
+		[Puppet]
+		public void LoginFailed()
+		{
+			GD.Print("Loggeo fallido ");
+			EmitSignal(nameof(LoggedFail));
+		}
 
 		public void RegisterUser(string name, string email, string username, string hashPassword, byte [] imageProfile, int victories, int defaults)
 		{

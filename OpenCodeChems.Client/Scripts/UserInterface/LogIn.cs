@@ -34,29 +34,11 @@ public class LogIn : Control
 	{
 		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
-		
-        LoggIn(username, password);
-
-	}
-
-	private async Task LoggIn(string username, string password)
-    {
-        if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
+		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
 		{
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
 			serverClient.Login(username, hashPassword);
-            await ToSignal(serverClient, "LoggedIn");
-			if (loggedStatus.Result)
-			{
-				GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-			}
-			else
-			{
-				GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("WRONG_CREDENTIALS");
-				GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
-			}
-			
 		}
 		else
 		{
@@ -64,15 +46,22 @@ public class LogIn : Control
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 			GD.Print("Empty fields");
 		}
-    }
+		
+
+	}
 	
 	public void LoggedAcepted()
 	{
 		loggedStatus = Task<bool>.FromResult(true);
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+		
+			
 	}
 	
 	public void LoggedFailed()
 	{
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("WRONG_CREDENTIALS");
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 		loggedStatus = Task<bool>.FromResult(false);
 	}
 
