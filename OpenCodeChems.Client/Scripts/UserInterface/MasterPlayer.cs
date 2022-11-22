@@ -14,8 +14,9 @@ public class MasterPlayer : Control
         {
             
                 itemNode.SetItemText(c, listElements[c]);
-                uint randomNumber = GD.Randi() % 25;
-                //GD.Print(randomNumber);
+                Random RandomClass = new Random();
+                int randomNumber = RandomClass.Next(0,25);
+                GD.Print(listElements[randomNumber]);
                 
         }
     }

@@ -12,10 +12,7 @@ public class KeyController : Control
     public override void _Ready()
     {   
         LoadKey();
-        
-        //NinePatchRect key = (NinePatchRect)packedScene.Instance();
-        //key.Position = mouseEvent.Position;
-        //this.AddChild(key);
+    
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
