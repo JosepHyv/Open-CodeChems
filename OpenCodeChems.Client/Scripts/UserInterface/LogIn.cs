@@ -30,16 +30,22 @@ public class LogIn : Control
 	}
 
 	
-	private async void _on_LogInButton_pressed()
+	private void _on_LogInButton_pressed()
 	{
 		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
-		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
+		
+
+	}
+
+	private async Task LoggIn(string username, string password)
+    {
+        if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
 		{
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
 			serverClient.Login(username, hashPassword);
-			await loggedStatus;
+            await ToSignal(serverClient, "LoggedIn");
 			if (loggedStatus.Result)
 			{
 				GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
@@ -57,24 +63,7 @@ public class LogIn : Control
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 			GD.Print("Empty fields");
 		}
-
-	}
-
-	private void LoginRequest(string username, string hashPassword)
-	{
-		RpcId(PEER_ID, "LoginRequest", username, hashPassword);
-	}
-	private void ReturnLoginRequest(bool results)
-	{
-		if(results == true)
-		{
-			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-		}
-		else 
-		{
-			GD.Print("Login error");
-		}
-	}
+    }
 	
 	public void LoggedAcepted()
 	{
