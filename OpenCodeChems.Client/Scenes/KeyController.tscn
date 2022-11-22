@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/UserInterface/KeyController.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/MasterPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/KeyRedOne.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/KeyRedTwo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/KeyBlueTwo.tscn" type="PackedScene" id=5]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="MasterPlayer" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="KeyRedOne" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="KeyRedTwo" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="KeyBlueTwo" parent="." instance=ExtResource( 5 )]
+visible = false
