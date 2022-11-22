@@ -35,6 +35,7 @@ public class LogIn : Control
 		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 		
+        LoggIn(username, password);
 
 	}
 
