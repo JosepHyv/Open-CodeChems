@@ -27,7 +27,7 @@ public class RegisterUser : Control
 		GetTree().ChangeScene("res://Scenes/LogIn.tscn");
 	}
 
-	public async void _on_RegisterTextureButton_pressed()
+	public  void _on_RegisterTextureButton_pressed()
 	{
 		GD.Print("Precionaon el Register Texture Buton");
 		string name = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NameLineEdit").Text;
@@ -44,19 +44,12 @@ public class RegisterUser : Control
 			int victories = 0;
 			int defaults = 0;
 			serverClient.RegisterUser(name, email, username, hashPassword, imageProfile, victories, defaults);
-			await registeredStatus;
-			if (registeredStatus.Result == true)
-			{
-				GD.Print("REGISTER_SUCCESFULLY");	
-			}
-			else
-			{
-				GD.Print("WRONG_REGISTER");
-			}
 		}
 		else
 		{
 			GD.Print("VERIFY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 		}
 		
 	}
@@ -71,11 +64,18 @@ public class RegisterUser : Control
 	public void RegisteredAccepted()
 	{
 		registeredStatus = Task<bool>.FromResult(true);
+		GD.Print("REGISTER_SUCCESFULLY");	
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("REGISTER_COMPLETE");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+		GetTree().ChangeScene("res://Scenes/LogIn.tscn");
 	}
 	
 	public void RegisteredFail()
 	{
 		registeredStatus = Task<bool>.FromResult(false);
+		GD.Print("WRONG_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("WRONG_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 	}
 
 }

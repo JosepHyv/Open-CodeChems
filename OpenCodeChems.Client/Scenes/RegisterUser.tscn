@@ -230,5 +230,12 @@ text = "PASSWORD_INSTRUCTION"
 autowrap = true
 clip_text = true
 
+[node name="RegisterUserDialog" type="AcceptDialog" parent="."]
+margin_left = 296.0
+margin_top = 176.0
+margin_right = 726.0
+margin_bottom = 408.0
+window_title = "¡Alerta!"
+
 [connection signal="pressed" from="BackgroundRegisterNinePatchRect/RegisterTextureButton" to="." method="_on_RegisterTextureButton_pressed"]
 [connection signal="pressed" from="BackgroundRegisterNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
