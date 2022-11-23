@@ -76,6 +76,8 @@ margin_top = 173.0
 margin_right = 585.0
 margin_bottom = 197.0
 custom_fonts/font = SubResource( 6 )
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="PasswordLineEdit" type="LineEdit" parent="NinePatchRect"]
 margin_left = 164.0
@@ -84,6 +86,8 @@ margin_right = 591.0
 margin_bottom = 297.0
 custom_fonts/font = SubResource( 7 )
 secret = true
+caret_blink = true
+caret_blink_speed = 0.5
 
 [node name="LogInButton" type="TextureButton" parent="NinePatchRect"]
 margin_left = 451.0
@@ -131,6 +135,13 @@ custom_fonts/font = SubResource( 5 )
 text = "SINGIN_BUTTON"
 autowrap = true
 clip_text = true
+
+[node name="EmptyFieldsAcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 266.0
+margin_top = 184.0
+margin_right = 738.0
+margin_bottom = 400.0
+window_title = "¡Alerta!"
 
 [connection signal="pressed" from="NinePatchRect/LogInButton" to="." method="_on_LogInButton_pressed"]
 [connection signal="pressed" from="NinePatchRect/RegisterButton" to="." method="_on_RegisterButton_pressed"]

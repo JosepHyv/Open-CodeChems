@@ -1,50 +1,68 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using OpenCodeChems.Client.Resources;
+using OpenCodeChems.Client.Server;
 
 public class LogIn : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
 
-	// Called when the node enters the scene tree for the first time.
+	Network serverClient;
+	int PEER_ID = 1; 
+	Task<bool> loggedStatus = Task<bool>.FromResult(false);
 	public override void _Ready()
 	{
-		
+		serverClient = GetNode<Network>("/root/Network") as Network;
+		serverClient.ConnectToServer();
+		serverClient.Connect("LoggedIn", this, nameof(LoggedAcepted));
+		serverClient.Connect("LoggedFail", this, nameof(LoggedFailed));
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+
 	private void _on_RegisterButton_pressed()
 	{
-		// Replace with function body.
-		//Owo?	
+		
 		GetTree().ChangeScene("res://Scenes/RegisterUser.tscn");
 		
 	}
 
+	
 	private void _on_LogInButton_pressed()
 	{
-		GD.Print("Hola Mundo andamos en el login");
-
 		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
 		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
-
-		
 		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
 		{
-			GD.Print("Intentando la conexion");
 			Encryption PasswordHasher = new Encryption();
 			string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-			GD.Print("Usuario atenticado");
-			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+			serverClient.Login(username, hashPassword);
 		}
+		else
+		{
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("EMPTY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
+			GD.Print("Empty fields");
+		}
+		
 
+	}
+	
+	public void LoggedAcepted()
+	{
+		loggedStatus = Task<bool>.FromResult(true);
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+		
+			
+	}
+	
+	public void LoggedFailed()
+	{
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("WRONG_CREDENTIALS");
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
+		loggedStatus = Task<bool>.FromResult(false);
 	}
 
 	

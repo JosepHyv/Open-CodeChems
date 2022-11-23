@@ -1,28 +1,19 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.Service", "OpenCodeChems.Service\OpenCodeChems.Service.csproj", "{E6EA4570-5159-4DB0-808A-31BA1AA7E7B9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.DataAccess", "OpenCodeChems.DataAccess\OpenCodeChems.DataAccess.csproj", "{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.BusinessLogic", "OpenCodeChems.BusinessLogic\OpenCodeChems.BusinessLogic.csproj", "{8A02872B-1E28-4932-97EC-266FD1902D51}"
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenCodeChems.Server", "OpenCodeChems.Server.csproj", "{8D8A2F53-9ABC-48E0-8662-E05B63A8D612}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E6EA4570-5159-4DB0-808A-31BA1AA7E7B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6EA4570-5159-4DB0-808A-31BA1AA7E7B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6EA4570-5159-4DB0-808A-31BA1AA7E7B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6EA4570-5159-4DB0-808A-31BA1AA7E7B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6CE8981-9592-4EF4-9E5E-ADFEBD2D5493}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A02872B-1E28-4932-97EC-266FD1902D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A02872B-1E28-4932-97EC-266FD1902D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A02872B-1E28-4932-97EC-266FD1902D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A02872B-1E28-4932-97EC-266FD1902D51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D8A2F53-9ABC-48E0-8662-E05B63A8D612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D8A2F53-9ABC-48E0-8662-E05B63A8D612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D8A2F53-9ABC-48E0-8662-E05B63A8D612}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{8D8A2F53-9ABC-48E0-8662-E05B63A8D612}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{8D8A2F53-9ABC-48E0-8662-E05B63A8D612}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{8D8A2F53-9ABC-48E0-8662-E05B63A8D612}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal
