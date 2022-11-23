@@ -54,10 +54,10 @@ texture_pressed = ExtResource( 1 )
 expand = true
 
 [node name="CancelLabel" type="Label" parent="TraslationNinePatchRect/CancelTextureButton"]
-margin_left = -2.0
-margin_top = 17.0
-margin_right = 142.0
-margin_bottom = 40.0
+margin_left = 16.0
+margin_top = 14.0
+margin_right = 160.0
+margin_bottom = 37.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "CANCEL_BUTTON"

@@ -115,7 +115,7 @@ margin_right = 41.9
 margin_bottom = 25.022
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 6 )
-text = "CANCELBUTTON"
+text = "CANCEL_BUTTON"
 autowrap = true
 clip_text = true
 

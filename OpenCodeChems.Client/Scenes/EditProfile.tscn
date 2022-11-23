@@ -76,7 +76,7 @@ texture = ExtResource( 2 )
 [node name="ProfileInformationLabel" type="Label" parent="EditProfileNinePatchRect"]
 margin_left = 59.0
 margin_top = 57.0
-margin_right = 287.0
+margin_right = 439.0
 margin_bottom = 93.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
@@ -100,7 +100,7 @@ expand = true
 [node name="NicknameLabel" type="Label" parent="EditProfileNinePatchRect"]
 margin_left = 524.0
 margin_top = 46.0
-margin_right = 664.0
+margin_right = 712.0
 margin_bottom = 77.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
@@ -136,10 +136,10 @@ margin_bottom = 194.0
 custom_fonts/font = SubResource( 5 )
 
 [node name="ProfilePhotoLabel" type="Label" parent="EditProfileNinePatchRect"]
-margin_left = 851.0
-margin_top = 119.0
-margin_right = 958.0
-margin_bottom = 145.0
+margin_left = 831.0
+margin_top = 117.0
+margin_right = 964.0
+margin_bottom = 143.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "PHOTO_LABEL"
@@ -156,10 +156,10 @@ texture_pressed = ExtResource( 3 )
 expand = true
 
 [node name="SaveInformationLabel" type="Label" parent="EditProfileNinePatchRect/SaveProfileInformationTextureButton"]
-margin_left = 29.0
-margin_top = 10.0
-margin_right = 69.0
-margin_bottom = 33.0
+margin_left = 20.0
+margin_top = 12.0
+margin_right = 92.0
+margin_bottom = 35.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "SAVE_BUTTON"
@@ -176,7 +176,7 @@ anchor_right = 0.152
 anchor_bottom = 0.405
 margin_left = 69.0
 margin_top = 304.0
-margin_right = 112.504
+margin_right = 216.504
 margin_bottom = 97.81
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 8 )
@@ -205,7 +205,7 @@ custom_fonts/font = SubResource( 10 )
 [node name="NewPasswordLabel" type="Label" parent="EditProfileNinePatchRect"]
 margin_left = 527.0
 margin_top = 372.0
-margin_right = 646.0
+margin_right = 740.0
 margin_bottom = 398.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 11 )
@@ -223,7 +223,7 @@ custom_fonts/font = SubResource( 12 )
 [node name="ConfirmPasswordLabel" type="Label" parent="EditProfileNinePatchRect"]
 margin_left = 528.0
 margin_top = 442.0
-margin_right = 677.0
+margin_right = 746.0
 margin_bottom = 468.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 13 )
@@ -250,13 +250,13 @@ texture_pressed = ExtResource( 3 )
 expand = true
 
 [node name="SavePasswordLabel" type="Label" parent="EditProfileNinePatchRect/SavePasswordTextureButton"]
-margin_left = 30.0
+margin_left = 16.0
 margin_top = 13.0
-margin_right = 70.0
+margin_right = 82.0
 margin_bottom = 36.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 15 )
-text = "SAAVE_BUTTON"
+text = "SAVE_BUTTON"
 autowrap = true
 clip_text = true
 
@@ -272,10 +272,10 @@ expand = true
 [node name="CancelLabel" type="Label" parent="CancelTextureButton"]
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 57.0
-margin_top = 20.0
-margin_right = 43.5
-margin_bottom = 15.0
+margin_left = 60.0
+margin_top = 26.0
+margin_right = 46.5
+margin_bottom = 21.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 16 )
 text = "CANCEL_BUTTON"
