@@ -13,7 +13,6 @@ namespace OpenCodeChems.Client.Resources
         public bool ValidatePassword(string password)
         {
             bool isValid = true;
-            isValid = isValid & !String.IsNullOrWhiteSpace(password);
             isValid = isValid & (password.Length >= 8);
 
             string especialCharacters = "*#+-_;.@%&/()=!?¿¡{}[]^<>";
@@ -50,7 +49,6 @@ namespace OpenCodeChems.Client.Resources
         public bool ValidateEmail(string email)
         {
             bool isValid = true;
-            isValid = isValid & !String.IsNullOrWhiteSpace(email);
             isValid = isValid & (email.Length <= 255);
             isValid = isValid & EmailValidator.Validate(email);
             return isValid;

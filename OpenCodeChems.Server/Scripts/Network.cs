@@ -3,11 +3,12 @@ using System;
 using OpenCodeChems.BussinesLogic;
 using OpenCodeChems.DataAccess;
 using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 public class Network : Node
 {
 	private int DEFAULT_PORT = 5500;
-	private string ADDRESS = "192.168.127.93";
+	private string ADDRESS = "localhost";
 	private int MAX_PLAYERS = 200;
 	private int PEERID = 1;
 	public override void _Ready()
@@ -46,32 +47,43 @@ public class Network : Node
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		UserManagement userManagement = new UserManagement();
-		if(userManagement.Login(username, password) == true)
+		try
 		{
-			
-			RpcId(senderId, "LoginSuccesful");
-			GD.Print($"Player no. {senderId} logged in successfully.");
+			if(userManagement.Login(username, password) == true)
+			{
+				
+				RpcId(senderId, "LoginSuccesful");
+				GD.Print($"Player no. {senderId} logged in successfully.");
+			}
+			else
+			{
+				RpcId(senderId, "LoginFailed");
+				GD.Print($"Player no. {senderId} logged in failed.");
+			}
 		}
-		else
-		{
-			RpcId(senderId, "LoginFailed");
-			GD.Print($"Player no. {senderId} logged in failed.");
-		}
+		catch (DbUpdateException)
+        {
+        	
+        }
 	}
 	[Master]
-	private void RegisterUserRequest(string name, string email, string username, string hashPassword,byte[] imageProfile, int victories, int defeats)
+	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		UserManagement userManagement = new UserManagement();
 		bool status = false;
 		try
 		{
-			User newUser = new User(username, hashPassword, name, email, victories, defeats, imageProfile);
+			User newUser = new User(username, hashPassword, name, email);
+			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
 			if(userManagement.RegisterUser(newUser) == true)
 			{
-				status = true;
-				RpcId(senderId, "RegisterSuccesful");
-				GD.Print($"Player no. {senderId} registered in successfully.");             
+				if (userManagement.RegisterProfile(newProfile) == true)
+				{
+					status = true;
+					RpcId(senderId, "RegisterSuccesful");
+					GD.Print($"Player no. {senderId} registered in successfully.");      
+				}       
 			}
 			else
 			{
@@ -79,9 +91,58 @@ public class Network : Node
 				GD.Print($"Player no. {senderId} registered in failed.");
 			}
 		}
-		catch 
+		catch (DbUpdateException)
+        {
+            status = false;
+    	}
+	}
+
+	[Master]
+	private void EmailRegisteredRequest(string email)
+	{	
+		int senderId = GetTree().GetRpcSenderId();
+		UserManagement userManagement = new UserManagement();
+		bool status = false;	
+		if (userManagement.EmailRegistered(email) == false)
 		{
-			
+			status = true;
+			RpcId(senderId, "EmailNotRegistered");
+		}
+		else
+		{
+			RpcId(senderId, "EmailIsRegistered");
+		}
+	}
+	[Master]
+	private void UsernameRegisteredRequest(string username)
+	{	
+		int senderId = GetTree().GetRpcSenderId();
+		UserManagement userManagement = new UserManagement();
+		bool status = false;	
+		if (userManagement.UsernameRegistered(username) == false)
+		{
+			status = true;
+			RpcId(senderId, "UsernameNotRegistered");
+		}
+		else
+		{
+			RpcId(senderId, "UsernameIsRegistered");
+		}
+	}
+	[Master]
+	private void NicknameRegisteredRequest(string nickname)
+	{	
+		int senderId = GetTree().GetRpcSenderId();
+		UserManagement userManagement = new UserManagement();
+		bool status = false;	
+		if (userManagement.NicknameRegistered(nickname) == false)
+		{
+			status = true;
+			RpcId(senderId, "NicknameNotRegistered");
+		}
+		else
+		{
+			RpcId(senderId, "NicknameIsRegistered");
 		}
 	}
 }

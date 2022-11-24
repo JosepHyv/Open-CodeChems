@@ -44,7 +44,6 @@ public class LogIn : Control
 		{
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("EMPTY_FIELDS");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
-			GD.Print("Empty fields");
 		}
 		
 

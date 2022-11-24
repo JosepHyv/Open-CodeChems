@@ -32,13 +32,28 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     status = false;
                 }
-                catch (NullReferenceException)
-                {
-                    status = false;
-                }
             }
             return status;
         }
+        public bool RegisterProfile(Profile profile)
+		{  
+			bool status = false;
+			using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+			{
+				
+				try
+				{
+					context.Profile.Add(profile);
+					context.SaveChanges();
+					status = true;
+				}
+				catch (DbUpdateException)
+				{
+					status = false;
+				}
+			}
+			return status;
+		}
 
 
 
@@ -48,9 +63,7 @@ namespace OpenCodeChems.BussinesLogic
             bool status = false;
             using (OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                int foundUser = (from User in context.User
-                    where User.username == username && User.password == password
-                    select User).Count();
+                int foundUser = (from User in context.User where User.username == username && User.password == password   select User).Count();
                 if (foundUser > 0)
                 {
                     status = true;
@@ -59,18 +72,16 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public bool EditProfileNickname(User user, string newUsername)
+        public bool EditProfileNickname(Profile profile, string newNickname)
         {
             bool status = false;
             try
             {
-                string username = user.username;
+                string username = profile.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
-                    var users = (from User in context.User
-                                    where User.username == username
-                                    select User).First();
-                    users.username = newUsername;
+                    var profiles = (from Profile in context.Profile where Profile.username == username select Profile).First();
+                    profiles.username = newNickname;
                     context.SaveChanges();
                     status = true;
                 }
@@ -82,18 +93,16 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public bool EditProfileImage(User user, byte[] imageProfile)
+        public bool EditProfileImage(Profile profile, byte[] imageProfile)
         {
             bool status = false;
             try
             {
-                string username = user.username;
+                string username = profile.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
-                    var users = (from User in context.User
-                                    where User.username == username
-                                    select User).First();
-                    users.imageProfile = imageProfile;
+                    var profiles = (from Profile in context.Profile where Profile.username == username  select Profile).First();
+                    profiles.imageProfile = imageProfile;
                     context.SaveChanges();
                     status = true;
                 }
@@ -112,9 +121,7 @@ namespace OpenCodeChems.BussinesLogic
                 string username = user.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
-                    var users = (from User in context.User
-                                    where User.username == username
-                                    select User).First();
+                    var users = (from User in context.User where User.username == username select User).First();
                     users.email = email;
                     context.SaveChanges();
                     status = true;
@@ -132,9 +139,7 @@ namespace OpenCodeChems.BussinesLogic
             string oldHashedPassword;
             using(OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                oldHashedPassword = (from User in context.User
-                                            where User.username == username
-                                            select User.password).First();
+                oldHashedPassword = (from User in context.User where User.username == username select User.password).First();
                 
             }
             return oldHashedPassword;
@@ -150,9 +155,7 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     if (oldHashedPassword == actualHashedPassword)
                     {
-                        var users = (from User in context.User
-                                    where User.username == username
-                                    select User).First();
+                        var users = (from User in context.User where User.username == username  select User).First();
                         users.password = newHashedPassword;
                         context.SaveChanges();
                         status = true;
@@ -168,25 +171,62 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public User GetUser(string username)
+        public Profile GetProfile(string username)
+		{
+			try
+			{
+				using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+				{
+					Profile profileObteined = (from Profile in context.Profile where Profile.username == username select Profile).First();
+					context.SaveChanges();
+					return profileObteined;
+				}
+			}
+			catch (DbUpdateException)
+			{
+				Exception exception = new Exception("PROFILE_NOT_FOUND");
+				throw exception;
+			}
+		}
+        public bool EmailRegistered(string email)
         {
-            try
+            bool isRegistered = false;
+            using(OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+                int emailFound = (from User in context.User where User.email.Equals(email) select User).Count();
+                if (emailFound > 0)
                 {
-                    User userObteined = (from User in context.User
-                                        where User.username == username
-                                        select User).First();
-                    context.SaveChanges();
-                    return userObteined;
+                    isRegistered = true;
                 }
             }
-            catch (DbUpdateException)
-            {
-                Exception exception = new Exception("USER_NOT_FOUND");
-                throw exception;
-            }
+            return isRegistered;
         }
 
+        public bool UsernameRegistered(string username)
+        {
+            bool isRegistered = false;
+            using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+            {
+                int usernameFound = (from User in context.User where User.username.Equals(username) select User).Count();
+                if (usernameFound > 0)
+                {
+                    isRegistered = true;
+                }
+            }
+            return isRegistered;
+        } 
+        public bool NicknameRegistered(string nickname)
+        {
+            bool isRegistered = false;
+            using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+            {
+                int nicknameFound = (from Profile in context.Profile where Profile.nickname.Equals(nickname) select Profile).Count();
+                if (nicknameFound > 0)
+                {
+                    isRegistered = true;
+                }
+            }
+            return isRegistered;
+        }  
     }
 }

@@ -9,13 +9,13 @@ namespace OpenCodeChems.Client.Server
 	{
 		private int SERVER_ID = 1;
 		private int DEFAULT_PORT = 5500;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 		private int MAX_PLAYERS = 200; 
-		private string ADDRESS = "192.168.127.241";
-=======
-		private int MAX_PLAYERS = 200;
-		private string ADDRESS = "192.168.127.93";
->>>>>>> f22c8d6859163e274264c5b3577234f165a76a7e
+		private string ADDRESS = "localhost";
+//=======
+		//private int MAX_PLAYERS = 200;
+		//private string ADDRESS = "192.168.127.93";
+//>>>>>>> f22c8d6859163e274264c5b3577234f165a76a7e
 		private int PEER_ID = 1;
 		private bool connected = false;
 //        private bool logged = false;
@@ -29,6 +29,18 @@ namespace OpenCodeChems.Client.Server
 		delegate void LoggedFail();
 		[Signal]
 		delegate void RegisteredFail();
+		[Signal]
+		delegate void EmailNotRegistered();
+		[Signal]
+		delegate void EmailRegistered();
+		[Signal]
+		delegate void UsernameNotRegistered();
+		[Signal]
+		delegate void UsernameRegistered();
+		[Signal]
+		delegate void NicknameNotRegistered();
+		[Signal]
+		delegate void NicknameRegistered();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -83,10 +95,10 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(LoggedFail));
 		}
 
-		public void RegisterUser(string name, string email, string username, string hashPassword, byte [] imageProfile, int victories, int defaults)
+		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, byte [] imageProfile, int victories, int defaults)
 		{
 			GD.Print("Enviando Request al server");
-			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword,  imageProfile, victories, defaults);
+			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname,imageProfile, victories, defaults);
 			GD.Print("Request enviado");
 			
 		}
@@ -96,7 +108,7 @@ namespace OpenCodeChems.Client.Server
 		public void RegisterSuccesful()
 		{
 			GD.Print("Register successfully");
-				EmitSignal(nameof(Registered));
+			EmitSignal(nameof(Registered));
 		}
 		
 		[Puppet]
@@ -110,7 +122,58 @@ namespace OpenCodeChems.Client.Server
 		{
 			return this.regitered;
 		}
+		public void EmailRegister(string email)
+		{
+			GD.Print("Enviando Request al server");
+			RpcId(PEER_ID,"EmailRegisteredRequest", email);
+			GD.Print("Request enviado");
+			
+		}
+		public void UsernameRegister(string username)
+		{
+			GD.Print("Enviando Request al server");
+			RpcId(PEER_ID,"UsernameRegisteredRequest", username);
+			GD.Print("Request enviado");
+			
+		}
+		public void NicknameRegister(string nickname)
+		{
+			GD.Print("Enviando Request al server");
+			RpcId(PEER_ID,"NicknameRegisteredRequest", nickname);
+			GD.Print("Request enviado");
+			
+		}
 
+		[Puppet]
+		public void EmailIsNotRegistered()
+		{
+			EmitSignal(nameof(EmailNotRegistered));
+		}
+		[Puppet]
+		public void EmailIsRegistered()
+		{
+			EmitSignal(nameof(EmailRegistered));
+		}
+		[Puppet]
+		public void UsernameIsNotRegistered()
+		{
+			EmitSignal(nameof(EmailNotRegistered));
+		}
+		[Puppet]
+		public void UsernameIsRegistered()
+		{
+			EmitSignal(nameof(EmailRegistered));
+		}
+		[Puppet]
+		public void NicknameIsNotRegistered()
+		{
+			EmitSignal(nameof(EmailNotRegistered));
+		}
+		[Puppet]
+		public void NicknameIsRegistered()
+		{
+			EmitSignal(nameof(EmailRegistered));
+		}
 	}
 	
 }
