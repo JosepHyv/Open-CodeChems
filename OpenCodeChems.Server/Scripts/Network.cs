@@ -7,26 +7,24 @@ using System.Data.SqlClient;
 public class Network : Node
 {
 	private int DEFAULT_PORT = 5500;
-	private string ADDRESS = "192.168.127.93";
+	private string ADDRESS = "localhost";
 	private int MAX_PLAYERS = 200;
 	private int PEERID = 1;
+	private LineEdit ipLineEdit; 
+	private LineEdit portLineEdit; 
+	private TextEdit logBlock;
+	private RichTextLabel listening;
+	private Button connectButton;
 	public override void _Ready()
 	{
-		GD.Print("Entrando al server Godot");
-		var server = new NetworkedMultiplayerENet();
-		var result = server.CreateServer(DEFAULT_PORT, MAX_PLAYERS);
-		GD.Print(result);
-		if(result == 0 )
-		{
-			GetTree().NetworkPeer = server;
-			GD.Print($"Hosteando server en {ADDRESS}:{DEFAULT_PORT}.");
-			GD.Print(GetTree().NetworkPeer);
-		}
-		GD.Print($"Estoy escuchando? {GetTree().IsNetworkServer()}");
-		GD.Print($"Mi network ID = {GetTree().GetNetworkUniqueId()}");
-		GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
-		GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
-
+		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
+		portLineEdit = GetParent().GetNode<LineEdit>("Network/puerto");
+		logBlock = GetParent().GetNode<TextEdit>("Network/TextEdit");
+		listening = GetParent().GetNode<RichTextLabel>("Network/currentDirText");
+		connectButton = GetParent().GetNode<Button>("Network/Button");
+		ipLineEdit.SetText(ADDRESS);
+		portLineEdit.SetText(DEFAULT_PORT.ToString());
+		
 	}
 
 	private void PlayerConnected(int peerId)
@@ -39,23 +37,44 @@ public class Network : Node
 		GD.Print($"Jugador = {peerId} Desconectado");
 	}
 
-	
+	private void _on_Button_pressed()
+	{
+		// Replace with function body.
+		ADDRESS = ipLineEdit.GetText();
+		DEFAULT_PORT = Int32.Parse(portLineEdit.GetText());
+		connectButton.SetDisabled(true);
+		logBlock.InsertTextAtCursor("Entrando al server Godot\n");
+		var server = new NetworkedMultiplayerENet();
+		var result = server.CreateServer(DEFAULT_PORT, MAX_PLAYERS);
+		GD.Print(result);
+		if(result == 0 )
+		{
+			GetTree().NetworkPeer = server;
+			logBlock.InsertTextAtCursor($"Hosteando server en {ADDRESS}:{DEFAULT_PORT}.\n");
+			GD.Print(GetTree().NetworkPeer);
+			listening.SetText($"{ADDRESS}:{DEFAULT_PORT}");
+		}
+		logBlock.InsertTextAtCursor($"Estoy escuchando? {GetTree().IsNetworkServer()}\n");
+		logBlock.InsertTextAtCursor($"Mi network ID = {GetTree().GetNetworkUniqueId()}\n");
+		GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
+		GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
+	}
 	
 	[Master]
 	private void LoginRequest(string username, string password)
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		UserManagement userManagement = new UserManagement();
-		if(userManagement.Login(username, password) == true)
+		if(/*userManagement.Login(username, password) == */true)
 		{
 			
 			RpcId(senderId, "LoginSuccesful");
-			GD.Print($"Player no. {senderId} logged in successfully.");
+			logBlock.InsertTextAtCursor($"Player no. {senderId} logged in successfully.\n");
 		}
 		else
 		{
 			RpcId(senderId, "LoginFailed");
-			GD.Print($"Player no. {senderId} logged in failed.");
+			logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
 		}
 	}
 	[Master]
@@ -67,16 +86,16 @@ public class Network : Node
 		try
 		{
 			User newUser = new User(username, hashPassword, name, email, victories, defeats, imageProfile);
-			if(userManagement.RegisterUser(newUser) == true)
+			if(/*userManagement.RegisterUser(newUser) == */true)
 			{
 				status = true;
 				RpcId(senderId, "RegisterSuccesful");
-				GD.Print($"Player no. {senderId} registered in successfully.");             
+				logBlock.InsertTextAtCursor($"Player no. {senderId} registered in successfully.\n");             
 			}
 			else
 			{
 				RpcId(senderId, "RegisterFail");
-				GD.Print($"Player no. {senderId} registered in failed.");
+				logBlock.InsertTextAtCursor($"Player no. {senderId} registered in failed.\n");
 			}
 		}
 		catch 
@@ -85,3 +104,6 @@ public class Network : Node
 		}
 	}
 }
+
+
+
