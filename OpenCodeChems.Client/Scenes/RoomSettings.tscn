@@ -27,7 +27,7 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 3 )
 
-[node name="Control" type="Control"]
+[node name="RoomSettings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
@@ -118,6 +118,13 @@ custom_fonts/font = SubResource( 6 )
 text = "CANCEL_BUTTON"
 autowrap = true
 clip_text = true
+
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 332.0
+margin_top = 157.0
+margin_right = 677.0
+margin_bottom = 379.0
+window_title = "¡Alerta!"
 
 [connection signal="pressed" from="CreateRoomNinePatchRect/CreateTextureButton" to="." method="_on_CreateTextureButton_pressed"]
 [connection signal="pressed" from="CreateRoomNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
