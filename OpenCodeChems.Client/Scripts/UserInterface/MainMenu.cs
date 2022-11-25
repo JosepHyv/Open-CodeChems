@@ -1,15 +1,15 @@
 using Godot;
 using System;
+using OpenCodeChems.Client.Server;
 
 public class MainMenu : Control
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
+    string username = LogIn.username;
+    Network serverClient;
+	int PEER_ID = 1; 
     public override void _Ready()
     {
+        serverClient = GetNode<Network>("/root/Network") as Network;
         
     }
     public void _on_SettingsTextureButton_pressed()
@@ -21,8 +21,6 @@ public class MainMenu : Control
     public void _on_LogOutTextureButton_pressed()
     {
         GetTree().ChangeScene("res://Scenes/LogIn.tscn");
-        // ToDo
-        // implementing logout in server for secure connection
     }
     public void _on_CreateGameTextureButton_pressed()
     {
@@ -45,11 +43,7 @@ public class MainMenu : Control
         GetTree().ChangeScene("res://Scenes/EditProfile.tscn");
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+
 
     public void _on_FriendsRequestButton_pressed()
     {

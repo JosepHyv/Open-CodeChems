@@ -3,7 +3,8 @@ using OpenCodeChems.DataAccess;
 namespace OpenCodeChems.BusinessLogic.Interface
 {
     public interface IUserManagement
-    {bool RegisterUser(User user);
+    {
+		bool RegisterUser(User user);
 		bool RegisterProfile(Profile profile);
 		bool Login(string username, string password);
 		bool EditProfileNickname(Profile profile, string nickname);

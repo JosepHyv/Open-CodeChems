@@ -14,19 +14,21 @@ public class RegisterUser : Control
 {
 	Network serverClient;
 	int PEER_ID = 1; 
-	AcceptDialog dialogAccept = new AcceptDialog();
-	Task<bool> registeredStatus = Task<bool>.FromResult(false);
-	Task<bool> emailNotRegisteredStatus = Task<bool>.FromResult(false);
-	Task<bool> usernameNotRegisteredStatus = Task<bool>.FromResult(false);
-	Task<bool> nicknameNotRegisteredStatus = Task<bool>.FromResult(false);
-	int VICTORIES_DEFAULT = 0;
-	int DEFEATS_DEFAULT = 0;
-	string name = "";
-	string email = "";
-	string username = "";
-	string password = "";
-	string confirmPassword = "";
-	string nickname = "";
+	private AcceptDialog dialogAccept = new AcceptDialog();
+	private Task<bool> registeredStatus = Task<bool>.FromResult(false);
+	private Task<bool> emailNotRegisteredStatus = Task<bool>.FromResult(false);
+	private Task<bool> usernameNotRegisteredStatus = Task<bool>.FromResult(false);
+	private Task<bool> nicknameNotRegisteredStatus = Task<bool>.FromResult(false);
+	private bool validateRegister = false;
+	private int VICTORIES_DEFAULT = 0;
+	private int DEFEATS_DEFAULT = 0;
+	private string name = "";
+	private string email = "";
+	private string username = "";
+	private string password = "";
+	private string confirmPassword = "";
+	private string nickname = "";
+	private byte[] imageProfile = null;
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
@@ -55,16 +57,18 @@ public class RegisterUser : Control
 		nickname = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
 		bool noEmptyFields = ValidateEmptyFields();
 		bool verifyEmailPassword = ValidatePasswordAndEmail();
-		bool userExistence = CheckUserExistence(username, email, nickname);
 		if(noEmptyFields == true)
 		{
 			if(verifyEmailPassword == true)
 			{
-				if(userExistence == true)
+				serverClient.EmailRegister(email);
+				serverClient.UsernameRegister(username);
+				serverClient.NicknameRegister(nickname);
+				if(validateRegister == true)
 				{
 					Encryption PasswordHasher = new Encryption();
 					string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-					byte [] imageProfile = GetDefaultImage();
+					//imageProfile = GetDefaultImage(); Error al leer imagenes CORREGIR
 					serverClient.RegisterUser(name, email, username, hashPassword, nickname, imageProfile, VICTORIES_DEFAULT, DEFEATS_DEFAULT);
 				}
 			}
@@ -90,27 +94,27 @@ public class RegisterUser : Control
 	public bool ValidatePasswordAndEmail()
 	{
 		Validation validator = new Validation();
-		bool isValid = false;
-		if(validator.ValidateEmail(email))
+		bool isValid = true;
+		if(validator.ValidateEmail(email) == false)
 		{
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_EMAIL");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-			isValid = true;
+			isValid = false;
 		}
-		if(validator.ValidatePassword(password))
+		if(validator.ValidatePassword(password) == false)
 		{
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_PASSWORD");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-			isValid = true;
+			isValid = false;
 		}
-		if(confirmPassword.Equals(password))
+		if(confirmPassword.Equals(password) == false)
 		{
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_CONFIRM_PASSWORD");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-			isValid = true;
+			isValid = false;
 		}
 		return isValid;
 	}
@@ -122,6 +126,7 @@ public class RegisterUser : Control
 		Byte[] imageProfileDefault = new Byte[imageProfileFileStream.Length];
 		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
 		imageProfileDefault = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
+		imageProfileFileStream.Close();
 		return imageProfileDefault;
 	}
 	
@@ -145,46 +150,42 @@ public class RegisterUser : Control
 	public void EmailNotRegistered()
 	{
 		emailNotRegisteredStatus = Task<bool>.FromResult(true);
+		validateRegister = true;
 	}
 	public void EmailIsRegistered()
 	{
-		emailNotRegisteredStatus = Task<bool>.FromResult(false);
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("EMAIL_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+		emailNotRegisteredStatus = Task<bool>.FromResult(false);
 	}
 	public void UsernameNotRegistered()
 	{
 		usernameNotRegisteredStatus = Task<bool>.FromResult(true);
+		validateRegister = true;
 	}
 	public void UsernameIsRegistered()
 	{
-		usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("USERNAME_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText
+		("USERNAME_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+		usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 	}
 	public void NicknameNotRegistered()
 	{
 		nicknameNotRegisteredStatus = Task<bool>.FromResult(true);
+		validateRegister = true;
 	}
 	public void NicknameIsRegistered()
 	{
-		nicknameNotRegisteredStatus = Task<bool>.FromResult(false);
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("NICKNAME_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+		usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 	}
 
-	public bool CheckUserExistence(string username, string email, string nickname)
-	{
-		serverClient.EmailRegister(email);
-		serverClient.UsernameRegister(username);
-		serverClient.NicknameRegister(nickname);
-		bool statusUserExistence = false;
-		if (emailNotRegisteredStatus.Equals(true) && usernameNotRegisteredStatus.Equals(true) && nicknameNotRegisteredStatus.Equals(true))
-		{
-			statusUserExistence = true;
-		}
-		return statusUserExistence;
-	}
+
 
 
 }

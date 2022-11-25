@@ -95,10 +95,10 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(LoggedFail));
 		}
 
-		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, byte [] imageProfile, int victories, int defaults)
+		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 		{
 			GD.Print("Enviando Request al server");
-			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname,imageProfile, victories, defaults);
+			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname,imageProfile, victories, defeats);
 			GD.Print("Request enviado");
 			
 		}
@@ -157,22 +157,22 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void UsernameIsNotRegistered()
 		{
-			EmitSignal(nameof(EmailNotRegistered));
+			EmitSignal(nameof(UsernameNotRegistered));
 		}
 		[Puppet]
 		public void UsernameIsRegistered()
 		{
-			EmitSignal(nameof(EmailRegistered));
+			EmitSignal(nameof(UsernameRegistered));
 		}
 		[Puppet]
 		public void NicknameIsNotRegistered()
 		{
-			EmitSignal(nameof(EmailNotRegistered));
+			EmitSignal(nameof(NicknameNotRegistered));
 		}
 		[Puppet]
 		public void NicknameIsRegistered()
 		{
-			EmitSignal(nameof(EmailRegistered));
+			EmitSignal(nameof(NicknameRegistered));
 		}
 	}
 	

@@ -11,6 +11,7 @@ public class Network : Node
 	private string ADDRESS = "localhost";
 	private int MAX_PLAYERS = 200;
 	private int PEERID = 1;
+	private UserManagement USER_MANAGEMENT = new UserManagement();
 	public override void _Ready()
 	{
 		GD.Print("Entrando al server Godot");
@@ -46,10 +47,9 @@ public class Network : Node
 	private void LoginRequest(string username, string password)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		UserManagement userManagement = new UserManagement();
 		try
 		{
-			if(userManagement.Login(username, password) == true)
+			if(USER_MANAGEMENT.Login(username, password) == true)
 			{
 				
 				RpcId(senderId, "LoginSuccesful");
@@ -70,15 +70,14 @@ public class Network : Node
 	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		UserManagement userManagement = new UserManagement();
 		bool status = false;
 		try
 		{
 			User newUser = new User(username, hashPassword, name, email);
 			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
-			if(userManagement.RegisterUser(newUser) == true)
+			if(USER_MANAGEMENT.RegisterUser(newUser) == true)
 			{
-				if (userManagement.RegisterProfile(newProfile) == true)
+				if (USER_MANAGEMENT.RegisterProfile(newProfile) == true)
 				{
 					status = true;
 					RpcId(senderId, "RegisterSuccesful");
@@ -101,12 +100,11 @@ public class Network : Node
 	private void EmailRegisteredRequest(string email)
 	{	
 		int senderId = GetTree().GetRpcSenderId();
-		UserManagement userManagement = new UserManagement();
 		bool status = false;	
-		if (userManagement.EmailRegistered(email) == false)
+		if (USER_MANAGEMENT.EmailRegistered(email) == false)
 		{
 			status = true;
-			RpcId(senderId, "EmailNotRegistered");
+			RpcId(senderId, "EmailIsNotRegistered");
 		}
 		else
 		{
@@ -117,12 +115,11 @@ public class Network : Node
 	private void UsernameRegisteredRequest(string username)
 	{	
 		int senderId = GetTree().GetRpcSenderId();
-		UserManagement userManagement = new UserManagement();
 		bool status = false;	
-		if (userManagement.UsernameRegistered(username) == false)
+		if (USER_MANAGEMENT.UsernameRegistered(username) == false)
 		{
 			status = true;
-			RpcId(senderId, "UsernameNotRegistered");
+			RpcId(senderId, "UsernameIsNotRegistered");
 		}
 		else
 		{
@@ -133,16 +130,20 @@ public class Network : Node
 	private void NicknameRegisteredRequest(string nickname)
 	{	
 		int senderId = GetTree().GetRpcSenderId();
-		UserManagement userManagement = new UserManagement();
 		bool status = false;	
-		if (userManagement.NicknameRegistered(nickname) == false)
+		if (USER_MANAGEMENT.NicknameRegistered(nickname) == false)
 		{
 			status = true;
-			RpcId(senderId, "NicknameNotRegistered");
+			RpcId(senderId, "NicknameIsNotRegistered");
 		}
 		else
 		{
 			RpcId(senderId, "NicknameIsRegistered");
 		}
+	}
+	[Master]
+	private void GetProfileRequest(string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
 	}
 }
