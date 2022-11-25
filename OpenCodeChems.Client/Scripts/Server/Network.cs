@@ -41,7 +41,7 @@ namespace OpenCodeChems.Client.Server
 		delegate void ProfileFound(Profile profile);
 		[Signal]
 		delegate void ProfileNotFound();
-    [Signal]
+	[Signal]
 		delegate void RoomCreation();
 		[Signal]
 		delegate void RoomCreationFail();
@@ -203,7 +203,7 @@ namespace OpenCodeChems.Client.Server
 		public void NicknameIsRegistered()
 		{
 			EmitSignal(nameof(NicknameRegistered));
-    }
+	}
 		
 		public void ClientCreateRoom(string name)
 		{

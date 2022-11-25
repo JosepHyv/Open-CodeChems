@@ -8,7 +8,7 @@ using OpenCodeChems.Client.Server;
 using System.IO;
 using Path = System.IO.Path;
 using File = System.IO.File;
-using 	System.Drawing.Imaging;
+//using System.Drawing.Imaging;
 
 public class RegisterUser : Control
 {
