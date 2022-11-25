@@ -8,14 +8,9 @@ namespace OpenCodeChems.Client.Server
    internal  class Network : Node
 	{
 		private int SERVER_ID = 1;
-		private int DEFAULT_PORT = 5500;
-<<<<<<< HEAD
+		public int DEFAULT_PORT {get; set;} = 5500;
 		private int MAX_PLAYERS = 200; 
-		private string ADDRESS = "192.168.127.241";
-=======
-		private int MAX_PLAYERS = 200;
-		private string ADDRESS = "192.168.127.93";
->>>>>>> f22c8d6859163e274264c5b3577234f165a76a7e
+		public string ADDRESS {get; set;} = "192.168.127.241";
 		private int PEER_ID = 1;
 		private bool connected = false;
 //        private bool logged = false;
@@ -47,6 +42,7 @@ namespace OpenCodeChems.Client.Server
 			GD.Print($"el coso tiene {coso} y es {coso.GetType()} y el ntpeer = {networkPeer.GetType()}");
 			connected = (GetTree().NetworkPeer != null);
 			GD.Print($"Dentro de NETWORK class = {connected}");
+			GD.Print($"Conectando con {ADDRESS}:{DEFAULT_PORT}");
 		}
 
 		public void OnConnectionFailed()

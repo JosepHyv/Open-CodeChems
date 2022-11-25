@@ -6,5 +6,6 @@
   <ItemGroup>
     <PackageReference Include="EmailValidation" Version="1.0.8" />
     <PackageReference Include="EntityFramework" Version="6.4.0" />
+    <PackageReference Include="System.Net.Primitives" Version="4.3.1" />
   </ItemGroup>
 </Project>
