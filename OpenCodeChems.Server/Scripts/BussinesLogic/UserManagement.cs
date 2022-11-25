@@ -227,6 +227,66 @@ namespace OpenCodeChems.BussinesLogic
                 }
             }
             return isRegistered;
-        }  
+        }
+        public bool AddFriend(Friends friends)
+		{  
+			bool status = false;
+			using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+			{
+				
+				try
+				{
+					context.Friends.Add(friends);
+					context.SaveChanges();
+					status = true;
+				}
+				catch (DbUpdateException)
+				{
+					status = false;
+				}
+			}
+			return status;
+		} 
+        public bool AcceptFriendRequest(Friends friends)
+        {
+            bool status = false;
+            try
+            {
+                string nicknameFrom = friends.nicknameFrom;
+                string nicknameTo = friends.nicknameTo;
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {   
+                    var friendsUpdate = (from Friends in context.Friends where Friends.nicknameFrom == nicknameFrom where Friends.nicknameTo ==  nicknameTo select Friends).First();
+                    friendsUpdate.state = friends.state;
+                    context.SaveChanges();
+                    status = true;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                status = false;
+            }
+            return status;
+        } 
+        public bool DenyFriendRequest(Friends friends)
+        {
+            bool status = false;
+            try{
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {
+                    string nicknameFrom = friends.nicknameFrom;
+                    string nicknameTo = friends.nicknameTo;
+                    var friendsDelete = (from Friends in context.Friends where friends.nicknameFrom == nicknameFrom where friends.nicknameTo == nicknameTo select friends).First();
+                    context.Friends.Remove(friendsDelete);
+                    context.SaveChanges();
+                    status = true;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                status = false;
+            }
+            return status;
+        }
     }
 }

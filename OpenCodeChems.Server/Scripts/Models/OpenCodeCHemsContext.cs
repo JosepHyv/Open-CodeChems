@@ -16,6 +16,7 @@ namespace OpenCodeChems.DataAccess
 
 		public DbSet<User> User { get; set; }
 		public DbSet<Profile> Profile { get; set; }
+        public DbSet<Friends> Friends { get; set; }
 
 		
 
@@ -61,6 +62,18 @@ namespace OpenCodeChems.DataAccess
         public int defeats { get; set; }
         public byte[] imageProfile { get; set; }
         public string username { get; set;  }
+    }
+    public class Friends
+    {
+        public Friends(string nicknameFrom, string nicknameTo, int state)
+        {
+            this.nicknameFrom = nicknameFrom;
+            this.nicknameTo = nicknameTo;
+            this.state = state;
+        }
+        public string nicknameFrom { get; set; }
+        public string nicknameTo { get; set; }
+        public int state { get; set; }
     }
 
 }

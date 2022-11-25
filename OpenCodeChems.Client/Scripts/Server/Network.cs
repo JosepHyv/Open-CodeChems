@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Resources;
+using static OpenCodeChems.Client.Resources.Objects;
 
 
 namespace OpenCodeChems.Client.Server
@@ -41,6 +42,10 @@ namespace OpenCodeChems.Client.Server
 		delegate void NicknameNotRegistered();
 		[Signal]
 		delegate void NicknameRegistered();
+		[Signal]
+		delegate void ProfileFound(Profile profile);
+		[Signal]
+		delegate void ProfileNotFound();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -173,6 +178,22 @@ namespace OpenCodeChems.Client.Server
 		public void NicknameIsRegistered()
 		{
 			EmitSignal(nameof(NicknameRegistered));
+		}
+
+		public void GetProfile(string username)
+		{
+			RpcId(PEER_ID,"GetProfileRequest", username);
+		}
+		[Puppet]
+		public void ProfileObtained(string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		{
+			Profile profileObtained = new Profile(nickname, victories, defeats, imageProfile, username);
+			EmitSignal(nameof(ProfileFound), profileObtained);
+		}
+		[Puppet]
+		public void ProfileNotObtained()
+		{
+			EmitSignal(nameof(ProfileNotFound));
 		}
 	}
 	

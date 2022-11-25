@@ -16,7 +16,9 @@ namespace OpenCodeChems.BusinessLogic.Interface
         bool EmailRegistered(string email);
         bool UsernameRegistered(string username);
         bool NicknameRegistered(string nickname);
-        
+        bool AddFriend(Friends friends);
+		bool AcceptFriendRequest(Friends friends);
+		bool DenyFriendRequest(Friends friends);
     }
 
 }

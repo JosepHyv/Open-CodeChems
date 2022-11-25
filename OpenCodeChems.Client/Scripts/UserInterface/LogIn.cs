@@ -27,7 +27,7 @@ public class LogIn : Control
 	private void _on_RegisterButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/RegisterUser.tscn");
-	}
+	}	
 
 	
 	private void _on_LogInButton_pressed()

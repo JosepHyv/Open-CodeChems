@@ -141,9 +141,23 @@ public class Network : Node
 			RpcId(senderId, "NicknameIsRegistered");
 		}
 	}
-	[Master]
-	private void GetProfileRequest(string nickname)
+	[RemoteSync]
+	private void GetProfileRequest(string username)
 	{
 		int senderId = GetTree().GetRpcSenderId();
+		Profile profileObtained = USER_MANAGEMENT.GetProfile(username);
+		string nickname = profileObtained.nickname;
+		string usernameObtained = profileObtained.username;
+		int victories = profileObtained.victories;
+		int defeats = profileObtained.defeats;
+		byte[] imageProfile = profileObtained.imageProfile;
+		if (profileObtained != null)
+		{
+			RpcId(senderId, "ProfileObtained", nickname, victories, defeats, imageProfile, username);
+		}
+		else
+		{
+			RpcId(senderId, "ProfileNotObtained");
+		}
 	}
 }
