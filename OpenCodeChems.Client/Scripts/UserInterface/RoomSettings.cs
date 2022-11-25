@@ -1,5 +1,6 @@
-	using Godot;
+using Godot;
 using System;
+using OpenCodeChems.Client.Server;
 
 public class RoomSettings : Control
 {
@@ -8,21 +9,46 @@ public class RoomSettings : Control
 	// private string b = "text";
 
 	// Called when the node enters the scene tree for the first time.
+	Network serverClient;
+	private LineEdit nameRoom;
+	private AcceptDialog dialog;
 	public override void _Ready()
 	{
-		
+		nameRoom =  GetParent().GetNode<LineEdit>("RoomSettings/CreateRoomNinePatchRect/NameRoomLineEdit");
+		dialog = GetParent().GetNode<AcceptDialog>("RoomSettings/AcceptDialog");
+		serverClient = GetNode<Network>("/root/Network") as Network;
+		serverClient.Connect("RoomCreation", this, nameof(ChangeToRoom));
+		serverClient.Connect("RoomCreationFail", this, nameof(DisplayAlert));
 	}
 	public void _on_CancelTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
-	public void _on_JoinTextureButton_pressed()
+	
+	private void _on_CreateTextureButton_pressed()
+	{
+		if(!String.IsNullOrWhiteSpace(nameRoom.GetText()))
+		{
+			serverClient.ClientCreateRoom(nameRoom.GetText());
+		}
+		// Replace with function body.
+	}
+	
+	public void ChangeToRoom()
 	{
 		GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
 	}
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	
+	public void DisplayAlert()
+	{
+		string warning = "ROOM_EXIST_WITH_NAME" + "\n" + nameRoom.GetText();
+		dialog.SetText(warning);
+		dialog.Visible = true;
+	}
 }
+
+
+
+
+
+

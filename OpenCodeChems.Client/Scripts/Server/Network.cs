@@ -7,18 +7,12 @@ namespace OpenCodeChems.Client.Server
 {
    internal  class Network : Node
 	{
-		private int SERVER_ID = 1;
-		private int DEFAULT_PORT = 5500;
-<<<<<<< HEAD
+		
+		public int DEFAULT_PORT {get; set;} = 5500;
 		private int MAX_PLAYERS = 200; 
-		private string ADDRESS = "192.168.127.241";
-=======
-		private int MAX_PLAYERS = 200;
-		private string ADDRESS = "192.168.127.93";
->>>>>>> f22c8d6859163e274264c5b3577234f165a76a7e
+		public string ADDRESS {get; set;} = "localhost";
 		private int PEER_ID = 1;
 		private bool connected = false;
-//        private bool logged = false;
 		private bool regitered = false;
 		
 		[Signal]
@@ -29,37 +23,65 @@ namespace OpenCodeChems.Client.Server
 		delegate void LoggedFail();
 		[Signal]
 		delegate void RegisteredFail();
+		[Signal]
+		delegate void RoomCreation();
+		[Signal]
+		delegate void RoomCreationFail();
+		[Signal]
+		delegate void RoomJoin();
+		[Signal]
+		delegate void RoomJoinFail();
+		[Signal]
+		delegate void ServerDead();
+		[Signal]
+		delegate void Server();
+		[Signal]
+		delegate void ServerFail();
+		
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
 		{
  
 			GetTree().Connect("connection_failed", this, nameof(OnConnectionFailed));
-			GetTree().Connect("connected_to_server", this, nameof(ConnectedToServer));
+			GetTree().Connect("connected_to_server", this, nameof(OnConnectedToServer));
+			GetTree().Connect("server_disconnected", this, nameof(LeaveServer));
+		}
+		
+		public void CloseConnection()
+		{
+			GD.Print("Me activaron para cerrar al conexion");
+			networkPeer.CloseConnection(1);
+			return;
+		}
+		
+		public void LeaveServer()
+		{
+			GD.Print("Server Dead");
+			CloseConnection();
+			GetTree().ChangeScene("res://Scenes/connexion.tscn");
+			EmitSignal(nameof(ServerDead));
 		}
 
 		public void ConnectToServer()
 		{
-			
-			var coso = networkPeer.CreateClient(ADDRESS, DEFAULT_PORT);
-			GetTree().NetworkPeer = networkPeer;
-			GD.Print("Pase la asignacion");
-			GD.Print($"el coso tiene {coso} y es {coso.GetType()} y el ntpeer = {networkPeer.GetType()}");
-			connected = (GetTree().NetworkPeer != null);
-			GD.Print($"Dentro de NETWORK class = {connected}");
+			networkPeer.CreateClient(ADDRESS, DEFAULT_PORT);
+			GetTree().NetworkPeer = networkPeer;			
 		}
 
 		public void OnConnectionFailed()
 		{
 			GD.Print("Failed to connect");
+			EmitSignal(nameof(ServerFail));
 		}
-		public void ConnectedToServer()
+		public void OnConnectedToServer()
 		{
 			GD.Print($"Succesfully connected to server {GetTree().GetNetworkUniqueId()}");
 			GD.Print($"Soy cliente o server (~/1) {GetTree().IsNetworkServer()}");
+			EmitSignal(nameof(Server));
 		}
 
-		
+		//cliente
 	   
 		public void Login(string username, string password )
 		{
@@ -109,6 +131,26 @@ namespace OpenCodeChems.Client.Server
 		public bool GetRegisteresResponse()
 		{
 			return this.regitered;
+		}
+		
+		public void ClientCreateRoom(string name)
+		{
+			GD.Print("Create Room Request send");
+			RpcId(PEER_ID, "CreateRoom", name);
+		}
+		
+		[Puppet]
+		public void CreateRoomAccepted()
+		{
+			GD.Print("Cosito aceptado OwO");
+			EmitSignal(nameof(RoomCreation));
+		}
+		
+		[Puppet]
+		public void CreateRoomFail()
+		{
+			GD.Print("Error creando la sala, ya existe una con la misma clave");
+			EmitSignal(nameof(RoomCreationFail));
 		}
 
 	}

@@ -16,7 +16,7 @@ public class LogIn : Control
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		serverClient.ConnectToServer();
+		//serverClient.ConnectToServer();
 		serverClient.Connect("LoggedIn", this, nameof(LoggedAcepted));
 		serverClient.Connect("LoggedFail", this, nameof(LoggedFailed));
 	}
