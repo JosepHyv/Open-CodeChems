@@ -38,10 +38,10 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void NicknameRegistered();
 		[Signal]
-		delegate void ProfileFound(Profile profile);
+		delegate void ProfileFound();
 		[Signal]
 		delegate void ProfileNotFound();
-	[Signal]
+		[Signal]
 		delegate void RoomCreation();
 		[Signal]
 		delegate void RoomCreationFail();
@@ -234,7 +234,7 @@ namespace OpenCodeChems.Client.Server
 		public void ProfileObtained(string nickname, int victories, int defeats, byte[] imageProfile, string username)
 		{
 			Profile profileObtained = new Profile(nickname, victories, defeats, imageProfile, username);
-			EmitSignal(nameof(ProfileFound), profileObtained);
+			EmitSignal(nameof(ProfileFound));
 		}
 		[Puppet]
 		public void ProfileNotObtained()

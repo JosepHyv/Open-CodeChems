@@ -21,7 +21,7 @@ public class MainMenu : Control
 		serverClient.Connect("ProfileFound", this, nameof(GetProfileComplete));
 		serverClient.Connect("ProfileNotFound", this, nameof(GetProfileFail));
 		//serverClient.GetProfile(username);
-		//GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = username;
+		GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = username;
 	}
 	public void _on_SettingsTextureButton_pressed()
 	{
