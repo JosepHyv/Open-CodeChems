@@ -12,7 +12,9 @@ public class LogIn : Control
 
 	Network serverClient;
 	int PEER_ID = 1; 
-	Task<bool> loggedStatus = Task<bool>.FromResult(false);
+	private Task<bool> loggedStatus = Task<bool>.FromResult(false);
+	public static string username = "";
+	private string password = "";
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
@@ -24,16 +26,14 @@ public class LogIn : Control
 
 	private void _on_RegisterButton_pressed()
 	{
-		
 		GetTree().ChangeScene("res://Scenes/RegisterUser.tscn");
-		
-	}
+	}	
 
 	
 	private void _on_LogInButton_pressed()
 	{
-		string username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
-		string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
+		username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
+		password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 		if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
 		{
 			Encryption PasswordHasher = new Encryption();
@@ -42,9 +42,8 @@ public class LogIn : Control
 		}
 		else
 		{
-			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("EMPTY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("VERIFY_EMPTY_FIELDS");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
-			GD.Print("Empty fields");
 		}
 		
 
@@ -53,9 +52,7 @@ public class LogIn : Control
 	public void LoggedAcepted()
 	{
 		loggedStatus = Task<bool>.FromResult(true);
-		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-		
-			
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");	
 	}
 	
 	public void LoggedFailed()

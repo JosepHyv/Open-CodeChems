@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Resources/Icons/optionBackground.jpg" type="Texture" id=2]
+[ext_resource path="res://Scenes/Resources/Fonts/6680-fontps.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Scenes/Resources/Fonts/comic.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scripts/UserInterface/ConfirmRegister.cs" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 38
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 3 )
+
+[node name="ConfirmRegister" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+
+[node name="ConfirmRegisterNinePatchRect" type="NinePatchRect" parent="."]
+margin_left = 78.0
+margin_top = 93.0
+margin_right = 935.0
+margin_bottom = 486.0
+texture = ExtResource( 2 )
+
+[node name="InstructionConfirmRegisterLabel" type="Label" parent="ConfirmRegisterNinePatchRect"]
+margin_left = 160.0
+margin_top = 73.0
+margin_right = 676.0
+margin_bottom = 179.0
+custom_fonts/font = SubResource( 1 )
+text = "CONFIRM_REGISTER_INSTRUCTION"
+autowrap = true
+clip_text = true
+
+[node name="ConfirmRegisterLineEdit" type="LineEdit" parent="ConfirmRegisterNinePatchRect"]
+margin_left = 162.0
+margin_top = 151.0
+margin_right = 659.0
+margin_bottom = 251.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="CancelTextureButton" type="TextureButton" parent="ConfirmRegisterNinePatchRect"]
+margin_left = 139.0
+margin_top = 299.0
+margin_right = 282.0
+margin_bottom = 348.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 1 )
+expand = true
+
+[node name="CancelLabel" type="Label" parent="ConfirmRegisterNinePatchRect/CancelTextureButton"]
+margin_left = 14.0
+margin_top = 12.0
+margin_right = 123.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "CANCEL_BUTTON"
+autowrap = true
+clip_text = true
+
+[node name="AcceptTextureButton" type="TextureButton" parent="ConfirmRegisterNinePatchRect"]
+anchor_right = 0.023
+anchor_bottom = 0.102
+margin_left = 541.0
+margin_top = 303.0
+margin_right = 664.289
+margin_bottom = 311.914
+texture_normal = ExtResource( 1 )
+expand = true
+
+[node name="AcceptLabel" type="Label" parent="ConfirmRegisterNinePatchRect/AcceptTextureButton"]
+anchor_left = 0.217
+anchor_top = 0.5
+anchor_right = 0.217
+anchor_bottom = 0.5
+margin_left = -17.031
+margin_top = -15.5
+margin_right = 97.969
+margin_bottom = 12.5
+custom_fonts/font = SubResource( 4 )
+text = "ACCEPT_BUTTON"
+autowrap = true
+clip_text = true
