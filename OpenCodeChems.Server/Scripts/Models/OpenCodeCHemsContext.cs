@@ -14,7 +14,7 @@ namespace OpenCodeChems.DataAccess
 	{
 		
 
-		public DbSet<User> User { get; set; }
+		/*public DbSet<User> User { get; set; }
 
 		
 
@@ -47,6 +47,6 @@ namespace OpenCodeChems.DataAccess
 		public int defeats { get; set; }
 		public byte[] imageProfile { get; set; }
 
-	}
+	*/}
 
 }

@@ -1,8 +1,10 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using OpenCodeChems.BussinesLogic;
 using OpenCodeChems.DataAccess;
 using System.Data.SqlClient;
+using OpenCodeChems.Server.Utils;
 
 public class Network : Node
 {
@@ -15,8 +17,12 @@ public class Network : Node
 	private TextEdit logBlock;
 	private RichTextLabel listening;
 	private Button connectButton;
+	private AcceptDialog dialog;
+	private Dictionary<string, List<int>> rooms;
 	public override void _Ready()
 	{
+		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
+		rooms = new Dictionary<string, List<int>>();
 		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
 		portLineEdit = GetParent().GetNode<LineEdit>("Network/puerto");
 		logBlock = GetParent().GetNode<TextEdit>("Network/TextEdit");
@@ -29,35 +35,47 @@ public class Network : Node
 
 	private void PlayerConnected(int peerId)
 	{
-		GD.Print($"Jugador = {peerId} Conectado");
+		logBlock.InsertTextAtCursor($"Jugador = {peerId} Conectado\n");
 	}
 
 	private void PlayerDisconnected(int peerId)
 	{
-		GD.Print($"Jugador = {peerId} Desconectado");
+		logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
 	}
 
 	private void _on_Button_pressed()
 	{
 		// Replace with function body.
-		ADDRESS = ipLineEdit.GetText();
-		DEFAULT_PORT = Int32.Parse(portLineEdit.GetText());
-		connectButton.SetDisabled(true);
-		logBlock.InsertTextAtCursor("Entrando al server Godot\n");
-		var server = new NetworkedMultiplayerENet();
-		var result = server.CreateServer(DEFAULT_PORT, MAX_PLAYERS);
-		GD.Print(result);
-		if(result == 0 )
+		string ipAddress = ipLineEdit.GetText();
+		string port = portLineEdit.GetText();
+		Validation validations = new Validation();
+		if(validations.ValidateIp(ipAddress) && validations.ValidatePort(port))
 		{
-			GetTree().NetworkPeer = server;
-			logBlock.InsertTextAtCursor($"Hosteando server en {ADDRESS}:{DEFAULT_PORT}.\n");
-			GD.Print(GetTree().NetworkPeer);
-			listening.SetText($"{ADDRESS}:{DEFAULT_PORT}");
+			ADDRESS = ipAddress;
+			DEFAULT_PORT = Int32.Parse(port);
+			connectButton.SetDisabled(true);
+			logBlock.InsertTextAtCursor("Entrando al server OpenCodeChems\n");
+			var server = new NetworkedMultiplayerENet();
+			var result = server.CreateServer(DEFAULT_PORT, MAX_PLAYERS);
+			GD.Print(result);
+			if(result == 0 )
+			{
+				GetTree().NetworkPeer = server;
+				logBlock.InsertTextAtCursor($"Hosteando server en {ADDRESS}:{DEFAULT_PORT}.\n");
+				logBlock.InsertTextAtCursor($"{GetTree().NetworkPeer}\n");
+				listening.SetText($"{ADDRESS}:{DEFAULT_PORT}");
+			}
+			logBlock.InsertTextAtCursor($"Estoy escuchando? {GetTree().IsNetworkServer()}\n");
+			logBlock.InsertTextAtCursor($"Mi network ID = {GetTree().GetNetworkUniqueId()}\n");
+			GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
+			GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
 		}
-		logBlock.InsertTextAtCursor($"Estoy escuchando? {GetTree().IsNetworkServer()}\n");
-		logBlock.InsertTextAtCursor($"Mi network ID = {GetTree().GetNetworkUniqueId()}\n");
-		GetTree().Connect("network_peer_connected", this, nameof(PlayerConnected));
-		GetTree().Connect("network_peer_disconnected", this, nameof(PlayerDisconnected));
+		else
+		{
+			dialog.SetText("INVALID_ADDRESS_OR_PORT");
+			dialog.Visible = true;
+		}
+		
 	}
 	
 	[Master]
@@ -85,7 +103,7 @@ public class Network : Node
 		bool status = false;
 		try
 		{
-			User newUser = new User(username, hashPassword, name, email, victories, defeats, imageProfile);
+			//User newUser = new User(username, hashPassword, name, email, victories, defeats, imageProfile);
 			if(/*userManagement.RegisterUser(newUser) == */true)
 			{
 				status = true;
@@ -101,6 +119,42 @@ public class Network : Node
 		catch 
 		{
 			
+		}
+	}
+	
+	[Master]
+	public void CreateRoom(string code)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(rooms.ContainsKey(code))
+		{
+			RpcId(senderId, "CreateRoomFail");
+			logBlock.InsertTextAtCursor($"user {senderId} cant create {code} room\n");
+		}
+		else
+		{
+			List<int>hostRoom = new List<int>();
+			hostRoom.Add(senderId);
+			rooms.Add(code, hostRoom);
+			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
+			RpcId(senderId, "CreateRoomAccepted");
+		}
+	}
+	
+	[Master]
+	public void JoinRoom(string code)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(rooms.ContainsKey(code))
+		{
+			rooms[code].Add(senderId);
+			RpcId(senderId, "JoinRoomAccepted");
+			logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
+		}
+		else
+		{
+			RpcId(senderId, "JoinRoomFail");
+			logBlock.InsertTextAtCursor($"user {senderId} cant join to {code} room\n");
 		}
 	}
 }

@@ -65,4 +65,11 @@ margin_bottom = 189.0
 rect_pivot_offset = Vector2( 60, 10 )
 text = "Escuchando en:"
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 390.0
+margin_top = 178.0
+margin_right = 769.0
+margin_bottom = 420.0
+window_title = "¡Alerta!"
+
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

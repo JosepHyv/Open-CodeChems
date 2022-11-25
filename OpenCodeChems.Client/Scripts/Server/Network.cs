@@ -23,35 +23,62 @@ namespace OpenCodeChems.Client.Server
 		delegate void LoggedFail();
 		[Signal]
 		delegate void RegisteredFail();
+		[Signal]
+		delegate void RoomCreation();
+		[Signal]
+		delegate void RoomCreationFail();
+		[Signal]
+		delegate void RoomJoin();
+		[Signal]
+		delegate void RoomJoinFail();
+		[Signal]
+		delegate void ServerDead();
+		[Signal]
+		delegate void Server();
+		[Signal]
+		delegate void ServerFail();
+		
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
 		{
  
 			GetTree().Connect("connection_failed", this, nameof(OnConnectionFailed));
-			GetTree().Connect("connected_to_server", this, nameof(ConnectedToServer));
+			GetTree().Connect("connected_to_server", this, nameof(OnConnectedToServer));
+			GetTree().Connect("server_disconnected", this, nameof(LeaveServer));
+		}
+		
+		public void CloseConnection()
+		{
+			GD.Print("Me activaron para cerrar al conexion");
+			networkPeer.CloseConnection(1);
+			return;
+		}
+		
+		public void LeaveServer()
+		{
+			GD.Print("Server Dead");
+			CloseConnection();
+			GetTree().ChangeScene("res://Scenes/connexion.tscn");
+			EmitSignal(nameof(ServerDead));
 		}
 
 		public void ConnectToServer()
 		{
-			
-			var coso = networkPeer.CreateClient(ADDRESS, DEFAULT_PORT);
-			GetTree().NetworkPeer = networkPeer;
-			GD.Print("Pase la asignacion");
-			GD.Print($"el coso tiene {coso} y es {coso.GetType()} y el ntpeer = {networkPeer.GetType()}");
-			connected = (GetTree().NetworkPeer != null);
-			GD.Print($"Dentro de NETWORK class = {connected}");
-			GD.Print($"Conectando con {ADDRESS}:{DEFAULT_PORT}");
+			networkPeer.CreateClient(ADDRESS, DEFAULT_PORT);
+			GetTree().NetworkPeer = networkPeer;			
 		}
 
 		public void OnConnectionFailed()
 		{
 			GD.Print("Failed to connect");
+			EmitSignal(nameof(ServerFail));
 		}
-		public void ConnectedToServer()
+		public void OnConnectedToServer()
 		{
 			GD.Print($"Succesfully connected to server {GetTree().GetNetworkUniqueId()}");
 			GD.Print($"Soy cliente o server (~/1) {GetTree().IsNetworkServer()}");
+			EmitSignal(nameof(Server));
 		}
 
 		//cliente
@@ -104,6 +131,12 @@ namespace OpenCodeChems.Client.Server
 		public bool GetRegisteresResponse()
 		{
 			return this.regitered;
+		}
+		
+		public void ClientCreateRoom(string name)
+		{
+			GD.Print("Create Room Request send");
+			RpcId(PEER_ID, "CreateRoom", name);
 		}
 
 	}
