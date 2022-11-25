@@ -39,6 +39,11 @@ public class connexion : Control
 		}
 		
 	}
+	
+	private void TryConnect()
+	{
+		
+	}
 
 
 

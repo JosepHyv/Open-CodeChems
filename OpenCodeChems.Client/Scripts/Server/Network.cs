@@ -7,13 +7,12 @@ namespace OpenCodeChems.Client.Server
 {
    internal  class Network : Node
 	{
-		private int SERVER_ID = 1;
+		
 		public int DEFAULT_PORT {get; set;} = 5500;
 		private int MAX_PLAYERS = 200; 
-		public string ADDRESS {get; set;} = "192.168.127.241";
+		public string ADDRESS {get; set;} = "localhost";
 		private int PEER_ID = 1;
 		private bool connected = false;
-//        private bool logged = false;
 		private bool regitered = false;
 		
 		[Signal]
@@ -55,7 +54,7 @@ namespace OpenCodeChems.Client.Server
 			GD.Print($"Soy cliente o server (~/1) {GetTree().IsNetworkServer()}");
 		}
 
-		
+		//cliente
 	   
 		public void Login(string username, string password )
 		{
