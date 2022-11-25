@@ -119,5 +119,12 @@ text = "CANCEL_BUTTON"
 autowrap = true
 clip_text = true
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 332.0
+margin_top = 157.0
+margin_right = 677.0
+margin_bottom = 379.0
+window_title = "¡Alerta!"
+
 [connection signal="pressed" from="CreateRoomNinePatchRect/CreateTextureButton" to="." method="_on_CreateTextureButton_pressed"]
 [connection signal="pressed" from="CreateRoomNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]

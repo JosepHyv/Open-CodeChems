@@ -138,6 +138,20 @@ namespace OpenCodeChems.Client.Server
 			GD.Print("Create Room Request send");
 			RpcId(PEER_ID, "CreateRoom", name);
 		}
+		
+		[Puppet]
+		public void CreateRoomAccepted()
+		{
+			GD.Print("Cosito aceptado OwO");
+			EmitSignal(nameof(RoomCreation));
+		}
+		
+		[Puppet]
+		public void CreateRoomFail()
+		{
+			GD.Print("Error creando la sala, ya existe una con la misma clave");
+			EmitSignal(nameof(RoomCreationFail));
+		}
 
 	}
 	
