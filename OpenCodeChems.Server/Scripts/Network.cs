@@ -83,7 +83,7 @@ public class Network : Node
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		UserManagement userManagement = new UserManagement();
-		if(/*userManagement.Login(username, password) == */true)
+		if(userManagement.Login(username, password) == true)
 		{
 			
 			RpcId(senderId, "LoginSuccesful");
@@ -103,8 +103,8 @@ public class Network : Node
 		bool status = false;
 		try
 		{
-			//User newUser = new User(username, hashPassword, name, email, victories, defeats, imageProfile);
-			if(/*userManagement.RegisterUser(newUser) == */true)
+			User newUser = new User(username, hashPassword, name, email, victories, defeats, imageProfile);
+			if(userManagement.RegisterUser(newUser) == true)
 			{
 				status = true;
 				RpcId(senderId, "RegisterSuccesful");

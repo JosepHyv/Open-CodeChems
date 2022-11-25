@@ -16,7 +16,7 @@ namespace OpenCodeChems.BussinesLogic
 	{
 		
 
-		/*public bool RegisterUser(User user)
+		public bool RegisterUser(User user)
 		{  
 			bool status = false;
 			using (OpenCodeChemsContext context = new OpenCodeChemsContext())
@@ -186,7 +186,7 @@ namespace OpenCodeChems.BussinesLogic
 				Exception exception = new Exception("USER_NOT_FOUND");
 				throw exception;
 			}
-		}*/
+		}
 
 	}
 }
