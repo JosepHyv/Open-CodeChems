@@ -71,6 +71,7 @@ namespace OpenCodeChems.DataAccess
             this.nicknameTo = nicknameTo;
             this.state = state;
         }
+        [Key]
         public string nicknameFrom { get; set; }
         public string nicknameTo { get; set; }
         public int state { get; set; }

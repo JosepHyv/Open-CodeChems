@@ -91,12 +91,12 @@ public class Network : Node
 			{
 				
 				RpcId(senderId, "LoginSuccesful");
-			  logBlock.InsertTextAtCursor($"Player no. {senderId} logged in successfully.\n");
+			  	logBlock.InsertTextAtCursor($"Player no. {senderId} logged in successfully.\n");
 			}
 			else
 			{
 				RpcId(senderId, "LoginFailed");
-			  logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
+			  	logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
 			}
 		}
 		catch (DbUpdateException)
@@ -104,6 +104,7 @@ public class Network : Node
       RpcId(senderId, "LoginFailed");
     }
 	}
+
 	[Master]
 	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 	{
@@ -115,12 +116,10 @@ public class Network : Node
 			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
 			if(USER_MANAGEMENT.RegisterUser(newUser) == true)
 			{
-
 				if (USER_MANAGEMENT.RegisterProfile(newProfile) == true)
 				{
-					status = true;
-			  	RpcId(senderId, "RegisterSuccesful");
-				  logBlock.InsertTextAtCursor($"Player no. {senderId} registered in successfully.\n");      
+			  		RpcId(senderId, "RegisterSuccesful");
+				  	logBlock.InsertTextAtCursor($"Player no. {senderId} registered in successfully.\n");      
 				}       	           
 			}
 			else
@@ -180,19 +179,20 @@ public class Network : Node
 			RpcId(senderId, "NicknameIsRegistered");
 		}
 	}
-	[RemoteSync]
+	
+	[Master]
 	private void GetProfileRequest(string username)
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		Profile profileObtained = USER_MANAGEMENT.GetProfile(username);
-		string nickname = profileObtained.nickname;
-		string usernameObtained = profileObtained.username;
-		int victories = profileObtained.victories;
-		int defeats = profileObtained.defeats;
-		byte[] imageProfile = profileObtained.imageProfile;
 		if (profileObtained != null)
 		{
-			RpcId(senderId, "ProfileObtained", nickname, victories, defeats, imageProfile, username);
+			string nickname = profileObtained.nickname;
+			string usernameObtained = profileObtained.username;
+			int victories = profileObtained.victories;
+			int defeats = profileObtained.defeats;
+			byte[] imageProfile = profileObtained.imageProfile;
+			RpcId(senderId, "ProfileObtained", nickname, victories, defeats, imageProfile, usernameObtained);
 		}
 		else
 		{
@@ -235,6 +235,35 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"user {senderId} cant join to {code} room\n");
 		}
 	}
+
+	[Master]
+	public void PasswordExistRequest(string username, string hashPassword)
+	{
+		int senderId = GetTree().GetRpcSenderId();	
+		if (USER_MANAGEMENT.PasswordExist(username, hashPassword) == true)
+		{
+			RpcId(senderId, "PasswordCorrect");
+		}
+		else
+		{
+			RpcId(senderId, "PasswordIncorrect");
+		}
+	}
+
+	[Master]
+	public void EditUserPasswordRequest(string username, string newHashedPassword)
+	{
+		int senderId = GetTree().GetRpcSenderId();	
+		if (USER_MANAGEMENT.EditUserPassword(username, newHashedPassword) == true)
+		{
+			RpcId(senderId, "EditPasswordSuccessful");
+		}
+		else
+		{
+			RpcId(senderId, "EditPasswordNotSuccessful");
+		}
+	}
+
 }
 
 

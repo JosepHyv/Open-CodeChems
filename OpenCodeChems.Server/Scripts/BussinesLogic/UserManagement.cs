@@ -72,16 +72,15 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public bool EditProfileNickname(Profile profile, string newNickname)
+        public bool EditProfileNickname(string username, string newNickname)
         {
             bool status = false;
             try
             {
-                string username = profile.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile where Profile.username == username select Profile).First();
-                    profiles.username = newNickname;
+                    profiles.nickname = newNickname;
                     context.SaveChanges();
                     status = true;
                 }
@@ -93,12 +92,11 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public bool EditProfileImage(Profile profile, byte[] imageProfile)
+        public bool EditProfileImage(string username, byte[] imageProfile)
         {
             bool status = false;
             try
             {
-                string username = profile.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile where Profile.username == username  select Profile).First();
@@ -113,12 +111,11 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
-        public bool EditUserEmail(User user, string email)
+        public bool EditUserEmail(string username, string email)
         {
             bool status = false;
             try
             {
-                string username = user.username;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var users = (from User in context.User where User.username == username select User).First();
@@ -133,35 +130,31 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
-        public string GetOldPassword(User user)
+        public bool PasswordExist(string username, string hashPassword)
         {
-            string username = user.username;
-            string oldHashedPassword;
+            bool existPassword = false;
             using(OpenCodeChemsContext context = new OpenCodeChemsContext())
             {
-                oldHashedPassword = (from User in context.User where User.username == username select User.password).First();
+                int oldPasswordFound = (from User in context.User where User.username.Equals(username) && User.password.Equals(hashPassword) select User).Count();
+                if (oldPasswordFound > 0)
+                {
+                    existPassword = true;
+                }
                 
             }
-            return oldHashedPassword;
+            return existPassword;
         }
-        public bool EditUserPassword(User user, string actualHashedPassword, string newHashedPassword)
+        public bool EditUserPassword(string username, string newHashedPassword)
         {
             bool status = false;
             try
             {
-                string username = user.username;
-                string oldHashedPassword = GetOldPassword(user);
                 using(OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
-                    if (oldHashedPassword == actualHashedPassword)
-                    {
-                        var users = (from User in context.User where User.username == username  select User).First();
-                        users.password = newHashedPassword;
-                        context.SaveChanges();
-                        status = true;
-                    }
-                    
-                                                
+                    var users = (from User in context.User where User.username == username  select User).First();
+                    users.password = newHashedPassword;
+                    context.SaveChanges();
+                    status = true;                           
                 }
             }
             catch (DbUpdateException)
@@ -173,20 +166,20 @@ namespace OpenCodeChems.BussinesLogic
 
         public Profile GetProfile(string username)
 		{
+            Profile profileObteined = null;
 			try
 			{
 				using(OpenCodeChemsContext context = new OpenCodeChemsContext())
 				{
-					Profile profileObteined = (from Profile in context.Profile where Profile.username == username select Profile).First();
+					profileObteined = (from Profile in context.Profile where Profile.username == username select Profile).First();
 					context.SaveChanges();
-					return profileObteined;
 				}
 			}
 			catch (DbUpdateException)
 			{
-				Exception exception = new Exception("PROFILE_NOT_FOUND");
-				throw exception;
+                profileObteined = null;
 			}
+            return profileObteined;
 		}
         public bool EmailRegistered(string email)
         {
@@ -256,7 +249,7 @@ namespace OpenCodeChems.BussinesLogic
                 string nicknameTo = friends.nicknameTo;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
-                    var friendsUpdate = (from Friends in context.Friends where Friends.nicknameFrom == nicknameFrom where Friends.nicknameTo ==  nicknameTo select Friends).First();
+                    var friendsUpdate = (from Friends in context.Friends where Friends.nicknameFrom == nicknameFrom && Friends.nicknameTo ==  nicknameTo select Friends).First();
                     friendsUpdate.state = friends.state;
                     context.SaveChanges();
                     status = true;
@@ -276,7 +269,7 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     string nicknameFrom = friends.nicknameFrom;
                     string nicknameTo = friends.nicknameTo;
-                    var friendsDelete = (from Friends in context.Friends where friends.nicknameFrom == nicknameFrom where friends.nicknameTo == nicknameTo select friends).First();
+                    var friendsDelete = (from Friends in context.Friends where friends.nicknameFrom == nicknameFrom && friends.nicknameTo == nicknameTo select friends).First();
                     context.Friends.Remove(friendsDelete);
                     context.SaveChanges();
                     status = true;

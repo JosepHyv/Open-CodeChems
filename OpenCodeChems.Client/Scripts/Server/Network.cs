@@ -16,6 +16,7 @@ namespace OpenCodeChems.Client.Server
 		private int PEER_ID = 1;
 		private bool connected = false;
 		private bool regitered = false;
+		public Profile profileObtained = null;
 		
 		[Signal]
 		delegate void LoggedIn();
@@ -55,6 +56,14 @@ namespace OpenCodeChems.Client.Server
 		delegate void Server();
 		[Signal]
 		delegate void ServerFail();
+		[Signal]
+		delegate void CorrectOldPassword();
+		[Signal]
+		delegate void IncorrectOldPassword();
+		[Signal]
+		delegate void CorrectEditPassword();
+		[Signal]
+		delegate void EditPasswordFail();
 		
 
 		
@@ -233,13 +242,41 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void ProfileObtained(string nickname, int victories, int defeats, byte[] imageProfile, string username)
 		{
-			Profile profileObtained = new Profile(nickname, victories, defeats, imageProfile, username);
+			profileObtained = new Profile(nickname, victories, defeats, imageProfile, username);
 			EmitSignal(nameof(ProfileFound));
 		}
 		[Puppet]
 		public void ProfileNotObtained()
 		{
 			EmitSignal(nameof(ProfileNotFound));
+		}
+		public void PasswordExist(string username, string hashPassword)
+		{
+			RpcId(PEER_ID, "PasswordExistRequest", username, hashPassword);
+		}
+		[Puppet]
+		public void PasswordCorrect()
+		{
+			EmitSignal(nameof(CorrectOldPassword));
+		}
+		[Puppet]
+		public void PasswordIncorrect()
+		{
+			EmitSignal(nameof(IncorrectOldPassword));
+		}
+		public void EditPassword(string username, string newHashPassword)
+		{
+			RpcId(PEER_ID, "EditUserPasswordRequest", username, newHashPassword);
+		}
+		[Puppet]
+		public void EditPasswordSuccessful()
+		{
+			EmitSignal(nameof(CorrectEditPassword));
+		}
+		[Puppet]
+		public void EditPasswordNotSuccessful()
+		{
+			EmitSignal(nameof(EditPasswordFail));
 		}
 	}
 	
