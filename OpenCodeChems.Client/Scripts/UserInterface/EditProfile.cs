@@ -43,15 +43,15 @@ public class EditProfile : Control
 		bool verifyPassword = ValidatePassword();
 		if(noEmptyFields == true)
 		{
-			if(verifyPassword == true)
 			{
 				Encryption PasswordHasher = new Encryption();
 				string oldPasswordHashed = PasswordHasher.ComputeSHA256Hash(oldPassword);
 				string newPasswordHashed = PasswordHasher.ComputeSHA256Hash(newPassword);
 				string confirmPasswordHashed = PasswordHasher.ComputeSHA256Hash(confirmPassword);
 				serverClient.PasswordExist(username, oldPasswordHashed);
-				if(passwordIsCorrect.Equals(Task<bool>.FromResult(true)))
+				if(validateOldPassword)
 				{
+					
 					serverClient.EditPassword(username, newPasswordHashed);
 					CleanFields();
 				}
@@ -117,7 +117,7 @@ public class EditProfile : Control
 	}
 	public void IncorrectPassword()
 	{
-		passwordIsNotCorrect = Task<bool>.FromResult(true);
+		passwordIsNotCorrect = Task<bool>.FromResult(false);
 		validateOldPassword = false;
 	}
 	public void CorrectEditPassword()

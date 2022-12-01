@@ -63,7 +63,7 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=16]
 font_data = ExtResource( 4 )
 
-[node name="Control" type="Control"]
+[node name="EditProfile" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
@@ -201,6 +201,7 @@ margin_top = 335.0
 margin_right = 833.0
 margin_bottom = 368.0
 custom_fonts/font = SubResource( 10 )
+secret = true
 
 [node name="NewPasswordLabel" type="Label" parent="EditProfileNinePatchRect"]
 margin_left = 527.0
@@ -219,6 +220,7 @@ margin_top = 402.0
 margin_right = 832.0
 margin_bottom = 435.0
 custom_fonts/font = SubResource( 12 )
+secret = true
 
 [node name="ConfirmPasswordLabel" type="Label" parent="EditProfileNinePatchRect"]
 margin_left = 528.0
@@ -237,6 +239,7 @@ margin_top = 472.0
 margin_right = 828.0
 margin_bottom = 505.0
 custom_fonts/font = SubResource( 14 )
+secret = true
 
 [node name="SavePasswordTextureButton" type="TextureButton" parent="EditProfileNinePatchRect"]
 anchor_right = 0.892
@@ -282,4 +285,13 @@ text = "CANCEL_BUTTON"
 autowrap = true
 clip_text = true
 
+[node name="EditProfileAcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 292.0
+margin_top = 176.0
+margin_right = 701.0
+margin_bottom = 415.0
+window_title = "¡Alerta!"
+
+[connection signal="pressed" from="EditProfileNinePatchRect/SaveProfileInformationTextureButton" to="." method="_on_SaveProfileInformationTextureButton_pressed"]
+[connection signal="pressed" from="EditProfileNinePatchRect/SavePasswordTextureButton" to="." method="_on_SavePasswordTextureButton_pressed"]
 [connection signal="pressed" from="CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]

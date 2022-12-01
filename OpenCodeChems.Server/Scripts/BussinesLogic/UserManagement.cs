@@ -140,7 +140,6 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     existPassword = true;
                 }
-                
             }
             return existPassword;
         }
