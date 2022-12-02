@@ -57,6 +57,7 @@ public class LogIn : Control
 	
 	public void LoggedFailed()
 	{
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetTitle("WARNING");
 		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("WRONG_CREDENTIALS");
 		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 		loggedStatus = Task<bool>.FromResult(false);

@@ -4,30 +4,26 @@ using OpenCodeChems.Client.Server;
 using System.Threading.Tasks;
 using OpenCodeChems.Client.Resources;
 using static OpenCodeChems.Client.Resources.Objects;
+using System.IO;
 
 public class MainMenu : Control
 {
-	string username = LogIn.username;
+	public static string username = LogIn.username;
 	Network serverClient;
-	  int PEER_ID = 1; 
-	public static Profile actualPlayer;
-	private Task<bool> getProfileStatus = Task<bool>.FromResult(false);
-	
+	int PEER_ID = 1; 
+	public Profile actualPlayer;
+
 
 	public override void _Ready()
 	{
-		GD.Print(username);
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("ProfileFound", this, nameof(GetProfileComplete));
 		serverClient.Connect("ProfileNotFound", this, nameof(GetProfileFail));
-		//serverClient.GetProfile(username);
-		GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = username;
+		serverClient.GetProfile(username);
 	}
 	public void _on_SettingsTextureButton_pressed()
 	{
-		
-		GetTree().ChangeScene("res://Scenes/SelectLenguage.tscn");
-		
+		GetTree().ChangeScene("res://Scenes/SelectLenguage.tscn");	
 	}
 	public void _on_LogOutTextureButton_pressed()
 	{
@@ -55,24 +51,30 @@ public class MainMenu : Control
 	}
 
 
-	public void GetProfileComplete(string nickname, int victories, int defeats, byte[] imageProfile, string username)
+	public void GetProfileComplete()
 	{
-		  nickname = actualPlayer.nickname;
-		  victories = actualPlayer.victories;
-		  defeats = actualPlayer.defeats;
-		  imageProfile = actualPlayer.imageProfile;
-		  username = actualPlayer.username;
-		  GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nickname;
-		  getProfileStatus = Task<bool>.FromResult(true);
+		if(serverClient.profileObtained != null)
+		{
+			actualPlayer = serverClient.profileObtained;
+			string nickname = actualPlayer.nickname;
+			int victories = actualPlayer.victories;
+			int defeats = actualPlayer.defeats;
+			byte [] imageProfile = actualPlayer.imageProfile;
+			string usernameObtained = actualPlayer.username;
+			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nickname;
+		}
 	}
+
+	/*public Image ByteArrayToImage(byte[] data)
+	{
+    	
+	}*/
 	
 	public void GetProfileFail()
 	{
-		  getProfileStatus = Task<bool>.FromResult(false);
-	}
-	public void GettingProfile(string usernameFind)
-	{
-		serverClient.GetProfile(usernameFind);
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetText("ERROR_LOADING_PROFILE");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("WARNING");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").Visible = true;
 	}
 
 }

@@ -8,7 +8,7 @@ using OpenCodeChems.Client.Server;
 using System.IO;
 using Path = System.IO.Path;
 using File = System.IO.File;
-//using System.Drawing.Imaging;
+
 
 public class RegisterUser : Control
 {
@@ -28,7 +28,6 @@ public class RegisterUser : Control
 	private string password = "";
 	private string confirmPassword = "";
 	private string nickname = "";
-	private byte[] imageProfile = null;
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
@@ -56,7 +55,7 @@ public class RegisterUser : Control
 		confirmPassword = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
 		nickname = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
 		bool noEmptyFields = ValidateEmptyFields();
-		bool verifyEmailPassword = ValidatePasswordAndEmail();
+		bool verifyEmailPassword = ValidateFields();
 		if(noEmptyFields == true)
 		{
 			if(verifyEmailPassword == true)
@@ -68,7 +67,7 @@ public class RegisterUser : Control
 				{
 					Encryption PasswordHasher = new Encryption();
 					string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-					//imageProfile = GetDefaultImage(); Error al leer imagenes CORREGIR
+					byte[] imageProfile = null; 
 					serverClient.RegisterUser(name, email, username, hashPassword, nickname, imageProfile, VICTORIES_DEFAULT, DEFEATS_DEFAULT);
 				}
 			}
@@ -91,7 +90,7 @@ public class RegisterUser : Control
 		}
 		return validFields;
 	}
-	public bool ValidatePasswordAndEmail()
+	public bool ValidateFields()
 	{
 		Validation validator = new Validation();
 		bool isValid = true;
@@ -109,6 +108,27 @@ public class RegisterUser : Control
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			isValid = false;
 		}
+		if(validator.ValidateUsernameAndNickname(username) == false)
+		{
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_USERNAME");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+			isValid = false;
+		}
+		if(validator.ValidateUsernameAndNickname(nickname) == false)
+		{
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_NICKNAME");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+			isValid = false;
+		}
+		if(validator.ValidateName(name) == false)
+		{
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_NAME");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+			isValid = false;
+		}
 		if(confirmPassword.Equals(password) == false)
 		{
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
@@ -119,15 +139,15 @@ public class RegisterUser : Control
 		return isValid;
 	}
 
-	public byte[] GetDefaultImage()
+	public byte[] ImageToByte()
 	{
 		string pathProfileImageDefault = "../../Scenes/Resources/Icons/imagePerfilDefault.jpg";
 		FileStream imageProfileFileStream = new FileStream(pathProfileImageDefault, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		Byte[] imageProfileDefault = new Byte[imageProfileFileStream.Length];
+		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
 		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-		imageProfileDefault = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
+		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
 		imageProfileFileStream.Close();
-		return imageProfileDefault;
+		return imageProfile;
 	}
 	
 	public void RegisteredAccepted()
@@ -184,8 +204,4 @@ public class RegisterUser : Control
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 		usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 	}
-
-
-
-
 }
