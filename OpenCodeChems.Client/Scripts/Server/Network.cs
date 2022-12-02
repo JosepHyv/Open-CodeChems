@@ -43,11 +43,11 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void ProfileNotFound();
 		[Signal]
-		delegate void RoomCreation(int sender);
+		delegate void RoomCreation();
 		[Signal]
 		delegate void RoomCreationFail();
 		[Signal]
-		delegate void RoomJoin();
+		delegate void RoomJoin(int sender);
 		[Signal]
 		delegate void RoomJoinFail();
 		[Signal]
@@ -228,11 +228,11 @@ namespace OpenCodeChems.Client.Server
 		}
 		
 		[Puppet]
-		public void CreateRoomAccepted(int sender)
+		public void CreateRoomAccepted()
 		{	
 
 			GD.Print("Cosito aceptado OwO");
-			EmitSignal(nameof(RoomCreation),sender);
+			EmitSignal(nameof(RoomCreation));
 		}
 		
 		[Puppet]
@@ -241,6 +241,20 @@ namespace OpenCodeChems.Client.Server
 			GD.Print("Error creando la sala, ya existe una con la misma clave");
 			EmitSignal(nameof(RoomCreationFail));
 
+		}
+		
+		[Puppet]
+		public void JoinRoomAccepted(int sender)
+		{
+			GD.Print($"Entrando a la sala con el id = {sender}");
+			EmitSignal(nameof(RoomJoin), sender);
+		}
+		
+		[Puppet]
+		public void JoinRoomFail()
+		{
+			GD.Print("Error entrando a la sala");
+			EmitSignal(nameof(RoomJoinFail));
 		}
 
 		public void GetProfile(string username)

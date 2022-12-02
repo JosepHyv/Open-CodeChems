@@ -34,16 +34,11 @@ public class RoomSettings : Control
 		// Replace with function body.
 	}
 	
-	public void ChangeToRoom(int sender)
+	public void ChangeToRoom()
 	{
 		GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
-		AddClientId(sender);
 	}
 
-	public void AddClientId(int sender)
-	{
-			//
-	}
 	
 	public void DisplayAlert()
 	{

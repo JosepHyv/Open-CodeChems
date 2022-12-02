@@ -103,9 +103,9 @@ public class Network : Node
 			}
 		}
 		catch (DbUpdateException)
-    {
-      RpcId(senderId, "LoginFailed");
-    }
+	{
+	  RpcId(senderId, "LoginFailed");
+	}
 	}
 
 	[Master]
@@ -132,9 +132,9 @@ public class Network : Node
 			}
 		}
 		catch (DbUpdateException)
-    {
-       RpcId(senderId, "RegisterFail");
-    }
+	{
+	   RpcId(senderId, "RegisterFail");
+	}
 	}
 
 	[Master]
@@ -219,7 +219,8 @@ public class Network : Node
 			hostRoom.Add(senderId);
 			rooms.Add(code, hostRoom);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
-			RpcId(senderId, "CreateRoomAccepted",senderId);
+			RpcId(senderId, "CreateRoomAccepted");
+			RpcId(senderId, "JoinRoomAccepted", senderId);
 		}
 	}
 	
