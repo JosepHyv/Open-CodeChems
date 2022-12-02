@@ -67,10 +67,7 @@ public class MainMenu : Control
 
 	/*public Image ByteArrayToImage(byte[] data)
 	{
-    	MemoryStream ms = new MemoryStream(data);
-    	Image returnImage = new Image();
-		returnImage = ((Godot.Image)ms);
-    	return returnImage;
+    	
 	}*/
 	
 	public void GetProfileFail()
