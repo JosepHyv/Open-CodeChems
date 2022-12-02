@@ -21,7 +21,7 @@ public class Network : Node
 	private Button connectButton;
 	private AcceptDialog dialog;
 	private Dictionary<string, List<int>> rooms;
-
+	public List<int> clientsConected;
 	public override void _Ready()
 	{
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
@@ -39,11 +39,13 @@ public class Network : Node
 	private void PlayerConnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Conectado\n");
+		clientsConected.Add(peerId);
 	}
 
 	private void PlayerDisconnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
+		clientsConected.Remove(peerId);
 	}
 
 	private void _on_Button_pressed()
