@@ -219,7 +219,7 @@ public class Network : Node
 			hostRoom.Add(senderId);
 			rooms.Add(code, hostRoom);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
-			RpcId(senderId, "CreateRoomAccepted");
+			RpcId(senderId, "CreateRoomAccepted",senderId);
 		}
 	}
 	
@@ -230,7 +230,7 @@ public class Network : Node
 		if(rooms.ContainsKey(code))
 		{
 			rooms[code].Add(senderId);
-			RpcId(senderId, "JoinRoomAccepted");
+			RpcId(senderId, "JoinRoomAccepted",senderId);
 			logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
 		}
 		else

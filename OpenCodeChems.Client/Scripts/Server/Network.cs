@@ -43,7 +43,7 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void ProfileNotFound();
 		[Signal]
-		delegate void RoomCreation();
+		delegate void RoomCreation(int sender);
 		[Signal]
 		delegate void RoomCreationFail();
 		[Signal]
@@ -228,10 +228,11 @@ namespace OpenCodeChems.Client.Server
 		}
 		
 		[Puppet]
-		public void CreateRoomAccepted()
-		{
+		public void CreateRoomAccepted(int sender)
+		{	
+
 			GD.Print("Cosito aceptado OwO");
-			EmitSignal(nameof(RoomCreation));
+			EmitSignal(nameof(RoomCreation),sender);
 		}
 		
 		[Puppet]
