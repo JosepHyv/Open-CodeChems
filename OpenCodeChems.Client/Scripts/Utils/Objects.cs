@@ -25,14 +25,16 @@ namespace OpenCodeChems.Client.Resources
 
     public class Profile 
     {
-        public Profile (string nickname, int victories, int defeats, byte[] imageProfile, string username)
+        public Profile (int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
         {
+            this.idProfile = idProfile;
             this.nickname = nickname;
             this.victories = victories;
             this.defeats = defeats;
             this.imageProfile = imageProfile;
             this.username = username;
         }
+        public int idProfile { get; set; }
         public string nickname { get; set; }
         public int victories { get; set; }
         public int defeats { get; set; }

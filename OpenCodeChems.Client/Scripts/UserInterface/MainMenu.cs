@@ -4,6 +4,7 @@ using OpenCodeChems.Client.Server;
 using System.Threading.Tasks;
 using OpenCodeChems.Client.Resources;
 using static OpenCodeChems.Client.Resources.Objects;
+using System.IO;
 
 public class MainMenu : Control
 {
@@ -15,7 +16,6 @@ public class MainMenu : Control
 
 	public override void _Ready()
 	{
-		GD.Print(username);
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("ProfileFound", this, nameof(GetProfileComplete));
 		serverClient.Connect("ProfileNotFound", this, nameof(GetProfileFail));
@@ -64,6 +64,14 @@ public class MainMenu : Control
 			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nickname;
 		}
 	}
+
+	/*public Image ByteArrayToImage(byte[] data)
+	{
+    	MemoryStream ms = new MemoryStream(data);
+    	Image returnImage = new Image();
+		returnImage = ((Godot.Image)ms);
+    	return returnImage;
+	}*/
 	
 	public void GetProfileFail()
 	{

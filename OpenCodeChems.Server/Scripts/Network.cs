@@ -109,11 +109,11 @@ public class Network : Node
 	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		bool status = false;
+		int idProfile = 0;
 		try
 		{
 			User newUser = new User(username, hashPassword, name, email);
-			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
+			Profile newProfile = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
 			if(USER_MANAGEMENT.RegisterUser(newUser) == true)
 			{
 				if (USER_MANAGEMENT.RegisterProfile(newProfile) == true)
@@ -187,12 +187,13 @@ public class Network : Node
 		Profile profileObtained = USER_MANAGEMENT.GetProfile(username);
 		if (profileObtained != null)
 		{
+			int idProfile = profileObtained.idProfile;
 			string nickname = profileObtained.nickname;
 			string usernameObtained = profileObtained.username;
 			int victories = profileObtained.victories;
 			int defeats = profileObtained.defeats;
 			byte[] imageProfile = profileObtained.imageProfile;
-			RpcId(senderId, "ProfileObtained", nickname, victories, defeats, imageProfile, usernameObtained);
+			RpcId(senderId, "ProfileObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
 		}
 		else
 		{
@@ -263,7 +264,32 @@ public class Network : Node
 			RpcId(senderId, "EditPasswordNotSuccessful");
 		}
 	}
-
+	[Master]
+	public void EditNicknameRequest(string username, string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if (USER_MANAGEMENT.EditProfileNickname(username, nickname) == true)
+		{
+			RpcId(senderId, "EditNicknameSuccessful");
+		}
+		else
+		{
+			RpcId(senderId, "EditNicknameNotSuccessful");
+		}
+	}
+	[Master]
+	public void EditImageProfileRequest(string username, byte[] imageProfile)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if (USER_MANAGEMENT.EditProfileImage(username, imageProfile) == true)
+		{
+			RpcId(senderId, "EditImageProfileSuccessful");
+		}
+		else
+		{
+			RpcId(senderId, "EditImageProfileNotSuccessful");
+		}
+	}
 }
 
 

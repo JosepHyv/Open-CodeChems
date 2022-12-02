@@ -64,6 +64,14 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectEditPassword();
 		[Signal]
 		delegate void EditPasswordFail();
+		[Signal]
+		delegate void CorrectEditNickname();
+		[Signal]
+		delegate void EditNicknameFail();
+		[Signal]
+		delegate void CorrectEditImageProfile();
+		[Signal]
+		delegate void EditImageProfileFail();
 		
 
 		
@@ -109,7 +117,6 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(Server));
 		}
 
-		//cliente
 	   
 		public void Login(string username, string password )
 		{
@@ -240,9 +247,9 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID,"GetProfileRequest", username);
 		}
 		[Puppet]
-		public void ProfileObtained(string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		public void ProfileObtained(int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
 		{
-			profileObtained = new Profile(nickname, victories, defeats, imageProfile, username);
+			profileObtained = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
 			EmitSignal(nameof(ProfileFound));
 		}
 		[Puppet]
@@ -277,6 +284,34 @@ namespace OpenCodeChems.Client.Server
 		public void EditPasswordNotSuccessful()
 		{
 			EmitSignal(nameof(EditPasswordFail));
+		}
+		public void EditNickname(string username, string nickname)
+		{
+			RpcId(PEER_ID, "EditNicknameRequest", username, nickname);
+		}
+		[Puppet]
+		public void EditNicknameSuccessful()
+		{
+			EmitSignal(nameof(CorrectEditNickname));
+		}
+		[Puppet]
+		public void EditNicknameNotSuccessful()
+		{
+			EmitSignal(nameof(EditNicknameFail));
+		}
+		public void EditImageProfile(string username, byte[] imageProfile )
+		{
+			RpcId(PEER_ID, "EditImageProfileRequest", username, imageProfile);
+		}
+		[Puppet]
+		public void EditImageProfileSuccessful()
+		{
+			EmitSignal(nameof(CorrectEditImageProfile));
+		}
+		[Puppet]
+		public void EditImageProfileNotSuccessful()
+		{
+			EmitSignal(nameof(EditImageProfileFail));
 		}
 	}
 	

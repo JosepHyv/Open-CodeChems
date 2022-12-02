@@ -111,25 +111,7 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
-        public bool EditUserEmail(string username, string email)
-        {
-            bool status = false;
-            try
-            {
-                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
-                {   
-                    var users = (from User in context.User where User.username == username select User).First();
-                    users.email = email;
-                    context.SaveChanges();
-                    status = true;
-                }
-            }
-            catch (DbUpdateException)
-            {
-                status = false;
-            }
-            return status;
-        }
+
         public bool PasswordExist(string username, string hashPassword)
         {
             bool existPassword = false;
@@ -178,6 +160,10 @@ namespace OpenCodeChems.BussinesLogic
 			{
                 profileObteined = null;
 			}
+            catch (InvalidOperationException)
+            {
+                profileObteined = null;
+            }
             return profileObteined;
 		}
         public bool EmailRegistered(string email)
