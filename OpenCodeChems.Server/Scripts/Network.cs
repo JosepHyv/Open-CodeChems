@@ -24,6 +24,7 @@ public class Network : Node
 	public List<int> clientsConected;
 	public override void _Ready()
 	{
+		clientsConected = new List<int>();
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
 		rooms = new Dictionary<string, List<int>>();
 		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
