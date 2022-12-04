@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Resources;
 using static OpenCodeChems.Client.Resources.Objects;
 
@@ -17,6 +18,8 @@ namespace OpenCodeChems.Client.Server
 		private bool connected = false;
 		private bool regitered = false;
 		public Profile profileObtained = null;
+		public List<string> friendsObtained = null;
+		public List<string> friendsRequestsObtained = null;
 		
 		[Signal]
 		delegate void LoggedIn();
@@ -39,9 +42,9 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void NicknameRegistered();
 		[Signal]
-		delegate void ProfileFound();
+		delegate void ProfileByUsernameFound();
 		[Signal]
-		delegate void ProfileNotFound();
+		delegate void ProfileByUsernameNotFound();
 		[Signal]
 		delegate void RoomCreation();
 		[Signal]
@@ -80,6 +83,14 @@ namespace OpenCodeChems.Client.Server
 		delegate void FriendshipNotRegistered();
 		[Signal]
 		delegate void FriendshipRegistered();
+		[Signal]
+		delegate void FriendsFound();
+		[Signal]
+		delegate void FriendsNotFound();
+		[Signal]
+		delegate void FriendsRequestsFound();
+		[Signal]
+		delegate void FriendsRequestsNotFound();
 		
 
 		
@@ -250,20 +261,20 @@ namespace OpenCodeChems.Client.Server
 
 		}
 
-		public void GetProfile(string username)
+		public void GetProfileByUsername(string username)
 		{
-			RpcId(PEER_ID,"GetProfileRequest", username);
+			RpcId(PEER_ID,"GetProfileByUsernameRequest", username);
 		}
 		[Puppet]
-		public void ProfileObtained(int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		public void ProfileByUsernameObtained(int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
 		{
 			profileObtained = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
-			EmitSignal(nameof(ProfileFound));
+			EmitSignal(nameof(ProfileByUsernameFound));
 		}
 		[Puppet]
-		public void ProfileNotObtained()
+		public void ProfileByUsernameNotObtained()
 		{
-			EmitSignal(nameof(ProfileNotFound));
+			EmitSignal(nameof(ProfileByUsernameNotFound));
 		}
 		public void PasswordExist(string username, string hashPassword)
 		{
@@ -348,6 +359,36 @@ namespace OpenCodeChems.Client.Server
 		public void FriendshipIsRegistered()
 		{
 			EmitSignal(nameof(FriendshipRegistered));
+		}
+		public void GetFriends(int idProfile, bool status)
+		{
+			RpcId(PEER_ID, "GetFriendsRequest", idProfile, status);
+		}
+		[Puppet]
+		public void FriendsObtained(List<string> friends)
+		{
+			friendsObtained = friends;
+			EmitSignal(nameof(FriendsFound));
+		}
+		[Puppet]
+		public void FriendsNotObtained()
+		{
+			EmitSignal(nameof(FriendsNotFound));
+		}
+		public void GetFriendsRequests(int idProfile, bool status)
+		{
+			RpcId(PEER_ID, "GetFriendsRequestsRequest", idProfile, status);
+		}
+		[Puppet]
+		public void FriendsRequestsObtained(List<string> friendsRequests)
+		{
+			friendsRequestsObtained = friendsRequests;
+			EmitSignal(nameof(FriendsRequestsFound));
+		}
+		[Puppet]
+		public void FriendsRequestsNotObtained()
+		{
+			EmitSignal(nameof(FriendsRequestsNotFound));
 		}
 	}
 }

@@ -176,10 +176,10 @@ public class Network : Node
 	}
 	
 	[Master]
-	private void GetProfileRequest(string username)
+	private void GetProfileByUsernameRequest(string username)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		Profile profileObtained = USER_MANAGEMENT.GetProfile(username);
+		Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
 		if (profileObtained != null)
 		{
 			int idProfile = profileObtained.idProfile;
@@ -188,12 +188,12 @@ public class Network : Node
 			int victories = profileObtained.victories;
 			int defeats = profileObtained.defeats;
 			byte[] imageProfile = profileObtained.imageProfile;
-			RpcId(senderId, "ProfileObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
+			RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
 			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
 		}
 		else
 		{
-			RpcId(senderId, "ProfileNotObtained");
+			RpcId(senderId, "ProfileByUsernameNotObtained");
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
 		}
 	}
@@ -317,6 +317,38 @@ public class Network : Node
 		{
 			RpcId(senderId, "FriendshipIsRegistered");
 			logBlock.InsertTextAtCursor($"Exist a friendship between {idProfileFrom} and {idProfileTo}\n");
+		}
+	}
+	[Master]
+	public void GetFriendsRequest(int idProfile, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		List<string> friendsObtainded = USER_MANAGEMENT.GetFriends(idProfile, status);
+		if(friendsObtainded != null)
+		{
+			RpcId(senderId, "FriendsObtained", friendsObtainded);
+			logBlock.InsertTextAtCursor($"Friends of {senderId} obtained\n");
+		}
+		else
+		{
+			RpcId(senderId, "FriendsNotObtained");
+			logBlock.InsertTextAtCursor($"Friends of {senderId} not obtained\n");
+		}
+	}
+	[Master]
+	public void GetFriendsRequestsRequest(int idProfile, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		List<string> friendsRequestsObtainded = USER_MANAGEMENT.GetFriendsRequests(idProfile, status);
+		if(friendsRequestsObtainded != null)
+		{
+			RpcId(senderId, "FriendsRequestsObtained", friendsRequestsObtainded);
+			logBlock.InsertTextAtCursor($"Friends requests of {senderId} obtained\n");
+		}
+		else
+		{
+			RpcId(senderId, "FriendsRequestsNotObtained");
+			logBlock.InsertTextAtCursor($"Friends requests of {senderId} not obtained\n");
 		}
 	}
 }

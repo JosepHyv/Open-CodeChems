@@ -13,7 +13,7 @@ namespace OpenCodeChems.BusinessLogic.Interface
         bool EditProfileImage(string username, byte[] imageProfile);
         bool EditUserPassword(string username, string newHashedPassword);
         bool PasswordExist(string username, string hashPassword);
-        Profile GetProfile(string username);
+        Profile GetProfileByUsername(string username);
         bool EmailRegistered(string email);
         bool UsernameRegistered(string username);
         bool NicknameRegistered(string nickname);
@@ -21,7 +21,8 @@ namespace OpenCodeChems.BusinessLogic.Interface
         bool AcceptFriendRequest(Friends friends);
         bool DenyFriendRequest(Friends friends);
         bool FriendshipExist(int idProfileActualPlayer, int idProfilePlayerFound);
-        List<string> GetFriends(int idProfile);
+        List<string> GetFriends(int idProfile, bool status);
+        List<string> GetFriendsRequests(int idProfile, bool status);
     }
 
 

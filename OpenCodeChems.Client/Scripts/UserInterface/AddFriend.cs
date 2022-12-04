@@ -75,14 +75,13 @@ public class AddFriend : Control
 	{
 		usernameRegisteredStatus = Task<bool>.FromResult(false);
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText
-		("USERNAME_NOT_FOUND");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("USERNAME_NOT_FOUND");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 	}
 	public void UsernameIsRegistered()
 	{
 		usernameRegisteredStatus = Task<bool>.FromResult(true);
-		serverClient.GetProfile(usernameFriend);
+		serverClient.GetProfileByUsername(usernameFriend);
 	}	
 	public void AddFriendCorrect()
 	{

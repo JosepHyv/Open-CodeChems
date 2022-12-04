@@ -145,7 +145,7 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
-        public Profile GetProfile(string username)
+        public Profile GetProfileByUsername(string username)
 		{
             Profile profileObteined = null;
 			try
@@ -284,10 +284,35 @@ namespace OpenCodeChems.BussinesLogic
             }
             return existFriendship;
         }
-        public List<string> GetFriends(int idProfile)
+        public List<string> GetFriends(int idProfile, bool status)
         {
             List<string> friendsObtained = new List<string>();
+            List<string> friendsIdFrom = new List<string>();
+            List<string> friendsIdTo= new List<string>();
+            using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+            {
+                friendsIdFrom = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileTo equals Profiles.idProfile where Friends.idProfileFrom == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                friendsIdTo = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+            }
+            foreach(var friendIdFrom in friendsIdFrom)
+            {
+                friendsObtained.Add(friendIdFrom);
+            }
+            foreach(var friendIdTo in friendsIdTo)
+            {
+                friendsObtained.Add(friendIdTo);
+            }
             return friendsObtained;
+        }
+
+        public List<string> GetFriendsRequests(int idProfile, bool status)
+        {
+            List<string> friendsRequests = new List<string>();
+            using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+            {
+                friendsRequests = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+            }
+            return friendsRequests;
         }
     }
 }

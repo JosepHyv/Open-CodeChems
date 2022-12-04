@@ -59,3 +59,4 @@ ERROR_NICKNAME_UPDATE,"Failed to update player name, please try again later","Er
 CORRECT_IMAGE_PROFILE_UPDATE,Profile picture updated successfully,Imagen del perfil actualizada correctamente
 ERROR_IMAGE_PROFILE_UPDATE,"Error updating profile picture, please try again later","Error al actualizar la imagen del perfil, inténtalo más tarde"
 USERNAME_NOT_FOUND,Username not found,Nombre de usuario no encontrado
+ACCEPT_FRIEND_REQUEST_INSTRUCTION,Select a user and click on the green button to accept or the red button to reject.,Selecciona un usuario y da clic en el botón verde para aceptarla o rojo para rechazarla
