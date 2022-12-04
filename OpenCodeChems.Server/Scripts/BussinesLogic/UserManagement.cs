@@ -230,12 +230,12 @@ namespace OpenCodeChems.BussinesLogic
             bool status = false;
             try
             {
-                string nicknameFrom = friends.nicknameFrom;
-                string nicknameTo = friends.nicknameTo;
+                int idProfileFrom = friends.idProfileFrom;
+                int idProfileTo = friends.idProfileTo;
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
-                    var friendsUpdate = (from Friends in context.Friends where Friends.nicknameFrom == nicknameFrom && Friends.nicknameTo ==  nicknameTo select Friends).First();
-                    friendsUpdate.state = friends.state;
+                    var friendsUpdate = (from Friends in context.Friends where Friends.idProfileFrom == idProfileFrom && Friends.idProfileTo ==  idProfileTo select Friends).First();
+                    friendsUpdate.status = friends.status;
                     context.SaveChanges();
                     status = true;
                 }
@@ -252,9 +252,9 @@ namespace OpenCodeChems.BussinesLogic
             try{
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
-                    string nicknameFrom = friends.nicknameFrom;
-                    string nicknameTo = friends.nicknameTo;
-                    var friendsDelete = (from Friends in context.Friends where friends.nicknameFrom == nicknameFrom && friends.nicknameTo == nicknameTo select friends).First();
+                    int idProfileFrom = friends.idProfileFrom;
+                    int idProfileTo = friends.idProfileTo;
+                    var friendsDelete = (from Friends in context.Friends where Friends.idProfileFrom == idProfileFrom && Friends.idProfileTo ==  idProfileTo select Friends).First();
                     context.Friends.Remove(friendsDelete);
                     context.SaveChanges();
                     status = true;
@@ -265,6 +265,29 @@ namespace OpenCodeChems.BussinesLogic
                 status = false;
             }
             return status;
+        }
+        public bool FriendshipExist(int idProfileActualPlayer, int idProfilePlayerFound)
+        {
+            bool existFriendship = false;
+            using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+            {
+                int existInIdProfileFrom = (from Friends in context.Friends where Friends.idProfileFrom.Equals(idProfileActualPlayer) && Friends.idProfileTo.Equals(idProfilePlayerFound) select Friends).Count();
+                if (existInIdProfileFrom > 0)
+                {
+                    existFriendship = true;
+                }
+                int existInIdProfileTo = (from Friends in context.Friends where Friends.idProfileTo.Equals(idProfileActualPlayer) && Friends.idProfileFrom.Equals(idProfilePlayerFound) select Friends).Count();
+                if (existInIdProfileTo > 0)
+                {
+                    existFriendship = true;
+                }
+            }
+            return existFriendship;
+        }
+        public List<string> GetFriends(int idProfile)
+        {
+            List<string> friendsObtained = new List<string>();
+            return friendsObtained;
         }
     }
 }

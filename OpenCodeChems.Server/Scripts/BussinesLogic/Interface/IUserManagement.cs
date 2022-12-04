@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using OpenCodeChems.DataAccess;
 
 namespace OpenCodeChems.BusinessLogic.Interface
@@ -19,6 +20,8 @@ namespace OpenCodeChems.BusinessLogic.Interface
         bool AddFriend(Friends friends);
         bool AcceptFriendRequest(Friends friends);
         bool DenyFriendRequest(Friends friends);
+        bool FriendshipExist(int idProfileActualPlayer, int idProfilePlayerFound);
+        List<string> GetFriends(int idProfile);
     }
 
 

@@ -73,10 +73,10 @@ text = "ADDFRIEND_BUTTON"
 clip_text = true
 
 [node name="CancelTextureButton" type="TextureButton" parent="."]
-margin_left = 219.0
-margin_top = 370.0
-margin_right = 364.0
-margin_bottom = 419.0
+margin_left = 625.0
+margin_top = 368.0
+margin_right = 770.0
+margin_bottom = 417.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 expand = true
@@ -90,6 +90,13 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 4 )
 text = "CANCEL_BUTTON"
 clip_text = true
+
+[node name="AddFriendAcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 362.0
+margin_top = 218.0
+margin_right = 622.0
+margin_bottom = 332.0
+window_title = "¡Alerta!"
 
 [connection signal="pressed" from="AddFriendNinePatchRect/AddFriendTextureButton" to="." method="_on_AddFriendTextureButton_pressed"]
 [connection signal="pressed" from="CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]

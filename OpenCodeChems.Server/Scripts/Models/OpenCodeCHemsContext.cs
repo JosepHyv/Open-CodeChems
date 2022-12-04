@@ -67,16 +67,16 @@ namespace OpenCodeChems.DataAccess
     }
     public class Friends
     {
-        public Friends(string nicknameFrom, string nicknameTo, int state)
+        public Friends(int idProfileFrom, int idProfileTo, bool status)
         {
-            this.nicknameFrom = nicknameFrom;
-            this.nicknameTo = nicknameTo;
-            this.state = state;
+            this.idProfileFrom = idProfileFrom;
+            this.idProfileTo = idProfileTo;
+            this.status = status;
         }
         [Key]
-        public string nicknameFrom { get; set; }
-        public string nicknameTo { get; set; }
-        public int state { get; set; }
+        public int idProfileFrom { get; set; }
+        public int idProfileTo { get; set; }
+        public bool status { get; set; }
     }
 
 }

@@ -72,6 +72,14 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectEditImageProfile();
 		[Signal]
 		delegate void EditImageProfileFail();
+		[Signal]
+		delegate void CorrectAddFriend();
+		[Signal]
+		delegate void AddFriendFail();
+		[Signal]
+		delegate void FriendshipNotRegistered();
+		[Signal]
+		delegate void FriendshipRegistered();
 		
 
 		
@@ -219,7 +227,7 @@ namespace OpenCodeChems.Client.Server
 		public void NicknameIsRegistered()
 		{
 			EmitSignal(nameof(NicknameRegistered));
-	}
+		}
 		
 		public void ClientCreateRoom(string name)
 		{
@@ -313,6 +321,33 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(EditImageProfileFail));
 		}
+		public void AddFriend(int idProfileFrom, int idProfileTo, bool status)
+		{
+			RpcId(PEER_ID, "AddFriendRequest", idProfileFrom, idProfileTo, status);
+		}
+		[Puppet]
+		public void AddFriendSuccessful()
+		{
+			EmitSignal(nameof(CorrectAddFriend));
+		}
+		[Puppet]
+		public void AddFriendNotSuccessful()
+		{
+			EmitSignal(nameof(AddFriendFail));
+		}
+		public void FriendshipExist(int idProfileFrom, int idProfileTo)
+		{
+			RpcId(PEER_ID, "FriendshipExistRequest", idProfileFrom, idProfileTo);
+		}
+		[Puppet]
+		public void FriendshipIsNotRegistered()
+		{
+			EmitSignal(nameof(FriendshipNotRegistered));
+		}
+		[Puppet]
+		public void FriendshipIsRegistered()
+		{
+			EmitSignal(nameof(FriendshipRegistered));
+		}
 	}
-	
 }

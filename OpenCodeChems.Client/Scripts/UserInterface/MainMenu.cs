@@ -11,7 +11,9 @@ public class MainMenu : Control
 	public static string username = LogIn.username;
 	Network serverClient;
 	int PEER_ID = 1; 
-	public Profile actualPlayer;
+	public static Profile actualPlayer;
+	public static int idProfile = 0; 
+	
 
 
 	public override void _Ready()
@@ -40,6 +42,7 @@ public class MainMenu : Control
 	public void _on_AddFriendButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/AddFriend.tscn");
+		serverClient.profileObtained = null;
 	}
 	public void _on_FriendRequestButton_pressed()
 	{
@@ -56,6 +59,7 @@ public class MainMenu : Control
 		if(serverClient.profileObtained != null)
 		{
 			actualPlayer = serverClient.profileObtained;
+			idProfile = actualPlayer.idProfile;
 			string nickname = actualPlayer.nickname;
 			int victories = actualPlayer.victories;
 			int defeats = actualPlayer.defeats;
