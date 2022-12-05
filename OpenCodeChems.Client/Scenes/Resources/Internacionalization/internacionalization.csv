@@ -60,3 +60,12 @@ CORRECT_IMAGE_PROFILE_UPDATE,Profile picture updated successfully,Imagen del per
 ERROR_IMAGE_PROFILE_UPDATE,"Error updating profile picture, please try again later","Error al actualizar la imagen del perfil, inténtalo más tarde"
 USERNAME_NOT_FOUND,Username not found,Nombre de usuario no encontrado
 ACCEPT_FRIEND_REQUEST_INSTRUCTION,Select a user and click on the green button to accept or the red button to reject.,Selecciona un usuario y da clic en el botón verde para aceptarla o rojo para rechazarla
+FRIEND_YOURSELF,You can't send a friend request to yourself,No puedes enviarte una solicitud de amistad a ti mismo
+FRIEND_REQUEST_SENT,Friendship request sent,Solicitud de amistad enviada
+FRIEND_REQUEST_NOT_SENT,"Couldn't send friend request, try again later.","No se pudo enviar la solicitud de amistad, inténtalo más tarde"
+FRIENDSHIP_EXIST,This user is already your friend or you have already sent a friend request to this user.,Este usuario ya es tu amigo o ya enviaste una solicitud de amistad al mismo
+ERROR_LOADING_FRIENDS_REQUESTS,"There was an error loading the friend requests, try again later.","Hubo un error al cargar las solicitudes de amistad, inténtalo más tarde"
+FRIEND_REQUEST_CANT_ACCEPTED,"Unable to accept the friend request at this time, please try again later.","No se puede aceptar la solicitud de amistad en este momento, inténtalo más tarde"
+FRIEND_REQUEST_CANT_DENY,"Unable to reject the friend request at this time, try again later.","No se puede rechazar la solicitud de amistad en este momento, inténtalo más tarde"
+ERROR_LOADING_FRIENDS,"There was an error loading your friends, try again later.","Hubo un error al cargar tus amigos, inténtalo más tarde"
+,,

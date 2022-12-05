@@ -18,7 +18,6 @@ public class LogIn : Control
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		//serverClient.ConnectToServer();
 		serverClient.Connect("LoggedIn", this, nameof(LoggedAcepted));
 		serverClient.Connect("LoggedFail", this, nameof(LoggedFailed));
 	}
@@ -42,6 +41,7 @@ public class LogIn : Control
 		}
 		else
 		{
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetTitle("WARNING");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("VERIFY_EMPTY_FIELDS");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 		}

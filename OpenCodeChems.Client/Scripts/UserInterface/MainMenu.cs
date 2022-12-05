@@ -15,15 +15,15 @@ public class MainMenu : Control
 	public static Profile actualPlayer;
 	private List<string> friendsOfActualPlayer;
 	public static int idProfile = 0; 
-	private bool STATUS_FRIENDS = false;
+	private bool STATUS_FRIENDS = true;
 	
 
 
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		serverClient.Connect("ProfileFound", this, nameof(GetProfileComplete));
-		serverClient.Connect("ProfileNotFound", this, nameof(GetProfileFail));
+		serverClient.Connect("ProfileByUsernameFound", this, nameof(GetProfileByUsernameComplete));
+		serverClient.Connect("ProfileByUsernameNotFound", this, nameof(GetProfileByUsernameFail));
 		serverClient.GetProfileByUsername(username);
 		serverClient.Connect("FriendsFound", this, nameof(GetFriendsComplete));
 		serverClient.Connect("FriendsNotFound", this, nameof(GetFriendsFail));
@@ -47,7 +47,7 @@ public class MainMenu : Control
 	public void _on_AddFriendButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/AddFriend.tscn");
-		serverClient.profileObtained = null;
+		serverClient.profileByUsernameObtained = null;
 	}
 	public void _on_FriendsRequestButton_pressed()
 	{
@@ -59,11 +59,11 @@ public class MainMenu : Control
 	}
 
 
-	public void GetProfileComplete()
+	public void GetProfileByUsernameComplete()
 	{
-		if(serverClient.profileObtained != null)
+		if(serverClient.profileByUsernameObtained != null)
 		{
-			actualPlayer = serverClient.profileObtained;
+			actualPlayer = serverClient.profileByUsernameObtained;
 			idProfile = actualPlayer.idProfile;
 			string nickname = actualPlayer.nickname;
 			int victories = actualPlayer.victories;
@@ -80,10 +80,10 @@ public class MainMenu : Control
     	
 	}*/
 	
-	public void GetProfileFail()
+	public void GetProfileByUsernameFail()
 	{
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetText("ERROR_LOADING_PROFILE");
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("WARNING");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").Visible = true;
 	}
 	public void GetFriendsComplete()
@@ -100,7 +100,7 @@ public class MainMenu : Control
 	public void GetFriendsFail()
 	{
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetText("ERROR_LOADING_FRIENDS");
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("WARNING");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").Visible = true;
 	}
 

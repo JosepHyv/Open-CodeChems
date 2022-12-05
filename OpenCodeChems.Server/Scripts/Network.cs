@@ -351,6 +351,60 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"Friends requests of {senderId} not obtained\n");
 		}
 	}
+	[Master]
+	private void GetProfileByNicknameRequest(string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
+		if (profileObtained != null)
+		{
+			int idProfile = profileObtained.idProfile;
+			string nicknameObtained = profileObtained.nickname;
+			string username = profileObtained.username;
+			int victories = profileObtained.victories;
+			int defeats = profileObtained.defeats;
+			byte[] imageProfile = profileObtained.imageProfile;
+			RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
+			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+		}
+		else
+		{
+			RpcId(senderId, "ProfileByNicknameNotObtained");
+			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");
+		}
+	}
+	[Master]
+	private void AcceptFriendRequest(int idProfileFrom, int idProfileTo, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		Friends friendAccepted = new Friends(idProfileFrom, idProfileTo, status);
+		if (USER_MANAGEMENT.AcceptFriend(friendAccepted) == true)
+		{
+			RpcId(senderId, "AcceptFriendSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} accept friend request to {idProfileTo}\n");
+		}
+		else
+		{
+			RpcId(senderId, "AcceptFriendNotSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} cant accept friend request to {idProfileTo}\n");
+		}
+	}
+	[Master]
+	private void DenyFriendRequest(int idProfileFrom, int idProfileTo, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		Friends friendAccepted = new Friends(idProfileFrom, idProfileTo, status);
+		if (USER_MANAGEMENT.DenyFriend(friendAccepted) == true)
+		{
+			RpcId(senderId, "AcceptFriendSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} deny friend request to {idProfileTo}\n");
+		}
+		else
+		{
+			RpcId(senderId, "AcceptFriendNotSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} cant deny friend request to {idProfileTo}\n");
+		}
+	}
 }
 
 

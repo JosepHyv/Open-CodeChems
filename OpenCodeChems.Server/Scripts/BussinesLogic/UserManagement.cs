@@ -225,7 +225,7 @@ namespace OpenCodeChems.BussinesLogic
 			}
 			return status;
 		} 
-        public bool AcceptFriendRequest(Friends friends)
+        public bool AcceptFriend(Friends friends)
         {
             bool status = false;
             try
@@ -246,7 +246,7 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         } 
-        public bool DenyFriendRequest(Friends friends)
+        public bool DenyFriend(Friends friends)
         {
             bool status = false;
             try{
@@ -314,5 +314,26 @@ namespace OpenCodeChems.BussinesLogic
             }
             return friendsRequests;
         }
+        public Profile GetProfileByNickname(string nickname)
+		{
+            Profile profileObteined = null;
+			try
+			{
+				using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+				{
+					profileObteined = (from Profile in context.Profile where Profile.nickname == nickname select Profile).First();
+					context.SaveChanges();
+				}
+			}
+			catch (DbUpdateException)
+			{
+                profileObteined = null;
+			}
+            catch (InvalidOperationException)
+            {
+                profileObteined = null;
+            }
+            return profileObteined;
+		}
     }
 }

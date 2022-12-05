@@ -25,8 +25,8 @@ public class AddFriend : Control
 		serverClient.Connect("UsernameNotRegistered", this, nameof(UsernameNotRegistered));
 		serverClient.Connect("CorrectAddFriend", this, nameof(AddFriendCorrect));
 		serverClient.Connect("AddFriendFail", this, nameof(AddFriendNotCorrect));
-		serverClient.Connect("ProfileFound", this, nameof(GetProfileComplete));
-		serverClient.Connect("ProfileNotFound", this, nameof(GetProfileFail));
+		serverClient.Connect("ProfileByUsernameFound", this, nameof(GetProfileByUsernameComplete));
+		serverClient.Connect("ProfileByUsernameNotFound", this, nameof(GetProfileByUsernameFail));
 		serverClient.Connect("FriendshipNotRegistered", this, nameof(FriendshipNotRegistered));
 		serverClient.Connect("FriendshipRegistered", this, nameof(FriendshipIsRegistered));
 	}
@@ -58,7 +58,7 @@ public class AddFriend : Control
 			}
 			else
 			{
-				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
+				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("ERROR");
 				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("FRIEND_YOURSELF");
 				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 			}
@@ -93,17 +93,17 @@ public class AddFriend : Control
 	}
 	public void AddFriendNotCorrect()
 	{
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText
 		("FRIEND_REQUEST_NOT_SENT");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 		addFriendIsCorrect = Task<bool>.FromResult(false);
 	}
-	public void GetProfileComplete()
+	public void GetProfileByUsernameComplete()
 	{
-		if(serverClient.profileObtained != null)
+		if(serverClient.profileByUsernameObtained != null)
 		{
-			playerFound = serverClient.profileObtained;
+			playerFound = serverClient.profileByUsernameObtained;
 			idProfilePlayerFound = playerFound.idProfile;
 			string nickname = playerFound.nickname;
 			int victories = playerFound.victories;
@@ -113,10 +113,10 @@ public class AddFriend : Control
 		}
 		serverClient.FriendshipExist(idProfileActualPlayer, idProfilePlayerFound);
 	}
-	public void GetProfileFail()
+	public void GetProfileByUsernameFail()
 	{
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("ERROR_LOADING_PROFILE");
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 	}
 	public void FriendshipNotRegistered()

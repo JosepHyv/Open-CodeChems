@@ -18,11 +18,12 @@ namespace OpenCodeChems.BusinessLogic.Interface
         bool UsernameRegistered(string username);
         bool NicknameRegistered(string nickname);
         bool AddFriend(Friends friends);
-        bool AcceptFriendRequest(Friends friends);
-        bool DenyFriendRequest(Friends friends);
+        bool AcceptFriend(Friends friends);
+        bool DenyFriend(Friends friends);
         bool FriendshipExist(int idProfileActualPlayer, int idProfilePlayerFound);
         List<string> GetFriends(int idProfile, bool status);
         List<string> GetFriendsRequests(int idProfile, bool status);
+        Profile GetProfileByNickname(string nickname);
     }
 
 

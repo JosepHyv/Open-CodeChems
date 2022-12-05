@@ -17,7 +17,8 @@ namespace OpenCodeChems.Client.Server
 		private int PEER_ID = 1;
 		private bool connected = false;
 		private bool regitered = false;
-		public Profile profileObtained = null;
+		public Profile profileByUsernameObtained = null;
+		public Profile profileByNicknameObtained = null;
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
 		
@@ -91,6 +92,18 @@ namespace OpenCodeChems.Client.Server
 		delegate void FriendsRequestsFound();
 		[Signal]
 		delegate void FriendsRequestsNotFound();
+		[Signal]
+		delegate void ProfileByNicknameFound();
+		[Signal]
+		delegate void ProfileByNicknameNotFound();
+		[Signal]
+		delegate void CorrectAcceptFriend();
+		[Signal]
+		delegate void AcceptFriendFail();
+		[Signal]
+		delegate void CorrectDenyFriend();
+		[Signal]
+		delegate void DenyFriendFail();
 		
 
 		
@@ -268,7 +281,7 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void ProfileByUsernameObtained(int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
 		{
-			profileObtained = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
+			profileByUsernameObtained = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
 			EmitSignal(nameof(ProfileByUsernameFound));
 		}
 		[Puppet]
@@ -389,6 +402,49 @@ namespace OpenCodeChems.Client.Server
 		public void FriendsRequestsNotObtained()
 		{
 			EmitSignal(nameof(FriendsRequestsNotFound));
+		}
+		public void GetProfileByNickname(string nickname)
+		{
+			RpcId(PEER_ID,"GetProfileByNicknameRequest", nickname);
+		}
+		[Puppet]
+		public void ProfileByNicknameObtained(int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		{
+			profileByNicknameObtained = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
+			EmitSignal(nameof(ProfileByNicknameFound));
+		}
+		[Puppet]
+		public void ProfileByNicknameNotObtained()
+		{
+			EmitSignal(nameof(ProfileByNicknameNotFound));
+		}
+		public void AcceptFriend(int idProfileFrom, int idProfileTo, bool status)
+		{
+			RpcId(PEER_ID, "AcceptFriendRequest", idProfileFrom, idProfileTo, status);
+		}
+		[Puppet]
+		public void AcceptFriendSuccessful()
+		{
+			EmitSignal(nameof(CorrectAcceptFriend));
+		}
+		[Puppet]
+		public void AcceptFriendNotSuccessful()
+		{
+			EmitSignal(nameof(AcceptFriendFail));
+		}
+		public void DenyFriend(int idProfileFrom, int idProfileTo, bool status)
+		{
+			RpcId(PEER_ID, "DenyFriendRequest", idProfileFrom, idProfileTo, status);
+		}
+		[Puppet]
+		public void DenyFriendSuccessful()
+		{
+			EmitSignal(nameof(CorrectDenyFriend));
+		}
+		[Puppet]
+		public void DenyFriendNotSuccessful()
+		{
+			EmitSignal(nameof(DenyFriendFail));
 		}
 	}
 }
