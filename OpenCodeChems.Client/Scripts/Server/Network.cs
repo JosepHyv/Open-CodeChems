@@ -104,6 +104,10 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectDenyFriend();
 		[Signal]
 		delegate void DenyFriendFail();
+		[Signal]
+		delegate void CorrectDeleteFriend();
+		[Signal]
+		delegate void DeleteFriendFail();
 		
 
 		
@@ -445,6 +449,20 @@ namespace OpenCodeChems.Client.Server
 		public void DenyFriendNotSuccessful()
 		{
 			EmitSignal(nameof(DenyFriendFail));
+		}
+		public void DeleteFriend(int idProfileActualPlayer, int idProfileFriend, bool status)
+		{
+			RpcId(PEER_ID, "DeleteFriendRequest", idProfileActualPlayer, idProfileFriend, status);
+		}
+		[Puppet]
+		public void DeleteFriendSuccessful()
+		{
+			EmitSignal(nameof(CorrectDeleteFriend));
+		}
+		[Puppet]
+		public void DeleteFriendNotSuccessful()
+		{
+			EmitSignal(nameof(DeleteFriendFail));
 		}
 	}
 }

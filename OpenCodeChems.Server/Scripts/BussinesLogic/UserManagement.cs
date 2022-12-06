@@ -335,5 +335,43 @@ namespace OpenCodeChems.BussinesLogic
             }
             return profileObteined;
 		}
+        public bool DeleteFriend(Friends friendsForDelete)
+        {
+            bool status = false;
+            int idProfileActualPlayer = friendsForDelete.idProfileFrom;
+            int idProfileFriend = friendsForDelete.idProfileTo;
+            bool statusFriends = friendsForDelete.status;
+            try
+            {
+                using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {
+                    int friendshipExist = (from Friends in context.Friends where Friends.idProfileFrom == idProfileActualPlayer && Friends.idProfileTo == idProfileFriend && Friends.status == statusFriends select Friends).Count();
+                    if(friendshipExist > 0)
+                    {
+                        var friendDeleteIdFrom = (from Friends in context.Friends where Friends.idProfileFrom == idProfileActualPlayer && Friends.idProfileTo == idProfileFriend && Friends.status == statusFriends select Friends).First();
+                        context.Friends.Remove(friendDeleteIdFrom);
+                        context.SaveChanges();
+                        status = true;
+                    }
+                    else
+                    {
+                        var friendDeleteIdTo = (from Friends in context.Friends where Friends.idProfileTo == idProfileActualPlayer && Friends.idProfileFrom == idProfileFriend && Friends.status == statusFriends select Friends).First();
+                        context.Friends.Remove(friendDeleteIdTo);
+                        context.SaveChanges();
+                        status = true;
+                    }
+
+                }
+            }
+            catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch (InvalidOperationException)
+            {
+                status = false;
+            }
+            return status;
+        }
     }
 }

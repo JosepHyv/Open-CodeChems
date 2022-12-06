@@ -15,9 +15,11 @@ public class FriendRequests : Control
     private List<string> friendsRequestsOfActualPlayer;
     private bool STATUS_FRIENDS_REQUESTS = false;
     private bool STATUS_FRIEND_ACCEPT = true;
+	private bool STATUS_FRIEND_DENY = false;
     private bool statusRequest = false;
     public static Profile actualPlayer;
     private Task<bool> addFriendIsCorrect = Task<bool>.FromResult(false);
+	private Task<bool> denyFriendIsCorrect = Task<bool>.FromResult(false);
     public override void _Ready()
     {
         serverClient = GetNode<Network>("/root/Network") as Network;
@@ -87,7 +89,7 @@ public class FriendRequests : Control
         }
         else
         {
-            serverClient.DenyFriend(idProfilePlayerFound, idProfileActualPlayer, STATUS_FRIEND_ACCEPT);
+            serverClient.DenyFriend(idProfilePlayerFound, idProfileActualPlayer, STATUS_FRIEND_DENY);
             cleanFriendsRequest();
         }
 		
@@ -101,7 +103,6 @@ public class FriendRequests : Control
     public void AcceptFriendCorrect()
 	{
 		addFriendIsCorrect = Task<bool>.FromResult(true);
-		serverClient.GetFriendsRequests(idProfileActualPlayer, STATUS_FRIENDS_REQUESTS);
 	}
 	public void AcceptFriendNotCorrect()
 	{
@@ -113,8 +114,7 @@ public class FriendRequests : Control
 	}
     public void DenyFriendCorrect()
 	{
-		addFriendIsCorrect = Task<bool>.FromResult(true);
-		serverClient.GetFriendsRequests(idProfileActualPlayer, STATUS_FRIENDS_REQUESTS);
+		denyFriendIsCorrect = Task<bool>.FromResult(true);
 	}
 	public void DenyFriendNotCorrect()
 	{
@@ -122,7 +122,7 @@ public class FriendRequests : Control
 		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText
 		("FRIEND_REQUEST_CANT_DENY");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
-		addFriendIsCorrect = Task<bool>.FromResult(false);
+		denyFriendIsCorrect = Task<bool>.FromResult(false);
 	}
     public void cleanFriendsRequest()
     {

@@ -13,6 +13,7 @@ public class MainMenu : Control
 	Network serverClient;
 	int PEER_ID = 1; 
 	public static Profile actualPlayer;
+	public static string nicknameFriend = "";
 	private List<string> friendsOfActualPlayer;
 	public static int idProfile = 0; 
 	private bool STATUS_FRIENDS = true;
@@ -56,6 +57,11 @@ public class MainMenu : Control
 	public void _on_ImageProfileTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/EditProfile.tscn");
+	}
+	public void _on_FriendsItemList_item_selected(int indexFriendSelected)
+	{
+		nicknameFriend = GetParent().GetNode<ItemList>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/FriendsItemList").GetItemText(indexFriendSelected);
+		GetTree().ChangeScene("res://Scenes/SeeFriend.tscn");
 	}
 
 
