@@ -47,7 +47,7 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void RoomCreationFail();
 		[Signal]
-		delegate void RoomJoin(int sender);
+		delegate void RoomJoin();
 		[Signal]
 		delegate void RoomJoinFail();
 		[Signal]
@@ -72,6 +72,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectEditImageProfile();
 		[Signal]
 		delegate void EditImageProfileFail();
+		[Signal]
+		delegate void DiosTienePoder();
 		
 
 		
@@ -247,7 +249,7 @@ namespace OpenCodeChems.Client.Server
 		public void JoinRoomAccepted(int sender)
 		{
 			GD.Print($"Entrando a la sala con el id = {sender}");
-			EmitSignal(nameof(RoomJoin), sender);
+			EmitSignal(nameof(DiosTienePoder));
 		}
 		
 		[Puppet]

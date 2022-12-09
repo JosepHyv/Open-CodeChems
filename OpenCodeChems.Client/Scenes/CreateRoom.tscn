@@ -112,6 +112,7 @@ margin_top = 48.0
 margin_right = 239.0
 margin_bottom = 91.0
 custom_fonts/font = SubResource( 2 )
+items = [ "", null, false ]
 
 [node name="JoinSpyMasterRedTextureButton" type="TextureButton" parent="RoomNinePatchRect/TeamRedColorRect"]
 margin_left = 44.0
@@ -148,6 +149,7 @@ margin_top = 224.0
 margin_right = 239.0
 margin_bottom = 331.0
 custom_fonts/font = SubResource( 5 )
+items = [ "hola", null, false, "bola", null, false, "", null, false, "", null, false, "", null, false, "", null, false, "", null, false ]
 
 [node name="JoinSpyRedTextureButton" type="TextureButton" parent="RoomNinePatchRect/TeamRedColorRect"]
 margin_left = 53.0
@@ -193,6 +195,7 @@ margin_top = 55.0
 margin_right = 235.0
 margin_bottom = 100.0
 custom_fonts/font = SubResource( 8 )
+items = [ "", null, true ]
 
 [node name="JoinSpyMasterBlueTextureButton" type="TextureButton" parent="RoomNinePatchRect/TeamBlueColorRect"]
 margin_left = 45.0
@@ -231,6 +234,7 @@ margin_top = 233.0
 margin_right = 237.0
 margin_bottom = 341.0
 custom_fonts/font = SubResource( 11 )
+items = [ "", null, false, "", null, false, "", null, false, "", null, false, "", null, false, "", null, false, "", null, false ]
 
 [node name="JoinSpyBlueTextureButton" type="TextureButton" parent="RoomNinePatchRect/TeamBlueColorRect"]
 margin_left = 56.0

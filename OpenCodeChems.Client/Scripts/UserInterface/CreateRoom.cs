@@ -14,8 +14,8 @@ public class CreateRoom : Control
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		usersList = GetParent().GetNode<ItemList>("CreateRoom/SpiesRedItemList");
-		serverClient.Connect("RoomJoin", this, nameof(AddToList));
+		usersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
+		serverClient.Connect("DiosTienePoder", this, nameof(SiLoTiene));
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,10 +28,15 @@ public class CreateRoom : Control
 		GetTree().ChangeScene("res://Scenes/RoomSettings.tscn");
 	}
 	
-	public void AddToList(int sender)
+	public void SiLoTiene()
 	{
-		string idSender = sender.ToString();
-		usersList.AddItem(idSender);
-		GD.Print($"Coso Realizado, se metió sender = {sender}");
+		GD.Print("Amen");
+	}
+	public void AddToList(/*int sender*/)
+	{
+		//string idSender = Convert.ToString(sender);
+		GD.Print("entrando al add list"); 
+		//GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList").AddItem("caca");
+		//GD.Print($"Coso Realizado, se metió sender = {sender}");
 	}
 }
