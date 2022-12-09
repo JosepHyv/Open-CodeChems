@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OpenCodeChems.Server.Utils;
 
+
 public class Network : Node
 {
 	private int DEFAULT_PORT = 5500;
@@ -22,6 +23,7 @@ public class Network : Node
 	private AcceptDialog dialog;
 	private Dictionary<string, List<int>> rooms;
 	public List<int> clientsConected;
+
 	public override void _Ready()
 	{
 		clientsConected = new List<int>();
@@ -51,7 +53,6 @@ public class Network : Node
 
 	private void _on_Button_pressed()
 	{
-		// Replace with function body.
 		string ipAddress = ipLineEdit.GetText();
 		string port = portLineEdit.GetText();
 		Validation validations = new Validation();
@@ -88,24 +89,18 @@ public class Network : Node
 	private void LoginRequest(string username, string password)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		try
+		if(USER_MANAGEMENT.Login(username, password) == true)
 		{
-			if(USER_MANAGEMENT.Login(username, password) == true)
-			{
-				
-				RpcId(senderId, "LoginSuccesful");
-			  	logBlock.InsertTextAtCursor($"Player no. {senderId} logged in successfully.\n");
-			}
-			else
-			{
-				RpcId(senderId, "LoginFailed");
-			  	logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
-			}
+			
+			RpcId(senderId, "LoginSuccesful");
+			logBlock.InsertTextAtCursor($"Player no. {senderId} logged in successfully.\n");
 		}
-		catch (DbUpdateException)
-	{
-	  RpcId(senderId, "LoginFailed");
-	}
+		else
+		{
+			RpcId(senderId, "LoginFailed");
+			logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
+		}
+
 	}
 
 	[Master]
@@ -141,53 +136,53 @@ public class Network : Node
 	private void EmailRegisteredRequest(string email)
 	{	
 		int senderId = GetTree().GetRpcSenderId();
-		bool status = false;	
 		if (USER_MANAGEMENT.EmailRegistered(email) == false)
 		{
-			status = true;
 			RpcId(senderId, "EmailIsNotRegistered");
+			logBlock.InsertTextAtCursor($"the email send by user {senderId} not exists\n");
 		}
 		else
 		{
 			RpcId(senderId, "EmailIsRegistered");
+			logBlock.InsertTextAtCursor($"the email send by user {senderId} alredy exists\n");
 		}
 	}
 	[Master]
 	private void UsernameRegisteredRequest(string username)
 	{	
-		int senderId = GetTree().GetRpcSenderId();
-		bool status = false;	
+		int senderId = GetTree().GetRpcSenderId();	
 		if (USER_MANAGEMENT.UsernameRegistered(username) == false)
 		{
-			status = true;
 			RpcId(senderId, "UsernameIsNotRegistered");
+			logBlock.InsertTextAtCursor($"the username send by user {senderId} not exists\n");
 		}
 		else
 		{
 			RpcId(senderId, "UsernameIsRegistered");
+			logBlock.InsertTextAtCursor($"the username send by user {senderId} alredy exists\n");
 		}
 	}
 	[Master]
 	private void NicknameRegisteredRequest(string nickname)
 	{	
-		int senderId = GetTree().GetRpcSenderId();
-		bool status = false;	
+		int senderId = GetTree().GetRpcSenderId();	
 		if (USER_MANAGEMENT.NicknameRegistered(nickname) == false)
 		{
-			status = true;
 			RpcId(senderId, "NicknameIsNotRegistered");
+			logBlock.InsertTextAtCursor($"the nickname send by user {senderId} not exists\n");
 		}
 		else
 		{
 			RpcId(senderId, "NicknameIsRegistered");
+			logBlock.InsertTextAtCursor($"the nickname send by user {senderId} alredy exists\n");
 		}
 	}
 	
 	[Master]
-	private void GetProfileRequest(string username)
+	private void GetProfileByUsernameRequest(string username)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		Profile profileObtained = USER_MANAGEMENT.GetProfile(username);
+		Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
 		if (profileObtained != null)
 		{
 			int idProfile = profileObtained.idProfile;
@@ -196,11 +191,13 @@ public class Network : Node
 			int victories = profileObtained.victories;
 			int defeats = profileObtained.defeats;
 			byte[] imageProfile = profileObtained.imageProfile;
-			RpcId(senderId, "ProfileObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
+			RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
+			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
 		}
 		else
 		{
-			RpcId(senderId, "ProfileNotObtained");
+			RpcId(senderId, "ProfileByUsernameNotObtained");
+			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
 		}
 	}
 	
@@ -211,7 +208,7 @@ public class Network : Node
 		if(rooms.ContainsKey(code))
 		{
 			RpcId(senderId, "CreateRoomFail");
-			logBlock.InsertTextAtCursor($"user {senderId} cant create {code} room\n");
+			logBlock.InsertTextAtCursor($"user {senderId} can't create {code} room\n");
 		}
 		else
 		{
@@ -237,7 +234,7 @@ public class Network : Node
 		else
 		{
 			RpcId(senderId, "JoinRoomFail");
-			logBlock.InsertTextAtCursor($"user {senderId} cant join to {code} room\n");
+			logBlock.InsertTextAtCursor($"user {senderId} can't join to {code} room\n");
 		}
 	}
 
@@ -248,10 +245,12 @@ public class Network : Node
 		if (USER_MANAGEMENT.PasswordExist(username, hashPassword) == true)
 		{
 			RpcId(senderId, "PasswordCorrect");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} is correct\n");
 		}
 		else
 		{
 			RpcId(senderId, "PasswordIncorrect");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} isn't correct\n");
 		}
 	}
 
@@ -262,10 +261,12 @@ public class Network : Node
 		if (USER_MANAGEMENT.EditUserPassword(username, newHashedPassword) == true)
 		{
 			RpcId(senderId, "EditPasswordSuccessful");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} has been update\n");
 		}
 		else
 		{
 			RpcId(senderId, "EditPasswordNotSuccessful");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} hasn't been update\n");
 		}
 	}
 	[Master]
@@ -275,10 +276,12 @@ public class Network : Node
 		if (USER_MANAGEMENT.EditProfileNickname(username, nickname) == true)
 		{
 			RpcId(senderId, "EditNicknameSuccessful");
+			logBlock.InsertTextAtCursor($"the nickname of user {senderId} has been update\n");
 		}
 		else
 		{
 			RpcId(senderId, "EditNicknameNotSuccessful");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} hasn't been update\n");
 		}
 	}
 	[Master]
@@ -288,10 +291,146 @@ public class Network : Node
 		if (USER_MANAGEMENT.EditProfileImage(username, imageProfile) == true)
 		{
 			RpcId(senderId, "EditImageProfileSuccessful");
+			logBlock.InsertTextAtCursor($"the image profile of user {senderId} has been update\n");
 		}
 		else
 		{
 			RpcId(senderId, "EditImageProfileNotSuccessful");
+			logBlock.InsertTextAtCursor($"the image profile of user {senderId} hasn´t been update\n");
+		}
+	}
+	[Master]
+	public void AddFriendRequest(int idProfileFrom, int idProfileTo, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		
+		Friends friendRequest = new Friends(idProfileFrom, idProfileTo, status);
+		if (USER_MANAGEMENT.AddFriend(friendRequest) == true)
+		{
+			RpcId(senderId, "AddFriendSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} can send friend request\n");
+		}
+		else
+		{
+			RpcId(senderId, "AddFriendNotSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} can't send friend request\n");
+		}
+	}
+	[Master]
+	public void FriendshipExistRequest(int idProfileFrom, int idProfileTo)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(USER_MANAGEMENT.FriendshipExist(idProfileFrom, idProfileTo) == false)
+		{
+			RpcId(senderId, "FriendshipIsNotRegistered");
+			logBlock.InsertTextAtCursor($"No exist a friendship between {idProfileFrom} and {idProfileTo}\n");
+		}
+		else
+		{
+			RpcId(senderId, "FriendshipIsRegistered");
+			logBlock.InsertTextAtCursor($"Exist a friendship between {idProfileFrom} and {idProfileTo}\n");
+		}
+	}
+	[Master]
+	public void GetFriendsRequest(int idProfile, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		List<string> friendsObtainded = USER_MANAGEMENT.GetFriends(idProfile, status);
+		if(friendsObtainded != null)
+		{
+			RpcId(senderId, "FriendsObtained", friendsObtainded);
+			logBlock.InsertTextAtCursor($"Friends of {senderId} obtained\n");
+		}
+		else
+		{
+			RpcId(senderId, "FriendsNotObtained");
+			logBlock.InsertTextAtCursor($"Friends of {senderId} not obtained\n");
+		}
+	}
+	[Master]
+	public void GetFriendsRequestsRequest(int idProfile, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		List<string> friendsRequestsObtainded = USER_MANAGEMENT.GetFriendsRequests(idProfile, status);
+		if(friendsRequestsObtainded != null)
+		{
+			RpcId(senderId, "FriendsRequestsObtained", friendsRequestsObtainded);
+			logBlock.InsertTextAtCursor($"Friends requests of {senderId} obtained\n");
+		}
+		else
+		{
+			RpcId(senderId, "FriendsRequestsNotObtained");
+			logBlock.InsertTextAtCursor($"Friends requests of {senderId} not obtained\n");
+		}
+	}
+	[Master]
+	private void GetProfileByNicknameRequest(string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
+		if (profileObtained != null)
+		{
+			int idProfile = profileObtained.idProfile;
+			string nicknameObtained = profileObtained.nickname;
+			string username = profileObtained.username;
+			int victories = profileObtained.victories;
+			int defeats = profileObtained.defeats;
+			byte[] imageProfile = profileObtained.imageProfile;
+			RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
+			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+		}
+		else
+		{
+			RpcId(senderId, "ProfileByNicknameNotObtained");
+			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");
+		}
+	}
+	[Master]
+	private void AcceptFriendRequest(int idProfileFrom, int idProfileTo, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		Friends friendAccepted = new Friends(idProfileFrom, idProfileTo, status);
+		if (USER_MANAGEMENT.AcceptFriend(friendAccepted) == true)
+		{
+			RpcId(senderId, "AcceptFriendSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} accept friend request to {idProfileTo}\n");
+		}
+		else
+		{
+			RpcId(senderId, "AcceptFriendNotSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} cant accept friend request to {idProfileTo}\n");
+		}
+	}
+	[Master]
+	private void DenyFriendRequest(int idProfileFrom, int idProfileTo, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		Friends friendAccepted = new Friends(idProfileFrom, idProfileTo, status);
+		if (USER_MANAGEMENT.DenyFriend(friendAccepted) == true)
+		{
+			RpcId(senderId, "DenyFriendSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} deny friend request to {idProfileTo}\n");
+		}
+		else
+		{
+			RpcId(senderId, "DenyFriendNotSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} cant deny friend request to {idProfileTo}\n");
+		}
+	}
+	[Master]
+	private void DeleteFriendRequest(int idProfileActualPlayer, int idProfileFriend, bool status)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		Friends friendDelete= new Friends(idProfileActualPlayer, idProfileFriend, status);
+		if (USER_MANAGEMENT.DeleteFriend(friendDelete) == true)
+		{
+			RpcId(senderId, "DeleteFriendSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} delete friend {idProfileFriend}\n");
+		}
+		else
+		{
+			RpcId(senderId, "DeleteFriendNotSuccessful");
+			logBlock.InsertTextAtCursor($"user {senderId} can't delete friend {idProfileFriend}\n");
 		}
 	}
 }
