@@ -13,13 +13,10 @@ public class EditProfile : Control
 	Network serverClient;
 	int PEER_ID = 1; 
 	private Task<bool> passwordIsCorrect = Task<bool>.FromResult(false);
-	private Task<bool> passwordIsNotCorrect = Task<bool>.FromResult(false);
 	private Task<bool> editPasswordIsCorrect = Task<bool>.FromResult(false);
-	private Task<bool> editPasswordIsNotCorrect = Task<bool>.FromResult(false);
 	private Task<bool> editNicknameIsCorrect = Task<bool>.FromResult(false);
-	private Task<bool> editNicknameIsNotCorrect = Task<bool>.FromResult(false);
 	private Task<bool> editImageProfileIsCorrect = Task<bool>.FromResult(false);
-	private Task<bool> editImageProfileIsNotCorrect = Task<bool>.FromResult(false);
+
 	
 	private bool validateOldPassword = false;
 	private string oldPassword = "";
@@ -149,6 +146,15 @@ public class EditProfile : Control
 		imageProfileFileStream.Close();
 		return imageProfile;
 	}
+	/*public Image ByteToImage(byte[] imageInByte)
+	{
+		FileStream imageProfileFileStream = new FileStream(imageProfilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
+		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
+		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
+		imageProfileFileStream.Close();
+		return imageProfile;
+	}*/
 	
 	public bool ValidatePassword()
 	{
@@ -205,7 +211,7 @@ public class EditProfile : Control
 	}
 	public void IncorrectPassword()
 	{
-		passwordIsNotCorrect = Task<bool>.FromResult(false);
+		passwordIsCorrect = Task<bool>.FromResult(false);
 		validateOldPassword = false;
 	}
 	public void CorrectEditPassword()
@@ -217,7 +223,7 @@ public class EditProfile : Control
 	}
 	public void IncorrectEditPassword()
 	{
-		editPasswordIsNotCorrect = Task<bool>.FromResult(true);
+		editPasswordIsCorrect = Task<bool>.FromResult(true);
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("ERROR_PASSWORD_UPDATE");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
@@ -231,7 +237,7 @@ public class EditProfile : Control
 	}
 	public void IncorrectEditNickname()
 	{
-		editNicknameIsNotCorrect = Task<bool>.FromResult(false);
+		editNicknameIsCorrect = Task<bool>.FromResult(false);
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("ERROR_NICKNAME_UPDATE");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
@@ -245,7 +251,7 @@ public class EditProfile : Control
 	}
 	public void IncorrectEditImageProfile()
 	{
-		editImageProfileIsNotCorrect = Task<bool>.FromResult(false);
+		editImageProfileIsCorrect = Task<bool>.FromResult(false);
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("ERROR_IMAGE_PROFILE_UPDATE");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;

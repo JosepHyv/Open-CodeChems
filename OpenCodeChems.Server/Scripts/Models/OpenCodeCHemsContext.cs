@@ -57,26 +57,26 @@ namespace OpenCodeChems.DataAccess
 			this.username = username;
 		}
 
-		[Key]
-		public int idProfile { get; set; }
-		public string nickname { get; set; }
-		public int victories { get; set; }
-		public int defeats { get; set; }
-		public byte[] imageProfile { get; set; }
-		public string username { get; set;  }
-	}
-	public class Friends
-	{
-		public Friends(string nicknameFrom, string nicknameTo, int state)
-		{
-			this.nicknameFrom = nicknameFrom;
-			this.nicknameTo = nicknameTo;
-			this.state = state;
-		}
-		[Key]
-		public string nicknameFrom { get; set; }
-		public string nicknameTo { get; set; }
-		public int state { get; set; }
-	}
+        [Key]
+        public int idProfile { get; set; }
+        public string nickname { get; set; }
+        public int victories { get; set; }
+        public int defeats { get; set; }
+        public byte[] imageProfile { get; set; }
+        public string username { get; set;  }
+  }
+    public class Friends
+    {
+        public Friends(int idProfileFrom, int idProfileTo, bool status)
+        {
+            this.idProfileFrom = idProfileFrom;
+            this.idProfileTo = idProfileTo;
+            this.status = status;
+        }
+        [Key]
+        public int idProfileFrom { get; set; }
+        public int idProfileTo { get; set; }
+        public bool status { get; set; }
+    }
 
 }

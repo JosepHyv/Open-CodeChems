@@ -158,6 +158,7 @@ expand = true
 
 [connection signal="pressed" from="BackgroundMenuNinePatchRect/MenuColorRect/AddFriendButton" to="." method="_on_AddFriendButton_pressed"]
 [connection signal="pressed" from="BackgroundMenuNinePatchRect/MenuColorRect/FriendsRequestButton" to="." method="_on_FriendsRequestButton_pressed"]
+[connection signal="item_selected" from="BackgroundMenuNinePatchRect/MenuColorRect/FriendsItemList" to="." method="_on_FriendsItemList_item_selected"]
 [connection signal="pressed" from="BackgroundMenuNinePatchRect/MenuColorRect/ImageProfileTextureButton" to="." method="_on_ImageProfileTextureButton_pressed"]
 [connection signal="pressed" from="BackgroundMenuNinePatchRect/CreateGameTextureButton" to="." method="_on_CreateGameTextureButton_pressed"]
 [connection signal="pressed" from="BackgroundMenuNinePatchRect/JoinGameTextureButton" to="." method="_on_JoinGameTextureButton_pressed"]
