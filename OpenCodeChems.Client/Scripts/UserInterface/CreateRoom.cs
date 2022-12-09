@@ -11,10 +11,12 @@ public class CreateRoom : Control
 	// Called when the node enters the scene tree for the first time.
 	Network serverClient;
 	private ItemList usersList;
+	private AcceptDialog notificacion;
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		usersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
+		notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
 		serverClient.Connect("DiosTienePoder", this, nameof(SiLoTiene));
 	}
 
@@ -30,7 +32,9 @@ public class CreateRoom : Control
 	
 	public void SiLoTiene()
 	{
+		notificacion.SetText("Dios tiene poder si señor");
 		GD.Print("Amen");
+		
 	}
 	public void AddToList(/*int sender*/)
 	{

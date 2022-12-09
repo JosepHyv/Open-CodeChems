@@ -373,4 +373,14 @@ custom_fonts/font = SubResource( 20 )
 text = "ROOM_LABEL"
 clip_text = true
 
+[node name="Notificacion" type="AcceptDialog" parent="."]
+margin_left = 367.0
+margin_top = 128.0
+margin_right = 669.0
+margin_bottom = 384.0
+window_title = "¡Alerta!"
+__meta__ = {
+"_editor_description_": ""
+}
+
 [connection signal="pressed" from="RoomNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
