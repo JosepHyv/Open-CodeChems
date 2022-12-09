@@ -32,6 +32,10 @@ namespace OpenCodeChems.BussinesLogic
                 {
                     status = false;
                 }
+                catch(InvalidOperationException)
+                {
+                    status = false;
+                }
             }
             return status;
         }
@@ -51,6 +55,10 @@ namespace OpenCodeChems.BussinesLogic
 				{
 					status = false;
 				}
+                catch(InvalidOperationException)
+                {
+                    status = false;
+                }
 			}
 			return status;
 		}
@@ -89,6 +97,10 @@ namespace OpenCodeChems.BussinesLogic
             {
                 status = false;
             }
+            catch(InvalidOperationException)
+            {
+                status = false;
+            }
             return status;
         }
 
@@ -106,6 +118,10 @@ namespace OpenCodeChems.BussinesLogic
                 }
             }
             catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch(InvalidOperationException)
             {
                 status = false;
             }

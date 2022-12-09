@@ -123,9 +123,9 @@ public class Network : Node
 			}
 		}
 		catch (DbUpdateException)
-    {
-       RpcId(senderId, "RegisterFail");
-    }
+	{
+	   RpcId(senderId, "RegisterFail");
+	}
 	}
 
 	[Master]
