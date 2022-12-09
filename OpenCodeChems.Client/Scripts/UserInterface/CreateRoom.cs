@@ -14,7 +14,7 @@ public class CreateRoom : Control
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		usersList = GetParent().GetNode<ItemList>("CreateRoom/SpiesRedItemList");
+		usersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
 		serverClient.Connect("RoomJoin", this, nameof(AddToList));
 	}
 
