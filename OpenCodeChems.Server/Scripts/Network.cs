@@ -22,10 +22,11 @@ public class Network : Node
 	private Button connectButton;
 	private AcceptDialog dialog;
 	private Dictionary<string, List<int>> rooms;
-	
+	public List<int> clientsConected;
 
 	public override void _Ready()
 	{
+		clientsConected = new List<int>();
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
 		rooms = new Dictionary<string, List<int>>();
 		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
@@ -41,11 +42,13 @@ public class Network : Node
 	private void PlayerConnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Conectado\n");
+		clientsConected.Add(peerId);
 	}
 
 	private void PlayerDisconnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
+		clientsConected.Remove(peerId);
 	}
 
 	private void _on_Button_pressed()
@@ -97,6 +100,7 @@ public class Network : Node
 			RpcId(senderId, "LoginFailed");
 			logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
 		}
+
 	}
 
 	[Master]
@@ -123,9 +127,9 @@ public class Network : Node
 			}
 		}
 		catch (DbUpdateException)
-    {
-       RpcId(senderId, "RegisterFail");
-    }
+	{
+	   RpcId(senderId, "RegisterFail");
+	}
 	}
 
 	[Master]
@@ -213,6 +217,7 @@ public class Network : Node
 			rooms.Add(code, hostRoom);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
 			RpcId(senderId, "CreateRoomAccepted");
+			RpcId(senderId, "JoinRoomAccepted", senderId);
 		}
 	}
 	
@@ -223,7 +228,7 @@ public class Network : Node
 		if(rooms.ContainsKey(code))
 		{
 			rooms[code].Add(senderId);
-			RpcId(senderId, "JoinRoomAccepted");
+			RpcId(senderId, "JoinRoomAccepted",senderId);
 			logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
 		}
 		else

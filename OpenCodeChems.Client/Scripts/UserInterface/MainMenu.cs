@@ -83,7 +83,7 @@ public class MainMenu : Control
 
 	/*public Image ByteArrayToImage(byte[] data)
 	{
-    	
+		
 	}*/
 	
 	public void GetProfileByUsernameFail()

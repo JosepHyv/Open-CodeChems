@@ -16,7 +16,7 @@ namespace OpenCodeChems.DataAccess
 
 		public DbSet<User> User { get; set; }
 		public DbSet<Profile> Profile { get; set; }
-        public DbSet<Friends> Friends { get; set; }
+		public DbSet<Friends> Friends { get; set; }
 
 		
 
@@ -26,36 +26,36 @@ namespace OpenCodeChems.DataAccess
 		}
 		
 	}
-    public class User
-    {
+	public class User
+	{
 
-        public User(string username, string password, string name, string email)
-        {
-            this.username = username;
-            this.password = password;
-            this.name = name;
-            this.email = email;
-        }
+		public User(string username, string password, string name, string email)
+		{
+			this.username = username;
+			this.password = password;
+			this.name = name;
+			this.email = email;
+		}
 
-        [Key]
-        public string username { get; set; }
-        public string password { get; set; }
-        public string name { get; set; }
-        public string email { get; set; }
+		[Key]
+		public string username { get; set; }
+		public string password { get; set; }
+		public string name { get; set; }
+		public string email { get; set; }
 
-    }
+	}
 
-    public class Profile 
-    {
-        public Profile (int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
-        {
-            this.idProfile = idProfile;
-            this.nickname = nickname;
-            this.victories = victories;
-            this.defeats = defeats;
-            this.imageProfile = imageProfile;
-            this.username = username;
-        }
+	public class Profile 
+	{
+		public Profile (int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		{
+			this.idProfile = idProfile;
+			this.nickname = nickname;
+			this.victories = victories;
+			this.defeats = defeats;
+			this.imageProfile = imageProfile;
+			this.username = username;
+		}
 
         [Key]
         public int idProfile { get; set; }
@@ -64,7 +64,7 @@ namespace OpenCodeChems.DataAccess
         public int defeats { get; set; }
         public byte[] imageProfile { get; set; }
         public string username { get; set;  }
-    }
+  }
     public class Friends
     {
         public Friends(int idProfileFrom, int idProfileTo, bool status)
