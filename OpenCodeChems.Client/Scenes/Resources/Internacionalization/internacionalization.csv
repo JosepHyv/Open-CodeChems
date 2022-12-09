@@ -37,7 +37,7 @@ PASSWORD_INSTRUCTION,"The password must contain uppercase, lowercase, numbers, a
 NAMEROOM_LABEL,Name of the room,Nombre de la sala
 CODEJOINROOM_LABEL,Code to join the room,Código para unirse a la sala
 CONFIRM_REGISTER_INSTRUCTION,Enter the code send to your email,Ingresa el código que se te envío al correo electrónico
-WARNING,Warning,Atención
+WARNING,Warning!,¡Atención!
 VERIFY_EMPTY_FIELDS,"There can´t be empty fields, please verify the information","No puede haber campos vacíos, por favor verifica la información"
 VERIFY_EMAIL,Verify that the email is correct.,Verifica que el correo electrónico sea correcto.
 VERIFY_PASSWORD,"Verify that your password has at least eight characters, a capital letter, a number and a special character.","Verifica que tu contraseña tenga como mínimo ocho caractéres, una mayúscula, un número y un caractér especial."
@@ -48,3 +48,14 @@ WRONG_REGISTER,"Registration failed, please try again later","Registro no realiz
 EMAIL_REGISTER,The email entered already has an account.,El correo electrónico ingresado ya tiene una cuenta.
 USERNAME_REGISTER,The username entered is already in use.,El nombre de usuario ingresado ya está en uso.
 NICKNAME_REGISTER,The nickname entered is already in use.,El nombre de jugador ingresado ya está en uso.
+ERROR_LOADING_PROFILE,"There was an error loading the profile, please try again later","Hubo un error al cargar el perfil, intentalo más tarde"
+INCORRECT_OLD_PASSWORD,We can't update your password because your current password is not correct.,No podemos actualizar tu contraseña porque tu contraseña actual no es correcta.
+VERIFY_NICKNAME,Nickname must contain less than 40 characters,El nombre de jugador debe contener menos de 40 caracteres 
+CORRECT_PASSWORD_UPDATE,Password updated successfully,Contraseña actualizada correctamente
+ERROR_PASSWORD_UPDATE,"Failed to update password, please try again later","Error al actualizar la contraseña, inténtalo más tarde"
+ERROR,Error!,¡Error!
+CORRECT_NICKNAME_UPDATE,Nickname updated successfully,Nombre de jugador actualizado correctamente
+ERROR_NICKNAME_UPDATE,"Failed to update player name, please try again later","Error al actualizar el nombre de jugador, inténtalo más tarde"
+CORRECT_IMAGE_PROFILE_UPDATE,Profile picture updated successfully,Imagen del perfil actualizada correctamente
+ERROR_IMAGE_PROFILE_UPDATE,"Error updating profile picture, please try again later","Error al actualizar la imagen del perfil, inténtalo más tarde"
+USERNAME_NOT_FOUND,Username not found,Nombre de usuario no encontrado

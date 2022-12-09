@@ -16,7 +16,7 @@ namespace OpenCodeChems.DataAccess
 
 		public DbSet<User> User { get; set; }
 		public DbSet<Profile> Profile { get; set; }
-        public DbSet<Friends> Friends { get; set; }
+		public DbSet<Friends> Friends { get; set; }
 
 		
 
@@ -26,54 +26,57 @@ namespace OpenCodeChems.DataAccess
 		}
 		
 	}
-    public class User
-    {
+	public class User
+	{
 
-        public User(string username, string password, string name, string email)
-        {
-            this.username = username;
-            this.password = password;
-            this.name = name;
-            this.email = email;
-        }
+		public User(string username, string password, string name, string email)
+		{
+			this.username = username;
+			this.password = password;
+			this.name = name;
+			this.email = email;
+		}
 
-        [Key]
-        public string username { get; set; }
-        public string password { get; set; }
-        public string name { get; set; }
-        public string email { get; set; }
+		[Key]
+		public string username { get; set; }
+		public string password { get; set; }
+		public string name { get; set; }
+		public string email { get; set; }
 
-    }
+	}
 
-    public class Profile 
-    {
-        public Profile (string nickname, int victories, int defeats, byte[] imageProfile, string username)
-        {
-            this.nickname = nickname;
-            this.victories = victories;
-            this.defeats = defeats;
-            this.imageProfile = imageProfile;
-            this.username = username;
-        }
+	public class Profile 
+	{
+		public Profile (int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		{
+			this.idProfile = idProfile;
+			this.nickname = nickname;
+			this.victories = victories;
+			this.defeats = defeats;
+			this.imageProfile = imageProfile;
+			this.username = username;
+		}
 
-        [Key]
-        public string nickname { get; set; }
-        public int victories { get; set; }
-        public int defeats { get; set; }
-        public byte[] imageProfile { get; set; }
-        public string username { get; set;  }
-    }
-    public class Friends
-    {
-        public Friends(string nicknameFrom, string nicknameTo, int state)
-        {
-            this.nicknameFrom = nicknameFrom;
-            this.nicknameTo = nicknameTo;
-            this.state = state;
-        }
-        public string nicknameFrom { get; set; }
-        public string nicknameTo { get; set; }
-        public int state { get; set; }
-    }
+		[Key]
+		public int idProfile { get; set; }
+		public string nickname { get; set; }
+		public int victories { get; set; }
+		public int defeats { get; set; }
+		public byte[] imageProfile { get; set; }
+		public string username { get; set;  }
+	}
+	public class Friends
+	{
+		public Friends(string nicknameFrom, string nicknameTo, int state)
+		{
+			this.nicknameFrom = nicknameFrom;
+			this.nicknameTo = nicknameTo;
+			this.state = state;
+		}
+		[Key]
+		public string nicknameFrom { get; set; }
+		public string nicknameTo { get; set; }
+		public int state { get; set; }
+	}
 
 }

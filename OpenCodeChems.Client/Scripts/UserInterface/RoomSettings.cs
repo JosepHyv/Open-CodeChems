@@ -38,6 +38,7 @@ public class RoomSettings : Control
 	{
 		GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
 	}
+
 	
 	public void DisplayAlert()
 	{

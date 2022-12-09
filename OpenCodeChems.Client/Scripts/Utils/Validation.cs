@@ -109,6 +109,41 @@ namespace OpenCodeChems.Client.Resources
 			int currentPort = Int32.Parse(port);
 			return currentPort >= 1 && currentPort <= 65535;
 		}
-		
+		public bool ValidateUsernameAndNickname(string username)
+		{
+			bool isValid = true;
+			isValid = isValid & (username.Length <= 40);
+			return isValid;
+		}
+		public bool ValidateName(string name)
+		{
+			bool isValid = true;
+			isValid = isValid & (name.Length <= 50);
+			string especialCharacters = "*#+-_;.@%&/()=!?¿¡{}[]^<>";
+			foreach(char character in name)
+			{
+  				if(character >= '0' && character <= '9')
+				{ 
+					isValid = false;
+				}
+			}
+			foreach (char character in name)
+			{
+				foreach (char especialCharacter in especialCharacters)
+				{
+					if (character == especialCharacter)
+					{
+						isValid = true;
+					}
+						
+				}
+
+				if (isValid)
+				{
+					break;
+				}
+			}
+			return isValid;
+		}
 	}
 }
