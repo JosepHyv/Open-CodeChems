@@ -77,9 +77,8 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void EditImageProfileFail();
 		[Signal]
-<<<<<<< HEAD
 		delegate void DiosTienePoder();
-=======
+		[Signal]
 		delegate void CorrectAddFriend();
 		[Signal]
 		delegate void AddFriendFail();
@@ -111,8 +110,7 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectDeleteFriend();
 		[Signal]
 		delegate void DeleteFriendFail();
->>>>>>> main
-		
+
 
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();

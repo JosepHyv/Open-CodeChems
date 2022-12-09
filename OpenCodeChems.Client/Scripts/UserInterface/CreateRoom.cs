@@ -15,11 +15,7 @@ public class CreateRoom : Control
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		usersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
-<<<<<<< HEAD
 		serverClient.Connect("DiosTienePoder", this, nameof(SiLoTiene));
-=======
-		serverClient.Connect("RoomJoin", this, nameof(AddToList));
->>>>>>> main
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
