@@ -218,11 +218,17 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
 			RpcId(senderId, "CreateRoomAccepted");
 			logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
-			RpcId(senderId, "JoinRoomAccepted", senderId);
-			logBlock.InsertTextAtCursor($"Response JoinRoomAccepted with room {code} to id {senderId}\n");
+			
 		}
 	}
-	
+	[Master]
+	public void JoinHost()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		RpcId(senderId, "JoinRoomAccepted", senderId);
+		logBlock.InsertTextAtCursor($"joining to the room with id {senderId}\n");
+	}
+
 	[Master]
 	public void JoinRoom(string code)
 	{

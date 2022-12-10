@@ -264,6 +264,11 @@ namespace OpenCodeChems.Client.Server
 			GD.Print("Create Room Request send");
 			RpcId(PEER_ID, "CreateRoom", name);
 		}
+
+		public void RoomCreated()
+		{
+			RpcId(PEER_ID, "JoinHost");
+		}
 		
 		[Puppet]
 		public void CreateRoomAccepted()
@@ -285,6 +290,12 @@ namespace OpenCodeChems.Client.Server
 		public void JoinRoomAccepted(int sender)
 		{
 			GD.Print($"Entrando a la sala con el id = {sender}");
+			EmitSignal(nameof(RoomJoin));			
+		}
+
+		public void Esoterismo()
+		{
+			GD.Print("hola nos encomendamos a un poder superior");
 			EmitSignal(nameof(DiosTienePoder));
 		}
 		
