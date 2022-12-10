@@ -15,6 +15,14 @@ namespace OpenCodeChems.BussinesLogic
     public class UserManagement : IUserManagement
     {
         
+        /// <summary>
+        /// register a new user in the database
+        /// <summary>
+        /// <remarks>
+        /// evaluates whether a new register has been successfully entered into the database
+        /// <remarks>
+        /// <param name:"user"> receives an object of type User </param>
+        /// <returns> boolean with true value if performed correctly </returns>
 
         public bool RegisterUser(User user)
         {  
@@ -39,6 +47,14 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+        /// <summary>
+        /// register a new profile in the database
+        /// <summary>
+        /// <remarks>
+        /// evaluates whether a new register has been successfully entered into the database
+        /// <remarks>
+        /// <param name:"profile"> receives an object of type Profile </param>
+        /// <returns> boolean with true value if performed correctly </returns>
         public bool RegisterProfile(Profile profile)
 		{  
 			bool status = false;
@@ -64,7 +80,15 @@ namespace OpenCodeChems.BussinesLogic
 		}
 
 
-
+        /// <summary>
+        /// check whether a user exists with the provided username and password
+        /// <summary>
+        /// <remarks>
+        /// evaluates whether the credentials entered are correct
+        /// <remarks>
+        /// <param name:"username"> receives an string with the username of the user </param>
+        /// <param name:"password"> receives an string with the hash password of the user </param>
+        /// <returns> boolean with true value if credentials match a user </returns>
         public bool Login(string username, string password) 
         {
             
