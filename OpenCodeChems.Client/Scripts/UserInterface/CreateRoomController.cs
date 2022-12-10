@@ -11,14 +11,22 @@ public class CreateRoomController : Control
 
 	// Called when the node enters the scene tree for the first time.
 	Network serverClient;
-	private ItemList usersList;
+	int [] membersBalance = new int[4] {0,0,0,0};
+	private ItemList redUsersList;
+	private ItemList blueUsersList;
+	private ItemList redMasterList;
+	private ItemList blueMasterList;
 	private AcceptDialog notificacion;
     private Profile currentPlayer = null;
 	public override void _Ready()
 	{  		
 		serverClient = GetNode<Network>("/root/Network") as Network;
         currentPlayer = serverClient.profileByUsernameObtained;
-		usersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
+		redMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpyMasteRedrItemList");
+		redUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
+		blueMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpyMasterBlueItemList");
+		blueUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList");
+		
 		notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
 		serverClient.Connect("RoomJoin", this, nameof(AddToList));
 	}
@@ -33,17 +41,28 @@ public class CreateRoomController : Control
 		GetTree().ChangeScene("res://Scenes/RoomSettings.tscn");
 	}
 	
+	public void _on_JoinSpyMasterRedTextureButton_pressed()
+	{
+		redMasterList.AddItem(currentPlayer.nickname);
+	}
+	public void _on_JoinSpyMasterBlueTextureButton_pressed()
+	{
+		blueMasterList.AddItem(currentPlayer.nickname);
+	}
     public void _on_JoinSpyRedTextureButton_pressed()
     {
-        usersList.SetItemText(0,"care");
-        serverClient.Esoterismo();
+        redUsersList.AddItem(currentPlayer.nickname);
     }
 	
+	public void _on_JoinSpyBlueTextureButton_pressed()
+	{
+		blueUsersList.AddItem(currentPlayer.nickname);
+	}
 	public void AddToList()
 	{
 		if(currentPlayer != null)
         { 
-		    usersList.AddItem(currentPlayer.nickname);
+		    redUsersList.AddItem(currentPlayer.nickname);
         }
 		
 		

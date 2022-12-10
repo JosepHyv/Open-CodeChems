@@ -292,12 +292,6 @@ namespace OpenCodeChems.Client.Server
 			GD.Print($"Entrando a la sala con el id = {sender}");
 			EmitSignal(nameof(RoomJoin));			
 		}
-
-		public void Esoterismo()
-		{
-			GD.Print("hola nos encomendamos a un poder superior");
-			EmitSignal(nameof(DiosTienePoder));
-		}
 		
 		[Puppet]
 		public void JoinRoomFail()
