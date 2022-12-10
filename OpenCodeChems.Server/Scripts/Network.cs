@@ -103,11 +103,10 @@ public class Network : Node
 	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		int idProfile = 0;
 		try
 		{
 			User newUser = new User(username, hashPassword, name, email);
-			Profile newProfile = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
+			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
 			if(USER_MANAGEMENT.RegisterUser(newUser) == true)
 			{
 				if (USER_MANAGEMENT.RegisterProfile(newProfile) == true)
@@ -178,19 +177,27 @@ public class Network : Node
 	private void GetProfileByUsernameRequest(string username)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
-		if (profileObtained != null)
+		try
 		{
-			int idProfile = profileObtained.idProfile;
-			string nickname = profileObtained.nickname;
-			string usernameObtained = profileObtained.username;
-			int victories = profileObtained.victories;
-			int defeats = profileObtained.defeats;
-			byte[] imageProfile = profileObtained.imageProfile;
-			RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
-			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
+			if (profileObtained != null)
+			{
+				int idProfile = profileObtained.idProfile;
+				string nickname = profileObtained.nickname;
+				string usernameObtained = profileObtained.username;
+				int victories = profileObtained.victories;
+				int defeats = profileObtained.defeats;
+				byte[] imageProfile = profileObtained.imageProfile;
+				RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
+				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			}
+			else
+			{
+				RpcId(senderId, "ProfileByUsernameNotObtained");
+				logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
+			}
 		}
-		else
+		catch(NullReferenceException)
 		{
 			RpcId(senderId, "ProfileByUsernameNotObtained");
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
@@ -362,19 +369,27 @@ public class Network : Node
 	private void GetProfileByNicknameRequest(string nickname)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
-		if (profileObtained != null)
+		try
 		{
-			int idProfile = profileObtained.idProfile;
-			string nicknameObtained = profileObtained.nickname;
-			string username = profileObtained.username;
-			int victories = profileObtained.victories;
-			int defeats = profileObtained.defeats;
-			byte[] imageProfile = profileObtained.imageProfile;
-			RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
-			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
+			if (profileObtained != null)
+			{
+				int idProfile = profileObtained.idProfile;
+				string nicknameObtained = profileObtained.nickname;
+				string username = profileObtained.username;
+				int victories = profileObtained.victories;
+				int defeats = profileObtained.defeats;
+				byte[] imageProfile = profileObtained.imageProfile;
+				RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
+				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			}
+			else
+			{
+				RpcId(senderId, "ProfileByNicknameNotObtained");
+				logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");
+			}
 		}
-		else
+		catch(NullReferenceException)
 		{
 			RpcId(senderId, "ProfileByNicknameNotObtained");
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");

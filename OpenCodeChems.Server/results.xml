@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="1" time="3.897">
-	<testsuite name="UserManagement Tests" failures="0"  tests="12" time="0">
+<testsuites failures="0" name="TestXML" tests="1" time="10.317">
+	<testsuite name="UserManagement Tests" failures="0"  tests="40" time="0">
 		<testcase name="RegisterUserCorrect" time="0"></testcase>
 		<testcase name="RegisterUserInvalidOperationException" time="0"></testcase>
 		<testcase name="RegisterUserDuplicated" time="0"></testcase>
@@ -9,10 +9,38 @@
 		<testcase name="LoginCorrect" time="0"></testcase>
 		<testcase name="LoginNotCorrect" time="0"></testcase>
 		<testcase name="LoginNullUsernameAndPassword" time="0"></testcase>
+		<testcase name="NicknameRegisteredCorrect" time="0"></testcase>
+		<testcase name="NicknameRegisteredNotCorrect" time="0"></testcase>
 		<testcase name="EditProfileNicknameCorrect" time="0"></testcase>
 		<testcase name="EditProfileNicknameInvalidOperationException" time="0"></testcase>
 		<testcase name="EditProfileImageCorrect" time="0"></testcase>
 		<testcase name="EditProfileImageInvalidOperationException" time="0"></testcase>
+		<testcase name="PasswordExistCorrect" time="0"></testcase>
+		<testcase name="PasswordExistNotCorrect" time="0"></testcase>
+		<testcase name="EditUserPasswordCorrect" time="0"></testcase>
+		<testcase name="EditUserPasswordInvalidOperationException" time="0"></testcase>
+		<testcase name="GetProfileByUsernameCorrect" time="0"></testcase>
+		<testcase name="GetProfileByUsernameNotCorrect" time="0"></testcase>
+		<testcase name="GetProfileByNicknameCorrect" time="0"></testcase>
+		<testcase name="GetProfileByNicknameNotCorrect" time="0"></testcase>
+		<testcase name="EmailRegisteredCorrect" time="0"></testcase>
+		<testcase name="EmailRegisteredNotCorrect" time="0"></testcase>
+		<testcase name="UsernameRegisteredCorrect" time="0"></testcase>
+		<testcase name="UsernameRegisteredNotCorrect" time="0"></testcase>
+		<testcase name="AddFriendCorrect" time="0"></testcase>
+		<testcase name="AddFriendNotCorrect" time="0"></testcase>
+		<testcase name="GetFriendsRequestCorrect" time="0"></testcase>
+		<testcase name="GetFriendsRequestNotCorrect" time="0"></testcase>
+		<testcase name="AcceptFriendCorrect" time="0"></testcase>
+		<testcase name="AcceptFriendInvalidOperationException" time="0"></testcase>
+		<testcase name="FriendshipExistCorrect" time="0"></testcase>
+		<testcase name="FriendshipExistNotCorrect" time="0"></testcase>
+		<testcase name="GetFriendsCorrect" time="0"></testcase>
+		<testcase name="GetFriendsNotCorrect" time="0"></testcase>
+		<testcase name="DenyFriendCorrect" time="0"></testcase>
+		<testcase name="DenyFriendInvalidOperationException" time="0"></testcase>
+		<testcase name="DeleteFriendCorrect" time="0"></testcase>
+		<testcase name="DeleteFriendNotCorrect" time="0"></testcase>
 	</testsuite>
 
 </testsuites>

@@ -69,14 +69,22 @@ namespace OpenCodeChems.BussinesLogic
         {
             
             bool status = false;
-            using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+            try
             {
-                int foundUser = (from User in context.User where User.username == username && User.password == password   select User).Count();
-                if (foundUser > 0)
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
-                    status = true;
+                    int foundUser = (from User in context.User where User.username == username && User.password == password   select User).Count();
+                    if (foundUser > 0)
+                    {
+                        status = true;
+                    }
                 }
             }
+            catch (InvalidOperationException)
+            {
+                status = false;
+            }
+            
             return status;
         }
 
@@ -155,6 +163,10 @@ namespace OpenCodeChems.BussinesLogic
                 }
             }
             catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch(InvalidOperationException)
             {
                 status = false;
             }
@@ -238,6 +250,10 @@ namespace OpenCodeChems.BussinesLogic
 				{
 					status = false;
 				}
+                catch (InvalidOperationException)
+                {
+                    status = false;
+                }
 			}
 			return status;
 		} 
@@ -260,6 +276,10 @@ namespace OpenCodeChems.BussinesLogic
             {
                 status = false;
             }
+            catch (InvalidOperationException)
+            {
+                status = false;
+            }
             return status;
         } 
         public bool DenyFriend(Friends friends)
@@ -277,6 +297,10 @@ namespace OpenCodeChems.BussinesLogic
                 }
             }
             catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch (InvalidOperationException)
             {
                 status = false;
             }
@@ -302,31 +326,45 @@ namespace OpenCodeChems.BussinesLogic
         }
         public List<string> GetFriends(int idProfile, bool status)
         {
-            List<string> friendsObtained = new List<string>();
+            List<string> friendsObtained = new List<string>();;
             List<string> friendsIdFrom = new List<string>();
             List<string> friendsIdTo= new List<string>();
-            using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+            try
             {
-                friendsIdFrom = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileTo equals Profiles.idProfile where Friends.idProfileFrom == idProfile where Friends.status == status select Profiles.nickname).ToList();
-                friendsIdTo = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {
+                    friendsIdFrom = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileTo equals Profiles.idProfile where Friends.idProfileFrom == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                    friendsIdTo = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                }
+                foreach(var friendIdFrom in friendsIdFrom)
+                {
+                    friendsObtained.Add(friendIdFrom);
+                }
+                foreach(var friendIdTo in friendsIdTo)
+                {
+                    friendsObtained.Add(friendIdTo);
+                }
             }
-            foreach(var friendIdFrom in friendsIdFrom)
+            catch (InvalidOperationException)
             {
-                friendsObtained.Add(friendIdFrom);
-            }
-            foreach(var friendIdTo in friendsIdTo)
-            {
-                friendsObtained.Add(friendIdTo);
+                friendsObtained = null;
             }
             return friendsObtained;
         }
 
         public List<string> GetFriendsRequests(int idProfile, bool status)
         {
-            List<string> friendsRequests = new List<string>();
-            using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+            List<string> friendsRequests = null;
+            try
             {
-                friendsRequests = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {
+                    friendsRequests = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                friendsRequests = null;
             }
             return friendsRequests;
         }
