@@ -5,13 +5,11 @@ using static OpenCodeChems.Client.Resources.Objects;
 
 public class CreateRoomController : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-
-	// Called when the node enters the scene tree for the first time.
+	private int MAX_FIELD_MEMBERS = 3; 
 	Network serverClient;
+	//position 0 belongs to spy master red, position 1 belongs to red "field" spies, position 2 belongs to spy master blue, position 3 belongs to blue "field" spies
 	int [] membersBalance = new int[4] {0,0,0,0};
+	
 	private ItemList redUsersList;
 	private ItemList blueUsersList;
 	private ItemList redMasterList;
@@ -32,37 +30,54 @@ public class CreateRoomController : Control
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(float delta)
-    {
-        //serverClient.Connect("DiosTienePoder", this, nameof(SiLoTiene));
-    }
+  //public override void _Process(float delta)
+    //{
+    //}
 	public void _on_CancelTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/RoomSettings.tscn");
 	}
 	
 	public void _on_JoinSpyMasterRedTextureButton_pressed()
-	{
-		redMasterList.AddItem(currentPlayer.nickname);
+	{	
+		if(membersBalance[0]==0)
+		{
+			redMasterList.AddItem(currentPlayer.nickname);
+			membersBalance[0]=1;
+		}
+		
 	}
-	public void _on_JoinSpyMasterBlueTextureButton_pressed()
+	public void _on_JoinSpyRedTextureButton_pressed()
 	{
-		blueMasterList.AddItem(currentPlayer.nickname);
+		if(membersBalance[1]<MAX_FIELD_MEMBERS)
+		{
+			redUsersList.AddItem(currentPlayer.nickname);
+			membersBalance[1]= membersBalance[1]+1;
+		}
 	}
-    public void _on_JoinSpyRedTextureButton_pressed()
+    public void _on_JoinSpyMasterBlueTextureButton_pressed()
     {
-        redUsersList.AddItem(currentPlayer.nickname);
+		if(membersBalance[2]==0)
+		{
+			blueMasterList.AddItem(currentPlayer.nickname);
+			membersBalance[2]=1;
+		}
     }
 	
 	public void _on_JoinSpyBlueTextureButton_pressed()
 	{
-		blueUsersList.AddItem(currentPlayer.nickname);
+		if(membersBalance[3]<MAX_FIELD_MEMBERS)
+		{
+			blueUsersList.AddItem(currentPlayer.nickname);
+			membersBalance[3]= membersBalance[3]+1;
+		}
 	}
 	public void AddToList()
 	{
 		if(currentPlayer != null)
         { 
 		    redUsersList.AddItem(currentPlayer.nickname);
+			membersBalance[1]= membersBalance[1]+1;
         }
 		
 		
