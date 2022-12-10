@@ -1,6 +1,7 @@
 <Project Sdk="Godot.NET.Sdk/3.3.0">
   <PropertyGroup>
     <TargetFramework>net47</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />

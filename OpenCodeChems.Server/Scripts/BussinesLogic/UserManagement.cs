@@ -23,6 +23,8 @@ namespace OpenCodeChems.BussinesLogic
         /// <remarks>
         /// <param name:"user"> receives an object of type User </param>
         /// <returns> boolean with true value if performed correctly </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the object type User is null</exception>
 
         public bool RegisterUser(User user)
         {  
@@ -55,6 +57,8 @@ namespace OpenCodeChems.BussinesLogic
         /// <remarks>
         /// <param name:"profile"> receives an object of type Profile </param>
         /// <returns> boolean with true value if performed correctly </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the object type Profile is null</exception>
         public bool RegisterProfile(Profile profile)
 		{  
 			bool status = false;
@@ -89,6 +93,7 @@ namespace OpenCodeChems.BussinesLogic
         /// <param name:"username"> receives an string with the username of the user </param>
         /// <param name:"password"> receives an string with the hash password of the user </param>
         /// <returns> boolean with true value if credentials match a user </returns>
+        /// <exception cref="InvalidOperationException">throw if the username or password is null</exception>
         public bool Login(string username, string password) 
         {
             
@@ -111,7 +116,18 @@ namespace OpenCodeChems.BussinesLogic
             
             return status;
         }
-
+        
+        /// <summary>
+        /// assigns a new nickname to the user it profile with the provided username
+        /// <summary>
+        /// <remarks>
+        /// evaluates if there is a profile with the specified username, if so it changes its nickname
+        /// <remarks>
+        /// <param name:"username"> receives an string with the username of the user </param>
+        /// <param name:"newNickname"> receives an string with the new nickname of the user </param>
+        /// <returns> boolean with true value if it could update the new nickname </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if username or newNickname is null</exception>
         public bool EditProfileNickname(string username, string newNickname)
         {
             bool status = false;
@@ -136,6 +152,17 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
+        /// <summary>
+        /// assigns a new image profile to the profile it finds with the provided username
+        /// <summary>
+        /// <remarks>
+        /// evaluates if there is a profile with the specified username, if so it changes its image profile
+        /// <remarks>
+        /// <param name:"username"> receives an string with the username of the user </param>
+        /// <param name:"imageProfile"> receives an array of bytes with the new image profile of the user </param>
+        /// <returns> boolean with true value if it could update the new image profile </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the username is null</exception>
         public bool EditProfileImage(string username, byte[] imageProfile)
         {
             bool status = false;
@@ -160,6 +187,12 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
+        /// <summary>
+        /// check if exist a register with the hash password and the username
+        /// <summary>
+        /// <param name:"username"> receives an string with the username of the user </param>
+        /// <param name:"hashPassword"> receives an string with the password of the user </param>
+        /// <returns> boolean with true value if exist a register with the password </returns>
         public bool PasswordExist(string username, string hashPassword)
         {
             bool existPassword = false;
@@ -173,6 +206,18 @@ namespace OpenCodeChems.BussinesLogic
             }
             return existPassword;
         }
+        
+        /// <summary>
+        /// assigns a new password to the user it finds with the provided username
+        /// <summary>
+        /// <remarks>
+        /// evaluates if there is a user with the specified username, if so it changes its password
+        /// <remarks>
+        /// <param name:"username"> receives an string with the username of the user </param>
+        /// <param name:"newHashedPassword"> receives an string with the new password of the user </param>
+        /// <returns> boolean with true value if it could update the new password </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the username or newHashedPassword is null</exception>
         public bool EditUserPassword(string username, string newHashedPassword)
         {
             bool status = false;
@@ -197,6 +242,16 @@ namespace OpenCodeChems.BussinesLogic
             return status;
         }
 
+        /// <summary>
+        /// gets an object of type Profile  
+        /// <summary>
+        /// <remarks>
+        /// evaluates if there is a Profile with the specified username, if so it gets the Profile
+        /// <remarks>
+        /// <param name:"username"> receives an string with the username of the user </param>
+        /// <returns> object of type Profile </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the username is null</exception>
         public Profile GetProfileByUsername(string username)
 		{
             Profile profileObteined = null;
@@ -218,6 +273,13 @@ namespace OpenCodeChems.BussinesLogic
             }
             return profileObteined;
 		}
+        /// <summary>
+        /// check if exist a register with the email provided 
+        /// <summary>
+        /// <param name:"email"> receives an string with the email of the user </param>
+        /// <returns>boolean with true value if exist a register with the email</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the email is null</exception>
         public bool EmailRegistered(string email)
         {
             bool isRegistered = false;
@@ -232,6 +294,13 @@ namespace OpenCodeChems.BussinesLogic
             return isRegistered;
         }
 
+        /// <summary>
+        /// check if exist a register with the username provided 
+        /// <summary>
+        /// <param name:"useranme"> receives an string with the username of the user </param>
+        /// <returns>boolean with true value if exist a register with the username</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the username is null</exception>
         public bool UsernameRegistered(string username)
         {
             bool isRegistered = false;
@@ -245,6 +314,14 @@ namespace OpenCodeChems.BussinesLogic
             }
             return isRegistered;
         } 
+
+        /// <summary>
+        /// check if exist a register with the nickname provided 
+        /// <summary>
+        /// <param name:"nickname"> receives an string with the nickname of the user </param>
+        /// <returns>boolean with true value if exist a register with the nickname</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the nickname is null</exception>
         public bool NicknameRegistered(string nickname)
         {
             bool isRegistered = false;
@@ -258,6 +335,17 @@ namespace OpenCodeChems.BussinesLogic
             }
             return isRegistered;
         }
+
+        /// <summary>
+        /// register a new friendship in database 
+        /// <summary>
+        /// <remarks>
+        /// register a object of type Friends with the status false
+        /// <remarks>
+        /// <param name:"friends"> receives an object of type Friends </param>
+        /// <returns>boolean with true value if could register the friends</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if object type friends is null</exception>
         public bool AddFriend(Friends friends)
 		{  
 			bool status = false;
@@ -281,6 +369,17 @@ namespace OpenCodeChems.BussinesLogic
 			}
 			return status;
 		} 
+
+        /// <summary>
+        /// update a friendship in database 
+        /// <summary>
+        /// <remarks>
+        /// update a object of type Friends with the status false to status true, first check if exist a register with the idProfileFrom in the idProfileFrom column and the idProfileTo in the ifProfileTo column
+        /// <remarks>
+        /// <param name:"friends"> receives an object of type Friends </param>
+        /// <returns>boolean with true value if could update the new friends</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if object type friends is null</exception>
         public bool AcceptFriend(Friends friends)
         {
             bool status = false;
@@ -306,6 +405,17 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         } 
+
+        /// <summary>
+        /// dalete a friendship in database 
+        /// <summary>
+        /// <remarks>
+        /// delete a register of Friends table if the status is equal to false
+        /// <remarks>
+        /// <param name:"friends"> receives an object of type Friends </param>
+        /// <returns>boolean with true value if could delete the friends registerd</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if object type friends is null</exception>
         public bool DenyFriend(Friends friends)
         {
             bool status = false;
@@ -330,6 +440,16 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+
+        /// <summary>
+        /// check if exist a friendship in the database
+        /// <summary>
+        /// <remarks>
+        /// check if the idProfileFrom column exist the idProfileActualPlayer and in the idProfileTo column exist the idProfilePlayerFound, else the the idProfileFrom column exist the idProfilePlayerFound and in the idProfileTo column exist the idProfileActualPlayer
+        /// <remarks>
+        /// <param name:"idProfileActualPlayer"> receives an int with the id profile of the actual player </param>
+        /// <param name:"idProfilePlayerFound"> receives an int with the id profile of the player want to send a friend request </param>
+        /// <returns>boolean with true value if friendship exist</returns>
         public bool FriendshipExist(int idProfileActualPlayer, int idProfilePlayerFound)
         {
             bool existFriendship = false;
@@ -348,6 +468,17 @@ namespace OpenCodeChems.BussinesLogic
             }
             return existFriendship;
         }
+
+        /// <summary>
+        /// gets the friends of the actual player
+        /// <summary>
+        /// <remarks>
+        /// gets the id of the profiles with wich the actual player has a friendship and the status is equal to true, replaces the id for the nicknames of the profiles
+        /// <remarks>
+        /// <param name:"idProfile"> receives an int with de id profle of the actual player </param>
+        /// <param name:"status"> receives a boolean with the status of the friendship </param>
+        /// <returns>List with the friends of the actual player</returns>ception>
+        /// <exception cref="InvalidOperationException">throw if idProfile is null</exception>
         public List<string> GetFriends(int idProfile, bool status)
         {
             List<string> friendsObtained = new List<string>();;
@@ -376,6 +507,16 @@ namespace OpenCodeChems.BussinesLogic
             return friendsObtained;
         }
 
+        /// <summary>
+        /// gets the friends requests of the actual player
+        /// <summary>
+        /// <remarks>
+        /// gets the id of the profiles with wich the actual player has a friendship and the status is equal to false, replaces the id for the nicknames of the profiles
+        /// <remarks>
+        /// <param name:"idProfile"> receives an int with de id profle of the actual player </param>
+        /// <param name:"status"> receives a boolean with the status of the friendship </param>
+        /// <returns>List with the friends requests of the actual player</returns>ception>
+        /// <exception cref="InvalidOperationException">throw if idProfile is null</exception>
         public List<string> GetFriendsRequests(int idProfile, bool status)
         {
             List<string> friendsRequests = null;
@@ -392,6 +533,17 @@ namespace OpenCodeChems.BussinesLogic
             }
             return friendsRequests;
         }
+
+        /// <summary>
+        /// gets an object of type Profile  
+        /// <summary>
+        /// <remarks>
+        /// evaluates if there is a Profile with the specified nickname, if so it gets the Profile
+        /// <remarks>
+        /// <param name:"nickname"> receives an string with the nickname of the user </param>
+        /// <returns> object of type Profile </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the nickname is null</exception>
         public Profile GetProfileByNickname(string nickname)
 		{
             Profile profileObteined = null;
@@ -413,6 +565,17 @@ namespace OpenCodeChems.BussinesLogic
             }
             return profileObteined;
 		}
+
+        /// <summary>
+        /// dalete a friendship in database 
+        /// <summary>
+        /// <remarks>
+        /// delete a register of Friends table if exist a register with the idProfileFrom in the idProfileFrom column and idProfileTo in the idProfileTo column, else exist a register with the idProfileTo in the idProfileFrom column and idProfileTo in the idProfileFrom column and the status is equal to true;
+        /// <remarks>
+        /// <param name:"friends"> receives an object of type Friends </param>
+        /// <returns>boolean with true value if could delete the friends registerd</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if object type friends is null</exception>
         public bool DeleteFriend(Friends friendsForDelete)
         {
             bool status = false;

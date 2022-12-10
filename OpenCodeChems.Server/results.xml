@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<testsuites failures="0" name="TestXML" tests="1" time="10.317">
+<testsuites failures="0" name="TestXML" tests="1" time="12.313">
 	<testsuite name="UserManagement Tests" failures="0"  tests="40" time="0">
 		<testcase name="RegisterUserCorrect" time="0"></testcase>
 		<testcase name="RegisterUserInvalidOperationException" time="0"></testcase>
