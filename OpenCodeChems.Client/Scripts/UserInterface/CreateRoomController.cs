@@ -44,6 +44,7 @@ public class CreateRoomController : Control
 	public void _on_CancelTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/RoomSettings.tscn");
+		serverClient.LeftRoom();
 	}
 	
 	public void _on_JoinSpyMasterRedTextureButton_pressed()

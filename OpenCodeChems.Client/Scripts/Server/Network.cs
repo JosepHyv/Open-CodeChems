@@ -174,6 +174,11 @@ namespace OpenCodeChems.Client.Server
 			
 		}
 
+		public void LeftRoom()
+		{
+			RpcId(PEER_ID, "DeletePlayer", currentRoom);
+		}
+
 		[Puppet]
 		public void ExitRoom()
 		{
