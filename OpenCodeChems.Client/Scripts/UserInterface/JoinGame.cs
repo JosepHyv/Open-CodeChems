@@ -1,16 +1,20 @@
 using Godot;
 using System;
+using OpenCodeChems.Client.Server;
 
 public class JoinGame : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-
-	// Called when the node enters the scene tree for the first time.
+	
+	Network serverClient = null;
+	LineEdit code  = null;
+	AcceptDialog notification = null;
+	
 	public override void _Ready()
 	{
-		
+		notification = GetParent().GetNode<AcceptDialog>("control/JoinGameNinePatchRect/Notification");
+		code = GetParent().GetNode<LineEdit>("control/JoinGameNinePatchRect/CodeLineEdit");
+		serverClient = GetNode<Network>("/root/Network") as Network;
+		serverClient.Connect("RoomJoinFail", this, nameof(FailJoin));
 	}
 	public void _on_CancelTextureButton_pressed()
 	{
@@ -18,12 +22,23 @@ public class JoinGame : Control
 	}
 	public void _on_JoinButton_pressed()
 	{
-		GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
+		string roomCode = code.GetText();
+		if(!String.IsNullOrWhiteSpace(roomCode))
+		{
+			serverClient.ClientJoinRoom(roomCode);
+		}
+		else
+		{
+			notification.SetText("ROOM_CODE_INVALID");
+			notification.Visible = true;	
+		}
+		
+	}
+	
+	public void FailJoin()
+	{
+		notification.SetText("IMPOSSIBLE_TO_CONNECT");
+		notification.Visible = true;
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

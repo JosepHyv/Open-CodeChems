@@ -92,5 +92,12 @@ margin_right = 512.0
 margin_bottom = 203.0
 custom_fonts/font = SubResource( 4 )
 
+[node name="Notification" type="AcceptDialog" parent="."]
+margin_left = 349.0
+margin_top = 154.0
+margin_right = 644.0
+margin_bottom = 365.0
+window_title = "¡Alerta!"
+
 [connection signal="pressed" from="JoinGameNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
 [connection signal="pressed" from="JoinGameNinePatchRect/JoinTextureButton" to="." method="_on_JoinTextureButton_pressed"]

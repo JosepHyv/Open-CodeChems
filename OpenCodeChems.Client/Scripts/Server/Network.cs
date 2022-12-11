@@ -264,7 +264,12 @@ namespace OpenCodeChems.Client.Server
 			GD.Print("Create Room Request send");
 			RpcId(PEER_ID, "CreateRoom", name);
 		}
-
+		
+		public void ClientJoinRoom(string name)
+		{
+			GD.Print("Try to Join to Room");
+			RpcId(PEER_ID, "JoinRoom", name);
+		}
 		public void RoomCreated()
 		{
 			RpcId(PEER_ID, "JoinHost");
