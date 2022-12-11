@@ -139,9 +139,9 @@ public class Network : Node
 
 	private void DisJoinPlayer(int senderId)
 	{
-		foreach(string roomName in room)
+		foreach(KeyValuePair<string, List<int>> roomName in rooms)
 		{
-			DeletePlayer(roomName);
+			DeletePlayer(roomName.Key);
 		}
 	}
 
@@ -157,7 +157,7 @@ public class Network : Node
 		}
 		if(rooms.ContainsKey(nameRoom))
 		{
-			if(rooms[nameRoom].Exists(senderId))
+			if(rooms[nameRoom].Contains(senderId))
 			{
 				rooms[nameRoom].Remove(senderId);
 				UpdateClientsRoom(nameRoom);

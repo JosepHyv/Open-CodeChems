@@ -83,7 +83,7 @@ public class CreateRoomController : Control
 	}
 	public void AddToList(List<string> playersInRoom)
 	{
-		redUsersList.Clean();
+		redUsersList.Clear();
 		foreach(string name in playersInRoom)
 		{
 			redUsersList.AddItem(name);
