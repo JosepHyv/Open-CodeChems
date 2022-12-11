@@ -11,8 +11,8 @@ public class JoinGame : Control
 	
 	public override void _Ready()
 	{
-		notification = GetParent().GetNode<AcceptDialog>("control/JoinGameNinePatchRect/Notification");
-		code = GetParent().GetNode<LineEdit>("control/JoinGameNinePatchRect/CodeLineEdit");
+		notification = GetParent().GetNode<AcceptDialog>("JoinGame/JoinGameNinePatchRect/NotificationAcceptDialog");
+		code = GetParent().GetNode<LineEdit>("JoinGame/JoinGameNinePatchRect/CodeLineEdit");
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("RoomJoinFail", this, nameof(FailJoin));
 	}
