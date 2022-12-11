@@ -22,10 +22,12 @@ public class Network : Node
 	private Button connectButton;
 	private AcceptDialog dialog;
 	private Dictionary<string, List<int>> rooms;
+	private Dictionary<int, string> roomOwners;
 	public List<int> clientsConected;
 
 	public override void _Ready()
 	{
+		roomOwners = new Dictionary<int, string>();
 		clientsConected = new List<int>();
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
 		rooms = new Dictionary<string, List<int>>();
@@ -49,6 +51,13 @@ public class Network : Node
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
 		clientsConected.Remove(peerId);
+		if(roomOwners.ContainsKey(peerId))
+		{
+			string roomName = roomOwners[peerId];
+			logBlock.InsertTextAtCursor($"{peerId} left the room {roomName}\n");
+			EraseRoom(roomName);
+			roomOwners.Remove(peerId);
+		}
 	}
 
 	private void _on_Button_pressed()
@@ -83,6 +92,21 @@ public class Network : Node
 			dialog.Visible = true;
 		}
 		
+	}
+	
+	private void EraseRoom(string code)
+	{
+		if(rooms.ContainsKey(code))
+		{
+			List<int> playersInRoom = rooms[code];
+			for(int c = 0 ; c<playersInRoom.Count; c++)
+			{
+				int senderId = playersInRoom[c];
+				logBlock.InsertTextAtCursor($"player {senderId} exiting room {code}\n");
+				RpcId(senderId,"ExitRoom");
+			}
+			rooms.Remove(code);
+		}
 	}
 	
 	[Master]
@@ -215,6 +239,7 @@ public class Network : Node
 			List<int>hostRoom = new List<int>();
 			hostRoom.Add(senderId);
 			rooms.Add(code, hostRoom);
+			roomOwners.Add(senderId, code);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
 			RpcId(senderId, "CreateRoomAccepted");
 			logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
