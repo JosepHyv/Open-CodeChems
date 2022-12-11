@@ -77,6 +77,7 @@ public class MainMenu : Control
 			byte [] imageProfile = actualPlayer.imageProfile;
 			string usernameObtained = actualPlayer.username;
 			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nickname;
+			serverClient.UpdateServerData(nickname);
 		}
 		serverClient.GetFriends(idProfile, STATUS_FRIENDS);
 	}

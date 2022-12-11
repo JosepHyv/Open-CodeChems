@@ -10,7 +10,7 @@ using OpenCodeChems.Server.Utils;
 
 public class Network : Node
 {
-	private int DEFAULT_PORT = 5500;
+	private int DEFAULT_PORT = 6007;
 	private string ADDRESS = "localhost";
 	private int MAX_PLAYERS = 200;
 	private int PEERID = 1;
@@ -24,11 +24,13 @@ public class Network : Node
 	private Dictionary<string, List<int>> rooms;
 	private Dictionary<int, string> roomOwners;
 	public List<int> clientsConected;
+	public Dictionary<int, string> playersData;
 
 	public override void _Ready()
 	{
 		roomOwners = new Dictionary<int, string>();
 		clientsConected = new List<int>();
+		playersData = new Dictionary<int, string>();
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
 		rooms = new Dictionary<string, List<int>>();
 		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
@@ -45,6 +47,7 @@ public class Network : Node
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Conectado\n");
 		clientsConected.Add(peerId);
+		playersData.Add(peerId, "None");
 	}
 
 	private void PlayerDisconnected(int peerId)
@@ -57,8 +60,11 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"{peerId} left the room {roomName}\n");
 			EraseRoom(roomName);
 			roomOwners.Remove(peerId);
+			playersData.Remove(peerId);
 		}
 	}
+
+	
 
 	private void _on_Button_pressed()
 	{
@@ -93,6 +99,8 @@ public class Network : Node
 		}
 		
 	}
+
+	
 	
 	private void EraseRoom(string code)
 	{
@@ -151,9 +159,9 @@ public class Network : Node
 			}
 		}
 		catch (DbUpdateException)
-	{
-	   RpcId(senderId, "RegisterFail");
-	}
+		{
+			RpcId(senderId, "RegisterFail");
+		}
 	}
 
 	[Master]
@@ -224,6 +232,14 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
 		}
 	}
+
+	[Master]
+	public void UpdateData(string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		playersData[senderId] = nickname;
+	}
+
 	
 	[Master]
 	public void CreateRoom(string code)
@@ -246,6 +262,31 @@ public class Network : Node
 			
 		}
 	}
+
+	
+	public void UpdateClientsRoom(string nameRoom)
+	{
+		if(rooms.ContainsKey(nameRoom))
+		{
+			List<int> playersInRoom = rooms[nameRoom];
+			for(int c = 0 ; c<playersInRoom.Count; c++)
+			{
+				int master = playersInRoom[c];
+				List<string> namePlayers = new List<string>();
+				logBlock.InsertTextAtCursor($"sending to {master} the players updated:\n");
+				for(int d = 0 ; d<playersInRoom.Count; d++)
+				{
+					string separator = (d < playersInRoom.Count -1 ) ? "," : ".";
+					int slave =  playersInRoom[d];
+					logBlock.InsertTextAtCursor($"{playersData[slave]}{separator}");
+					namePlayers.Add(playersData[slave]);
+				}
+				RpcId(master,"UpdateRoom", namePlayers);
+			}
+			logBlock.InsertTextAtCursor("\n");
+		}
+	}
+
 	[Master]
 	public void JoinHost()
 	{

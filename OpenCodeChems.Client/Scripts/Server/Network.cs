@@ -11,7 +11,7 @@ namespace OpenCodeChems.Client.Server
 	{
 
 		private int SERVER_ID = 1;
-		public int DEFAULT_PORT {get; set;} = 5500;
+		public int DEFAULT_PORT {get; set;} = 6007;
 		private int MAX_PLAYERS = 200; 
 		public string ADDRESS {get; set;} = "localhost";
 		private int PEER_ID = 1;
@@ -21,6 +21,8 @@ namespace OpenCodeChems.Client.Server
 		public Profile profileByNicknameObtained = null;
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
+
+		public string currentRoom = "None";
 		
 		[Signal]
 		delegate void LoggedIn();
@@ -111,6 +113,8 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void DeleteFriendFail();
 
+		[Signal]
+		delegate void UpdatePlayersScreen(List<string> usersInRoom);
 
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
@@ -137,6 +141,10 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(ServerDead));
 		}
 
+		public void UpdateServerData(string nickname)
+		{
+			RpcId(PEER_ID, "UpdateData", nickname);
+		}
 		public void ConnectToServer()
 		{
 			networkPeer.CreateClient(ADDRESS, DEFAULT_PORT);
@@ -272,14 +280,23 @@ namespace OpenCodeChems.Client.Server
 		}
 		public void RoomCreated()
 		{
-			RpcId(PEER_ID, "JoinHost");
+			RpcId(PEER_ID, "UpdateClientsRoom", this.currentRoom);
+		}
+
+		[Puppet]
+		public void UpdateRoom(List<string> usersInRoom)
+		{
+			GD.Print($"Recibed {usersInRoom}");
+			EmitSignal(nameof(UpdatePlayersScreen), usersInRoom);
+			
 		}
 		
 		[Puppet]
-		public void CreateRoomAccepted()
+		public void CreateRoomAccepted(string nameRoom)
 		{	
 
 			GD.Print("Cosito aceptado OwO");
+			this.currentRoom = nameRoom;
 			EmitSignal(nameof(RoomCreation));
 		}
 		
@@ -292,9 +309,10 @@ namespace OpenCodeChems.Client.Server
 		}
 		
 		[Puppet]
-		public void JoinRoomAccepted(int sender)
+		public void JoinRoomAccepted(int sender, string nameRoom)
 		{
 			GD.Print($"Entrando a la sala con el id = {sender}");
+			this.currentRoom = nameRoom;
 			EmitSignal(nameof(RoomJoin));			
 		}
 		
@@ -302,6 +320,7 @@ namespace OpenCodeChems.Client.Server
 		public void JoinRoomFail()
 		{
 			GD.Print("Error entrando a la sala");
+			this.currentRoom = "None";
 			EmitSignal(nameof(RoomJoinFail));
 		}
 

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using OpenCodeChems.Client.Server;
 using static OpenCodeChems.Client.Resources.Objects;
 
@@ -26,7 +27,7 @@ public class CreateRoomController : Control
 		blueUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList");
 		
 		notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
-		serverClient.Connect("RoomJoin", this, nameof(AddToList));
+		serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,13 +73,16 @@ public class CreateRoomController : Control
 			membersBalance[3]= membersBalance[3]+1;
 		}
 	}
-	public void AddToList()
+	public void AddToList(List<string> playersInRoom)
 	{
-		if(currentPlayer != null)
+		foreach(string name in playersInRoom)
+		{
+			redUsersList.AddItem(name);
+		}
+		/*if(currentPlayer != null)
         { 
-		    redUsersList.AddItem(currentPlayer.nickname);
-			membersBalance[1]= membersBalance[1]+1;
-        }
+			//membersBalance[1]= membersBalance[1]+1;
+        }*/
 		
 		
 	}

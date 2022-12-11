@@ -15,6 +15,7 @@ public class JoinGame : Control
 		code = GetParent().GetNode<LineEdit>("JoinGame/JoinGameNinePatchRect/CodeLineEdit");
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("RoomJoinFail", this, nameof(FailJoin));
+		serverClient.Connect("RoomJoin", this, nameof(ChangeScene));
 	}
 	public void _on_CancelTextureButton_pressed()
 	{
@@ -26,7 +27,7 @@ public class JoinGame : Control
 		if(!String.IsNullOrWhiteSpace(roomCode))
 		{
 			serverClient.ClientJoinRoom(roomCode);
-			GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
+			//GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
 		}
 		else
 		{
@@ -34,6 +35,12 @@ public class JoinGame : Control
 			notification.Visible = true;	
 		}
 		
+	}
+
+	public void ChangeScene()
+	{
+		GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
+		serverClient.RoomCreated();
 	}
 	
 	public void FailJoin()
