@@ -62,7 +62,9 @@ public class Network : Node
 			roomOwners.Remove(peerId);
 			playersData.Remove(peerId);
 		}
+		DisJoinPlayer(peerId);
 	}
+
 
 	
 
@@ -133,6 +135,34 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
 		}
 
+	}
+
+	private void DisJoinPlayer(int senderId)
+	{
+		foreach(string roomName in room)
+		{
+			DeletePlayer(roomName);
+		}
+	}
+
+	[Master]
+	private void DeletePlayer(string nameRoom)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			EraseRoom(roomOwners[senderId]);
+			roomOwners.Remove(senderId);
+
+		}
+		if(rooms.ContainsKey(nameRoom))
+		{
+			if(rooms[nameRoom].Exists(senderId))
+			{
+				rooms[nameRoom].Remove(senderId);
+				UpdateClientsRoom(nameRoom);
+			}
+		}
 	}
 
 	[Master]
