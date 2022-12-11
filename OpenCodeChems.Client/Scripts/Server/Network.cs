@@ -174,6 +174,16 @@ namespace OpenCodeChems.Client.Server
 			
 		}
 
+		public void LogOut()
+		{
+			GD.Print("Logged from server");
+			profileByUsernameObtained = null;
+			profileByNicknameObtained = null;
+			friendsObtained = null;
+			friendsRequestsObtained = null;
+
+		}
+
 		public void LeftRoom()
 		{
 			RpcId(PEER_ID, "DeletePlayer", currentRoom);
