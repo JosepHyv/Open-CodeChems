@@ -20,12 +20,13 @@ public class JoinGame : Control
 	{
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
-	public void _on_JoinButton_pressed()
+	public void _on_JoinTextureButton_pressed()
 	{
 		string roomCode = code.GetText();
 		if(!String.IsNullOrWhiteSpace(roomCode))
 		{
 			serverClient.ClientJoinRoom(roomCode);
+			GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
 		}
 		else
 		{
