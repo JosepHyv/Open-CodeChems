@@ -257,7 +257,7 @@ public class Network : Node
 			rooms.Add(code, hostRoom);
 			roomOwners.Add(senderId, code);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
-			RpcId(senderId, "CreateRoomAccepted");
+			RpcId(senderId, "CreateRoomAccepted", code);
 			logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
 			
 		}
