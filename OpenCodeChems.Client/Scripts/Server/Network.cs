@@ -115,6 +115,8 @@ namespace OpenCodeChems.Client.Server
 
 		[Signal]
 		delegate void UpdatePlayersScreen(List<string> usersInRoom);
+		[Signal]
+		delegate void CleanRoom();
 
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
@@ -170,6 +172,12 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID,"LoginRequest", username, password);
 			GD.Print("Request enviado");
 			
+		}
+
+		[Puppet]
+		public void ExitRoom()
+		{
+			EmitSignal(nameof(CleanRoom));
 		}
 
 		[Puppet]

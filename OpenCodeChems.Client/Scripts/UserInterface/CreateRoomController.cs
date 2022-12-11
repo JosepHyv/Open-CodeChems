@@ -30,12 +30,17 @@ public class CreateRoomController : Control
 
 		GetParent().GetNode<Label>("Control/RoomNinePatchRect/NameRoomLabel").SetText(nameRoom);
 		serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
+		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   //public override void _Process(float delta)
     //{
     //}
+	public void ChangeToMainMenu()
+	{
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+	}
 	public void _on_CancelTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/RoomSettings.tscn");
@@ -77,6 +82,7 @@ public class CreateRoomController : Control
 	}
 	public void AddToList(List<string> playersInRoom)
 	{
+		redUsersList.Clean();
 		foreach(string name in playersInRoom)
 		{
 			redUsersList.AddItem(name);
