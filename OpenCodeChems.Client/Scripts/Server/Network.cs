@@ -309,9 +309,9 @@ namespace OpenCodeChems.Client.Server
 		}
 		
 		[Puppet]
-		public void JoinRoomAccepted(int sender, string nameRoom)
+		public void JoinRoomAccepted(string nameRoom)
 		{
-			GD.Print($"Entrando a la sala con el id = {sender}");
+			GD.Print($"Entrando a la sala {nameRoom}");
 			this.currentRoom = nameRoom;
 			EmitSignal(nameof(RoomJoin));			
 		}

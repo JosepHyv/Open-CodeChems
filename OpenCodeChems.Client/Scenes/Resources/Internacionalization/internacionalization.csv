@@ -1,155 +1,155 @@
-﻿,en,es,,
-LENGUAGE_INSTRUCTION,Select lenguage,Selecciona el lenguaje,,
-CANCEL_BUTTON,Cancel,Cancelar,,
-FRIEND_REQUEST_INSTRUCTION,Type your friend's username to send a friend request,Escribe el nombre de usuario de tu amigo para enviar una solicitud de amistad,,
-ADDFRIEND_BUTTON,Add friend,Agregar amigo,,
-FRIENDREQUEST_BUTTON,Friend requests,Solicitudes de amistad,,
-CREATEGAME_BUTTON,Create game,Crear partida,,
-JOINGAME_BUTTON,Join game,Unirse a partida,,
-RANDOMIZE_BUTTON,Randomize teams,Randomizar equipos,,
-SPYMASTER_LABEL,Spy master,Espía maestro,,
-SPYMASTER_BUTTON,Enter as a spy master,Entrar como espía maestro,,
-SPIES_LABEL,Spies,Espías,,
-SPIES_BUTTON,Enter as a soy,Entrar como espía maestro,,
-ROOM_LABEL,Room:,Sala:,,
-INVITATIONCODE_LABEL,Invitation code,Código de invitación,,
-START_BUTTON,Start game,Empezar partida,,
-RULES_BUTTON,Rules,Reglas,,
-CONFIRMATION_DELETE_FRIEND,Are you sure you want to delete this friend?,¿Estás seguro que quieres eliminar este amigo?,,
-ACCEPT_BUTTON,Accept,Aceptar,,
-PROFILEINFO_LABEL,Profile Information,Información del perfil,,
-UPDATEPASSWORD_LABEL,Update password,Cambiar contraseña,,
-NICKNAME_LABEL,Nickname,Nombre de jugador,,
-EMAIL_LABEL,Email,Correo eletrónico,,
-PHOTO_LABEL,Profile photo,Foto de perfil,,
-SAVE_BUTTON,Save,Guardar,,
-ACTUALPASS_LABEL,Actual password,Contraseña actual,,
-NEWPASS_LABEL,New password,Nueva contraseña,,
-CONFIRMPASS_LABEL,Confirm password,Confirmar contraseña,,
-JOINGAME_INSTRUCTION,Enter a room code to be able to join with other players,Ingrese un código de sala para unise con otros jugadores.,,
-USERNAME_LABEL,Username,Nombre de usuario,,
-PASSWORD_LABEL,Password,Contraseña actual,,
-SINGIN_BUTTON,Sing In,Registrarse,,
-LOGIN_BUTTON,Log In,Ingresar,,
-REGISTER_TITTLE,Register New User,Registrar Usuario Nuevo,,
-NAME_LABEL,Name,Nombre,,
-PASSWORD_INSTRUCTION,"The password must contain uppercase, lowercase, numbers, and special characters","La contrseña debe contener mayúsculas, minúsculas, números y caractéres especiales",,
-NAMEROOM_LABEL,Name of the room,Nombre de la sala,,
-CODEJOINROOM_LABEL,Code to join the room,Código para unirse a la sala,,
-CONFIRM_REGISTER_INSTRUCTION,Enter the code send to your email,Ingresa el código que se te envío al correo electrónico,,
-WARNING,Warning!,¡Atención!,,
-VERIFY_EMPTY_FIELDS,"There can´t be empty fields, please verify the information","No puede haber campos vacíos, por favor verifica la información",,
-VERIFY_EMAIL,Verify that the email is correct.,Verifica que el correo electrónico sea correcto.,,
-VERIFY_PASSWORD,"Verify that your password has at least eight characters, a capital letter, a number and a special character.","Verifica que tu contraseña tenga como mínimo ocho caractéres, una mayúscula, un número y un caractér especial.",,
-VERIFY_CONFIRM_PASSWORD,"The entered passwords are different, please verify them.","Las contraseñas ingresadas son diferentes, por favor verificarlas.",,
-NOTIFICATION,Notification,Notificación,,
-REGISTER_COMPLETE,"Registration completed, you will be redirected to login.","Registro completado, serás redirigido al inicio de sesión.",,
-WRONG_REGISTER,"Registration failed, please try again later","Registro no realizado, inténtelo más tarde",,
-EMAIL_REGISTER,The email entered already has an account.,El correo electrónico ingresado ya tiene una cuenta.,,
-USERNAME_REGISTER,The username entered is already in use.,El nombre de usuario ingresado ya está en uso.,,
-NICKNAME_REGISTER,The nickname entered is already in use.,El nombre de jugador ingresado ya está en uso.,,
-ERROR_LOADING_PROFILE,"There was an error loading the profile, please try again later","Hubo un error al cargar el perfil, intentalo más tarde",,
-INCORRECT_OLD_PASSWORD,We can't update your password because your current password is not correct.,No podemos actualizar tu contraseña porque tu contraseña actual no es correcta.,,
-VERIFY_NICKNAME,Nickname must contain less than 40 characters,El nombre de jugador debe contener menos de 40 caracteres ,,
-CORRECT_PASSWORD_UPDATE,Password updated successfully,Contraseña actualizada correctamente,,
-ERROR_PASSWORD_UPDATE,"Failed to update password, please try again later","Error al actualizar la contraseña, inténtalo más tarde",,
-ERROR,Error!,¡Error!,,
-CORRECT_NICKNAME_UPDATE,Nickname updated successfully,Nombre de jugador actualizado correctamente,,
-ERROR_NICKNAME_UPDATE,"Failed to update player name, please try again later","Error al actualizar el nombre de jugador, inténtalo más tarde",,
-CORRECT_IMAGE_PROFILE_UPDATE,Profile picture updated successfully,Imagen del perfil actualizada correctamente,,
-ERROR_IMAGE_PROFILE_UPDATE,"Error updating profile picture, please try again later","Error al actualizar la imagen del perfil, inténtalo más tarde",,
-USERNAME_NOT_FOUND,Username not found,Nombre de usuario no encontrado,,
-ACCEPT_FRIEND_REQUEST_INSTRUCTION,Select a user and click on the green button to accept or the red button to reject.,Selecciona un usuario y da clic en el botón verde para aceptarla o rojo para rechazarla,,
-FRIEND_YOURSELF,You can't send a friend request to yourself,No puedes enviarte una solicitud de amistad a ti mismo,,
-FRIEND_REQUEST_SENT,Friendship request sent,Solicitud de amistad enviada,,
-FRIEND_REQUEST_NOT_SENT,"Couldn't send friend request, try again later.","No se pudo enviar la solicitud de amistad, inténtalo más tarde",,
-FRIENDSHIP_EXIST,This user is already your friend or you have already sent a friend request to this user.,Este usuario ya es tu amigo o ya enviaste una solicitud de amistad al mismo,,
-ERROR_LOADING_FRIENDS_REQUESTS,"There was an error loading the friend requests, try again later.","Hubo un error al cargar las solicitudes de amistad, inténtalo más tarde",,
-FRIEND_REQUEST_CANT_ACCEPTED,"Unable to accept the friend request at this time, please try again later.","No se puede aceptar la solicitud de amistad en este momento, inténtalo más tarde",,
-FRIEND_REQUEST_CANT_DENY,"Unable to reject the friend request at this time, try again later.","No se puede rechazar la solicitud de amistad en este momento, inténtalo más tarde",,
-ERROR_LOADING_FRIENDS,"There was an error loading your friends, try again later.","Hubo un error al cargar tus amigos, inténtalo más tarde",,
-DELETE_FRIEND_CORRECT,Friend successfully deleted,Amigo eliminado correctamente,,
-ERROR_DELETE_FRIEND,"There was an error deleting this friend, try again later.","Hubo un error al eliminar este amigo, inténtalo más tarde",,
-WORD_ONE,oil,aceite,,
-WORD_TWO,torch,antorcha,,
-WORD_THREE,spider,araña,,
-WORD_FOUR,article,artículo,,
-WORD_FIVE,ace,as,,
-WORD_SIX,bullet,bala,,
-WORD_SEVEN,bar,barra,,
-WORD_EIGHT,bug,bicho,,
-WORD_NINE,block,bloque,,
-WORD_TEN,forest,bosque,,
-WORD_ELEVEN,button,botón,,
-WORD_TWELVE,arm,brazon,,
-WORD_THIRTEEN,change,cambio,,
-WORD_FOURTEEN,letter,carta,,
-WORD_FIFTEEN,cane,caña,,
-WORD_SIXTEEN,centaur,centauro,,
-WORD_SEVENTEN,scientific,científico,,
-WORD_EIGHTEEN,cook,cocinero,,
-WORD_NINETEEN,coconut,coco,,
-WORD_TWENTY,concert,concierto,,
-WORD_TWENTY_ONE,deck,cubierta,,
-WORD_TWENTY_TWO,cube,cubo,,
-WORD_TWENTY_THREE,diamond,diamante,,
-WORD_TWENTY_FOUR,diary,diario,,
-WORD_TWENTY_FIVE,dinosaur,dinosaurio,,
-WORD_TWENTY_SIX,doctor,doctor,,
-WORD_TWENTY_SEVEN,dragon,dragón,,
-WORD_TWENTY_EIGHT,elf,duende,,
-WORD_TWENTY_NINE,illness,enfermedad,,
-WORD_THIRTY,star,estrella,,
-WORD_THIRTY_ONE,party,fiesta,,
-WORD_THIRTY_TWO,france,francia,,
-WORD_THIRTY_THREE,cat,gato,,
-WORD_THIRTY_FOUR,giant,gigante,,
-WORD_THIRTY_FIVE,degree,grado,,
-WORD_THIRTY_SIX,worm,gusano,,
-WORD_THIRTY_SEVEN,ice,hielo,,
-WORD_THIRTY_EIGHT,sheet,hoja,,
-WORD_THIRTY_NINE,hotel,hotel,,
-WORD_FORTY,italy,italia,,
-WORD_FORTY_ONE,thief,ladrón,,
-WORD_FORTY_TWO,line,línea,,
-WORD_FORTY_THREE,ivory,marfíl,,
-WORD_FORTY_FOUR,dough,masa,,
-WORD_FORTY_FIVE,missile,misíl,,
-WORD_FORTY_SIX,ape,mono,,
-WORD_FORTY_SEVEN,moscow,moscú,,
-WORD_FORTY_EIGHT,orange,naranja,,
-WORD_FORTY_NINE,new york,nueva york,,
-WORD_FIFTY,order,orden,,
-WORD_FIFTY_ONE,platypus,ornitorrinco,,
-WORD_FIFTY_TWO,shovel,pala,,
-WORD_FIFTY_THREE,palm,palma,,
-WORD_FIFTY_FOUR,cake,pastel,,
-WORD_FIFTY_FIVE,beijing,pekin,,
-WORD_FIFTY_SIX,squad,pelotón,,
-WORD_FIFTY_SEVEN,movie,película,,
-WORD_FIFTY_EIGHT,piece,pieza,,
-WORD_FIFTY_NINE,pilot,piloto,,
-WORD_SIXTY,penguin,pingüino,,
-WORD_SIXTY_ONE,pirate,pirata,,
-WORD_SIXTY_TWO,gun,pistola,,
-WORD_SIXTY_THREE,pineapple,piña,,
-WORD_SIXTY_FOUR,plaque,placa,,
-WORD_SIXTY_FIVE,feather,pluma,,
-WORD_SIXTY_SIX,banana,platano,,
-WORD_SIXTY_SEVEN,cousin,prima,,
-WORD_SIXTY_EIGHT,octopus,pulpo,,
-WORD_SIXTY_NINE,point,punto,,
-WORD_SEVENTY,radio,radio,,
-WORD_SEVENTY_ONE,rule,reglas,,
-WORD_SEVENTY_TWO,king,rey,,
-WORD_SEVENTY_THREE,round,ronda,,
-WORD_SEVENTY_FOUR,serie,serie,,
-WORD_SEVENTY_FIVE,sirena,sirena,,
-WORD_SEVENTY_SIX,heel,talón,,
-WORD_SEVENTY_SEVEN,keyboard,teclado,,
-WORD_SEVENTY_EIGTH,pipeline,tubería,,
-WORD_SEVENTY_NINE,poison,veneno,,
-WORD_EIGHTY,yolk,yema,,
-WORD_EIGHTY_ONE,opera,ópera,,
-WORD_EIGHTY_TWO,organ,órgano,,
-WORD_EIGHTY_THREE,shoe,zapato,,
+﻿,en,es
+LENGUAGE_INSTRUCTION,Select lenguage,Selecciona el lenguaje
+CANCEL_BUTTON,Cancel,Cancelar
+FRIEND_REQUEST_INSTRUCTION,Type your friend's username to send a friend request,Escribe el nombre de usuario de tu amigo para enviar una solicitud de amistad
+ADDFRIEND_BUTTON,Add friend,Agregar amigo
+FRIENDREQUEST_BUTTON,Friend requests,Solicitudes de amistad
+CREATEGAME_BUTTON,Create game,Crear partida
+JOINGAME_BUTTON,Join game,Unirse a partida
+RANDOMIZE_BUTTON,Randomize teams,Randomizar equipos
+SPYMASTER_LABEL,Spy master,Espía maestro
+SPYMASTER_BUTTON,Enter as a spy master,Entrar como espía maestro
+SPIES_LABEL,Spies,Espías
+SPIES_BUTTON,Enter as a soy,Entrar como espía maestro
+ROOM_LABEL,Room:,Sala:
+INVITATIONCODE_LABEL,Invitation code,Código de invitación
+START_BUTTON,Start game,Empezar partida
+RULES_BUTTON,Rules,Reglas
+CONFIRMATION_DELETE_FRIEND,Are you sure you want to delete this friend?,¿Estás seguro que quieres eliminar este amigo?
+ACCEPT_BUTTON,Accept,Aceptar
+PROFILEINFO_LABEL,Profile Information,Información del perfil
+UPDATEPASSWORD_LABEL,Update password,Cambiar contraseña
+NICKNAME_LABEL,Nickname,Nombre de jugador
+EMAIL_LABEL,Email,Correo eletrónico
+PHOTO_LABEL,Profile photo,Foto de perfil
+SAVE_BUTTON,Save,Guardar
+ACTUALPASS_LABEL,Actual password,Contraseña actual
+NEWPASS_LABEL,New password,Nueva contraseña
+CONFIRMPASS_LABEL,Confirm password,Confirmar contraseña
+JOINGAME_INSTRUCTION,Enter a room code to be able to join with other players,Ingrese un código de sala para unise con otros jugadores.
+USERNAME_LABEL,Username,Nombre de usuario
+PASSWORD_LABEL,Password,Contraseña actual
+SINGIN_BUTTON,Sing In,Registrarse
+LOGIN_BUTTON,Log In,Ingresar
+REGISTER_TITTLE,Register New User,Registrar Usuario Nuevo
+NAME_LABEL,Name,Nombre
+PASSWORD_INSTRUCTION,"The password must contain uppercase, lowercase, numbers, and special characters","La contrseña debe contener mayúsculas, minúsculas, números y caractéres especiales"
+NAMEROOM_LABEL,Name of the room,Nombre de la sala
+CODEJOINROOM_LABEL,Code to join the room,Código para unirse a la sala
+CONFIRM_REGISTER_INSTRUCTION,Enter the code send to your email,Ingresa el código que se te envío al correo electrónico
+WARNING,Warning!,¡Atención!
+VERIFY_EMPTY_FIELDS,"There can´t be empty fields, please verify the information","No puede haber campos vacíos, por favor verifica la información"
+VERIFY_EMAIL,Verify that the email is correct.,Verifica que el correo electrónico sea correcto.
+VERIFY_PASSWORD,"Verify that your password has at least eight characters, a capital letter, a number and a special character.","Verifica que tu contraseña tenga como mínimo ocho caractéres, una mayúscula, un número y un caractér especial."
+VERIFY_CONFIRM_PASSWORD,"The entered passwords are different, please verify them.","Las contraseñas ingresadas son diferentes, por favor verificarlas."
+NOTIFICATION,Notification,Notificación
+REGISTER_COMPLETE,"Registration completed, you will be redirected to login.","Registro completado, serás redirigido al inicio de sesión."
+WRONG_REGISTER,"Registration failed, please try again later","Registro no realizado, inténtelo más tarde"
+EMAIL_REGISTER,The email entered already has an account.,El correo electrónico ingresado ya tiene una cuenta.
+USERNAME_REGISTER,The username entered is already in use.,El nombre de usuario ingresado ya está en uso.
+NICKNAME_REGISTER,The nickname entered is already in use.,El nombre de jugador ingresado ya está en uso.
+ERROR_LOADING_PROFILE,"There was an error loading the profile, please try again later","Hubo un error al cargar el perfil, intentalo más tarde"
+INCORRECT_OLD_PASSWORD,We can't update your password because your current password is not correct.,No podemos actualizar tu contraseña porque tu contraseña actual no es correcta.
+VERIFY_NICKNAME,Nickname must contain less than 40 characters,El nombre de jugador debe contener menos de 40 caracteres 
+CORRECT_PASSWORD_UPDATE,Password updated successfully,Contraseña actualizada correctamente
+ERROR_PASSWORD_UPDATE,"Failed to update password, please try again later","Error al actualizar la contraseña, inténtalo más tarde"
+ERROR,Error!,¡Error!
+CORRECT_NICKNAME_UPDATE,Nickname updated successfully,Nombre de jugador actualizado correctamente
+ERROR_NICKNAME_UPDATE,"Failed to update player name, please try again later","Error al actualizar el nombre de jugador, inténtalo más tarde"
+CORRECT_IMAGE_PROFILE_UPDATE,Profile picture updated successfully,Imagen del perfil actualizada correctamente
+ERROR_IMAGE_PROFILE_UPDATE,"Error updating profile picture, please try again later","Error al actualizar la imagen del perfil, inténtalo más tarde"
+USERNAME_NOT_FOUND,Username not found,Nombre de usuario no encontrado
+ACCEPT_FRIEND_REQUEST_INSTRUCTION,Select a user and click on the green button to accept or the red button to reject.,Selecciona un usuario y da clic en el botón verde para aceptarla o rojo para rechazarla
+FRIEND_YOURSELF,You can't send a friend request to yourself,No puedes enviarte una solicitud de amistad a ti mismo
+FRIEND_REQUEST_SENT,Friendship request sent,Solicitud de amistad enviada
+FRIEND_REQUEST_NOT_SENT,"Couldn't send friend request, try again later.","No se pudo enviar la solicitud de amistad, inténtalo más tarde"
+FRIENDSHIP_EXIST,This user is already your friend or you have already sent a friend request to this user.,Este usuario ya es tu amigo o ya enviaste una solicitud de amistad al mismo
+ERROR_LOADING_FRIENDS_REQUESTS,"There was an error loading the friend requests, try again later.","Hubo un error al cargar las solicitudes de amistad, inténtalo más tarde"
+FRIEND_REQUEST_CANT_ACCEPTED,"Unable to accept the friend request at this time, please try again later.","No se puede aceptar la solicitud de amistad en este momento, inténtalo más tarde"
+FRIEND_REQUEST_CANT_DENY,"Unable to reject the friend request at this time, try again later.","No se puede rechazar la solicitud de amistad en este momento, inténtalo más tarde"
+ERROR_LOADING_FRIENDS,"There was an error loading your friends, try again later.","Hubo un error al cargar tus amigos, inténtalo más tarde"
+DELETE_FRIEND_CORRECT,Friend successfully deleted,Amigo eliminado correctamente
+ERROR_DELETE_FRIEND,"There was an error deleting this friend, try again later.","Hubo un error al eliminar este amigo, inténtalo más tarde"
+WORD_ONE,oil,aceite
+WORD_TWO,torch,antorcha
+WORD_THREE,spider,araña
+WORD_FOUR,article,artículo
+WORD_FIVE,ace,as
+WORD_SIX,bullet,bala
+WORD_SEVEN,bar,barra
+WORD_EIGHT,bug,bicho
+WORD_NINE,block,bloque
+WORD_TEN,forest,bosque
+WORD_ELEVEN,button,botón
+WORD_TWELVE,arm,brazon
+WORD_THIRTEEN,change,cambio
+WORD_FOURTEEN,letter,carta
+WORD_FIFTEEN,cane,caña
+WORD_SIXTEEN,centaur,centauro
+WORD_SEVENTEN,scientific,científico
+WORD_EIGHTEEN,cook,cocinero
+WORD_NINETEEN,coconut,coco
+WORD_TWENTY,concert,concierto
+WORD_TWENTY_ONE,deck,cubierta
+WORD_TWENTY_TWO,cube,cubo
+WORD_TWENTY_THREE,diamond,diamante
+WORD_TWENTY_FOUR,diary,diario
+WORD_TWENTY_FIVE,dinosaur,dinosaurio
+WORD_TWENTY_SIX,doctor,doctor
+WORD_TWENTY_SEVEN,dragon,dragón
+WORD_TWENTY_EIGHT,elf,duende
+WORD_TWENTY_NINE,illness,enfermedad
+WORD_THIRTY,star,estrella
+WORD_THIRTY_ONE,party,fiesta
+WORD_THIRTY_TWO,france,francia
+WORD_THIRTY_THREE,cat,gato
+WORD_THIRTY_FOUR,giant,gigante
+WORD_THIRTY_FIVE,degree,grado
+WORD_THIRTY_SIX,worm,gusano
+WORD_THIRTY_SEVEN,ice,hielo
+WORD_THIRTY_EIGHT,sheet,hoja
+WORD_THIRTY_NINE,hotel,hotel
+WORD_FORTY,italy,italia
+WORD_FORTY_ONE,thief,ladrón
+WORD_FORTY_TWO,line,línea
+WORD_FORTY_THREE,ivory,marfíl
+WORD_FORTY_FOUR,dough,masa
+WORD_FORTY_FIVE,missile,misíl
+WORD_FORTY_SIX,ape,mono
+WORD_FORTY_SEVEN,moscow,moscú
+WORD_FORTY_EIGHT,orange,naranja
+WORD_FORTY_NINE,new york,nueva york
+WORD_FIFTY,order,orden
+WORD_FIFTY_ONE,platypus,ornitorrinco
+WORD_FIFTY_TWO,shovel,pala
+WORD_FIFTY_THREE,palm,palma
+WORD_FIFTY_FOUR,cake,pastel
+WORD_FIFTY_FIVE,beijing,pekin
+WORD_FIFTY_SIX,squad,pelotón
+WORD_FIFTY_SEVEN,movie,película
+WORD_FIFTY_EIGHT,piece,pieza
+WORD_FIFTY_NINE,pilot,piloto
+WORD_SIXTY,penguin,pingüino
+WORD_SIXTY_ONE,pirate,pirata
+WORD_SIXTY_TWO,gun,pistola
+WORD_SIXTY_THREE,pineapple,piña
+WORD_SIXTY_FOUR,plaque,placa
+WORD_SIXTY_FIVE,feather,pluma
+WORD_SIXTY_SIX,banana,platano
+WORD_SIXTY_SEVEN,cousin,prima
+WORD_SIXTY_EIGHT,octopus,pulpo
+WORD_SIXTY_NINE,point,punto
+WORD_SEVENTY,radio,radio
+WORD_SEVENTY_ONE,rule,reglas
+WORD_SEVENTY_TWO,king,rey
+WORD_SEVENTY_THREE,round,ronda
+WORD_SEVENTY_FOUR,serie,serie
+WORD_SEVENTY_FIVE,sirena,sirena
+WORD_SEVENTY_SIX,heel,talón
+WORD_SEVENTY_SEVEN,keyboard,teclado
+WORD_SEVENTY_EIGTH,pipeline,tubería
+WORD_SEVENTY_NINE,poison,veneno
+WORD_EIGHTY,yolk,yema
+WORD_EIGHTY_ONE,opera,ópera
+WORD_EIGHTY_TWO,organ,órgano
+WORD_EIGHTY_THREE,shoe,zapato

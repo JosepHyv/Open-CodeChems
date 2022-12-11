@@ -287,13 +287,6 @@ public class Network : Node
 		}
 	}
 
-	[Master]
-	public void JoinHost()
-	{
-		int senderId = GetTree().GetRpcSenderId();
-		RpcId(senderId, "JoinRoomAccepted", senderId);
-		logBlock.InsertTextAtCursor($"joining to the room with id {senderId}\n");
-	}
 
 	[Master]
 	public void JoinRoom(string code)
@@ -302,7 +295,7 @@ public class Network : Node
 		if(rooms.ContainsKey(code))
 		{
 			rooms[code].Add(senderId);
-			RpcId(senderId, "JoinRoomAccepted",senderId);
+			RpcId(senderId, "JoinRoomAccepted", code);
 			logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
 		}
 		else
