@@ -263,7 +263,7 @@ public class Network : Node
 		}
 	}
 
-	
+	[Master]
 	public void UpdateClientsRoom(string nameRoom)
 	{
 		if(rooms.ContainsKey(nameRoom))
