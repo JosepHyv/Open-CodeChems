@@ -22,7 +22,7 @@ namespace OpenCodeChems.Client.Server
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
 
-		public string currentRoom = "None";
+		public static string currentRoom = "None";
 		
 		[Signal]
 		delegate void LoggedIn();

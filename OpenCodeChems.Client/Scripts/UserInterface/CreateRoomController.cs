@@ -17,6 +17,7 @@ public class CreateRoomController : Control
 	private ItemList blueMasterList;
 	private AcceptDialog notificacion;
     private Profile currentPlayer = null;
+	private String nameRoom = Network.currentRoom;
 	public override void _Ready()
 	{  		
 		serverClient = GetNode<Network>("/root/Network") as Network;
@@ -25,8 +26,9 @@ public class CreateRoomController : Control
 		redUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
 		blueMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpyMasterBlueItemList");
 		blueUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList");
-		
 		notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
+
+		GetParent().GetNode<Label>("Control/RoomNinePatchRect/NameRoomLabel").SetText(nameRoom);
 		serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
 	}
 
