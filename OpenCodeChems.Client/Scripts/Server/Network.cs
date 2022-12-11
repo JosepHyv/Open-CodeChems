@@ -280,7 +280,7 @@ namespace OpenCodeChems.Client.Server
 		}
 		public void RoomCreated()
 		{
-			RpcId(PEER_ID, "UpdateClientsRoom", this.currentRoom);
+			RpcId(PEER_ID, "UpdateClientsRoom", currentRoom);
 		}
 
 		[Puppet]
@@ -296,7 +296,7 @@ namespace OpenCodeChems.Client.Server
 		{	
 
 			GD.Print("Cosito aceptado OwO");
-			this.currentRoom = nameRoom;
+			currentRoom = nameRoom;
 			EmitSignal(nameof(RoomCreation));
 		}
 		
@@ -312,7 +312,7 @@ namespace OpenCodeChems.Client.Server
 		public void JoinRoomAccepted(string nameRoom)
 		{
 			GD.Print($"Entrando a la sala {nameRoom}");
-			this.currentRoom = nameRoom;
+			currentRoom = nameRoom;
 			EmitSignal(nameof(RoomJoin));			
 		}
 		
@@ -320,7 +320,7 @@ namespace OpenCodeChems.Client.Server
 		public void JoinRoomFail()
 		{
 			GD.Print("Error entrando a la sala");
-			this.currentRoom = "None";
+			currentRoom = "None";
 			EmitSignal(nameof(RoomJoinFail));
 		}
 
