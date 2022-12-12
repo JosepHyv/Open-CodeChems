@@ -121,6 +121,12 @@ namespace OpenCodeChems.Client.Server
 
 		[Signal]
 		delegate void CantChangeRol();
+
+		[Signal]
+		delegate void CanBan();
+
+		[Signal]
+		delegate void BanFail();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -546,6 +552,35 @@ namespace OpenCodeChems.Client.Server
 		public void DeleteFriendNotSuccessful()
 		{
 			EmitSignal(nameof(DeleteFriendFail));
+		}
+
+		[Puppet]
+		public void BanPlayer(string playerName)
+		{
+			RpcId(PEER_ID, "BanPlayerInRoom", currentRoom, playerName);
+		}
+
+		public void BanPermission()
+		{
+			RpcId(PEER_ID, "BanPermission");
+		}
+
+		[Puppet]
+		public void BanPermissionAccept()
+		{
+			EmitSignal(nameof(CanBan));
+		}
+
+		[Puppet]
+		public void CantBan()
+		{
+			EmitSignal(nameof(BanFail));
+		}
+
+		[Puppet]
+		public void IAmBan()
+		{
+			EmitSignal(nameof(CleanRoom));
 		}
 	}
 }

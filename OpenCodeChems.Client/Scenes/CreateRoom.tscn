@@ -382,8 +382,21 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="BanPlayerConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_left = 324.0
+margin_top = 153.0
+margin_right = 677.0
+margin_bottom = 359.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Por favor, Confirma..."
+
+[connection signal="item_selected" from="RoomNinePatchRect/TeamRedColorRect/SpyMasteRedrItemList" to="." method="_on_SpyMasteRedrItemList_item_selected"]
 [connection signal="pressed" from="RoomNinePatchRect/TeamRedColorRect/JoinSpyMasterRedTextureButton" to="." method="_on_JoinSpyMasterRedTextureButton_pressed"]
+[connection signal="item_selected" from="RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList" to="." method="_on_SpiesRedItemList_item_selected"]
 [connection signal="pressed" from="RoomNinePatchRect/TeamRedColorRect/JoinSpyRedTextureButton" to="." method="_on_JoinSpyRedTextureButton_pressed"]
+[connection signal="item_selected" from="RoomNinePatchRect/TeamBlueColorRect/SpyMasterBlueItemList" to="." method="_on_SpyMasterBlueItemList_item_selected"]
 [connection signal="pressed" from="RoomNinePatchRect/TeamBlueColorRect/JoinSpyMasterBlueTextureButton" to="." method="_on_JoinSpyMasterBlueTextureButton_pressed"]
+[connection signal="item_selected" from="RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList" to="." method="_on_SpiesBlueItemList_item_selected"]
 [connection signal="pressed" from="RoomNinePatchRect/TeamBlueColorRect/JoinSpyBlueTextureButton" to="." method="_on_JoinSpyBlueTextureButton_pressed"]
 [connection signal="pressed" from="RoomNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
+[connection signal="confirmed" from="BanPlayerConfirmationDialog" to="." method="AppliBan"]

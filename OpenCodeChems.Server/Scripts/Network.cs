@@ -103,7 +103,30 @@ public class Network : Node
 		
 	}
 
-	
+	private int GetPlayerIdInRoom(string roomName, string playerName)
+	{
+		int idRoom = -1;
+		if(rooms.ContainsKey(roomName))
+		{
+			List<int> playersInRoom = rooms[roomName].members;
+			bool status = false;
+			for(int c = 0 ; c<playersInRoom.Count && !status; c++)
+			{
+				int id = playersInRoom[c];
+				if(playersData.ContainsKey(id))
+				{
+					if(playersData[id] == playerName)
+					{
+						status = true;
+						idRoom = id;
+
+					}
+				}
+			}
+		}
+
+		return idRoom;
+	}
 	
 	private void EraseRoom(string code)
 	{
@@ -256,6 +279,8 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"the nickname send by user {senderId} alredy exists\n");
 		}
 	}
+
+
 	
 	[Master]
 	private void GetProfileByUsernameRequest(string username)
@@ -379,6 +404,39 @@ public class Network : Node
 		}
 	}
 
+	[Master]
+	public void BanPlayerInRoom(string roomName, string playerName)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(rooms.ContainsKey(roomName))
+		{
+			int uniqueId = GetPlayerIdInRoom(roomName, playerName);
+			if(uniqueId != -1 && !roomOwners.ContainsKey(uniqueId))
+			{
+				rooms[roomName].BanPlayer(uniqueId);
+				RpcId(uniqueId,"IAmBan");
+				UpdateClientsRoom(roomName);
+			}
+			else
+			{
+				RpcId(senderId, "CantBan");
+			}
+		}
+		else
+		{
+			RpcId(senderId, "CantBan");
+		}
+	}
+
+	[Master]
+	public void BanPermission()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			RpcId(senderId, "BanPermissionAccept");
+		}
+	}
 
 	[Master]
 	public void JoinRoom(string code)
