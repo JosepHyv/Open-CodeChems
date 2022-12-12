@@ -65,6 +65,7 @@ public class Network : Node
 			playersData.Remove(peerId);
 		}
 		DisJoinPlayer(peerId);
+		DeleteInvitatedPlayerRequest(peerId.ToString());
 	}
 
 

@@ -90,6 +90,14 @@ public class MainMenu : Control
 			string usernameObtained = actualPlayer.username;
 			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nickname;
 			serverClient.UpdateServerData(nickname);
+			bool statusPlayer = validatePlayer();
+			if(statusPlayer == true)
+			{
+				GetParent().GetNode<Button>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/AddFriendButton").Disabled = true;
+				GetParent().GetNode<Button>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/FriendsRequestButton").Disabled = true;
+				GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/ImageProfileTextureButton").Disabled = true;
+				GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/CreateGameTextureButton").Disabled = true;
+			}
 		}
 		serverClient.GetFriends(idProfile, STATUS_FRIENDS);
 	}
