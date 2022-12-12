@@ -115,9 +115,12 @@ namespace OpenCodeChems.Client.Server
 
 		[Signal]
 		delegate void UpdatePlayersScreen(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers);
+		
 		[Signal]
 		delegate void CleanRoom();
 
+		[Signal]
+		delegate void CantChangeRol();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -235,6 +238,17 @@ namespace OpenCodeChems.Client.Server
 		public bool GetRegisteresResponse()
 		{
 			return this.regitered;
+		}
+
+		public void ChangeRolTo(string rol)
+		{
+			RpcId(PEER_ID, "UpdateRol", rol, currentRoom);
+		}
+
+		[Puppet]
+		public void NoRolChanged()
+		{
+			EmitSignal(nameof(CantChangeRol));
 		}
 
 		public void EmailRegister(string email)

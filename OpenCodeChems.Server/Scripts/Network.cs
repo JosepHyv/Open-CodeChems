@@ -295,6 +295,23 @@ public class Network : Node
 	}
 
 	[Master]
+	public void UpdateRol(string rol, string nameRoom)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(rooms.ContainsKey(nameRoom))
+		{
+			if(rooms[nameRoom].CanChange(rol, senderId))
+			{
+				UpdateClientsRoom(nameRoom);
+			}
+			else
+			{
+				RpcId(senderId, "NoRolChanged");
+			}
+		}
+	}
+
+	[Master]
 	public void UpdateClientsRoom(string nameRoom)
 	{
 		if(rooms.ContainsKey(nameRoom))

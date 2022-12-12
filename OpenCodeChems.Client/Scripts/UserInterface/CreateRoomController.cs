@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using OpenCodeChems.Client.Server;
 using static OpenCodeChems.Client.Resources.Objects;
+using OpenCodeChems.Client.Resources;
 
 public class CreateRoomController : Control
 {
@@ -30,12 +31,20 @@ public class CreateRoomController : Control
 		GetParent().GetNode<Label>("Control/RoomNinePatchRect/NameRoomLabel").SetText(nameRoom);
 		serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
+		serverClient.Connect("CantChangeRol", this, nameof(NoRolChange));
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   //public override void _Process(float delta)
     //{
     //}
+
+	public void NoRolChange()
+	{
+		notificacion.SetText("CANT_CHANGE_ROL");
+		notificacion.Visible = true;
+	}
+
 	public void ChangeToMainMenu()
 	{
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
@@ -48,21 +57,20 @@ public class CreateRoomController : Control
 	
 	public void _on_JoinSpyMasterRedTextureButton_pressed()
 	{	
-		
-		
+		serverClient.ChangeRolTo(Constants.RED_SPY_MASTER);
 	}
 	public void _on_JoinSpyRedTextureButton_pressed()
 	{
-		
+		serverClient.ChangeRolTo(Constants.RED_PLAYER);
 	}
     public void _on_JoinSpyMasterBlueTextureButton_pressed()
     {
-		
+		serverClient.ChangeRolTo(Constants.BLUE_SPY_MASTER);
     }
 	
 	public void _on_JoinSpyBlueTextureButton_pressed()
 	{
-		
+		serverClient.ChangeRolTo(Constants.BLUE_PLAYER);
 	}
 	public void AddToList(string redMaster, string blueMaster, List<string> redPlayers, List<string>bluePlayers)
 	{
