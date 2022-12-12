@@ -22,7 +22,7 @@ texture = ExtResource( 1 )
 [node name="CodeNamesItemList" type="ItemList" parent="BackGroundNinePatchRect"]
 margin_left = 93.0
 margin_top = 103.0
-margin_right = 443.0
+margin_right = 510.0
 margin_bottom = 522.0
 focus_mode = 1
 mouse_default_cursor_shape = 2
@@ -34,6 +34,7 @@ items = [ "Palabra 1", ExtResource( 7 ), false, "Palabra 2", ExtResource( 4 ), f
 auto_height = true
 max_columns = 5
 same_column_width = true
+fixed_column_width = 79
 icon_mode = 0
 
 [node name="EnviarTextureButton" type="TextureButton" parent="BackGroundNinePatchRect"]
@@ -74,5 +75,12 @@ margin_top = 306.0
 margin_right = 666.0
 margin_bottom = 330.0
 placeholder_text = "Palabra"
+
+[node name="MasterPlayerAcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 246.0
+margin_top = 208.0
+margin_right = 704.0
+margin_bottom = 390.0
+window_title = "¡Alerta!"
 
 [connection signal="pressed" from="BackGroundNinePatchRect/EnviarTextureButton" to="." method="_on_EnviarTextureButton_pressed"]

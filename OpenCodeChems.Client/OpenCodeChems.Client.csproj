@@ -1,6 +1,6 @@
 <Project Sdk="Godot.NET.Sdk/3.3.0">
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <UserSecretsId>4ca671a8-8f31-4d79-9267-d894262e76bc</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>

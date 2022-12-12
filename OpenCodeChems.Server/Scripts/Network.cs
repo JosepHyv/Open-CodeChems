@@ -6,11 +6,12 @@ using OpenCodeChems.DataAccess;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OpenCodeChems.Server.Utils;
+using OpenCodeChems.Server.Game;
 
 
 public class Network : Node
 {
-	private int DEFAULT_PORT = 5500;
+	private int DEFAULT_PORT = 6007;
 	private string ADDRESS = "localhost";
 	private int MAX_PLAYERS = 200;
 	private int PEERID = 1;
@@ -21,13 +22,18 @@ public class Network : Node
 	private RichTextLabel listening;
 	private Button connectButton;
 	private AcceptDialog dialog;
-	private Dictionary<string, List<int>> rooms;
-	
+	private Dictionary<string, RoomGame> rooms;
+	private Dictionary<int, string> roomOwners;
+	public List<int> clientsConected;
+	public Dictionary<int, string> playersData;
 
 	public override void _Ready()
 	{
+		roomOwners = new Dictionary<int, string>();
+		clientsConected = new List<int>();
+		playersData = new Dictionary<int, string>();
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
-		rooms = new Dictionary<string, List<int>>();
+		rooms = new Dictionary<string, RoomGame>();
 		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
 		portLineEdit = GetParent().GetNode<LineEdit>("Network/puerto");
 		logBlock = GetParent().GetNode<TextEdit>("Network/TextEdit");
@@ -41,12 +47,27 @@ public class Network : Node
 	private void PlayerConnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Conectado\n");
+		clientsConected.Add(peerId);
+		playersData.Add(peerId, "None");
 	}
 
 	private void PlayerDisconnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
+		clientsConected.Remove(peerId);
+		if(roomOwners.ContainsKey(peerId))
+		{
+			string roomName = roomOwners[peerId];
+			logBlock.InsertTextAtCursor($"{peerId} left the room {roomName}\n");
+			EraseRoom(roomName);
+			roomOwners.Remove(peerId);
+			playersData.Remove(peerId);
+		}
+		DisJoinPlayer(peerId);
 	}
+
+
+	
 
 	private void _on_Button_pressed()
 	{
@@ -81,6 +102,23 @@ public class Network : Node
 		}
 		
 	}
+
+	
+	
+	private void EraseRoom(string code)
+	{
+		if(rooms.ContainsKey(code))
+		{
+			List<int> playersInRoom = rooms[code].members;
+			for(int c = 0 ; c<playersInRoom.Count; c++)
+			{
+				int senderId = playersInRoom[c];
+				logBlock.InsertTextAtCursor($"player {senderId} exiting room {code}\n");
+				RpcId(senderId,"ExitRoom");
+			}
+			rooms.Remove(code);
+		}
+	}
 	
 	[Master]
 	private void LoginRequest(string username, string password)
@@ -96,6 +134,35 @@ public class Network : Node
 		{
 			RpcId(senderId, "LoginFailed");
 			logBlock.InsertTextAtCursor($"Player no. {senderId} logged in failed.\n");
+		}
+
+	}
+
+	private void DisJoinPlayer(int senderId)
+	{
+		foreach(KeyValuePair<string, RoomGame> roomName in rooms)
+		{
+			DeletePlayer(roomName.Key);
+		}
+	}
+
+	[Master]
+	private void DeletePlayer(string nameRoom)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			EraseRoom(roomOwners[senderId]);
+			roomOwners.Remove(senderId);
+
+		}
+		if(rooms.ContainsKey(nameRoom))
+		{
+			if(rooms[nameRoom].Exist(senderId))
+			{
+				rooms[nameRoom].RemovePlayer(senderId);
+				UpdateClientsRoom(nameRoom);
+			}
 		}
 	}
 
@@ -138,9 +205,10 @@ public class Network : Node
 			}
 		}
 		catch (DbUpdateException)
-	{
-	   RpcId(senderId, "RegisterFail");
-	}
+		{
+			RpcId(senderId, "RegisterFail");
+		}
+
 	}
 
 	[Master]
@@ -219,6 +287,14 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
 		}
 	}
+
+	[Master]
+	public void UpdateData(string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		playersData[senderId] = nickname;
+	}
+
 	
 	[Master]
 	public void CreateRoom(string code)
@@ -231,23 +307,97 @@ public class Network : Node
 		}
 		else
 		{
-			List<int>hostRoom = new List<int>();
-			hostRoom.Add(senderId);
+			RoomGame hostRoom = new RoomGame();
+			hostRoom.AddPlayer(senderId);
 			rooms.Add(code, hostRoom);
+			roomOwners.Add(senderId, code);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
-			RpcId(senderId, "CreateRoomAccepted");
+			RpcId(senderId, "CreateRoomAccepted", code);
+			logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
+			
 		}
 	}
-	
+
+	[Master]
+	public void UpdateRol(string rol, string nameRoom)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(rooms.ContainsKey(nameRoom))
+		{
+			if(rooms[nameRoom].CanChange(rol, senderId))
+			{
+				UpdateClientsRoom(nameRoom);
+			}
+			else
+			{
+				RpcId(senderId, "NoRolChanged");
+			}
+		}
+	}
+
+	[Master]
+	public void UpdateClientsRoom(string nameRoom)
+	{
+		if(rooms.ContainsKey(nameRoom))
+		{
+			List<int> playersInRoom = rooms[nameRoom].members;
+			for(int c = 0 ; c<playersInRoom.Count; c++)
+			{
+				int master = playersInRoom[c];
+				logBlock.InsertTextAtCursor($"sending to {master} -> {playersData[master]} the players updated:\n");
+				for(int d = 0 ; d<playersInRoom.Count; d++)
+				{
+					string separator = (d < playersInRoom.Count -1 ) ? "," : ".";
+					int slave =  playersInRoom[d];
+					logBlock.InsertTextAtCursor($"{playersData[slave]}{separator}");
+				}
+				string redSpyMaster = null;
+				string blueSpyMaster = null;
+				if(playersData.ContainsKey(rooms[nameRoom].redSpyMaster))
+				{
+					redSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
+				}
+
+				if(playersData.ContainsKey(rooms[nameRoom].blueSpyMaster))
+				{
+					blueSpyMaster = playersData[rooms[nameRoom].blueSpyMaster];
+				}
+				
+				List<string> redPlayers = new List<string>(); // rooms[nameRoom].redPlayers;
+				List<string> bluePlayers = new List<string>();// rooms[nameRoom].bluePlayers;
+				foreach(int id in rooms[nameRoom].redPlayers)
+				{
+					redPlayers.Add(playersData[id]);
+				}
+				foreach(int id in rooms[nameRoom].bluePlayers)
+				{
+					bluePlayers.Add(playersData[id]);
+				}
+				RpcId(master,"UpdateRoom", redSpyMaster, blueSpyMaster, redPlayers, bluePlayers);
+			}
+			logBlock.InsertTextAtCursor("\n");
+		}
+	}
+
+
 	[Master]
 	public void JoinRoom(string code)
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		if(rooms.ContainsKey(code))
 		{
-			rooms[code].Add(senderId);
-			RpcId(senderId, "JoinRoomAccepted");
-			logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
+			if(rooms[code].CanJoin(senderId))
+			{
+				rooms[code].AddPlayer(senderId);
+				RpcId(senderId, "JoinRoomAccepted", code);
+				logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
+			}
+			else
+			{
+				RpcId(senderId, "JoinRoomFail");
+				logBlock.InsertTextAtCursor($"user {senderId} can't join to {code} room\n");
+			}
+			
 		}
 		else
 		{

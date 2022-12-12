@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -10,34 +10,34 @@ anchor_bottom = 1.0
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 600.0
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="NinePatchRect"]
-margin_left = 387.0
+margin_left = 368.0
 margin_top = 205.0
-margin_right = 617.0
+margin_right = 642.0
 margin_bottom = 219.0
-text = "Ingrese correo asociado a su cuenta"
+text = "Ingrese el nombre que usarás en la partida"
 
 [node name="LineEdit" type="LineEdit" parent="NinePatchRect"]
 margin_left = 368.0
 margin_top = 286.0
 margin_right = 631.0
 margin_bottom = 342.0
-placeholder_text = "correo electronico"
+placeholder_text = "Nombre de jugador"
 
 [node name="TextureButton" type="TextureButton" parent="NinePatchRect"]
 margin_left = 417.0
 margin_top = 365.0
 margin_right = 591.0
 margin_bottom = 440.0
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 2 )
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 1 )
 expand = true
 
 [node name="Label" type="Label" parent="NinePatchRect/TextureButton"]
-margin_left = 55.0
+margin_left = 71.0
 margin_top = 32.0
-margin_right = 119.0
+margin_right = 135.0
 margin_bottom = 46.0
-text = "Recuperar"
+text = "Jugar"

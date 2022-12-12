@@ -23,7 +23,7 @@ cubo
 diamante
 diario
 dinosaurio
-doctór
+doctor
 dragón
 duende
 enfermedad

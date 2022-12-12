@@ -11,7 +11,7 @@ namespace OpenCodeChems.Client.Server
 	{
 
 		private int SERVER_ID = 1;
-		public int DEFAULT_PORT {get; set;} = 5500;
+		public int DEFAULT_PORT {get; set;} = 6007;
 		private int MAX_PLAYERS = 200; 
 		public string ADDRESS {get; set;} = "localhost";
 		private int PEER_ID = 1;
@@ -21,6 +21,8 @@ namespace OpenCodeChems.Client.Server
 		public Profile profileByNicknameObtained = null;
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
+
+		public static string currentRoom = "None";
 		
 		[Signal]
 		delegate void LoggedIn();
@@ -77,6 +79,8 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void EditImageProfileFail();
 		[Signal]
+		delegate void DiosTienePoder();
+		[Signal]
 		delegate void CorrectAddFriend();
 		[Signal]
 		delegate void AddFriendFail();
@@ -108,8 +112,15 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectDeleteFriend();
 		[Signal]
 		delegate void DeleteFriendFail();
-		
 
+		[Signal]
+		delegate void UpdatePlayersScreen(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers);
+		
+		[Signal]
+		delegate void CleanRoom();
+
+		[Signal]
+		delegate void CantChangeRol();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -135,6 +146,10 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(ServerDead));
 		}
 
+		public void UpdateServerData(string nickname)
+		{
+			RpcId(PEER_ID, "UpdateData", nickname);
+		}
 		public void ConnectToServer()
 		{
 			networkPeer.CreateClient(ADDRESS, DEFAULT_PORT);
@@ -160,6 +175,27 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID,"LoginRequest", username, password);
 			GD.Print("Request enviado");
 			
+		}
+
+		public void LogOut()
+		{
+			GD.Print("Logged from server");
+			profileByUsernameObtained = null;
+			profileByNicknameObtained = null;
+			friendsObtained = null;
+			friendsRequestsObtained = null;
+
+		}
+
+		public void LeftRoom()
+		{
+			RpcId(PEER_ID, "DeletePlayer", currentRoom);
+		}
+
+		[Puppet]
+		public void ExitRoom()
+		{
+			EmitSignal(nameof(CleanRoom));
 		}
 
 		[Puppet]
@@ -202,6 +238,17 @@ namespace OpenCodeChems.Client.Server
 		public bool GetRegisteresResponse()
 		{
 			return this.regitered;
+		}
+
+		public void ChangeRolTo(string rol)
+		{
+			RpcId(PEER_ID, "UpdateRol", rol, currentRoom);
+		}
+
+		[Puppet]
+		public void NoRolChanged()
+		{
+			EmitSignal(nameof(CantChangeRol));
 		}
 
 		public void EmailRegister(string email)
@@ -263,10 +310,30 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID, "CreateRoom", name);
 		}
 		
-		[Puppet]
-		public void CreateRoomAccepted()
+		public void ClientJoinRoom(string name)
 		{
+			GD.Print("Try to Join to Room");
+			RpcId(PEER_ID, "JoinRoom", name);
+		}
+		public void RoomCreated()
+		{
+			RpcId(PEER_ID, "UpdateClientsRoom", currentRoom);
+		}
+
+		[Puppet]
+		public void UpdateRoom(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers)
+		{
+			GD.Print($"Recibed packages");
+			EmitSignal(nameof(UpdatePlayersScreen), redMaster, blueMaster, redPlayers, bluePlayers);
+			
+		}
+		
+		[Puppet]
+		public void CreateRoomAccepted(string nameRoom)
+		{	
+
 			GD.Print("Cosito aceptado OwO");
+			currentRoom = nameRoom;
 			EmitSignal(nameof(RoomCreation));
 		}
 		
@@ -276,6 +343,22 @@ namespace OpenCodeChems.Client.Server
 			GD.Print("Error creando la sala, ya existe una con la misma clave");
 			EmitSignal(nameof(RoomCreationFail));
 
+		}
+		
+		[Puppet]
+		public void JoinRoomAccepted(string nameRoom)
+		{
+			GD.Print($"Entrando a la sala {nameRoom}");
+			currentRoom = nameRoom;
+			EmitSignal(nameof(RoomJoin));			
+		}
+		
+		[Puppet]
+		public void JoinRoomFail()
+		{
+			GD.Print("Error entrando a la sala");
+			currentRoom = "None";
+			EmitSignal(nameof(RoomJoinFail));
 		}
 
 		public void GetProfileByUsername(string username)
