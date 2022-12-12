@@ -7,8 +7,8 @@
 */packages/
 */.vs/
 *.apk
-
-
+*/android/
+*.apk.idsig
 # ================================
 
 # intellijIdea Rider C# files unnecesary 

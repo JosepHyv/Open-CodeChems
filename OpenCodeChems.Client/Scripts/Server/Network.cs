@@ -547,5 +547,11 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(DeleteFriendFail));
 		}
+
+		[Puppet]
+		public void BanPlayer(string playerName)
+		{
+			RpcId(PEER_ID, "BanPlayerInRoom", currentRoom, playerName);
+		}
 	}
 }

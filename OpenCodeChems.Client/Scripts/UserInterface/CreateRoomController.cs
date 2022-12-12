@@ -17,27 +17,48 @@ public class CreateRoomController : Control
 	private ItemList redMasterList;
 	private ItemList blueMasterList;
 	private AcceptDialog notificacion;
+	private ConfirmationDialog banPlayerDialog;
    
 	private String nameRoom = Network.currentRoom;
+
+	private string banName = null;
 	public override void _Ready()
 	{  		
 		serverClient = GetNode<Network>("/root/Network") as Network;
+		banPlayerDialog = GetParent().GetNode<ConfirmationDialog>("Control/BanPlayerConfirmationDialog");
 		redMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpyMasteRedrItemList");
 		redUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
 		blueMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpyMasterBlueItemList");
 		blueUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList");
 		notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
 
+		banPlayerDialog.GetCancel().Connect("pressed", this, nameof(CancelBan));
+		banPlayerDialog.GetAccept().Connect("pressed", this, nameof(AppliBan));
+
 		GetParent().GetNode<Label>("Control/RoomNinePatchRect/NameRoomLabel").SetText(nameRoom);
 		serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 		serverClient.Connect("CantChangeRol", this, nameof(NoRolChange));
+
 	}
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
   //public override void _Process(float delta)
     //{
     //}
+
+	public void CancelBan()
+	{
+		banPlayerDialog.Visible = false;
+	}
+
+	public void AppliBan()
+	{
+		if(banName != null)
+		{
+			serverClient.BanPlayer(banName);
+		}
+	}
 
 	public void NoRolChange()
 	{
