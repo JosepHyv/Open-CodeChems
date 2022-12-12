@@ -36,6 +36,7 @@ public class MainMenu : Control
 	public void _on_LogOutTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/LogIn.tscn");
+		serverClient.LogOut();
 	}
 	public void _on_CreateGameTextureButton_pressed()
 	{

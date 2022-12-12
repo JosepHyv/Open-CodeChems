@@ -114,10 +114,13 @@ namespace OpenCodeChems.Client.Server
 		delegate void DeleteFriendFail();
 
 		[Signal]
-		delegate void UpdatePlayersScreen(List<string> usersInRoom);
+		delegate void UpdatePlayersScreen(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers);
+		
 		[Signal]
 		delegate void CleanRoom();
 
+		[Signal]
+		delegate void CantChangeRol();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -174,6 +177,21 @@ namespace OpenCodeChems.Client.Server
 			
 		}
 
+		public void LogOut()
+		{
+			GD.Print("Logged from server");
+			profileByUsernameObtained = null;
+			profileByNicknameObtained = null;
+			friendsObtained = null;
+			friendsRequestsObtained = null;
+
+		}
+
+		public void LeftRoom()
+		{
+			RpcId(PEER_ID, "DeletePlayer", currentRoom);
+		}
+
 		[Puppet]
 		public void ExitRoom()
 		{
@@ -220,6 +238,17 @@ namespace OpenCodeChems.Client.Server
 		public bool GetRegisteresResponse()
 		{
 			return this.regitered;
+		}
+
+		public void ChangeRolTo(string rol)
+		{
+			RpcId(PEER_ID, "UpdateRol", rol, currentRoom);
+		}
+
+		[Puppet]
+		public void NoRolChanged()
+		{
+			EmitSignal(nameof(CantChangeRol));
 		}
 
 		public void EmailRegister(string email)
@@ -292,10 +321,10 @@ namespace OpenCodeChems.Client.Server
 		}
 
 		[Puppet]
-		public void UpdateRoom(List<string> usersInRoom)
+		public void UpdateRoom(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers)
 		{
-			GD.Print($"Recibed {usersInRoom}");
-			EmitSignal(nameof(UpdatePlayersScreen), usersInRoom);
+			GD.Print($"Recibed packages");
+			EmitSignal(nameof(UpdatePlayersScreen), redMaster, blueMaster, redPlayers, bluePlayers);
 			
 		}
 		
