@@ -155,3 +155,5 @@ WORD_EIGHTY_TWO,organ,órgano
 WORD_EIGHTY_THREE,shoe,zapato
 REPEATED_WORD,repeated word,palabra repetida
 SENDED_WORD,SEND,ENVIAR
+WORD_PLACEHOLDER,Word,Palabra
+CODENAME_INSTRUCTION,Send a keyword and a number to create the codename,Manda una palabra clave y un número para formar el código secreto

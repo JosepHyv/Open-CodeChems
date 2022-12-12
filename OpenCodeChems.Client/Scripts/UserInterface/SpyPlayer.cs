@@ -3,48 +3,27 @@ using System;
 
 public class SpyPlayer : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
+	private LineEdit ChatLineEdit; 
+	private TextEdit ChatBlock;
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		GD.Print("Hola mundo en godot");
-		GD.Print(TranslationServer.GetLocale());
+		ChatLineEdit = GetParent().GetNode<LineEdit>("SpyPlayer/ChatLineEdit");
+		ChatBlock = GetParent().GetNode<TextEdit>("SpyPlayer/ChatTextEdit");
 
 	}
 
-	/*private void _on_CodeNamesItemList_item_selected(InputEventMouseButton e)
+	private void _on_ChatTextureButton_pressed()
 	{
-		
-	   
-		
-		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
-		string[] listElements = new string[itemNode.GetItemCount()];
-
-		int elemento = 7;
-		string palabra = "Astroaut";
-
-		itemNode.SetItemText(elemento, palabra);
-
-
-		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
-		{
-			
-				var card = itemNode.GetItemMetadata(c);
-				GD.Print(card);
-		}
-
-		GD.Print("=================="); 
-
-			
-	}*/
+		string message = ChatLineEdit.GetText();
+		ChatLineEdit.Clear();
+		ChatBlock.InsertTextAtCursor($"{message}\n");
+	}
 	private void _on_CodeNamesItemList_item_selected(int index)
 	{
 		
-		TranslationServer.SetLocale("en");
 		
 		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		var  selectedCard = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/SelectedCardRichTextLabel");

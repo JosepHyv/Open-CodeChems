@@ -8,7 +8,6 @@ public class RecoverPassword : Control
     public override void _Ready()
     {
         var to = new {email = "miguelzinedinne@gmail.com"};
-        var
         GetNode("NinePatchRect/HTTPRequest").Connect("request_completed", this, "OnRequestCompleted");
     }
 
