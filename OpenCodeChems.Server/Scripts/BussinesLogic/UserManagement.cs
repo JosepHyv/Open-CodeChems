@@ -615,6 +615,14 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+
+        /// <summary>
+        /// dalete a user that played as invitated
+        /// </summary>
+        /// <param name = "username"> receives a string with de username of the player </param>
+        /// <returns>boolean with true value if could delete the user registerd</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if username is null</exception>
         public bool DeleteInvitatedPlayer(string username)
         {
             bool status = false;
@@ -637,6 +645,14 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+
+        /// <summary>
+        /// add a victory to the player with de nickname provided 
+        /// </summary>
+        /// <param name = "nickname"> receives a string with the nickname of the user </param>
+        /// <returns>boolean with true value if could update the victories of the user</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw nickname is null</exception>
         public bool AddVictory(string nickname)
         {
             bool status;
@@ -660,6 +676,14 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+
+        /// <summary>
+        /// add a defeat to the player with de nickname provided 
+        /// </summary>
+        /// <param name = "nickname"> receives a string with the nickname of the user </param>
+        /// <returns>boolean with true value if could update the defeats of the user</returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw nickname is null</exception>
         public bool AddDefeat(string nickname)
         {
             bool status;

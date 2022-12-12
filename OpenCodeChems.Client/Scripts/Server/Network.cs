@@ -634,7 +634,7 @@ namespace OpenCodeChems.Client.Server
 
 		public void ClientsChangeScene()
 		{
-			
+			RpcId(PEER_ID, "UpdateGame", currentRoom);
 		}
 		
 		

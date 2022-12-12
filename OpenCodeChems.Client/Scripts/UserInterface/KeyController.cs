@@ -16,6 +16,7 @@ public class KeyController : Control
 	{   
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		LoadKey();
+		randomNumber = RandomClass.Next(0,4);
 		serverClient.SendSceneToServer(randomNumber);
 	
 	}
