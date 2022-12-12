@@ -320,7 +320,7 @@ public class Network : Node
 			for(int c = 0 ; c<playersInRoom.Count; c++)
 			{
 				int master = playersInRoom[c];
-				logBlock.InsertTextAtCursor($"sending to {master} the players updated:\n");
+				logBlock.InsertTextAtCursor($"sending to {master} -> {playersData[master]} the players updated:\n");
 				for(int d = 0 ; d<playersInRoom.Count; d++)
 				{
 					string separator = (d < playersInRoom.Count -1 ) ? "," : ".";
