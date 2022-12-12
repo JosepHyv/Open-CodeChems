@@ -13,7 +13,12 @@ public class SpyPlayer : Control
 	private ImageTexture textureCivil = new ImageTexture();
 	private string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
 	private ImageTexture textureAssassin = new ImageTexture();
-	
+
+	private string PATH_RED_COLOR = "Scenes/Resources/Icons/squareRed.png";
+	private ImageTexture textureRed = new ImageTexture();
+	private string PATH_BLUE_COLOR = "Scenes/Resources/Icons/squareBlue.png";
+	private ImageTexture textureBlue = new ImageTexture();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -26,7 +31,10 @@ public class SpyPlayer : Control
 	{
 		string message = ChatLineEdit.GetText();
 		ChatLineEdit.Clear();
-		ChatBlock.InsertTextAtCursor($"{message}\n");
+		if(!String.IsNullOrWhiteSpace(message))
+		{
+			ChatBlock.InsertTextAtCursor($"{message}\n");
+		}
 	}
 	private void _on_CodeNamesItemList_item_selected(int index)
 	{
