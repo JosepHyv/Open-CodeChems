@@ -74,6 +74,7 @@ public class CreateRoomController : Control
 	}
 	public void AddToList(string redMaster, string blueMaster, List<string> redPlayers, List<string>bluePlayers)
 	{
+
 		redMasterList.Clear();
 		blueMasterList.Clear();
 		redUsersList.Clear();
@@ -98,10 +99,7 @@ public class CreateRoomController : Control
 		{
 			blueUsersList.AddItem(name);
 		}
-		/*if(currentPlayer != null)
-        { 
-			//membersBalance[1]= membersBalance[1]+1;
-        }*/
+
 		
 		
 	}
