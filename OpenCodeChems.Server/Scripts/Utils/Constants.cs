@@ -16,6 +16,17 @@ namespace OpenCodeChems.Server.Standar
         public static int MAX_BLUE_PLAYERS = 3;
 
         public static int MAX_MEMBERS = 8;
+
+        public static int BLUE = 0;
+
+        public static int RED = 1;
+
+        public static int YELLOW = 2;
+
+        public static int BLACK = 3;
+        
+        
+        
     }
     
 }
