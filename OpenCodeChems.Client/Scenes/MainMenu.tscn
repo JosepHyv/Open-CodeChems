@@ -156,6 +156,13 @@ texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 6 )
 expand = true
 
+[node name="MainMenuAcceptDialog" type="AcceptDialog" parent="BackgroundMenuNinePatchRect"]
+margin_left = 246.0
+margin_top = 217.0
+margin_right = 614.0
+margin_bottom = 399.0
+window_title = "¡Alerta!"
+
 [connection signal="pressed" from="BackgroundMenuNinePatchRect/MenuColorRect/AddFriendButton" to="." method="_on_AddFriendButton_pressed"]
 [connection signal="pressed" from="BackgroundMenuNinePatchRect/MenuColorRect/FriendsRequestButton" to="." method="_on_FriendsRequestButton_pressed"]
 [connection signal="item_selected" from="BackgroundMenuNinePatchRect/MenuColorRect/FriendsItemList" to="." method="_on_FriendsItemList_item_selected"]

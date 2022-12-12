@@ -26,6 +26,7 @@ public class Network : Node
 	private Dictionary<int, string> roomOwners;
 	public List<int> clientsConected;
 	public Dictionary<int, string> playersData;
+	private static Encryption PASSWORD_HASHER = new Encryption();
 
 	public override void _Ready()
 	{
@@ -64,6 +65,7 @@ public class Network : Node
 			playersData.Remove(peerId);
 		}
 		DisJoinPlayer(peerId);
+		DeleteInvitatedPlayerRequest(peerId.ToString());
 	}
 
 
@@ -103,7 +105,30 @@ public class Network : Node
 		
 	}
 
-	
+	private int GetPlayerIdInRoom(string roomName, string playerName)
+	{
+		int idRoom = -1;
+		if(rooms.ContainsKey(roomName))
+		{
+			List<int> playersInRoom = rooms[roomName].members;
+			bool status = false;
+			for(int c = 0 ; c<playersInRoom.Count && !status; c++)
+			{
+				int id = playersInRoom[c];
+				if(playersData.ContainsKey(id))
+				{
+					if(playersData[id] == playerName)
+					{
+						status = true;
+						idRoom = id;
+
+					}
+				}
+			}
+		}
+
+		return idRoom;
+	}
 	
 	private void EraseRoom(string code)
 	{
@@ -256,6 +281,8 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"the nickname send by user {senderId} alredy exists\n");
 		}
 	}
+
+
 	
 	[Master]
 	private void GetProfileByUsernameRequest(string username)
@@ -379,6 +406,39 @@ public class Network : Node
 		}
 	}
 
+	[Master]
+	public void BanPlayerInRoom(string roomName, string playerName)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(rooms.ContainsKey(roomName))
+		{
+			int uniqueId = GetPlayerIdInRoom(roomName, playerName);
+			if(uniqueId != -1 && !roomOwners.ContainsKey(uniqueId))
+			{
+				rooms[roomName].BanPlayer(uniqueId);
+				RpcId(uniqueId,"IAmBan");
+				UpdateClientsRoom(roomName);
+			}
+			else
+			{
+				RpcId(senderId, "CantBan");
+			}
+		}
+		else
+		{
+			RpcId(senderId, "CantBan");
+		}
+	}
+
+	[Master]
+	public void BanPermission()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			RpcId(senderId, "BanPermissionAccept");
+		}
+	}
 
 	[Master]
 	public void JoinRoom(string code)
@@ -607,6 +667,58 @@ public class Network : Node
 		{
 			RpcId(senderId, "DeleteFriendNotSuccessful");
 			logBlock.InsertTextAtCursor($"user {senderId} can't delete friend {idProfileFriend}\n");
+		}
+	}
+	[Master]
+	private void RegisterUserInvitatedRequest()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		try
+		{
+			string hashPassword = PASSWORD_HASHER.ComputeSHA256Hash(senderId.ToString());
+			string username = senderId.ToString();
+			string name = "Chemsito" + senderId.ToString();
+			string email = senderId.ToString() + "@email.com";
+			string nickname = "Chemsito" + senderId.ToString();
+			int victories = 0;
+			int defeats = 0;
+			byte [] imageProfile = null;
+			User newUser = new User(username, hashPassword, name, email);
+			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
+			if(USER_MANAGEMENT.RegisterUser(newUser) == true)
+			{
+				if (USER_MANAGEMENT.RegisterProfile(newProfile) == true)
+				{
+			  		RpcId(senderId, "RegisterInvitatedSuccesful", username);
+				  	logBlock.InsertTextAtCursor($"Player no. {senderId} registered as invitated in successfully.\n");      
+				}       	           
+			}
+			else
+			{
+				RpcId(senderId, "RegisterInvitatedFail");
+				logBlock.InsertTextAtCursor($"Player no. {senderId} registered as invitated in failed.\n");
+			}
+		}
+		catch (DbUpdateException)
+		{
+			RpcId(senderId, "RegisterInvitatedFail");
+			logBlock.InsertTextAtCursor($"Player no. {senderId} registered as invitated in failed.\n");
+		}
+
+	}
+	[Master]
+	private void DeleteInvitatedPlayerRequest(string username)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(USER_MANAGEMENT.DeleteInvitatedPlayer(username) == true)
+		{
+			RpcId(senderId, "DeleteInvitatedPlayerSuccessful");
+			logBlock.InsertTextAtCursor($"Player as invitated {senderId} delete in sucessfully.\n");
+		}
+		else
+		{	
+			RpcId(senderId, "DeleteInvitatedPlayerFail");
+			logBlock.InsertTextAtCursor($"Player as invitated {senderId} delete in failed.\n");
 		}
 	}
 }

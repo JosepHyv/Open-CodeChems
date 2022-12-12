@@ -615,5 +615,27 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+        public bool DeleteInvitatedPlayer(string username)
+        {
+            bool status = false;
+            try{
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {
+                    var invitatedPlayer = (from Users in context.User where Users.username == username select Users).First();
+                    context.User.Remove(invitatedPlayer);
+                    context.SaveChanges();
+                    status = true;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch (InvalidOperationException)
+            {
+                status = false;
+            }
+            return status;
+        }
     }
 }

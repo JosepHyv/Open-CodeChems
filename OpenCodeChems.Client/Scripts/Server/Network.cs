@@ -21,6 +21,7 @@ namespace OpenCodeChems.Client.Server
 		public Profile profileByNicknameObtained = null;
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
+		public static string usernamePlayerAsInvitated = "";
 
 		public static string currentRoom = "None";
 		
@@ -79,8 +80,6 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void EditImageProfileFail();
 		[Signal]
-		delegate void DiosTienePoder();
-		[Signal]
 		delegate void CorrectAddFriend();
 		[Signal]
 		delegate void AddFriendFail();
@@ -121,6 +120,23 @@ namespace OpenCodeChems.Client.Server
 
 		[Signal]
 		delegate void CantChangeRol();
+
+		[Signal]
+		delegate void InvitatedRegistered();
+		[Signal]
+		delegate void InvitatedRegisteredFail();
+		[Signal]
+		delegate void CorrectDeleteInvitated();
+		[Signal]
+		delegate void DeleteInvitatedFail();
+
+
+		[Signal]
+		delegate void CanBan();
+
+		[Signal]
+		delegate void BanFail();
+
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -546,6 +562,65 @@ namespace OpenCodeChems.Client.Server
 		public void DeleteFriendNotSuccessful()
 		{
 			EmitSignal(nameof(DeleteFriendFail));
+		}
+
+		public void RegisterUserInvitated()
+		{
+			RpcId(PEER_ID, "RegisterUserInvitatedRequest");
+		}
+		[Puppet]
+		public void RegisterInvitatedSuccesful(string username)
+		{
+			usernamePlayerAsInvitated = username;
+			EmitSignal(nameof(InvitatedRegistered));
+		}
+		[Puppet]
+		public void RegisterInvitatedFail()
+		{
+			EmitSignal(nameof(InvitatedRegisteredFail));
+		}
+		public void DeleteInvitatedPlayer(string username)
+		{
+			RpcId(PEER_ID, "DeleteInvitatedPlayerRequest", username);
+		}
+		[Puppet]
+		public void DeleteInvitatedPlayerSuccessful()
+		{
+			EmitSignal(nameof(CorrectDeleteInvitated));
+		}
+    [Puppet]
+		public void DeleteInvitatedPlayerFail()
+		{
+			EmitSignal(nameof(DeleteInvitatedFail));
+    }
+
+		[Puppet]
+		public void BanPlayer(string playerName)
+		{
+			RpcId(PEER_ID, "BanPlayerInRoom", currentRoom, playerName);
+		}
+
+		public void BanPermission()
+		{
+			RpcId(PEER_ID, "BanPermission");
+		}
+
+		[Puppet]
+		public void BanPermissionAccept()
+		{
+			EmitSignal(nameof(CanBan));
+		}
+
+		[Puppet]
+		public void CantBan()
+		{
+			EmitSignal(nameof(BanFail));
+		}
+
+		[Puppet]
+		public void IAmBan()
+		{
+			EmitSignal(nameof(CleanRoom));
 		}
 	}
 }

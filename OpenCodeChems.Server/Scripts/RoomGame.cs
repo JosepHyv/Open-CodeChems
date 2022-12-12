@@ -12,6 +12,7 @@ namespace OpenCodeChems.Server.Game
         
         public int NumberPlayers {get;set;} = 0;
         public List<int> members {get;set;} = new List<int>();
+        public List<int> blackList {get;set;} = new List<int>();
         public int redSpyMaster {get; set;} = -1;
 
         public int blueSpyMaster {get; set;} = -1;
@@ -182,7 +183,18 @@ namespace OpenCodeChems.Server.Game
                 }
             }
 
+            if(status)
+            {
+                status = status & !blackList.Contains(uniqueId);
+            }
+
             return status;
+        }
+
+        public void BanPlayer(int uniqueId)
+        {
+            RemovePlayer(uniqueId);
+            blackList.Add(uniqueId);
         }
 
 

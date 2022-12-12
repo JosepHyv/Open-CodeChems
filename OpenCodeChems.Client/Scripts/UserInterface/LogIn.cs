@@ -13,6 +13,7 @@ public class LogIn : Control
 	Network serverClient;
 	int PEER_ID = 1; 
 	private Task<bool> loggedStatus = Task<bool>.FromResult(false);
+	private Task<bool> registeredStatus = Task<bool>.FromResult(false);
 	public static string username = "";
 	private string password = "";
 	public override void _Ready()
@@ -20,6 +21,8 @@ public class LogIn : Control
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("LoggedIn", this, nameof(LoggedAcepted));
 		serverClient.Connect("LoggedFail", this, nameof(LoggedFailed));
+		serverClient.Connect("InvitatedRegistered", this, nameof(RegisteredAsInvitatedAccepted));
+		serverClient.Connect("InvitatedRegisteredFail", this, nameof(RegisteredAsInvitatedFail));
 	}
 
 
@@ -48,6 +51,11 @@ public class LogIn : Control
 		
 
 	}
+
+	private void _on_PlayInvitatedTextureButton_pressed()
+	{
+		serverClient.RegisterUserInvitated();
+	}
 	
 	public void LoggedAcepted()
 	{
@@ -63,7 +71,23 @@ public class LogIn : Control
 		loggedStatus = Task<bool>.FromResult(false);
 	}
 
+	public void RegisteredAsInvitatedAccepted()
+	{
+		registeredStatus = Task<bool>.FromResult(true);
+		username = Network.usernamePlayerAsInvitated;
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetTitle("NOTIFICATION");	
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("REGISTER_COMPLETE");
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+	}
 	
+	public void RegisteredAsInvitatedFail()
+	{
+		registeredStatus = Task<bool>.FromResult(false);
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("WRONG_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
+	}
 }   
 
 

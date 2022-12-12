@@ -30,6 +30,11 @@ config/name="OpenCodeChems.Server"
 run/main_scene="res://Scenes/Network.tscn"
 config/icon="res://icon.png"
 
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/WAT/plugin.cfg" )
+
 [global]
 
 etc=false

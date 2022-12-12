@@ -24,7 +24,7 @@ public class FriendRequests : Control
     {
         serverClient = GetNode<Network>("/root/Network") as Network;
         serverClient.Connect("FriendsRequestsFound", this, nameof(GetFriendsRequestsComplete));
-		serverClient.Connect("FriendsRequestsNotObtained", this, nameof(GetFriendsRequestsFail));
+		serverClient.Connect("FriendsRequestsNotFound", this, nameof(GetFriendsRequestsFail));
         serverClient.GetFriendsRequests(idProfileActualPlayer, STATUS_FRIENDS_REQUESTS);
         serverClient.Connect("ProfileByNicknameFound", this, nameof(GetProfileByNicknameComplete));
 		serverClient.Connect("ProfileByNicknameNotFound", this, nameof(GetProfileByNicknameFail));
