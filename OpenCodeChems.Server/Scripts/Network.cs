@@ -721,6 +721,33 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"Player as invitated {senderId} delete in failed.\n");
 		}
 	}
+
+	[Master]
+	private void AddSceneRoom(string nameRom, int number)
+	{
+		if(rooms.ContainsKey(nameRom))
+		{
+			rooms[nameRom].SceneNumber = number;
+		}
+	}
+
+	[Master]
+	private void CanStart()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			string nameRoom = roomOwners[senderId];
+			if(rooms[nameRoom].CanStart())
+			{
+				RpcId(senderId, "Start");
+			}
+			else
+			{
+				RpcId(senderId, "NoStart");
+			}
+		}
+	}
 }
 
 

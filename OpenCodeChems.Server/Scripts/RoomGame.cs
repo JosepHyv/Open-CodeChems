@@ -21,6 +21,8 @@ namespace OpenCodeChems.Server.Game
 
         public List<int> bluePlayers {get; set;} = new List<int>();
 
+        public int SceneNumber = -1;
+
         public string GetRol(int uniqueId)
         {
             string rol = "None";
@@ -195,6 +197,23 @@ namespace OpenCodeChems.Server.Game
         {
             RemovePlayer(uniqueId);
             blackList.Add(uniqueId);
+        }
+
+        public bool CanStart()
+        {
+            bool redMasterReady = false;
+            bool blueMasterReady = false;
+            bool redSpyReady = false;
+            bool blueSpyReady = false;
+            
+            redMasterReady = redSpyMaster != -1;
+            blueMasterReady = blueSpyMaster != -1;
+
+            redSpyMaster = (redPlayers.Count > 0);
+            blueSpyReady = (bluePlayers.Count > 0);
+
+            bool status = redMasterReady && blueMasterReady && redSpyReady && blueSpyReady;
+            return status;
         }
 
 
