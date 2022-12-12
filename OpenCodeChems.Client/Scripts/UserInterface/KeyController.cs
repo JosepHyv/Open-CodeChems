@@ -11,7 +11,7 @@ public class KeyController : Control
 	// Called when the node enters the scene tree for the first time.
 	Network serverClient;
 	Random RandomClass = new Random();
-	private int randomNumber = RandomClass.Next(0,4);
+	private int randomNumber = 0;
 	public override void _Ready()
 	{   
 		serverClient = GetNode<Network>("/root/Network") as Network;
