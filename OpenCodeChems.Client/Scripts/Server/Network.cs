@@ -137,6 +137,11 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void BanFail();
 
+		[Signal]
+		delegate void StartGame();
+
+		[Signal]
+		delegate void NoStartGame();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -628,9 +633,24 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID, "AddSceneRoom", currentRoom, number);
 		}
 
+		
 		public void StartGame()
 		{
 			RpcId(PEER_ID, "CanStart");
 		}
+
+
+		[Puppet]
+		public void Start()
+		{
+			EmitSignal(nameof(StartGame));
+		}
+
+		[Puppet]
+		public void NoStart()
+		{
+			EmitSignal(nameof(NoStartGame));
+		}
+		
 	}
 }
