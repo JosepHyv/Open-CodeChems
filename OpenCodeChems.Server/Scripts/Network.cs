@@ -309,10 +309,19 @@ public class Network : Node
 					string separator = (d < playersInRoom.Count -1 ) ? "," : ".";
 					int slave =  playersInRoom[d];
 					logBlock.InsertTextAtCursor($"{playersData[slave]}{separator}");
-				
 				}
-				string redSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
-				string blueSpyMaster = playersData[rooms[nameRoom].blueSpyMaster];
+				string redSpyMaster = null;
+				string blueSpyMaster = null;
+				if(playersData.ContainsKey(rooms[nameRoom].redSpyMaster))
+				{
+					redSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
+				}
+
+				if(playersData.ContainsKey(rooms[nameRoom].blueSpyMaster))
+				{
+					blueSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
+				}
+				
 				List<string> redPlayers = new List<string>(); // rooms[nameRoom].redPlayers;
 				List<string> bluePlayers = new List<string>();// rooms[nameRoom].bluePlayers;
 				foreach(int id in rooms[nameRoom].redPlayers)

@@ -71,8 +71,15 @@ public class CreateRoomController : Control
 		redUsersList.Clear();
 		blueUsersList.Clear();
 
-		redMasterList.AddItem(redMaster);
-		blueMasterList.AddItem(blueMaster);
+		if(redMaster != null)
+		{
+			redMasterList.AddItem(redMaster);
+		}
+
+		if(blueMaster != null)
+		{
+			blueMasterList.AddItem(blueMaster);
+		}
 		
 		foreach(string name in redPlayers)
 		{
