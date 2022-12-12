@@ -12,6 +12,8 @@ public class SpyPlayer : Control
 	public override void _Ready()
 	{
 		GD.Print("Hola mundo en godot");
+		GD.Print(TranslationServer.GetLocale());
+
 	}
 
 	/*private void _on_CodeNamesItemList_item_selected(InputEventMouseButton e)
@@ -42,7 +44,7 @@ public class SpyPlayer : Control
 	private void _on_CodeNamesItemList_item_selected(int index)
 	{
 		
-		
+		TranslationServer.SetLocale("en");
 		
 		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		var  selectedCard = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/SelectedCardRichTextLabel");
