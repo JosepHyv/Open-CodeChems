@@ -46,9 +46,11 @@ config/icon="res://icon.png"
 
 enabled=PoolStringArray( "res://addons/WAT/plugin.cfg" )
 
+
 [global]
 
 etc=false
+
 
 [gui]
 

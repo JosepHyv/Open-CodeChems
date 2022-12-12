@@ -120,6 +120,7 @@ namespace OpenCodeChems.Client.Server
 
 		[Signal]
 		delegate void CantChangeRol();
+
 		[Signal]
 		delegate void InvitatedRegistered();
 		[Signal]
@@ -128,6 +129,14 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectDeleteInvitated();
 		[Signal]
 		delegate void DeleteInvitatedFail();
+
+
+		[Signal]
+		delegate void CanBan();
+
+		[Signal]
+		delegate void BanFail();
+
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -554,6 +563,7 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(DeleteFriendFail));
 		}
+
 		public void RegisterUserInvitated()
 		{
 			RpcId(PEER_ID, "RegisterUserInvitatedRequest");
@@ -578,9 +588,39 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(CorrectDeleteInvitated));
 		}
+    [Puppet]
 		public void DeleteInvitatedPlayerFail()
 		{
 			EmitSignal(nameof(DeleteInvitatedFail));
+    }
+
+		[Puppet]
+		public void BanPlayer(string playerName)
+		{
+			RpcId(PEER_ID, "BanPlayerInRoom", currentRoom, playerName);
+		}
+
+		public void BanPermission()
+		{
+			RpcId(PEER_ID, "BanPermission");
+		}
+
+		[Puppet]
+		public void BanPermissionAccept()
+		{
+			EmitSignal(nameof(CanBan));
+		}
+
+		[Puppet]
+		public void CantBan()
+		{
+			EmitSignal(nameof(BanFail));
+		}
+
+		[Puppet]
+		public void IAmBan()
+		{
+			EmitSignal(nameof(CleanRoom));
 		}
 	}
 }
