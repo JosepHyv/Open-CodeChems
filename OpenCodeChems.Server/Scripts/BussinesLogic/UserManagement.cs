@@ -637,5 +637,51 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+        public bool AddVictory(string nickname)
+        {
+            bool status;
+            try
+            {
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {   
+                    var profiles = (from Profile in context.Profile where Profile.nickname == nickname select Profile).First();
+                    profiles.victories = profiles.victories ++;
+                    context.SaveChanges();
+                    status = true;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch(InvalidOperationException)
+            {
+                status = false;
+            }
+            return status;
+        }
+        public bool AddDefeat(string nickname)
+        {
+            bool status;
+            try
+            {
+                using (OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {   
+                    var profiles = (from Profile in context.Profile where Profile.nickname == nickname select Profile).First();
+                    profiles.defeats = profiles.defeats ++;
+                    context.SaveChanges();
+                    status = true;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch(InvalidOperationException)
+            {
+                status = false;
+            }
+            return status;
+        }
     }
 }

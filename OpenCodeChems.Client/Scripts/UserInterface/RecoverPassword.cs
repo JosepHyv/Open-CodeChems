@@ -20,7 +20,6 @@ public class RecoverPassword : Control
     public void OnRequestCompleted(int result, int response_code, string[] headers, byte[] body)
     {
         JSONParseResult json = JSON.Parse(Encoding.UTF8.GetString(body));
-        GD.Print(json.Result);
     }
 
     public void MakePostRequest(string url, object data_to_send, bool use_ssl)
