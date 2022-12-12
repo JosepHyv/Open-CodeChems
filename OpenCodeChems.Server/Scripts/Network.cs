@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using System;
 using System.Collections.Generic;
 using OpenCodeChems.BussinesLogic;
@@ -166,15 +166,30 @@ public class Network : Node
 		}
 	}
 
+	/// <summary>
+	/// call to RegisterUser and RegisterProfile method 
+	/// </summary>
+	/// <remarks>
+	/// recive nine parameters because RPC with Godot Engine can't serialize objects, only it can recive primitive data, call the RegisterUser method if it completed correctly call the RegisterProfile method and send signal to client
+	/// </remarks>
+	/// <param name = "name"> receives a string with the name of the new user </param>
+	/// <param name = "email"> receives a string with the email of the new user </param>
+	/// <param name = "username"> receives a string with the username of the new user </param>
+	/// <param name = "hashPassword"> receives a string with the password of the new user </param>
+	/// <param name = "nickname"> receives a string with the nickname of the new user </param>
+	/// <param name = "imageProfile"> receives a array of bytes with the image profile of the new user </param>
+	/// <param name = "victories"> receives an int with the default victories of the new user </param>
+	/// <param name = "defeats"> receives an int with the default defeats of the new user </param>
+	/// <returns>Signal to client</returns>
+	/// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
 	[Master]
 	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		int idProfile = 0;
 		try
 		{
 			User newUser = new User(username, hashPassword, name, email);
-			Profile newProfile = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
+			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
 			if(USER_MANAGEMENT.RegisterUser(newUser) == true)
 			{
 				if (USER_MANAGEMENT.RegisterProfile(newProfile) == true)
@@ -193,6 +208,7 @@ public class Network : Node
 		{
 			RpcId(senderId, "RegisterFail");
 		}
+
 	}
 
 	[Master]
@@ -245,19 +261,27 @@ public class Network : Node
 	private void GetProfileByUsernameRequest(string username)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
-		if (profileObtained != null)
+		try
 		{
-			int idProfile = profileObtained.idProfile;
-			string nickname = profileObtained.nickname;
-			string usernameObtained = profileObtained.username;
-			int victories = profileObtained.victories;
-			int defeats = profileObtained.defeats;
-			byte[] imageProfile = profileObtained.imageProfile;
-			RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
-			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
+			if (profileObtained != null)
+			{
+				int idProfile = profileObtained.idProfile;
+				string nickname = profileObtained.nickname;
+				string usernameObtained = profileObtained.username;
+				int victories = profileObtained.victories;
+				int defeats = profileObtained.defeats;
+				byte[] imageProfile = profileObtained.imageProfile;
+				RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
+				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			}
+			else
+			{
+				RpcId(senderId, "ProfileByUsernameNotObtained");
+				logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
+			}
 		}
-		else
+		catch(NullReferenceException)
 		{
 			RpcId(senderId, "ProfileByUsernameNotObtained");
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
@@ -511,19 +535,27 @@ public class Network : Node
 	private void GetProfileByNicknameRequest(string nickname)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
-		if (profileObtained != null)
+		try
 		{
-			int idProfile = profileObtained.idProfile;
-			string nicknameObtained = profileObtained.nickname;
-			string username = profileObtained.username;
-			int victories = profileObtained.victories;
-			int defeats = profileObtained.defeats;
-			byte[] imageProfile = profileObtained.imageProfile;
-			RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
-			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
+			if (profileObtained != null)
+			{
+				int idProfile = profileObtained.idProfile;
+				string nicknameObtained = profileObtained.nickname;
+				string username = profileObtained.username;
+				int victories = profileObtained.victories;
+				int defeats = profileObtained.defeats;
+				byte[] imageProfile = profileObtained.imageProfile;
+				RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
+				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
+			}
+			else
+			{
+				RpcId(senderId, "ProfileByNicknameNotObtained");
+				logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");
+			}
 		}
-		else
+		catch(NullReferenceException)
 		{
 			RpcId(senderId, "ProfileByNicknameNotObtained");
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");

@@ -141,7 +141,8 @@ public class RegisterUser : Control
 
 	public byte[] ImageToByte()
 	{
-		string pathProfileImageDefault = "res://Scenes/Resources/Icons/imagePerfilDefault.jpg";
+
+		string pathProfileImageDefault = "Scenes/Resources/Icons/imagePerfilDefault.jpg";
 		FileStream imageProfileFileStream = new FileStream(pathProfileImageDefault, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
 		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
