@@ -25,6 +25,7 @@ namespace OpenCodeChems.BusinessLogic.Interface
 		List<string> GetFriends(int idProfile, bool status);
 		List<string> GetFriendsRequests(int idProfile, bool status);
 		Profile GetProfileByNickname(string nickname);
+		bool DeleteInvitatedPlayer(string username);
 	}
 
 

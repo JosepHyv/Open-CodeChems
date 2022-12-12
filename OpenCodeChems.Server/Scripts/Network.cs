@@ -26,6 +26,7 @@ public class Network : Node
 	private Dictionary<int, string> roomOwners;
 	public List<int> clientsConected;
 	public Dictionary<int, string> playersData;
+	private static Encryption PASSWORD_HASHER = new Encryption();
 
 	public override void _Ready()
 	{
@@ -607,6 +608,58 @@ public class Network : Node
 		{
 			RpcId(senderId, "DeleteFriendNotSuccessful");
 			logBlock.InsertTextAtCursor($"user {senderId} can't delete friend {idProfileFriend}\n");
+		}
+	}
+	[Master]
+	private void RegisterUserInvitatedRequest()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		try
+		{
+			string hashPassword = PASSWORD_HASHER.ComputeSHA256Hash(senderId.ToString());
+			string username = senderId.ToString();
+			string name = "Chemsito" + senderId.ToString();
+			string email = senderId.ToString() + "@email.com";
+			string nickname = "Chemsito" + senderId.ToString();
+			int victories = 0;
+			int defeats = 0;
+			byte [] imageProfile = null;
+			User newUser = new User(username, hashPassword, name, email);
+			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
+			if(USER_MANAGEMENT.RegisterUser(newUser) == true)
+			{
+				if (USER_MANAGEMENT.RegisterProfile(newProfile) == true)
+				{
+			  		RpcId(senderId, "RegisterInvitatedSuccesful", username);
+				  	logBlock.InsertTextAtCursor($"Player no. {senderId} registered as invitated in successfully.\n");      
+				}       	           
+			}
+			else
+			{
+				RpcId(senderId, "RegisterInvitatedFail");
+				logBlock.InsertTextAtCursor($"Player no. {senderId} registered as invitated in failed.\n");
+			}
+		}
+		catch (DbUpdateException)
+		{
+			RpcId(senderId, "RegisterInvitatedFail");
+			logBlock.InsertTextAtCursor($"Player no. {senderId} registered as invitated in failed.\n");
+		}
+
+	}
+	[Master]
+	private void DeleteInvitatedPlayerRequest(string username)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(USER_MANAGEMENT.DeleteInvitatedPlayer(username) == true)
+		{
+			RpcId(senderId, "DeleteInvitatedPlayerSuccessful");
+			logBlock.InsertTextAtCursor($"Player as invitated {senderId} delete in sucessfully.\n");
+		}
+		else
+		{	
+			RpcId(senderId, "DeleteInvitatedPlayerFail");
+			logBlock.InsertTextAtCursor($"Player as invitated {senderId} delete in failed.\n");
 		}
 	}
 }
