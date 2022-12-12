@@ -31,7 +31,6 @@ public class MasterPlayer : Control
 	{
 		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		var  pistaPalabra = GetParent().GetNode<LineEdit>("MasterPlayer/BackGroundNinePatchRect/WordLineEdit");
-		GD.Print(pistaPalabra.GetText());
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{
 			var masterDialog = GetParent().GetNode<AcceptDialog>("MasterPlayer/MasterPlayerAcceptDialog");
@@ -47,9 +46,7 @@ public class MasterPlayer : Control
 		textureAssassin.CreateFromImage(assassinBlack);
 		itemNode.SetItemIcon(2, textureAssassin);
 		itemNode.SetItemIcon(9, itemNode.GetItemIcon(0));
-		GD.Print(itemNode.GetItemIcon(0).GetData());
-		GD.Print(itemNode.GetItemIcon(4).GetData());
-		GD.Print(itemNode.GetItemIcon(14).GetData());
+		
 	}
 	/// <summary>
     /// Loads the card codenames from the right file depending on the internacionalization 
@@ -79,24 +76,18 @@ public class MasterPlayer : Control
          		listAllElements.Add(cardValues.GetLine().Trim());
      	 	}
 		}
-		catch(FileNotFoundException e)
+		catch(FileNotFoundException)
 		{
-      		GD.Print(e.ToString());
+      		masterDialog.SetTitle("ERROR");
+			masterDialog.SetText("FILE_NOT_FOUND");
+			masterDialog.Visible = true;
     	}
 
 		Random rand = new Random();
         listGameElements = listAllElements.OrderBy(_ => rand.Next()).ToList();
- 
-        GD.Print(String.Join(", ", listGameElements));
 		
 		
 		return listGameElements;
 	}
-
-	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 
 }

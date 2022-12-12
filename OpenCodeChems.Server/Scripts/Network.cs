@@ -84,7 +84,6 @@ public class Network : Node
 			logBlock.InsertTextAtCursor("Entrando al server OpenCodeChems\n");
 			var server = new NetworkedMultiplayerENet();
 			var result = server.CreateServer(DEFAULT_PORT, MAX_PLAYERS);
-			GD.Print(result);
 			if(result == 0 )
 			{
 				GetTree().NetworkPeer = server;
@@ -720,6 +719,82 @@ public class Network : Node
 			RpcId(senderId, "DeleteInvitatedPlayerFail");
 			logBlock.InsertTextAtCursor($"Player as invitated {senderId} delete in failed.\n");
 		}
+	}
+	[Master]
+	private void AddVictoryRequest(string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(USER_MANAGEMENT.AddVictory(nickname) == true)
+		{
+			RpcId(senderId, "AddVictorySuccessful");
+			logBlock.InsertTextAtCursor($"the victories of user {senderId} has been update\n");
+		}
+		else
+		{	
+			RpcId(senderId, "AddVictoryFail");
+			logBlock.InsertTextAtCursor($"the victories of user {senderId} hasn´t been update\n");
+		}
+	}
+	[Master]
+	private void AddDefeatRequest(string nickname)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(USER_MANAGEMENT.AddDefeat(nickname) == true)
+		{
+			RpcId(senderId, "AddDefeatSuccessful");
+			logBlock.InsertTextAtCursor($"the defeats of user {senderId} has been update\n");
+		}
+		else
+		{	
+			RpcId(senderId, "AddDefeatFail");
+			logBlock.InsertTextAtCursor($"the defeats of user {senderId} hasn´t been update\n");
+		}
+	}
+
+	[Master]
+	private void AddSceneRoom(string nameRom, int number)
+	{
+		if(rooms.ContainsKey(nameRom))
+		{
+			rooms[nameRom].SceneNumber = number;
+		}
+	}
+
+	[Master]
+	private void CanStart()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			string nameRoom = roomOwners[senderId];
+			if(rooms[nameRoom].CanStart())
+			{
+				RpcId(senderId, "Start");
+			}
+			else
+			{
+				RpcId(senderId, "NoStart");
+			}
+		}
+	}
+
+	[Master]
+	private void IAmOwner( string roomName)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			if(roomOwners[senderId] == roomName)
+			{
+				RpcId(senderId, "ICanStart");
+			}
+		}
+	}
+
+	[Master]
+	private void UpdateGame(string roomCode)
+	{
+		return;
 	}
 }
 

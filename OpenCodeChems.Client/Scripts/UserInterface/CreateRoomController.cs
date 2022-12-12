@@ -41,6 +41,8 @@ public class CreateRoomController : Control
 		serverClient.Connect("CantChangeRol", this, nameof(NoRolChange));
 		serverClient.Connect("CanBan", this, nameof(AvailableToBan));
 		serverClient.Connect("BanFail", this, nameof(FailToBan));
+		serverClient.Connect("YesStartGame", this, nameof(AvailableToStart));
+		serverClient.Connect("NoStartGame", this, nameof(UnavailableToStart));
 
 	}
 
@@ -129,6 +131,24 @@ public class CreateRoomController : Control
 	{
 		banName = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList").GetItemText(indexSelected);
 		serverClient.BanPermission();
+	}
+
+	public void _on_StartGameTextureButton_pressed()
+	{
+		serverClient.StartGame();
+		
+	}
+
+	public void AvailableToStart()
+	{
+		serverClient.ClientsChangeScene();
+		
+	}
+
+	public void UnavailableToStart()
+	{
+		notificacion.SetText("CANT_START_GAME");
+		notificacion.Visible = true;
 	}
 	public void AddToList(string redMaster, string blueMaster, List<string> redPlayers, List<string>bluePlayers)
 	{

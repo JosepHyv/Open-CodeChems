@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+using OpenCodeChems.Client.Server;
 
 public class KeyController : Control
 {
@@ -9,9 +9,15 @@ public class KeyController : Control
 	// private string b = "text";
 
 	// Called when the node enters the scene tree for the first time.
+	Network serverClient;
+	Random RandomClass = new Random();
+	private int randomNumber = 0;
 	public override void _Ready()
 	{   
+		serverClient = GetNode<Network>("/root/Network") as Network;
 		LoadKey();
+		randomNumber = RandomClass.Next(0,4);
+		serverClient.SendSceneToServer(randomNumber);
 	
 	}
 
@@ -24,8 +30,6 @@ public class KeyController : Control
 	public void LoadKey()
 	{   
 		PackedScene packedScene;
-		Random RandomClass = new Random();
-		int randomNumber = RandomClass.Next(0,4);
 		GD.Print(randomNumber);
 		if(randomNumber == 0)
 		{

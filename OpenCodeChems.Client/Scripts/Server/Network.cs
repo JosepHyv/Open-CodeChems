@@ -136,7 +136,22 @@ namespace OpenCodeChems.Client.Server
 
 		[Signal]
 		delegate void BanFail();
+		[Signal]
+		delegate void CorrectAddVictory();
+		[Signal]
+		delegate void AddVictoryNotCorrect();
+		[Signal]
+		delegate void CorrectAddDefeat();
+		[Signal]
+		delegate void AddDefeatNotCorrect();
 
+		[Signal]
+		delegate void YesStartGame();
+
+		[Signal]
+		delegate void NoStartGame();
+
+		
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -149,14 +164,12 @@ namespace OpenCodeChems.Client.Server
 		
 		public void CloseConnection()
 		{
-			GD.Print("Me activaron para cerrar al conexion");
 			networkPeer.CloseConnection(1);
 			return;
 		}
 		
 		public void LeaveServer()
 		{
-			GD.Print("Server Dead");
 			CloseConnection();
 			GetTree().ChangeScene("res://Scenes/connexion.tscn");
 			EmitSignal(nameof(ServerDead));
@@ -174,28 +187,21 @@ namespace OpenCodeChems.Client.Server
 
 		public void OnConnectionFailed()
 		{
-			GD.Print("Failed to connect");
 			EmitSignal(nameof(ServerFail));
 		}
 		public void OnConnectedToServer()
 		{
-			GD.Print($"Succesfully connected to server {GetTree().GetNetworkUniqueId()}");
-			GD.Print($"Soy cliente o server (~/1) {GetTree().IsNetworkServer()}");
 			EmitSignal(nameof(Server));
 		}
 
 	   
 		public void Login(string username, string password )
 		{
-			GD.Print("Enviando Request al server");
 			RpcId(PEER_ID,"LoginRequest", username, password);
-			GD.Print("Request enviado");
-			
 		}
 
 		public void LogOut()
 		{
-			GD.Print("Logged from server");
 			profileByUsernameObtained = null;
 			profileByNicknameObtained = null;
 			friendsObtained = null;
@@ -217,37 +223,30 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void LoginSuccesful()
 		{
-			GD.Print("Loggueado Correctamente");
 			EmitSignal(nameof(LoggedIn));
 		}
 
 		[Puppet]
 		public void LoginFailed()
 		{
-			GD.Print("Loggeo fallido ");
 			EmitSignal(nameof(LoggedFail));
 		}
 
 		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
 		{
-			GD.Print("Enviando Request al server");
-			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname,imageProfile, victories, defeats);
-			GD.Print("Request enviado");
-			
+			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname,imageProfile, victories, defeats);		
 		}
 		
 		
 		[Puppet]
 		public void RegisterSuccesful()
 		{
-			GD.Print("Register successfully");
 			EmitSignal(nameof(Registered));
 		}
 		
 		[Puppet]
 		public void RegisterFail()
 		{
-			GD.Print("Register failed");
 			EmitSignal(nameof(RegisteredFail));
 		}
 
@@ -269,23 +268,17 @@ namespace OpenCodeChems.Client.Server
 
 		public void EmailRegister(string email)
 		{
-			GD.Print("Enviando Request al server");
 			RpcId(PEER_ID,"EmailRegisteredRequest", email);
-			GD.Print("Request enviado");
 			
 		}
 		public void UsernameRegister(string username)
 		{
-			GD.Print("Enviando Request al server");
 			RpcId(PEER_ID,"UsernameRegisteredRequest", username);
-			GD.Print("Request enviado");
 			
 		}
 		public void NicknameRegister(string nickname)
 		{
-			GD.Print("Enviando Request al server");
 			RpcId(PEER_ID,"NicknameRegisteredRequest", nickname);
-			GD.Print("Request enviado");
 			
 		}
 
@@ -322,13 +315,11 @@ namespace OpenCodeChems.Client.Server
 		
 		public void ClientCreateRoom(string name)
 		{
-			GD.Print("Create Room Request send");
 			RpcId(PEER_ID, "CreateRoom", name);
 		}
 		
 		public void ClientJoinRoom(string name)
 		{
-			GD.Print("Try to Join to Room");
 			RpcId(PEER_ID, "JoinRoom", name);
 		}
 		public void RoomCreated()
@@ -339,16 +330,12 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void UpdateRoom(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers)
 		{
-			GD.Print($"Recibed packages");
 			EmitSignal(nameof(UpdatePlayersScreen), redMaster, blueMaster, redPlayers, bluePlayers);
-			
 		}
 		
 		[Puppet]
 		public void CreateRoomAccepted(string nameRoom)
-		{	
-
-			GD.Print("Cosito aceptado OwO");
+		{
 			currentRoom = nameRoom;
 			EmitSignal(nameof(RoomCreation));
 		}
@@ -356,7 +343,6 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void CreateRoomFail()
 		{
-			GD.Print("Error creando la sala, ya existe una con la misma clave");
 			EmitSignal(nameof(RoomCreationFail));
 
 		}
@@ -364,7 +350,6 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void JoinRoomAccepted(string nameRoom)
 		{
-			GD.Print($"Entrando a la sala {nameRoom}");
 			currentRoom = nameRoom;
 			EmitSignal(nameof(RoomJoin));			
 		}
@@ -372,7 +357,6 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void JoinRoomFail()
 		{
-			GD.Print("Error entrando a la sala");
 			currentRoom = "None";
 			EmitSignal(nameof(RoomJoinFail));
 		}
@@ -588,11 +572,11 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(CorrectDeleteInvitated));
 		}
-    [Puppet]
+    	[Puppet]
 		public void DeleteInvitatedPlayerFail()
 		{
 			EmitSignal(nameof(DeleteInvitatedFail));
-    }
+    	}
 
 		[Puppet]
 		public void BanPlayer(string playerName)
@@ -622,5 +606,70 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(CleanRoom));
 		}
+
+		public void SendSceneToServer(int number)
+		{
+			RpcId(PEER_ID, "AddSceneRoom", currentRoom, number);
+		}
+
+		
+		public void StartGame()
+		{
+			RpcId(PEER_ID, "CanStart");
+		}
+
+
+		[Puppet]
+		public void Start()
+		{
+			EmitSignal(nameof(YesStartGame));
+		}
+
+		[Puppet]
+		public void NoStart()
+		{
+			EmitSignal(nameof(NoStartGame));
+		}
+
+
+		public void ClientsChangeScene()
+		{
+			RpcId(PEER_ID, "UpdateGame", currentRoom);
+		}
+		
+		
+		
+		public void AddVictory(string nickname)
+		{
+			RpcId(PEER_ID,"AddVictoryRequest", nickname);;
+			
+		}
+		[Puppet]
+		public void AddVictorySuccessful()
+		{
+			EmitSignal(nameof(CorrectAddVictory));
+		}
+		[Puppet]
+		public void AddVictoryFail()
+		{
+			EmitSignal(nameof(AddVictoryNotCorrect));
+		}
+		public void AddDefeat(string nickname)
+		{
+			RpcId(PEER_ID,"AddDefeatRequest", nickname);;
+			
+		}
+		[Puppet]
+		public void AddDefeatSuccessful()
+		{
+			EmitSignal(nameof(CorrectAddDefeat));
+		}
+		[Puppet]
+		public void AddDefeatFail()
+		{
+			EmitSignal(nameof(AddDefeatNotCorrect));
+		}
+		
+
 	}
 }
