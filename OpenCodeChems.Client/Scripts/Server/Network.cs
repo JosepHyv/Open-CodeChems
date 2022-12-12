@@ -114,7 +114,7 @@ namespace OpenCodeChems.Client.Server
 		delegate void DeleteFriendFail();
 
 		[Signal]
-		delegate void UpdatePlayersScreen(List<string> usersInRoom);
+		delegate void UpdatePlayersScreen(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers);
 		[Signal]
 		delegate void CleanRoom();
 
@@ -307,10 +307,10 @@ namespace OpenCodeChems.Client.Server
 		}
 
 		[Puppet]
-		public void UpdateRoom(List<string> usersInRoom)
+		public void UpdateRoom(string redMaster, string blueMaster, List<string> redPlayers, List<string> bluePlayers)
 		{
-			GD.Print($"Recibed {usersInRoom}");
-			EmitSignal(nameof(UpdatePlayersScreen), usersInRoom);
+			GD.Print($"Recibed packages");
+			EmitSignal(nameof(UpdatePlayersScreen), redMaster, blueMaster, redPlayers, bluePlayers);
 			
 		}
 		

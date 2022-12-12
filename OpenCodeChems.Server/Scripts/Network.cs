@@ -6,6 +6,7 @@ using OpenCodeChems.DataAccess;
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OpenCodeChems.Server.Utils;
+using OpenCodeChems.Server.Game;
 
 
 public class Network : Node
@@ -21,7 +22,7 @@ public class Network : Node
 	private RichTextLabel listening;
 	private Button connectButton;
 	private AcceptDialog dialog;
-	private Dictionary<string, List<int>> rooms;
+	private Dictionary<string, RoomGame> rooms;
 	private Dictionary<int, string> roomOwners;
 	public List<int> clientsConected;
 	public Dictionary<int, string> playersData;
@@ -32,7 +33,7 @@ public class Network : Node
 		clientsConected = new List<int>();
 		playersData = new Dictionary<int, string>();
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
-		rooms = new Dictionary<string, List<int>>();
+		rooms = new Dictionary<string, RoomGame>();
 		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
 		portLineEdit = GetParent().GetNode<LineEdit>("Network/puerto");
 		logBlock = GetParent().GetNode<TextEdit>("Network/TextEdit");
@@ -108,7 +109,7 @@ public class Network : Node
 	{
 		if(rooms.ContainsKey(code))
 		{
-			List<int> playersInRoom = rooms[code];
+			List<int> playersInRoom = rooms[code].members;
 			for(int c = 0 ; c<playersInRoom.Count; c++)
 			{
 				int senderId = playersInRoom[c];
@@ -139,7 +140,7 @@ public class Network : Node
 
 	private void DisJoinPlayer(int senderId)
 	{
-		foreach(KeyValuePair<string, List<int>> roomName in rooms)
+		foreach(KeyValuePair<string, RoomGame> roomName in rooms)
 		{
 			DeletePlayer(roomName.Key);
 		}
@@ -157,9 +158,9 @@ public class Network : Node
 		}
 		if(rooms.ContainsKey(nameRoom))
 		{
-			if(rooms[nameRoom].Contains(senderId))
+			if(rooms[nameRoom].Exist(senderId))
 			{
-				rooms[nameRoom].Remove(senderId);
+				rooms[nameRoom].RemovePlayer(senderId);
 				UpdateClientsRoom(nameRoom);
 			}
 		}
@@ -282,8 +283,8 @@ public class Network : Node
 		}
 		else
 		{
-			List<int>hostRoom = new List<int>();
-			hostRoom.Add(senderId);
+			RoomGame hostRoom = new RoomGame();
+			hostRoom.AddPlayer(senderId);
 			rooms.Add(code, hostRoom);
 			roomOwners.Add(senderId, code);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
@@ -298,20 +299,31 @@ public class Network : Node
 	{
 		if(rooms.ContainsKey(nameRoom))
 		{
-			List<int> playersInRoom = rooms[nameRoom];
+			List<int> playersInRoom = rooms[nameRoom].members;
 			for(int c = 0 ; c<playersInRoom.Count; c++)
 			{
 				int master = playersInRoom[c];
-				List<string> namePlayers = new List<string>();
 				logBlock.InsertTextAtCursor($"sending to {master} the players updated:\n");
 				for(int d = 0 ; d<playersInRoom.Count; d++)
 				{
 					string separator = (d < playersInRoom.Count -1 ) ? "," : ".";
 					int slave =  playersInRoom[d];
 					logBlock.InsertTextAtCursor($"{playersData[slave]}{separator}");
-					namePlayers.Add(playersData[slave]);
+				
 				}
-				RpcId(master,"UpdateRoom", namePlayers);
+				string redSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
+				string blueSpyMaster = playersData[rooms[nameRoom].blueSpyMaster];
+				List<string> redPlayers = new List<string>(); // rooms[nameRoom].redPlayers;
+				List<string> bluePlayers = new List<string>();// rooms[nameRoom].bluePlayers;
+				foreach(int id in rooms[nameRoom].redPlayers)
+				{
+					redPlayers.Add(playersData[id]);
+				}
+				foreach(int id in rooms[nameRoom].bluePlayers)
+				{
+					bluePlayers.Add(playersData[id]);
+				}
+				RpcId(master,"UpdateRoom", redSpyMaster, blueSpyMaster, redPlayers, bluePlayers);
 			}
 			logBlock.InsertTextAtCursor("\n");
 		}
@@ -324,9 +336,18 @@ public class Network : Node
 		int senderId = GetTree().GetRpcSenderId();
 		if(rooms.ContainsKey(code))
 		{
-			rooms[code].Add(senderId);
-			RpcId(senderId, "JoinRoomAccepted", code);
-			logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
+			if(rooms[code].CanJoin(senderId))
+			{
+				rooms[code].AddPlayer(senderId);
+				RpcId(senderId, "JoinRoomAccepted", code);
+				logBlock.InsertTextAtCursor($"user {senderId} join to {code} room\n");
+			}
+			else
+			{
+				RpcId(senderId, "JoinRoomFail");
+				logBlock.InsertTextAtCursor($"user {senderId} can't join to {code} room\n");
+			}
+			
 		}
 		else
 		{
