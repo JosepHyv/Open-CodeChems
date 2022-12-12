@@ -60,7 +60,6 @@ public class LogIn : Control
 	public void LoggedAcepted()
 	{
 		loggedStatus = Task<bool>.FromResult(true);
-		username = Network.usernamePlayerAsInvitated;
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");	
 	}
 	

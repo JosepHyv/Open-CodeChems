@@ -39,9 +39,10 @@ public class MainMenu : Control
 	public void _on_LogOutTextureButton_pressed()
 	{
 		bool statusPlayer = validatePlayer();
-		if(statusPlayer == true)
+		if(statusPlayer == false)
 		{
 			serverClient.DeleteInvitatedPlayer(username);
+			serverClient.LogOut();
 		}
 		else
 		{
@@ -83,15 +84,15 @@ public class MainMenu : Control
 		{
 			actualPlayer = serverClient.profileByUsernameObtained;
 			idProfile = actualPlayer.idProfile;
-			string nickname = actualPlayer.nickname;
+			nicknameActualPlayer = actualPlayer.nickname;
 			int victories = actualPlayer.victories;
 			int defeats = actualPlayer.defeats;
 			byte [] imageProfile = actualPlayer.imageProfile;
 			string usernameObtained = actualPlayer.username;
-			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nickname;
-			serverClient.UpdateServerData(nickname);
+			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nicknameActualPlayer;
+			serverClient.UpdateServerData(nicknameActualPlayer);
 			bool statusPlayer = validatePlayer();
-			if(statusPlayer == true)
+			if(statusPlayer == false)
 			{
 				GetParent().GetNode<Button>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/AddFriendButton").Disabled = true;
 				GetParent().GetNode<Button>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/FriendsRequestButton").Disabled = true;
