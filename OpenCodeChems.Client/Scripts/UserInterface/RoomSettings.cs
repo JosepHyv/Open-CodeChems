@@ -37,6 +37,7 @@ public class RoomSettings : Control
 	public void ChangeToRoom()
 	{
 		GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
+		serverClient.RoomCreated();
 	}
 
 	

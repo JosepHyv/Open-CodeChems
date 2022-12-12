@@ -36,6 +36,7 @@ public class MainMenu : Control
 	public void _on_LogOutTextureButton_pressed()
 	{
 		GetTree().ChangeScene("res://Scenes/LogIn.tscn");
+		serverClient.LogOut();
 	}
 	public void _on_CreateGameTextureButton_pressed()
 	{
@@ -77,6 +78,7 @@ public class MainMenu : Control
 			byte [] imageProfile = actualPlayer.imageProfile;
 			string usernameObtained = actualPlayer.username;
 			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nickname;
+			serverClient.UpdateServerData(nickname);
 		}
 		serverClient.GetFriends(idProfile, STATUS_FRIENDS);
 	}
