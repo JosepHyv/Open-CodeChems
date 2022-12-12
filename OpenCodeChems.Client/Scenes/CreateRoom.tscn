@@ -398,5 +398,6 @@ window_title = "Por favor, Confirma..."
 [connection signal="pressed" from="RoomNinePatchRect/TeamBlueColorRect/JoinSpyMasterBlueTextureButton" to="." method="_on_JoinSpyMasterBlueTextureButton_pressed"]
 [connection signal="item_selected" from="RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList" to="." method="_on_SpiesBlueItemList_item_selected"]
 [connection signal="pressed" from="RoomNinePatchRect/TeamBlueColorRect/JoinSpyBlueTextureButton" to="." method="_on_JoinSpyBlueTextureButton_pressed"]
+[connection signal="pressed" from="RoomNinePatchRect/StartGameTextureButton" to="." method="_on_StartGameTextureButton_pressed"]
 [connection signal="pressed" from="RoomNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
 [connection signal="confirmed" from="BanPlayerConfirmationDialog" to="." method="AppliBan"]

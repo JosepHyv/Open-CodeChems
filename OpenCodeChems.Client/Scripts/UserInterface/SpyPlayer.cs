@@ -13,7 +13,7 @@ public class SpyPlayer : Control
 	private ImageTexture textureCivil = new ImageTexture();
 	private string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
 	private ImageTexture textureAssassin = new ImageTexture();
-	private string PATH_
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

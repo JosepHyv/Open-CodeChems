@@ -790,6 +790,12 @@ public class Network : Node
 			}
 		}
 	}
+
+	[Master]
+	private void UpdateGame(string roomCode)
+	{
+		return;
+	}
 }
 
 
