@@ -656,7 +656,7 @@ namespace OpenCodeChems.Client.Server
 		}
 		public void AddDefeat(string nickname)
 		{
-			RpcId(PEER_ID,"AddVictoryRequest", nickname);;
+			RpcId(PEER_ID,"AddDefeatRequest", nickname);;
 			
 		}
 		[Puppet]
