@@ -69,6 +69,7 @@ namespace OpenCodeChems.Server.Game
             if(members.Contains(uniqueId))
             {
                 DeleteRol(uniqueId);
+                members.Remove(uniqueId);
             }
         }
 
@@ -105,7 +106,7 @@ namespace OpenCodeChems.Server.Game
                         bluePlayers.Remove(uniqueId);
                     }
                 }
-                members.Remove(uniqueId);
+                
             }
         }
 
