@@ -5,8 +5,16 @@ public class SpyPlayer : Control
 {
 	private LineEdit ChatLineEdit; 
 	private TextEdit ChatBlock;
-
-
+	private Image civilYellow = new Image();
+	private Image agentTypeRed = new Image();
+	private Image agentTypeBlue = new Image();
+	private Image assassinBlack = new Image();
+	private string PATH_CIVIL_COLOR = "Scenes/Resources/Icons/square-64.png";
+	private ImageTexture textureCivil = new ImageTexture();
+	private string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
+	private ImageTexture textureAssassin = new ImageTexture();
+	private string PATH_
+	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		ChatLineEdit = GetParent().GetNode<LineEdit>("SpyPlayer/ChatLineEdit");
