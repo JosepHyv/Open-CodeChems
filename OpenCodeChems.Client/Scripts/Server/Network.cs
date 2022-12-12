@@ -151,7 +151,9 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void NoStartGame();
 
-		
+
+		[Signal]
+		delegate void UpdateGameClient(string rool, int number);
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -670,6 +672,11 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(AddDefeatNotCorrect));
 		}
 		
+		[Puppet]
+		public void UpdateScreenClientGame(string rool, int number)
+		{
+			EmitSignal(nameof(UpdateGameClient), rool, number);
+		}
 
 	}
 }

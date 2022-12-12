@@ -794,7 +794,15 @@ public class Network : Node
 	[Master]
 	private void UpdateGame(string roomCode)
 	{
-		return;
+		if(rooms.ContainsKey(roomCode))
+		{
+			List<int> playersInRoom = rooms[roomCode].members;
+			for(int c = 0; c<playersInRoom.Count; c++)
+			{
+				int senderId = playersInRoom[c];
+				RpcId(senderId, "UpdateScreenClientGame", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
+			}
+		}
 	}
 }
 
