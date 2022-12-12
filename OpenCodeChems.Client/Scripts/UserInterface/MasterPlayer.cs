@@ -8,7 +8,11 @@ public class MasterPlayer : Control
 {
 	AcceptDialog masterDialog = null;
 	private int CARD_GAME_MAX_VALUE = 25;
-
+	private Image agentTypeRed = new Image();
+	private Image agentTypeBlue = new Image();
+	private Image assassinBlack = new Image();
+	private string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
+	private ImageTexture textureAssassin = new ImageTexture();
 	public override void _Ready()
 	{
 		
@@ -37,9 +41,15 @@ public class MasterPlayer : Control
 				masterDialog.SetText("REPEATED_WORD");
 				masterDialog.Visible = true;
 			}
-				
+			
 		}
-
+		assassinBlack.Load(PATH_ASSASSIN_COLOR);
+		textureAssassin.CreateFromImage(assassinBlack);
+		itemNode.SetItemIcon(2, textureAssassin);
+		itemNode.SetItemIcon(9, itemNode.GetItemIcon(0));
+		GD.Print(itemNode.GetItemIcon(0).GetData());
+		GD.Print(itemNode.GetItemIcon(4).GetData());
+		GD.Print(itemNode.GetItemIcon(14).GetData());
 	}
 	/// <summary>
     /// Loads the card codenames from the right file depending on the internacionalization 
