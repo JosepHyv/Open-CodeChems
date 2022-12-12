@@ -414,6 +414,7 @@ public class Network : Node
 			if(uniqueId != -1 && !roomOwners.ContainsKey(uniqueId))
 			{
 				rooms[roomName].BanPlayer(uniqueId);
+				RpcId(uniqueId,"IAmBan");
 				UpdateClientsRoom(roomName);
 			}
 			else

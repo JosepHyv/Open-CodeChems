@@ -576,5 +576,11 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(BanFail));
 		}
+
+		[Puppet]
+		public void IAmBan()
+		{
+			EmitSignal(nameof(CleanRoom));
+		}
 	}
 }
