@@ -407,18 +407,35 @@ public class Network : Node
 	[Master]
 	public void BanPlayerInRoom(string roomName, string playerName)
 	{
-		
+		int senderId = GetTree().GetRpcSenderId();
 		if(rooms.ContainsKey(roomName))
 		{
 			int uniqueId = GetPlayerIdInRoom(roomName, playerName);
-			if(uniqueId != -1)
+			if(uniqueId != -1 && !roomOwners.ContainsKey(uniqueId))
 			{
 				rooms[roomName].BanPlayer(uniqueId);
 				UpdateClientsRoom(roomName);
 			}
+			else
+			{
+				RpcId(senderId, "CantBan");
+			}
+		}
+		else
+		{
+			RpcId(senderId, "CantBan");
 		}
 	}
 
+	[Master]
+	public void BanPermission()
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			RpcId(senderId, "BanPermissionAccept");
+		}
+	}
 
 	[Master]
 	public void JoinRoom(string code)

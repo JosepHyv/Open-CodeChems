@@ -33,12 +33,14 @@ public class CreateRoomController : Control
 		notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
 
 		banPlayerDialog.GetCancel().Connect("pressed", this, nameof(CancelBan));
-		banPlayerDialog.GetAccept().Connect("pressed", this, nameof(AppliBan));
+		//banPlayerDialog.GetAccept().Connect("pressed", this, nameof(AppliBan));
 
 		GetParent().GetNode<Label>("Control/RoomNinePatchRect/NameRoomLabel").SetText(nameRoom);
 		serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 		serverClient.Connect("CantChangeRol", this, nameof(NoRolChange));
+		serverClient.Connect("CanBan", this, nameof(AvailableToBan));
+		serverClient.Connect("BanFail", this, nameof(FailToBan));
 
 	}
 
@@ -46,6 +48,12 @@ public class CreateRoomController : Control
   //public override void _Process(float delta)
     //{
     //}
+
+	public void FailToBan()
+	{
+		notificacion.SetText("CANT_BAN_USER");
+		notificacion.Visible = true;
+	}
 
 	public void CancelBan()
 	{
@@ -58,6 +66,12 @@ public class CreateRoomController : Control
 		{
 			serverClient.BanPlayer(banName);
 		}
+	}
+
+	public void AvailableToBan()
+	{
+		banPlayerDialog.SetText($"Do You Want Ban To {banName}");
+		banPlayerDialog.Visible = true;
 	}
 
 	public void NoRolChange()
@@ -93,6 +107,29 @@ public class CreateRoomController : Control
 	{
 		serverClient.ChangeRolTo(Constants.BLUE_PLAYER);
 	}
+	public void _on_SpyMasteRedrItemList_item_selected(int indexSelected)
+	{
+		banName = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpyMasteRedrItemList").GetItemText(indexSelected);
+		serverClient.BanPermission();
+	}
+
+	public void _on_SpiesRedItemList_item_selected(int indexSelected)
+	{
+		banName = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList").GetItemText(indexSelected);
+		serverClient.BanPermission();
+	}
+
+	public void _on_SpyMasterBlueItemList_item_selected(int indexSelected)
+	{
+		banName = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpyMasterBlueItemList").GetItemText(indexSelected);
+		serverClient.BanPermission();
+	}
+
+	public void _on_SpiesBlueItemList_item_selected(int indexSelected)
+	{
+		banName = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList").GetItemText(indexSelected);
+		serverClient.BanPermission();
+	}
 	public void AddToList(string redMaster, string blueMaster, List<string> redPlayers, List<string>bluePlayers)
 	{
 
@@ -124,4 +161,5 @@ public class CreateRoomController : Control
 		
 		
 	}
+
 }
