@@ -141,6 +141,7 @@ public class CreateRoomController : Control
 
 	public void AvailableToStart()
 	{
+		GD.Print("Change Scene Request");
 		serverClient.ClientsChangeScene();
 		
 	}

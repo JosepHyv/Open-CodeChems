@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using OpenCodeChems.Client.Server;
+using OpenCodeChems.Client.Resources;
+
 
 public class KeyController : Control
 {
@@ -22,7 +24,20 @@ public class KeyController : Control
 	public void ChangeScreen(string rool, int number)
 	{
 		randomNumber = number;
-		LoadKey();
+		ModifyScene(rool);
+	}
+
+	public void ModifyScene(string rool)
+	{
+		GD.Print($"Changing to Scene {rool}");
+		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
+		{
+			LoadKey();
+		}
+		else
+		{
+			GetTree().ChangeScene("res://Scenes/SpyPlayer.tscn");
+		}
 	}
 
 	public void LoadKey()
