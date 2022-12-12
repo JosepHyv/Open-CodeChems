@@ -319,7 +319,7 @@ public class Network : Node
 
 				if(playersData.ContainsKey(rooms[nameRoom].blueSpyMaster))
 				{
-					blueSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
+					blueSpyMaster = playersData[rooms[nameRoom].blueSpyMaster];
 				}
 				
 				List<string> redPlayers = new List<string>(); // rooms[nameRoom].redPlayers;
