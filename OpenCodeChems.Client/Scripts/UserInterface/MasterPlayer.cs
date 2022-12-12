@@ -1,27 +1,25 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 
 public class MasterPlayer : Control
 {
-	
 	AcceptDialog masterDialog = null;
+	private int CARD_GAME_MAX_VALUE = 25;
 
 	public override void _Ready()
 	{
 		
 
 		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
-		string[] listElements = LoadInternacionalizedCards();
+		List<string> listElements = LoadInternacionalizedCards();
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{
-			
-				itemNode.SetItemText(c, listElements[c]);
-				Random RandomClass = new Random();
-				int randomNumber = RandomClass.Next(0,25);
-				GD.Print(listElements[randomNumber]);
-				
+			itemNode.SetItemText(c, listElements[c]);					
 		}
+		
 		
 	}
 
@@ -48,11 +46,13 @@ public class MasterPlayer : Control
     /// into an array of strings.
     /// </summary>
     /// <returns>An array  with codenames as strings.</returns>
-	private string[] LoadInternacionalizedCards()
+	private List<string> LoadInternacionalizedCards()
 	{	
-		string path= "";
-		File cardValues = new File();
-		string[] listElements = new string[25];
+		string path = "";
+		bool exist = true;
+        Godot.File cardValues = new Godot.File();
+		List<string> listGameElements = new List<string>();
+		List<string> listAllElements = new List<string>();
 		if(TranslationServer.GetLocale()== "en")
 		{
 			path = "res://Scenes/Resources/words.txt";
@@ -61,13 +61,26 @@ public class MasterPlayer : Control
 		{
 			path = "res://Scenes/Resources/palabras.txt";
 		}
+		try
+		{
+			cardValues.Open(path, Godot.File.ModeFlags.Read);
+		 	while (!cardValues.EofReached())
+      		{
+         		listAllElements.Add(cardValues.GetLine().Trim());
+     	 	}
+		}
+		catch(FileNotFoundException e)
+		{
+      		GD.Print(e.ToString());
+    	}
 
-		cardValues.Open(path, File.ModeFlags.Read);
-		 while (!cardValues.EofReached())
-      {
-         listElements.Push(cardValues.GetLine().Trim());
-      }
-		return listElements;
+		Random rand = new Random();
+        listGameElements = listAllElements.OrderBy(_ => rand.Next()).ToList();
+ 
+        GD.Print(String.Join(", ", listGameElements));
+		
+		
+		return listGameElements;
 	}
 
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
