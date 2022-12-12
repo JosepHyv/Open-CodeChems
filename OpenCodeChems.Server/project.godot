@@ -46,6 +46,12 @@ config/icon="res://icon.png"
 
 enabled=PoolStringArray( "res://addons/WAT/plugin.cfg" )
 
+
+[global]
+
+etc=false
+
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
