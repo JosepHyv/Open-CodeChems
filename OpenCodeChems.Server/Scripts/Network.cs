@@ -777,6 +777,19 @@ public class Network : Node
 			}
 		}
 	}
+
+	[Master]
+	private void IAmOwner( string roomName)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		if(roomOwners.ContainsKey(senderId))
+		{
+			if(roomOwners[senderId] == roomName)
+			{
+				RpcId(senderId, "ICanStart");
+			}
+		}
+	}
 }
 
 

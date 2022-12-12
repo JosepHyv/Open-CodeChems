@@ -146,10 +146,12 @@ namespace OpenCodeChems.Client.Server
 		delegate void AddDefeatNotCorrect();
 
 		[Signal]
-		delegate void StartGame();
+		delegate void YesStartGame();
 
 		[Signal]
 		delegate void NoStartGame();
+
+		
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -620,7 +622,7 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void Start()
 		{
-			EmitSignal(nameof(StartGame));
+			EmitSignal(nameof(YesStartGame));
 		}
 
 		[Puppet]
@@ -628,6 +630,14 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(NoStartGame));
 		}
+
+
+		public void ClientsChangeScene()
+		{
+			
+		}
+		
+		
 		
 		public void AddVictory(string nickname)
 		{
