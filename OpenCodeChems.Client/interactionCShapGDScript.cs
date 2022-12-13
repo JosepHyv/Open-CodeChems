@@ -16,7 +16,8 @@ public class interactionCShapGDScript : Control
     public void _on_TextureButton_pressed()
     {
         GD.Print("se presionó");
-        GetParent().GetNode<Control>("pruebaEmail/emailSenderNode").Call("SendEmail", "miguelzinedinne@gmail.com", "entra a la sala", "sala de juego");
+        var mailSender = GetParent().GetNode<Control>("pruebaEmail/emailSenderNode");
+        mailSender.Call("SendEmail", "miguelzinedinne@gmail.com", "cambio de contraseña", "usa este código para cambiar tu contraseña 12543");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
