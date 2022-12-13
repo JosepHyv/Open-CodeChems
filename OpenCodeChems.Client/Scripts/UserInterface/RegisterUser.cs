@@ -139,17 +139,6 @@ public class RegisterUser : Control
 		return isValid;
 	}
 
-	public byte[] ImageToByte()
-	{
-
-		string pathProfileImageDefault = "Scenes/Resources/Icons/imagePerfilDefault.jpg";
-		FileStream imageProfileFileStream = new FileStream(pathProfileImageDefault, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
-		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
-		imageProfileFileStream.Close();
-		return imageProfile;
-	}
 	
 	public void RegisteredAccepted()
 	{

@@ -24,7 +24,7 @@ public class EditProfile : Control
 	private string confirmPassword = "";
 	private string newEmail = "";
 	private string newNickname = "";
-	private byte[] newImageProfile = null;
+	private int newImageProfile = 0;
 	private ImageTexture textureImageProfile = new ImageTexture(); 
 	private Image imageProfile = new Image();
 	public override void _Ready()
@@ -132,29 +132,10 @@ public class EditProfile : Control
 	public void _on_SelectImageProfileFileDialog_file_selected(string imagePath)
 	{
 		imageProfile.Load(imagePath);
-		newImageProfile = ImageToByte(imagePath);
 		textureImageProfile.CreateFromImage(imageProfile);
 		GetParent().GetNode<TextureButton>("EditProfile/EditProfileNinePatchRect/ProfileInformationTransparentFrame/ProfilePhotoTextureButton").SetNormalTexture(textureImageProfile);
 	}
 
-	public byte[] ImageToByte(string imageProfilePath)
-	{
-		FileStream imageProfileFileStream = new FileStream(imageProfilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
-		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
-		imageProfileFileStream.Close();
-		return imageProfile;
-	}
-	/*public Image ByteToImage(byte[] imageInByte)
-	{
-		FileStream imageProfileFileStream = new FileStream(imageProfilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
-		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
-		imageProfileFileStream.Close();
-		return imageProfile;
-	}*/
 	
 	public bool ValidatePassword()
 	{

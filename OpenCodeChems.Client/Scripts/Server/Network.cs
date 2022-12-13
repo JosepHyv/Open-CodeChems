@@ -420,7 +420,7 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(EditNicknameFail));
 		}
-		public void EditImageProfile(string username, byte[] imageProfile )
+		public void EditImageProfile(string username, int imageProfile )
 		{
 			RpcId(PEER_ID, "EditImageProfileRequest", username, imageProfile);
 		}
