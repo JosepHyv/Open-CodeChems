@@ -335,6 +335,8 @@ public class Network : Node
 		{
 			RoomGame hostRoom = new RoomGame();
 			hostRoom.AddPlayer(senderId);
+			Random randomClass = new Random();
+			hostRoom.SceneNumber =  randomClass.Next(0,4);
 			rooms.Add(code, hostRoom);
 			roomOwners.Add(senderId, code);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
@@ -751,14 +753,7 @@ public class Network : Node
 		}
 	}
 
-	[Master]
-	private void AddSceneRoom(string nameRom, int number)
-	{
-		if(rooms.ContainsKey(nameRom))
-		{
-			rooms[nameRom].SceneNumber = number;
-		}
-	}
+	
 
 	[Master]
 	private void CanStart()
