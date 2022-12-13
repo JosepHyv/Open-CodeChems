@@ -8,12 +8,11 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	pass # Replace with function body.
 
-
-
-func SendEmail(emailto, emailfrom, subject, body):
-
+func SendEmail(emailto, subject, body):
+	var emailfrom = "codechems@gmail.com"
+	print("generating email")
 	var command_body = [	"$EmailFrom = '%s'" %[emailfrom],
 	"$EmailTo = '%s'" %[emailto],
 	"$Subject = '%s'"%[subject],
@@ -41,7 +40,3 @@ func SendEmail(emailto, emailfrom, subject, body):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
-func _on_TextureButton_pressed():
-	SendEmail("miguelzinedinne@gmail.com","codechems@gmail.com","prueba de email en gdscript","esta es una prueba para enviar un email en gdscript")
