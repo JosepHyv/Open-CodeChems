@@ -48,7 +48,7 @@ namespace OpenCodeChems.DataAccess
 
   public class Profile 
   {
-      public Profile (string nickname, int victories, int defeats, byte[] imageProfile, string username)
+      public Profile (string nickname, int victories, int defeats, int imageProfile, string username)
       {
           this.nickname = nickname;
           this.victories = victories;
@@ -63,7 +63,7 @@ namespace OpenCodeChems.DataAccess
       public string nickname { get; set; }
       public int victories { get; set; }
       public int defeats { get; set; }
-      public byte[] imageProfile { get; set; }
+      public int imageProfile { get; set; }
       public string username { get; set;  }
   }
     

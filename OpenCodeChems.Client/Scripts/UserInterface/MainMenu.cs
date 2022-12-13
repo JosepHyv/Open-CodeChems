@@ -87,7 +87,7 @@ public class MainMenu : Control
 			nicknameActualPlayer = actualPlayer.nickname;
 			int victories = actualPlayer.victories;
 			int defeats = actualPlayer.defeats;
-			byte [] imageProfile = actualPlayer.imageProfile;
+			int imageProfile = actualPlayer.imageProfile;
 			string usernameObtained = actualPlayer.username;
 			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nicknameActualPlayer;
 			serverClient.UpdateServerData(nicknameActualPlayer);

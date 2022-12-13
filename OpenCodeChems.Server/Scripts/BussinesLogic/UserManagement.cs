@@ -164,7 +164,7 @@ namespace OpenCodeChems.BussinesLogic
         /// <returns> boolean with true value if it could update the new image profile </returns>
         /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
         /// <exception cref="InvalidOperationException">throw if the username is null</exception>
-        public bool EditProfileImage(string username, byte[] imageProfile)
+        public bool EditProfileImage(string username, int imageProfile)
         {
             bool status = false;
             try
