@@ -108,7 +108,7 @@ public class AddFriend : Control
 			string nickname = playerFound.nickname;
 			int victories = playerFound.victories;
 			int defeats = playerFound.defeats;
-			byte [] imageProfile = playerFound.imageProfile;
+			int imageProfile = playerFound.imageProfile;
 			string usernameObtained = playerFound.username;
 		}
 		serverClient.FriendshipExist(idProfileActualPlayer, idProfilePlayerFound);

@@ -54,7 +54,7 @@ public class SeeFriend : Control
 			nicknameFriendFound = profileObtained.nickname;
 			victories = profileObtained.victories;
 			defeats = profileObtained.defeats;
-			byte [] imageProfile = profileObtained.imageProfile;
+			int imageProfile = profileObtained.imageProfile;
 			string username = profileObtained.username;
 		}
         GetParent().GetNode<Label>("SeeFriend/SeeFriendNinePatchRect/NicknameFriendLabel").SetText(nicknameFriendFound);

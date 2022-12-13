@@ -67,7 +67,7 @@ public class RegisterUser : Control
 				{
 					Encryption PasswordHasher = new Encryption();
 					string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-					byte[] imageProfile = ImageToByte(); 
+					int imageProfile = 0; 
 					serverClient.RegisterUser(name, email, username, hashPassword, nickname, imageProfile, VICTORIES_DEFAULT, DEFEATS_DEFAULT);
 				}
 			}
