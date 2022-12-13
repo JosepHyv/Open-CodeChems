@@ -13,8 +13,6 @@ public class KeyController : Control
 	public override void _Ready()
 	{   
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		randomNumber = RandomClass.Next(0,4);
-		serverClient.SendSceneToServer(randomNumber);
 		serverClient.Connect("UpdateGameClient", this, nameof(ChangeScreen));
 	
 	}

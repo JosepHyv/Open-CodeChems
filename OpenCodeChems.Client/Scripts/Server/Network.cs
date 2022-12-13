@@ -608,12 +608,6 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(CleanRoom));
 		}
-
-		public void SendSceneToServer(int number)
-		{
-			RpcId(PEER_ID, "AddSceneRoom", currentRoom, number);
-		}
-
 		
 		public void StartGame()
 		{
