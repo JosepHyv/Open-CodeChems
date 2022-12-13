@@ -8,7 +8,7 @@ public class KeyController : Control
 {
 
 	Network serverClient;
-	Random RandomClass = new Random();
+	
 	private int randomNumber = 0;
 	public override void _Ready()
 	{   
