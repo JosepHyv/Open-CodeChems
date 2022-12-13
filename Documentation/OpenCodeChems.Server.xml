@@ -53,7 +53,7 @@
             <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
             <exception cref="T:System.InvalidOperationException">throw if username or newNickname is null</exception>
         </member>
-        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.EditProfileImage(System.String,System.Byte[])">
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.EditProfileImage(System.String,System.Int32)">
             <summary>
             assigns a new image profile to the profile it finds with the provided username
             </summary>
@@ -221,7 +221,34 @@
             <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
             <exception cref="T:System.InvalidOperationException">throw if object type friends is null</exception>
         </member>
-        <member name="M:Network.RegisterUserRequest(System.String,System.String,System.String,System.String,System.String,System.Byte[],System.Int32,System.Int32)">
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.DeleteInvitatedPlayer(System.String)">
+            <summary>
+            dalete a user that played as invitated
+            </summary>
+            <param name = "username"> receives a string with de username of the player </param>
+            <returns>boolean with true value if could delete the user registerd</returns>
+            <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
+            <exception cref="T:System.InvalidOperationException">throw if username is null</exception>
+        </member>
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.AddVictory(System.String)">
+            <summary>
+            add a victory to the player with de nickname provided 
+            </summary>
+            <param name = "nickname"> receives a string with the nickname of the user </param>
+            <returns>boolean with true value if could update the victories of the user</returns>
+            <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
+            <exception cref="T:System.InvalidOperationException">throw nickname is null</exception>
+        </member>
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.AddDefeat(System.String)">
+            <summary>
+            add a defeat to the player with de nickname provided 
+            </summary>
+            <param name = "nickname"> receives a string with the nickname of the user </param>
+            <returns>boolean with true value if could update the defeats of the user</returns>
+            <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
+            <exception cref="T:System.InvalidOperationException">throw nickname is null</exception>
+        </member>
+        <member name="M:Network.RegisterUserRequest(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
             call to RegisterUser and RegisterProfile method 
             </summary>

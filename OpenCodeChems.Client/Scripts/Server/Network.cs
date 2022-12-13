@@ -234,7 +234,7 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(LoggedFail));
 		}
 
-		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
+		public void RegisterUser(string name, string email, string username, string hashPassword, string nickname, int imageProfile, int victories, int defeats)
 		{
 			RpcId(PEER_ID,"RegisterUserRequest", name, email, username, hashPassword, nickname,imageProfile, victories, defeats);		
 		}
@@ -368,7 +368,7 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID,"GetProfileByUsernameRequest", username);
 		}
 		[Puppet]
-		public void ProfileByUsernameObtained(int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		public void ProfileByUsernameObtained(int idProfile, string nickname, int victories, int defeats, int imageProfile, string username)
 		{
 			profileByUsernameObtained = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
 			EmitSignal(nameof(ProfileByUsernameFound));
@@ -497,7 +497,7 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID,"GetProfileByNicknameRequest", nickname);
 		}
 		[Puppet]
-		public void ProfileByNicknameObtained(int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
+		public void ProfileByNicknameObtained(int idProfile, string nickname, int victories, int defeats, int imageProfile, string username)
 		{
 			profileByNicknameObtained = new Profile(idProfile, nickname, victories, defeats, imageProfile, username);
 			EmitSignal(nameof(ProfileByNicknameFound));

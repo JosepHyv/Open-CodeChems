@@ -23,18 +23,8 @@ namespace OpenCodeChems.Test
 		private string NEW_NICKNAME = "NicknameUpdateTest";
 		private int VICTORIES = 0;
 		private int DEFEATS = 0;
-		private byte[] IMAGE_PROFILE = null;
-		private byte[] NEW_IMAGE_PROFILE = GetBytes();
-		public static byte[] GetBytes()
-		{
-			var directory = new Godot.Directory();
-			FileStream imageProfileFileStream = new FileStream("Test/imagePerfilDefault.jpg", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-			Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
-			BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-			imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
-			imageProfileFileStream.Close(); 
-			return imageProfile;
-		}
+		private int IMAGE_PROFILE = 0;
+		private int NEW_IMAGE_PROFILE = 1;
 		
 		[Test]
 		public void RegisterUserCorrect()
@@ -71,7 +61,7 @@ namespace OpenCodeChems.Test
 		[Test]
 		public void RegisterProfileInvalidOperationException()
 		{
-			Profile newProfile = new Profile( null, -123, -123, null, null);
+			Profile newProfile = new Profile( null, -123, -123, -123, null);
 			bool expectedStatus = false;
 			bool obtainedStatus = USER_MANAGEMENT.RegisterProfile(newProfile);
 			Assert.IsEqual(expectedStatus, obtainedStatus);
@@ -137,7 +127,7 @@ namespace OpenCodeChems.Test
 		public void EditProfileImageInvalidOperationException()
 		{
 			bool expectedStatus = false;
-			bool obtainedStatus = USER_MANAGEMENT.EditProfileImage(null, null);
+			bool obtainedStatus = USER_MANAGEMENT.EditProfileImage(null, -123);
 			Assert.IsEqual(expectedStatus, obtainedStatus);
 		}
 		[Test]

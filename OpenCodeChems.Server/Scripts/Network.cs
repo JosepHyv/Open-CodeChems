@@ -207,7 +207,7 @@ public class Network : Node
 	/// <returns>Signal to client</returns>
 	/// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
 	[Master]
-	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, byte[] imageProfile, int victories, int defeats)
+	private void RegisterUserRequest(string name, string email, string username, string hashPassword, string nickname, int imageProfile, int victories, int defeats)
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		try
@@ -297,7 +297,7 @@ public class Network : Node
 				string usernameObtained = profileObtained.username;
 				int victories = profileObtained.victories;
 				int defeats = profileObtained.defeats;
-				byte[] imageProfile = profileObtained.imageProfile;
+				int imageProfile = profileObtained.imageProfile;
 				RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
 				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
 			}
@@ -512,7 +512,7 @@ public class Network : Node
 		}
 	}
 	[Master]
-	public void EditImageProfileRequest(string username, byte[] imageProfile)
+	public void EditImageProfileRequest(string username, int imageProfile)
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		if (USER_MANAGEMENT.EditProfileImage(username, imageProfile) == true)
@@ -604,7 +604,7 @@ public class Network : Node
 				string username = profileObtained.username;
 				int victories = profileObtained.victories;
 				int defeats = profileObtained.defeats;
-				byte[] imageProfile = profileObtained.imageProfile;
+				int imageProfile = profileObtained.imageProfile;
 				RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
 				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
 			}
@@ -681,7 +681,7 @@ public class Network : Node
 			string nickname = "Chemsito" + senderId.ToString();
 			int victories = 0;
 			int defeats = 0;
-			byte [] imageProfile = null;
+			int imageProfile = 0;
 			User newUser = new User(username, hashPassword, name, email);
 			Profile newProfile = new Profile(nickname, victories, defeats, imageProfile, username);
 			if(USER_MANAGEMENT.RegisterUser(newUser) == true)

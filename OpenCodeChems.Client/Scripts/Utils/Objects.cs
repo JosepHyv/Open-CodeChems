@@ -25,7 +25,7 @@ namespace OpenCodeChems.Client.Resources
 
         public class Profile 
             {
-                public Profile (int idProfile, string nickname, int victories, int defeats, byte[] imageProfile, string username)
+                public Profile (int idProfile, string nickname, int victories, int defeats, int imageProfile, string username)
                 {
                     this.idProfile = idProfile;
                     this.nickname = nickname;
@@ -38,7 +38,7 @@ namespace OpenCodeChems.Client.Resources
                 public string nickname { get; set; }
                 public int victories { get; set; }
                 public int defeats { get; set; }
-                public byte[] imageProfile { get; set; }
+                public int imageProfile { get; set; }
                 public string username { get; set;  }
         }
         public class Friends

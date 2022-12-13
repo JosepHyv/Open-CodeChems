@@ -79,7 +79,7 @@ public class FriendRequests : Control
 			string nickname = actualPlayer.nickname;
 			int victories = actualPlayer.victories;
 			int defeats = actualPlayer.defeats;
-			byte [] imageProfile = actualPlayer.imageProfile;
+			int imageProfile = actualPlayer.imageProfile;
 			string usernameObtained = actualPlayer.username;
 		}
         if(statusRequest == true)
