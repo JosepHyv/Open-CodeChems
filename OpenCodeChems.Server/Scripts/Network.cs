@@ -806,10 +806,13 @@ public class Network : Node
 		}
 	}
 	[Master]
-	private void SendEmail(string emailTo, string subject, string body)
+	private void SendEmailRequest(string emailTo, string subject, string body)
 	{
-		var mailSender = GetNode<Control>("pruebaEmail/emailSenderNode");
-        mailSender.Call("SendEmail", "oscarolivarezcarsi@gmail.com", "cambio de contraseña", "usa este código para cambiar tu contraseña 12543");
+		int senderId = GetTree().GetRpcSenderId();
+		var mailSender = GD.Load("res://Scripts/Utils/Email.gd");
+        mailSender.Call("SendEmail", emailTo, subject, body);
+		RpcId(senderId, "EmailSent");	
+		logBlock.InsertTextAtCursor($"sending email to  {senderId}\n");
 	}
 }
 

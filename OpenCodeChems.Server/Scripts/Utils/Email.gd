@@ -3,7 +3,7 @@ extends Control
 func _ready():
 	pass
 
-func SendEmail(emailto, subject, body):
+static func SendEmail(emailto, subject, body):
 	var emailfrom = "codechems@gmail.com"
 	print("generating email")
 	var command_body = [	"$EmailFrom = '%s'" %[emailfrom],

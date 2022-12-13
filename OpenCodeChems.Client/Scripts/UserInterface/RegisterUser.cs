@@ -19,9 +19,12 @@ public class RegisterUser : Control
 	private Task<bool> emailNotRegisteredStatus = Task<bool>.FromResult(false);
 	private Task<bool> usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 	private Task<bool> nicknameNotRegisteredStatus = Task<bool>.FromResult(false);
+	private string BODY_WITHOUT_CODE_EMAIL = "Your code for registration is:";
+	private string SUBJECT_EMAIL = "Complete your register to OpenCode Chems";
 	private bool validateRegister = false;
 	private int VICTORIES_DEFAULT = 0;
 	private int DEFEATS_DEFAULT = 0;
+	public static int codeRegistration = 0;
 	private string name = "";
 	private string email = "";
 	private string username = "";
@@ -39,6 +42,7 @@ public class RegisterUser : Control
 		serverClient.Connect("UsernameNotRegistered", this, nameof(UsernameNotRegistered));
 		serverClient.Connect("NicknameRegistered", this, nameof(NicknameIsRegistered));
 		serverClient.Connect("NicknameNotRegistered", this, nameof(NicknameNotRegistered));
+		serverClient.Connect("EmailIsSent", this, nameof(EmailSent));
 	}
 
 	public void _on_CancelTextureButton_pressed()
@@ -54,9 +58,9 @@ public class RegisterUser : Control
 		password = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/PasswordLineEdit").Text;
 		confirmPassword = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/ConfirmPasswordLineEdit").Text;
 		nickname = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
-		bool noEmptyFields = ValidateEmptyFields();
-		bool verifyEmailPassword = ValidateFields();
-		if(noEmptyFields == true)
+		//	bool noEmptyFields = ValidateEmptyFields();
+		//bool verifyEmailPassword = ValidateFields();
+		/*if(noEmptyFields == true)
 		{
 			if(verifyEmailPassword == true)
 			{
@@ -77,7 +81,11 @@ public class RegisterUser : Control
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_EMPTY_FIELDS");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-		}
+		}*/
+		Random newRandom = new Random();
+		codeRegistration = newRandom.Next(10000, 99999);
+		string bodyEmail = BODY_WITHOUT_CODE_EMAIL + codeRegistration.ToString();
+		serverClient.SendEmail(email, SUBJECT_EMAIL, bodyEmail);
 		
 	}
 
@@ -193,5 +201,11 @@ public class RegisterUser : Control
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("NICKNAME_REGISTER");
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 		usernameNotRegisteredStatus = Task<bool>.FromResult(false);
+	}
+	public void EmailSent()
+	{
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("NOTIFICATION");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("EMAIL_SENT");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 	}
 }

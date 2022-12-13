@@ -22,7 +22,6 @@ namespace OpenCodeChems.Client.Server
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
 		public static string usernamePlayerAsInvitated = "";
-
 		public static string currentRoom = "None";
 		
 		[Signal]
@@ -129,11 +128,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectDeleteInvitated();
 		[Signal]
 		delegate void DeleteInvitatedFail();
-
-
 		[Signal]
 		delegate void CanBan();
-
 		[Signal]
 		delegate void BanFail();
 		[Signal]
@@ -144,16 +140,14 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectAddDefeat();
 		[Signal]
 		delegate void AddDefeatNotCorrect();
-
 		[Signal]
 		delegate void YesStartGame();
-
 		[Signal]
 		delegate void NoStartGame();
-
-
 		[Signal]
 		delegate void UpdateGameClient(string rool, int number);
+		[Signal]
+		delegate void EmailIsSent();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -676,6 +670,15 @@ namespace OpenCodeChems.Client.Server
 		public void UpdateScreenClientGame(string rool, int number)
 		{
 			EmitSignal(nameof(UpdateGameClient), rool, number);
+		}
+		public void SendEmail(string emailTo, string subject, string body)
+		{
+			RpcId(PEER_ID, "SendEmailRequest", emailTo, subject, body);
+		}
+		[Puppet]
+		public void EmailSent()
+		{
+			EmitSignal(nameof(EmailIsSent));
 		}
 
 	}
