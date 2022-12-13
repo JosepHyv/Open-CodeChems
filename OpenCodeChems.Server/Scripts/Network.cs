@@ -805,6 +805,12 @@ public class Network : Node
 			}
 		}
 	}
+	[Master]
+	private void SendEmail(string emailTo, string subject, string body)
+	{
+		var mailSender = GetNode<Control>("pruebaEmail/emailSenderNode");
+        mailSender.Call("SendEmail", "oscarolivarezcarsi@gmail.com", "cambio de contraseña", "usa este código para cambiar tu contraseña 12543");
+	}
 }
 
 
