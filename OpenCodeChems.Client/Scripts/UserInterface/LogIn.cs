@@ -58,7 +58,7 @@ public class LogIn : Control
 	}
 	private void _on_RecoverPasswordTextureButton_pressed()
 	{
-		GetTree().ChangeScene("res://Scenes/RecoverPassword.tscn");
+		GetTree().ChangeScene("res://Scenes/RecoverPassword.tscn");	
 	}
 	
 	public void LoggedAcepted()
