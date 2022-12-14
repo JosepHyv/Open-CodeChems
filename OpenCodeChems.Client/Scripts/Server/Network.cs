@@ -153,7 +153,7 @@ namespace OpenCodeChems.Client.Server
 		delegate void NoStartGame();
 		
 		[Signal]
-		delegate void UpdateBoardSignal();
+		delegate void UpdateBoardSignal(string rool, int number);
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -678,7 +678,7 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void UpdateBoard(string rool, int number)
 		{
-			EmitSignal(nameof(UpdateBoardSignal));
+			EmitSignal(nameof(UpdateBoardSignal), rool, number);
 		}
 
 	}

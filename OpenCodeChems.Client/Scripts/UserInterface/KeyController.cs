@@ -21,18 +21,18 @@ public class KeyController : Control
 
 
 
-	public void ChangeScreen()
+	public void ChangeScreen(string rool, int number)
 	{
-		//randomNumber = number;
+		randomNumber = number;
 		GD.Print("coso plis funciona");
-		/*if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
+		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
 			LoadKey();
 		}
 		else
 		{
 			GetTree().ChangeScene("res://Scenes/SpyPlayer.tscn");
-		}*/
+		}
 	}
 
 	
