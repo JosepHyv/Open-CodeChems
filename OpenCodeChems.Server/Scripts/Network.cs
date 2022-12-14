@@ -816,8 +816,9 @@ public class Network : Node
 			for(int c = 0; c<playersInRoom.Count; c++)
 			{
 				int senderId = playersInRoom[c];
+				List<string> words = GenerateWordsInBoard(roomCode, playersLanguage[senderId]);
 				logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
-				RpcId(senderId, "UpdateScreenClientGame");
+				RpcId(senderId, "UpdateScreenClientGame", words);
 			}
 		}
 	}
@@ -881,9 +882,8 @@ public class Network : Node
 			for(int c = 0; c<playersInRoom.Count; c++)
 			{
 				int senderId = playersInRoom[c];
-				List<string> words = GenerateWordsInBoard(roomCode, playersLanguage[senderId]);
 				logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
-				RpcId(senderId, "UpdateBoard", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber, words);
+				RpcId(senderId, "UpdateBoard", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
 			}
 		}
 	}
