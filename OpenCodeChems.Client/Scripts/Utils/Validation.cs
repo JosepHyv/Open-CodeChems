@@ -145,5 +145,12 @@ namespace OpenCodeChems.Client.Resources
 			}
 			return isValid;
 		}
+		public bool ValidateCodeRegistration(string code)
+		{
+			bool isValid = true;
+			int codeResult = 0;
+			isValid = int.TryParse(code, out codeResult);
+			return isValid;
+		}
 	}
 }

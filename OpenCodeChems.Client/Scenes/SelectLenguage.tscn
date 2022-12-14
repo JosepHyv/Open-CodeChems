@@ -45,10 +45,10 @@ texture_normal = ExtResource( 3 )
 expand = true
 
 [node name="CancelTextureButton" type="TextureButton" parent="TraslationNinePatchRect"]
-margin_left = 15.0
-margin_top = 269.0
-margin_right = 148.0
-margin_bottom = 325.0
+margin_left = 439.0
+margin_top = 258.0
+margin_right = 572.0
+margin_bottom = 314.0
 texture_normal = ExtResource( 1 )
 texture_pressed = ExtResource( 1 )
 expand = true
@@ -56,11 +56,13 @@ expand = true
 [node name="CancelLabel" type="Label" parent="TraslationNinePatchRect/CancelTextureButton"]
 margin_left = 16.0
 margin_top = 14.0
-margin_right = 160.0
+margin_right = 129.0
 margin_bottom = 37.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "CANCEL_BUTTON"
+autowrap = true
+clip_text = true
 
 [node name="EnglishTextureButton" type="TextureButton" parent="TraslationNinePatchRect"]
 margin_left = 346.0

@@ -158,6 +158,24 @@ text = "PLAY_INVITATED"
 autowrap = true
 clip_text = true
 
+[node name="RecoverPasswordTextureButton" type="TextureButton" parent="NinePatchRect"]
+margin_left = 742.0
+margin_top = 262.0
+margin_right = 899.0
+margin_bottom = 317.0
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="RecoverPasswordLabel" type="Label" parent="NinePatchRect/RecoverPasswordTextureButton"]
+margin_left = 28.0
+margin_top = 14.0
+margin_right = 143.0
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 8 )
+text = "RECOVER_PASSWORD_LABEL"
+autowrap = true
+clip_text = true
+
 [node name="EmptyFieldsAcceptDialog" type="AcceptDialog" parent="."]
 margin_left = 266.0
 margin_top = 184.0
@@ -168,3 +186,4 @@ window_title = "¡Alerta!"
 [connection signal="pressed" from="NinePatchRect/LogInButton" to="." method="_on_LogInButton_pressed"]
 [connection signal="pressed" from="NinePatchRect/RegisterButton" to="." method="_on_RegisterButton_pressed"]
 [connection signal="pressed" from="NinePatchRect/PlayInvitatedTextureButton" to="." method="_on_PlayInvitatedTextureButton_pressed"]
+[connection signal="pressed" from="NinePatchRect/RecoverPasswordTextureButton" to="." method="_on_RecoverPasswordTextureButton_pressed"]

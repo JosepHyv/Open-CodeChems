@@ -17,7 +17,11 @@ public class MainMenu : Control
 	public string nicknameActualPlayer = "";
 	private List<string> friendsOfActualPlayer;
 	public static int idProfile = 0; 
+	public static int imageProfile = 0;
 	private bool STATUS_FRIENDS = true;
+	public static string pathImageProfile = "";
+	private ImageTexture textureImageProfile = new ImageTexture(); 
+	private Image image = new Image();
 
 
 	public override void _Ready()
@@ -87,9 +91,13 @@ public class MainMenu : Control
 			nicknameActualPlayer = actualPlayer.nickname;
 			int victories = actualPlayer.victories;
 			int defeats = actualPlayer.defeats;
-			int imageProfile = actualPlayer.imageProfile;
+			imageProfile = actualPlayer.imageProfile;
 			string usernameObtained = actualPlayer.username;
 			GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nicknameActualPlayer;
+			pathImageProfile = GetImageProfilePath(imageProfile);
+			image.Load(pathImageProfile);
+			textureImageProfile.CreateFromImage(image);
+			GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/ImageProfileTextureButton").SetNormalTexture(textureImageProfile);
 			serverClient.UpdateServerData(nicknameActualPlayer);
 			bool statusPlayer = validatePlayer();
 			if(statusPlayer == false)
@@ -103,10 +111,7 @@ public class MainMenu : Control
 		serverClient.GetFriends(idProfile, STATUS_FRIENDS);
 	}
 
-	/*public Image ByteArrayToImage(byte[] data)
-	{
-		
-	}*/
+	
 	
 	public void GetProfileByUsernameFail()
 	{
@@ -149,6 +154,44 @@ public class MainMenu : Control
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetText("ERROR_DELETE_INVITATED");
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("ERROR");
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").Visible = true;
+	}
+	public string GetImageProfilePath(int imageProfile)
+	{
+		string pathImageProfile = "";
+		switch (imageProfile) 
+		{
+			case Constants.IMAGE_PROFILE_DEFAULT:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/ImagePerfilDefault.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_CHEMS_GAMER:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/chemsGamer.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_CHEMS_CHRISTMAS:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/chemsNavidad.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_DRAVEN:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/draven.jpeg";
+			break;
+			case Constants.IMAGE_PROFILE_KITTY_MINECRAFT:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/kittyMinecraft.jpeg";
+			break;
+			case Constants.IMAGE_PROFILE_LINK:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/link.jpeg";
+			break;
+			case Constants.IMAGE_PROFILE_MECH:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/mech.png";
+			break;
+			case Constants.IMAGE_PROFILE_MECH_CHIVA:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/mechsChivahermano.png";
+			break;
+			case Constants.IMAGE_PROFILE_COLD_TEAM:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/teamFrio.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_WINDOWS:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/windows.jpeg";
+			break;
+		}
+		return pathImageProfile;
 	}
 
 }

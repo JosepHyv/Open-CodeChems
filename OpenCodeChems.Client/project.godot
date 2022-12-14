@@ -26,7 +26,7 @@ common/drop_mouse_on_gui_input_disabled=true
 
 test="en"
 fallback="es"
-translations=PoolStringArray( "res://Scenes/Resources/Internacionalization/internacionalization.es.translation", "res://Scenes/Resources/Internacionalization/internacionalization.en.translation" )
+translations=PoolStringArray( "res://Scenes/Resources/Internacionalization/internacionalization.en.translation", "res://Scenes/Resources/Internacionalization/internacionalization.es.translation" )
 translation_remaps={
 }
 

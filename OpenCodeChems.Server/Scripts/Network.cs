@@ -55,6 +55,11 @@ public class Network : Node
 	private void PlayerDisconnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
+		Profile profileForDelete = USER_MANAGEMENT.GetProfileByUsername(peerId.ToString());
+		if(profileForDelete != null)
+		{
+			USER_MANAGEMENT.DeleteInvitatedPlayer(profileForDelete.username);
+		}
 		clientsConected.Remove(peerId);
 		if(roomOwners.ContainsKey(peerId))
 		{
@@ -65,7 +70,6 @@ public class Network : Node
 			playersData.Remove(peerId);
 		}
 		DisJoinPlayer(peerId);
-		DeleteInvitatedPlayerRequest(peerId.ToString());
 	}
 
 
@@ -803,6 +807,30 @@ public class Network : Node
 				logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
 				RpcId(senderId, "UpdateScreenClientGame", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
 			}
+		}
+	}
+	[Master]
+	private void SendEmailRequest(string emailTo, string subject, string body)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		var mailSender = GD.Load("res://Scripts/Utils/Email.gd");
+        mailSender.Call("SendEmail", emailTo, subject, body);
+		RpcId(senderId, "EmailSent");	
+		logBlock.InsertTextAtCursor($"sending email to  {senderId}\n");
+	}
+	[Master]
+	public void RestorePasswordRequest(string email, string newHashedPassword)
+	{
+		int senderId = GetTree().GetRpcSenderId();	
+		if (USER_MANAGEMENT.RestorePassword(email, newHashedPassword) == true)
+		{
+			RpcId(senderId, "RestorePasswordSuccessful");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} has been restore\n");
+		}
+		else
+		{
+			RpcId(senderId, "RestirePasswordNotSuccessful");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} hasn't been restore\n");
 		}
 	}
 }
