@@ -483,7 +483,7 @@ namespace OpenCodeChems.BussinesLogic
         /// gets the id of the profiles with wich the actual player has a friendship and the status is equal to true, replaces the id for the nicknames of the profiles
         /// </remarks>
         /// <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-        /// <returns>List with the friends of the actual player</returns>ception>
+        /// <returns>List with the friends of the actual player</returns>
         /// <exception cref="InvalidOperationException">throw if idProfile is null</exception>
         public List<string> GetFriends(int idProfile)
         {
@@ -520,7 +520,7 @@ namespace OpenCodeChems.BussinesLogic
         /// gets the id of the profiles with wich the actual player has a friendship and the status is equal to false, replaces the id for the nicknames of the profiles
         /// </remarks>
         /// <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-        /// <returns>List with the friends requests of the actual player</returns>ception>
+        /// <returns>List with the friends requests of the actual player</returns>
         /// <exception cref="InvalidOperationException">throw if idProfile is null</exception>
         public List<string> GetFriendsRequests(int idProfile)
         {

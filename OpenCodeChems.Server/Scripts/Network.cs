@@ -11,6 +11,9 @@ using OpenCodeChems.Server.Game;
 
 namespace OpenCodeChems.Server.Network
 {
+    /// <summary>
+    /// Control the conectivity between serve and client using Rpc
+    /// </summary>
     public class Network : Node
     {
 
@@ -27,12 +30,15 @@ namespace OpenCodeChems.Server.Network
         private AcceptDialog dialog;
         private Dictionary<string, RoomGame> rooms;
         private Dictionary<int, string> roomOwners;
-        public List<int> clientsConected;
-        public Dictionary<int, string> playersData;
+        private List<int> clientsConected;
+        private Dictionary<int, string> playersData;
 
-        public Dictionary<int, string> playersLanguage;
+        private Dictionary<int, string> playersLanguage;
         private static Encryption PASSWORD_HASHER = new Encryption();
 
+        /// <summary>
+        /// Initialize the server
+        /// </summary>
         public override void _Ready()
         {
             roomOwners = new Dictionary<int, string>();
@@ -46,8 +52,8 @@ namespace OpenCodeChems.Server.Network
             logBlock = GetParent().GetNode<TextEdit>("Network/TextEdit");
             listening = GetParent().GetNode<RichTextLabel>("Network/currentDirText");
             connectButton = GetParent().GetNode<Button>("Network/Button");
-            ipLineEdit.SetText(ADDRESS);
-            portLineEdit.SetText(DEFAULT_PORT.ToString());
+            ipLineEdit.Text = (ADDRESS);
+            portLineEdit.Text = (DEFAULT_PORT.ToString());
 
         }
 
@@ -323,7 +329,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void UpdateData(string nickname)
+        private void UpdateData(string nickname)
         {
             int senderId = GetTree().GetRpcSenderId();
             playersData[senderId] = nickname;
@@ -332,14 +338,14 @@ namespace OpenCodeChems.Server.Network
 
 
         [Master]
-        public void UpdateLanguage(string lang)
+        private void UpdateLanguage(string lang)
         {
             int senderId = GetTree().GetRpcSenderId();
             playersLanguage[senderId] = lang;
         }
 
         [Master]
-        public void UpdateRol(string rol, string nameRoom)
+        private void UpdateRol(string rol, string nameRoom)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (rooms.ContainsKey(nameRoom))
@@ -357,7 +363,7 @@ namespace OpenCodeChems.Server.Network
 
 
         [Master]
-        public void CreateRoom(string code)
+        private void CreateRoom(string code)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (rooms.ContainsKey(code))
@@ -377,8 +383,6 @@ namespace OpenCodeChems.Server.Network
                 logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
                 RpcId(senderId, "CreateRoomAccepted", code);
                 logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
-
-                /// only for test 
                 logBlock.InsertTextAtCursor("positions generated\n");
                 foreach (int number in hostRoom.boardNumbers)
                 {
@@ -390,7 +394,7 @@ namespace OpenCodeChems.Server.Network
         }
 
 
-        public List<string> GetRedPlayers(string nameRoom)
+        private List<string> GetRedPlayers(string nameRoom)
         {
              List<string> redPlayers = new List<string>();
              if(rooms.ContainsKey(nameRoom))
@@ -403,7 +407,7 @@ namespace OpenCodeChems.Server.Network
              return redPlayers;
 
         }
-        public List<string> GetBluePlayers(string nameRoom)
+        private List<string> GetBluePlayers(string nameRoom)
         {
              List<string> bluePlayers = new List<string>();
              if(rooms.ContainsKey(nameRoom))
@@ -418,7 +422,7 @@ namespace OpenCodeChems.Server.Network
         }
 
 
-        public string GetRedSpyMaster(string nameRoom)
+        private string GetRedSpyMaster(string nameRoom)
         {
             string redSpyMaster = null;
             if(rooms.ContainsKey(nameRoom))
@@ -431,7 +435,7 @@ namespace OpenCodeChems.Server.Network
             return redSpyMaster;
         }
 
-        public string GetBlueSpyMaster(string nameRoom)
+        private string GetBlueSpyMaster(string nameRoom)
         {
             string blueSpyMaster = null;
             if(rooms.ContainsKey(nameRoom))
@@ -445,7 +449,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void UpdateClientsRoom(string nameRoom)
+        private void UpdateClientsRoom(string nameRoom)
         {
             if (rooms.ContainsKey(nameRoom))
             {
@@ -466,7 +470,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void BanPlayerInRoom(string roomName, string playerName)
+        private void BanPlayerInRoom(string roomName, string playerName)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (rooms.ContainsKey(roomName))
@@ -490,7 +494,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void BanPermission()
+        private void BanPermission()
         {
             int senderId = GetTree().GetRpcSenderId();
             if (roomOwners.ContainsKey(senderId))
@@ -500,7 +504,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void JoinRoom(string code)
+        private void JoinRoom(string code)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (rooms.ContainsKey(code))
@@ -526,7 +530,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void PasswordExistRequest(string username, string hashPassword)
+        private void PasswordExistRequest(string username, string hashPassword)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (USER_MANAGEMENT.PasswordExist(username, hashPassword))
@@ -542,7 +546,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void EditUserPasswordRequest(string username, string newHashedPassword)
+        private void EditUserPasswordRequest(string username, string newHashedPassword)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (USER_MANAGEMENT.EditUserPassword(username, newHashedPassword))
@@ -557,7 +561,7 @@ namespace OpenCodeChems.Server.Network
             }
         }
         [Master]
-        public void EditNicknameRequest(string username, string nickname)
+        private void EditNicknameRequest(string username, string nickname)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (USER_MANAGEMENT.EditProfileNickname(username, nickname))
@@ -572,7 +576,7 @@ namespace OpenCodeChems.Server.Network
             }
         }
         [Master]
-        public void EditImageProfileRequest(string username, int imageProfile)
+        private void EditImageProfileRequest(string username, int imageProfile)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (USER_MANAGEMENT.EditProfileImage(username, imageProfile))
@@ -587,7 +591,7 @@ namespace OpenCodeChems.Server.Network
             }
         }
         [Master]
-        public void AddFriendRequest(int idProfileFrom, int idProfileTo, bool status)
+        private void AddFriendRequest(int idProfileFrom, int idProfileTo, bool status)
         {
             int senderId = GetTree().GetRpcSenderId();
 
@@ -604,7 +608,7 @@ namespace OpenCodeChems.Server.Network
             }
         }
         [Master]
-        public void FriendshipExistRequest(int idProfileFrom, int idProfileTo)
+        private void FriendshipExistRequest(int idProfileFrom, int idProfileTo)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (USER_MANAGEMENT.FriendshipExist(idProfileFrom, idProfileTo))
@@ -619,7 +623,7 @@ namespace OpenCodeChems.Server.Network
             }
         }
         [Master]
-        public void GetFriendsRequest(int idProfile)
+        private void GetFriendsRequest(int idProfile)
         {
             int senderId = GetTree().GetRpcSenderId();
             List<string> friendsObtainded = USER_MANAGEMENT.GetFriends(idProfile);
@@ -635,7 +639,7 @@ namespace OpenCodeChems.Server.Network
             }
         }
         [Master]
-        public void GetFriendsRequestsRequest(int idProfile)
+        private void GetFriendsRequestsRequest(int idProfile)
         {
             int senderId = GetTree().GetRpcSenderId();
             List<string> friendsRequestsObtainded = USER_MANAGEMENT.GetFriendsRequests(idProfile);
@@ -871,7 +875,6 @@ namespace OpenCodeChems.Server.Network
         [Master]
         private void UpdateGame(string roomCode)
         {
-           // int senderId = GetTree().GetRpcSenderId();
             if (rooms.ContainsKey(roomCode))
             {
                 	List<int> playersInRoom = rooms[roomCode].members;
@@ -886,10 +889,9 @@ namespace OpenCodeChems.Server.Network
         }
             
 
-            public List<string> GenerateWordsInBoard(string nameRoom, string lang)
-        {
+            private List<string> GenerateWordsInBoard(string nameRoom, string lang)
+            {
             string path = "";
-            bool exist = true;
             Godot.File cardValues = new Godot.File();
             List<string> listGameElements = new List<string>();
             List<string> listAllElements = new List<string>();
@@ -933,7 +935,7 @@ namespace OpenCodeChems.Server.Network
         }
 
         [Master]
-        public void BoardChange(string nameRoom)
+        private void BoardChange(string nameRoom)
         {
             rooms[nameRoom].gameStarted = true;
             UpdateBoard(nameRoom);
@@ -963,7 +965,7 @@ namespace OpenCodeChems.Server.Network
             logBlock.InsertTextAtCursor($"sending email to  {senderId}\n");
         }
         [Master]
-        public void RestorePasswordRequest(string email, string newHashedPassword)
+        private void RestorePasswordRequest(string email, string newHashedPassword)
         {
             int senderId = GetTree().GetRpcSenderId();
             if (USER_MANAGEMENT.RestorePassword(email, newHashedPassword))
