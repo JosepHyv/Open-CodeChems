@@ -796,7 +796,30 @@ public class Network : Node
 			{
 				int senderId = playersInRoom[c];
 				logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
-				RpcId(senderId, "UpdateScreenClientGame", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
+				RpcId(senderId, "UpdateScreenClientGame");
+			}
+		}
+	}
+
+
+
+	[Master]
+	public void BoardChange(string nameRoom)
+	{
+		UpdateBoard(nameRoom);
+	}
+
+	[Master]
+	private void UpdateBoard(string roomCode)
+	{
+		if(rooms.ContainsKey(roomCode))
+		{
+			List<int> playersInRoom = rooms[roomCode].members;
+			for(int c = 0; c<playersInRoom.Count; c++)
+			{
+				int senderId = playersInRoom[c];
+				logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
+				RpcId(senderId, "UpdateBoard", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
 			}
 		}
 	}

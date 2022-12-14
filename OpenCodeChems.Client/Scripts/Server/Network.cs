@@ -25,6 +25,7 @@ namespace OpenCodeChems.Client.Server
 
 		public static string currentRoom = "None";
 		
+		
 		[Signal]
 		delegate void LoggedIn();
 		[Signal]
@@ -150,10 +151,9 @@ namespace OpenCodeChems.Client.Server
 
 		[Signal]
 		delegate void NoStartGame();
-
-
+		
 		[Signal]
-		delegate void UpdateGameClient(string rool, int number);
+		delegate void UpdateBoardSignal();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -652,7 +652,7 @@ namespace OpenCodeChems.Client.Server
 		}
 		public void AddDefeat(string nickname)
 		{
-			RpcId(PEER_ID,"AddDefeatRequest", nickname);;
+			RpcId(PEER_ID,"AddDefeatRequest", nickname);
 			
 		}
 		[Puppet]
@@ -667,9 +667,19 @@ namespace OpenCodeChems.Client.Server
 		}
 		
 		[Puppet]
-		public void UpdateScreenClientGame(string rool, int number)
+		public void UpdateScreenClientGame()
 		{
-			EmitSignal(nameof(UpdateGameClient), rool, number);
+			GD.Print($"we got algo");
+			GetTree().ChangeScene("res://Scenes/KeyController.tscn");
+			GD.Print("Se cambio a la escena Keys Controller");
+			EmitSignal(nameof(UpdateBoard), currentRoom);
+			RpcId(PEER_ID, "BoardChange", currentRoom);
+		}
+
+		[Puppet]
+		public void UpdateBoard(string rool, int number)
+		{
+			EmitSignal(nameof(UpdateBoardSignal));
 		}
 
 	}

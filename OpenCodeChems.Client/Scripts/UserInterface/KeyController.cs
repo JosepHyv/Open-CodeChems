@@ -1,6 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using OpenCodeChems.Client.Server;
+using static OpenCodeChems.Client.Resources.Objects;
 using OpenCodeChems.Client.Resources;
 
 
@@ -12,25 +14,25 @@ public class KeyController : Control
 	private int randomNumber = 0;
 	public override void _Ready()
 	{   
+		GD.Print("Ready de Keys Controller");
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		serverClient.Connect("UpdateGameClient", this, nameof(ChangeScreen));
-	
+		serverClient.Connect("UpdateBoardSignal", this, nameof(ChangeScreen));
 	}
 
 
 
-	public void ChangeScreen(string rool, int number)
+	public void ChangeScreen()
 	{
-		randomNumber = number;
-		GD.Print($"Changing to Scene {rool}");
-		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
+		//randomNumber = number;
+		GD.Print("Changing to Scene");
+		/*if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
 			LoadKey();
 		}
 		else
 		{
 			GetTree().ChangeScene("res://Scenes/SpyPlayer.tscn");
-		}
+		}*/
 	}
 
 	
