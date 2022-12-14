@@ -259,12 +259,19 @@
             <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
             <exception cref="T:System.InvalidOperationException">throw if the username or newHashedPassword is null</exception>
         </member>
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.SearchFriends(OpenCodeChems.DataAccess.Friends)">
+            <summary>
+            check if exist a register in Friends the object provided
+            </summary>
+            <param name = "friends"> receives an object of type Friends for search the form of friendship </param>
+            <returns>boolean with true value if exist a register with the friends</returns>
+        </member>
         <member name="M:Network.RegisterUserRequest(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
             call to RegisterUser and RegisterProfile method 
             </summary>
             <remarks>
-            recive nine parameters because RPC with Godot Engine can't serialize objects, only it can recive primitive data, call the RegisterUser method if it completed correctly call the RegisterProfile method and send signal to client
+            recive nine parameters because RPC with Godot Engine can't serialize objects, only it can recive primitive data, call the RegisterUser method if it completed correctly call the RegisterProfile method and send signal to client, reference of https://docs.godotengine.org/en/stable/tutorials/io/binary_serialization_api.html
             </remarks>
             <param name = "name"> receives a string with the name of the new user </param>
             <param name = "email"> receives a string with the email of the new user </param>
