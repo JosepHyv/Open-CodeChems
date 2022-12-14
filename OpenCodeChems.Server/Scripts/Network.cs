@@ -390,7 +390,59 @@ namespace OpenCodeChems.Server.Network
         }
 
 
-        
+        public List<string> GetRedPlayers(string nameRoom)
+        {
+             List<string> redPlayers = new List<string>();
+             if(rooms.ContainsKey(nameRoom))
+             {
+                foreach (int id in rooms[nameRoom].redPlayers)
+                {
+                    redPlayers.Add(playersData[id]);
+                }
+             }
+             return redPlayers;
+
+        }
+        public List<string> GetBluePlayers(string nameRoom)
+        {
+             List<string> bluePlayers = new List<string>();
+             if(rooms.ContainsKey(nameRoom))
+             {
+                foreach (int id in rooms[nameRoom].bluePlayers)
+                {
+                    bluePlayers.Add(playersData[id]);
+                }
+             }
+             return bluePlayers;
+
+        }
+
+
+        public string GetRedSpyMaster(string nameRoom)
+        {
+            string redSpyMaster = null;
+            if(rooms.ContainsKey(nameRoom))
+            {
+                if (playersData.ContainsKey(rooms[nameRoom].redSpyMaster))
+                {
+                    redSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
+                }
+            }
+            return redSpyMaster;
+        }
+
+        public string GetBlueSpyMaster(string nameRoom)
+        {
+            string blueSpyMaster = null;
+            if(rooms.ContainsKey(nameRoom))
+            {
+                if (playersData.ContainsKey(rooms[nameRoom].blueSpyMaster))
+                {
+                    blueSpyMaster = playersData[rooms[nameRoom].blueSpyMaster];
+                }
+            }
+            return blueSpyMaster;
+        }
 
         [Master]
         public void UpdateClientsRoom(string nameRoom)
@@ -401,35 +453,12 @@ namespace OpenCodeChems.Server.Network
                 for (int c = 0; c < playersInRoom.Count; c++)
                 {
                     int master = playersInRoom[c];
-                    logBlock.InsertTextAtCursor($"sending to {master} -> {playersData[master]} the players updated:\n");
-                    for (int d = 0; d < playersInRoom.Count; d++)
-                    {
-                        string separator = (d < playersInRoom.Count - 1) ? "," : ".";
-                        int slave = playersInRoom[d];
-                        logBlock.InsertTextAtCursor($"{playersData[slave]}{separator}");
-                    }
-                    string redSpyMaster = null;
-                    string blueSpyMaster = null;
-                    if (playersData.ContainsKey(rooms[nameRoom].redSpyMaster))
-                    {
-                        redSpyMaster = playersData[rooms[nameRoom].redSpyMaster];
-                    }
-
-                    if (playersData.ContainsKey(rooms[nameRoom].blueSpyMaster))
-                    {
-                        blueSpyMaster = playersData[rooms[nameRoom].blueSpyMaster];
-                    }
-
-                    List<string> redPlayers = new List<string>();
-                    List<string> bluePlayers = new List<string>();
-                    foreach (int id in rooms[nameRoom].redPlayers)
-                    {
-                        redPlayers.Add(playersData[id]);
-                    }
-                    foreach (int id in rooms[nameRoom].bluePlayers)
-                    {
-                        bluePlayers.Add(playersData[id]);
-                    }
+                    string redSpyMaster = GetRedSpyMaster(nameRoom);
+                    string blueSpyMaster = GetBlueSpyMaster(nameRoom);
+                    
+                    List<string> redPlayers = GetRedPlayers(nameRoom);
+                    List<string> bluePlayers = GetBluePlayers(nameRoom);
+                    
                     RpcId(master, "UpdateRoom", redSpyMaster, blueSpyMaster, redPlayers, bluePlayers);
                 }
                 logBlock.InsertTextAtCursor("\n");
