@@ -672,7 +672,6 @@ namespace OpenCodeChems.Client.Server
 			GD.Print($"we got algo");
 			GetTree().ChangeScene("res://Scenes/KeyController.tscn");
 			GD.Print("Se cambio a la escena Keys Controller");
-			EmitSignal(nameof(UpdateBoard), currentRoom);
 			RpcId(PEER_ID, "BoardChange", currentRoom);
 		}
 

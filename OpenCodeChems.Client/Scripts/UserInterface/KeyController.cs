@@ -24,7 +24,7 @@ public class KeyController : Control
 	public void ChangeScreen()
 	{
 		//randomNumber = number;
-		GD.Print("Changing to Scene");
+		GD.Print("coso plis funciona");
 		/*if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
 			LoadKey();
