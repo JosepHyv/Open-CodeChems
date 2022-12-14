@@ -18,7 +18,6 @@ public class MainMenu : Control
 	private List<string> friendsOfActualPlayer;
 	public static int idProfile = 0; 
 	public static int imageProfile = 0;
-	private bool STATUS_FRIENDS = true;
 	public static string pathImageProfile = "";
 	private ImageTexture textureImageProfile = new ImageTexture(); 
 	private Image image = new Image();
@@ -97,7 +96,7 @@ public class MainMenu : Control
 			pathImageProfile = GetImageProfilePath(imageProfile);
 			image.Load(pathImageProfile);
 			textureImageProfile.CreateFromImage(image);
-			GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/ImageProfileTextureButton").SetNormalTexture(textureImageProfile);
+			GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/ImageProfileTextureButton").TextureNormal = (textureImageProfile);
 			serverClient.UpdateServerData(nicknameActualPlayer);
 			bool statusPlayer = validatePlayer();
 			if(statusPlayer == false)
@@ -108,15 +107,15 @@ public class MainMenu : Control
 				GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/CreateGameTextureButton").Disabled = true;
 			}
 		}
-		serverClient.GetFriends(idProfile, STATUS_FRIENDS);
+		serverClient.GetFriends(idProfile);
 	}
 
 	
 	
 	public void GetProfileByUsernameFail()
 	{
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetText("ERROR_LOADING_PROFILE");
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").DialogText =("ERROR_LOADING_PROFILE");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").Visible = true;
 	}
 	public void GetFriendsComplete()
@@ -132,8 +131,8 @@ public class MainMenu : Control
 	}
 	public void GetFriendsFail()
 	{
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetText("ERROR_LOADING_FRIENDS");
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").DialogText =("ERROR_LOADING_FRIENDS");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").Visible = true;
 	}
 	public bool validatePlayer()
@@ -151,8 +150,8 @@ public class MainMenu : Control
 	}
 	public void DeletePlayerFail()
 	{
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetText("ERROR_DELETE_INVITATED");
-		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").DialogText =("ERROR_DELETE_INVITATED");
+		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("MainMenu/BackgroundMenuNinePatchRect/MainMenuAcceptDialog").Visible = true;
 	}
 	public string GetImageProfilePath(int imageProfile)

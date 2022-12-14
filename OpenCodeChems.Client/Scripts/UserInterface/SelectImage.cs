@@ -71,15 +71,15 @@ public class SelectImage : Control
     public void CorrectEditImageProfile()
 	{
 		editImageProfileIsCorrect = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").SetTitle("NOTIFICATION");
-		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").SetText("CORRECT_IMAGE_PROFILE_UPDATE");
+		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").WindowTitle = ("NOTIFICATION");
+		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").DialogText = ("CORRECT_IMAGE_PROFILE_UPDATE");
 		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").Visible = true;
 	}
 	public void IncorrectEditImageProfile()
 	{
 		editImageProfileIsCorrect = Task<bool>.FromResult(false);
-		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").SetText("ERROR_IMAGE_PROFILE_UPDATE");
+		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").WindowTitle = ("ERROR");
+		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").DialogText = ("ERROR_IMAGE_PROFILE_UPDATE");
 		GetParent().GetNode<AcceptDialog>("SelectImage/SelectImageAcceptDialog").Visible = true;
 	}
 }

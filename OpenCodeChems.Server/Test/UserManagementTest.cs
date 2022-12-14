@@ -12,19 +12,21 @@ namespace OpenCodeChems.Test
 	[Title("UserManagement Tests")]
 	public class UserManagementTest : WAT.Test
 	{
-		private UserManagement USER_MANAGEMENT = new UserManagement();
+		private readonly UserManagement USER_MANAGEMENT = new UserManagement();
 		private static Encryption PasswordHasher = new Encryption();
-		private string USERNAME = "UsernameTest";
-		private string PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!");
-		private string NEW_PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!2");
-		private string NAME = "Carlos Test";
-		private string EMAIL = "test@gmail.com";
-		private string NICKNAME = "NicknameTest";
-		private string NEW_NICKNAME = "NicknameUpdateTest";
-		private int VICTORIES = 0;
-		private int DEFEATS = 0;
-		private int IMAGE_PROFILE = 0;
-		private int NEW_IMAGE_PROFILE = 1;
+		private const string USERNAME = "UsernameTest";
+		private readonly string PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!");
+		private readonly string NEW_PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!2");
+		private const string NAME = "Carlos Test";
+		private const string EMAIL = "test@gmail.com";
+		private const string NICKNAME = "NicknameTest";
+		private const string NEW_NICKNAME = "NicknameUpdateTest";
+		private const int VICTORIES = 0;
+		private const int DEFEATS = 0;
+		private const int IMAGE_PROFILE = 0;
+		private const int NEW_IMAGE_PROFILE = 1;
+		private const int ID_PROFILE_CARSI12 = 2;
+		private const int ID_PROFILE_ZINE = 3;
 		
 		[Test]
 		public void RegisterUserCorrect()
@@ -262,7 +264,7 @@ namespace OpenCodeChems.Test
 		public void AddFriendCorrect()
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
-			Friends friendsTest = new Friends(profileTest.idProfile, 4, false);
+			Friends friendsTest = new Friends(profileTest.idProfile, ID_PROFILE_CARSI12, false);
 			bool expectedStatus = true;
 			bool obtainedStatus = USER_MANAGEMENT.AddFriend(friendsTest);
 			Assert.IsEqual(expectedStatus, obtainedStatus);
@@ -278,7 +280,7 @@ namespace OpenCodeChems.Test
 		[Test]
 		public void GetFriendsRequestCorrect()
 		{
-			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(4, false);
+			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(ID_PROFILE_CARSI12);
 			bool expectedStatus = false;
 			bool obtainedStatus = true;
 			for (int i = 0; i < obtainedFriendsRequests.Count; i++) 
@@ -293,7 +295,7 @@ namespace OpenCodeChems.Test
 		[Test]
 		public void GetFriendsRequestNotCorrect()
 		{
-			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(-123, false);
+			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(-123);
 			bool expectedStatus = false;
 			bool obtainedStatus = false;
 			for (int i = 0; i < obtainedFriendsRequests.Count; i++) 
@@ -309,7 +311,7 @@ namespace OpenCodeChems.Test
 		public void AcceptFriendCorrect()
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
-			Friends friendsTest = new Friends(profileTest.idProfile, 4, true);
+			Friends friendsTest = new Friends(profileTest.idProfile, ID_PROFILE_CARSI12, true);
 			bool expectedStatus = true;
 			bool obtainedStatus = USER_MANAGEMENT.AcceptFriend(friendsTest);
 			Assert.IsEqual(expectedStatus, obtainedStatus);
@@ -327,7 +329,7 @@ namespace OpenCodeChems.Test
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
 			bool expectedStatus = true;
-			bool obtainedStatus = USER_MANAGEMENT.FriendshipExist(profileTest.idProfile, 4);
+			bool obtainedStatus = USER_MANAGEMENT.FriendshipExist(profileTest.idProfile, ID_PROFILE_CARSI12);
 			Assert.IsEqual(expectedStatus, obtainedStatus);
 		}
 		[Test]
@@ -335,14 +337,14 @@ namespace OpenCodeChems.Test
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
 			bool expectedStatus = false;
-			bool obtainedStatus = USER_MANAGEMENT.FriendshipExist(profileTest.idProfile, 6);
+			bool obtainedStatus = USER_MANAGEMENT.FriendshipExist(profileTest.idProfile, ID_PROFILE_ZINE);
 			Assert.IsEqual(expectedStatus, obtainedStatus);
 		}
 		[Test]
 		public void GetFriendsCorrect()
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
-			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(profileTest.idProfile, true);
+			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(profileTest.idProfile);
 			bool expectedStatus = false;
 			bool obtainedStatus = true;
 			for (int i = 0; i < obtainedFriends.Count; i++) 
@@ -357,7 +359,7 @@ namespace OpenCodeChems.Test
 		[Test]
 		public void GetFriendsNotCorrect()
 		{
-			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(-123, true);
+			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(-123);
 			bool expectedStatus = false;
 			bool obtainedStatus = false;
 			for (int i = 0; i < obtainedFriends.Count; i++) 
@@ -373,7 +375,7 @@ namespace OpenCodeChems.Test
 		public void DenyFriendCorrect()
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
-			Friends friendsTest = new Friends(profileTest.idProfile, 4, true);
+			Friends friendsTest = new Friends(profileTest.idProfile, ID_PROFILE_CARSI12, true);
 			bool expectedStatus = true;
 			bool obtainedStatus = USER_MANAGEMENT.DenyFriend(friendsTest);
 			Assert.IsEqual(expectedStatus, obtainedStatus);
@@ -390,7 +392,7 @@ namespace OpenCodeChems.Test
 		public void DeleteFriendCorrect()
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
-			Friends friendsTest = new Friends(profileTest.idProfile, 4, true);
+			Friends friendsTest = new Friends(profileTest.idProfile, ID_PROFILE_CARSI12, true);
 			USER_MANAGEMENT.AddFriend(friendsTest);
 			bool expectedStatus = true;
 			bool obtainedStatus = USER_MANAGEMENT.DeleteFriend(friendsTest);

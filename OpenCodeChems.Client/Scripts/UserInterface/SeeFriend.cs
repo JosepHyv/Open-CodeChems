@@ -36,8 +36,8 @@ public class SeeFriend : Control
     }
     public void _on_DeleteFriendTextureButton_pressed()
     {
-        GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendConfirmationDialog").SetText("CONFIRMATION_DELETE_FRIEND");
-		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendConfirmationDialog").SetTitle("WARNING");
+        GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendConfirmationDialog").DialogText = ("CONFIRMATION_DELETE_FRIEND");
+		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendConfirmationDialog").WindowTitle = ("WARNING");
 		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendConfirmationDialog").Visible = true;
     }
     public void _on_DeleteFriendConfirmationDialog_confirmed()
@@ -62,31 +62,31 @@ public class SeeFriend : Control
             pathImageProfile = GetImageProfilePath(imageProfile);
 			image.Load(pathImageProfile);
 			textureImageProfile.CreateFromImage(image);
-			GetParent().GetNode<TextureButton>("SeeFriend/SeeFriendNinePatchRect/ImageProfileTextureButton").SetNormalTexture(textureImageProfile);
+			GetParent().GetNode<TextureButton>("SeeFriend/SeeFriendNinePatchRect/ImageProfileTextureButton").TextureNormal =(textureImageProfile);
 		}
-        GetParent().GetNode<Label>("SeeFriend/SeeFriendNinePatchRect/NicknameFriendLabel").SetText(nicknameFriendFound);
-        GetParent().GetNode<Label>("SeeFriend/SeeFriendNinePatchRect/VictoriesLabel").SetText(victories.ToString());
-        GetParent().GetNode<Label>("SeeFriend/SeeFriendNinePatchRect/DefeatsLabel").SetText(defeats.ToString());
+        GetParent().GetNode<Label>("SeeFriend/SeeFriendNinePatchRect/NicknameFriendLabel").Text = (nicknameFriendFound);
+        GetParent().GetNode<Label>("SeeFriend/SeeFriendNinePatchRect/VictoriesLabel").Text = (victories.ToString());
+        GetParent().GetNode<Label>("SeeFriend/SeeFriendNinePatchRect/DefeatsLabel").Text = (defeats.ToString());
 
 	}
 	public void GetProfileByNicknameFail()
 	{
-		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").SetText("ERROR_LOADING_PROFILE");
-		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").DialogText = ("ERROR_LOADING_PROFILE");
+		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").Visible = true;
 	}
 
     public void DeleteFriendCorrect()
 	{
-		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").SetText("DELETE_FRIEND_CORRECT");
-		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").SetTitle("NOTIFICATION");
+		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").DialogText = ("DELETE_FRIEND_CORRECT");
+		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").WindowTitle = ("NOTIFICATION");
 		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").Visible = true;
 		deleteFriendIsCorrect = Task<bool>.FromResult(true);
 	}
     public void DeleteFriendNotCorrect()
 	{
-        GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").SetText("ERROR_DELETE_FRIEND");
-		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").SetTitle("ERROR");
+        GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").DialogText = ("ERROR_DELETE_FRIEND");
+		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").Visible = true;
 		deleteFriendIsCorrect = Task<bool>.FromResult(false);
 	}

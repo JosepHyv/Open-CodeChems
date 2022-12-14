@@ -2,28 +2,28 @@ namespace OpenCodeChems.Server.Standar
 {
     public class Constants
     {
-        public static string RED_SPY_MASTER = "RedSpyMaster";
+        public const string RED_SPY_MASTER = "RedSpyMaster";
 
-        public static string BLUE_SPY_MASTER = "BlueSpyMaster";
+        public const string BLUE_SPY_MASTER = "BlueSpyMaster";
 
-        public static string RED_PLAYER = "RedPlayer";
+        public const string RED_PLAYER = "RedPlayer";
 
-        public static string BLUE_PLAYER = "BluePlayer";
+        public const string BLUE_PLAYER = "BluePlayer";
 
         public static string [] ROLES = {RED_SPY_MASTER, RED_PLAYER, BLUE_SPY_MASTER, BLUE_PLAYER};
-        public static int MAX_RED_PLAYERS = 3;
+        public const int MAX_RED_PLAYERS = 3;
 
-        public static int MAX_BLUE_PLAYERS = 3;
+        public const int MAX_BLUE_PLAYERS = 3;
 
-        public static int MAX_MEMBERS = 8;
+        public const int MAX_MEMBERS = 8;
 
-        public static int BLUE = 0;
+        public const int BLUE = 0;
 
-        public static int RED = 1;
+        public const int RED = 1;
 
-        public static int YELLOW = 2;
+        public const int YELLOW = 2;
 
-        public static int BLACK = 3;
+        public const int BLACK = 3;
         
         public int[] KeyBlueOne = new int[] {0,2,2,2,0,1,0,0,0,1,0,2,1,0,3,2,1,1,2,1,1,0,2,1,0}; //0
         public int[] KeyBlueTwo = new int[] {3,2,2,0,0,1,0,0,0,1,0,2,1,0,2,2,1,1,2,1,1,0,2,1,0}; //3

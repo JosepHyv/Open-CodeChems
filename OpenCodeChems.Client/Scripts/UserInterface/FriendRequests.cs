@@ -13,9 +13,8 @@ public class FriendRequests : Control
     public static int idProfilePlayerFound = 0;
     private string nicknameFriendRequest = "";
     private List<string> friendsRequestsOfActualPlayer;
-    private bool STATUS_FRIENDS_REQUESTS = false;
-    private bool STATUS_FRIEND_ACCEPT = true;
-	private bool STATUS_FRIEND_DENY = false;
+    private const bool STATUS_FRIEND_ACCEPT = true;
+	private const bool STATUS_FRIEND_DENY = false;
     private bool statusRequest = false;
     public static Profile actualPlayer;
     private Task<bool> addFriendIsCorrect = Task<bool>.FromResult(false);
@@ -25,7 +24,7 @@ public class FriendRequests : Control
         serverClient = GetNode<Network>("/root/Network") as Network;
         serverClient.Connect("FriendsRequestsFound", this, nameof(GetFriendsRequestsComplete));
 		serverClient.Connect("FriendsRequestsNotFound", this, nameof(GetFriendsRequestsFail));
-        serverClient.GetFriendsRequests(idProfileActualPlayer, STATUS_FRIENDS_REQUESTS);
+        serverClient.GetFriendsRequests(idProfileActualPlayer);
         serverClient.Connect("ProfileByNicknameFound", this, nameof(GetProfileByNicknameComplete));
 		serverClient.Connect("ProfileByNicknameNotFound", this, nameof(GetProfileByNicknameFail));
         serverClient.Connect("CorrectAcceptFriend", this, nameof(AcceptFriendCorrect));
@@ -66,8 +65,8 @@ public class FriendRequests : Control
 	}
 	public void GetFriendsRequestsFail()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText("ERROR_LOADING_FRIENDS_REQUESTS");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =("ERROR_LOADING_FRIENDS_REQUESTS");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").Visible = true;
 	}
     public void GetProfileByNicknameComplete()
@@ -96,8 +95,8 @@ public class FriendRequests : Control
 	}
 	public void GetProfileByNicknameFail()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText("ERROR_LOADING_PROFILE");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText = ("ERROR_LOADING_PROFILE");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").Visible = true;
 	}
     public void AcceptFriendCorrect()
@@ -106,8 +105,8 @@ public class FriendRequests : Control
 	}
 	public void AcceptFriendNotCorrect()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =
 		("FRIEND_REQUEST_CANT_ACCEPTED");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 		addFriendIsCorrect = Task<bool>.FromResult(false);
@@ -118,8 +117,8 @@ public class FriendRequests : Control
 	}
 	public void DenyFriendNotCorrect()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =
 		("FRIEND_REQUEST_CANT_DENY");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 		denyFriendIsCorrect = Task<bool>.FromResult(false);
@@ -127,6 +126,6 @@ public class FriendRequests : Control
     public void cleanFriendsRequest()
     {
         GetParent().GetNode<ItemList>("FriendRequests/FriendRequestsNinePatchRect/FriendRequestsItemList").Clear();
-        serverClient.GetFriendsRequests(idProfileActualPlayer, STATUS_FRIENDS_REQUESTS);
+        serverClient.GetFriendsRequests(idProfileActualPlayer);
     }
 }

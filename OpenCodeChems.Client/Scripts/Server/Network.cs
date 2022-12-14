@@ -460,9 +460,9 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(FriendshipRegistered));
 		}
-		public void GetFriends(int idProfile, bool status)
+		public void GetFriends(int idProfile)
 		{
-			RpcId(PEER_ID, "GetFriendsRequest", idProfile, status);
+			RpcId(PEER_ID, "GetFriendsRequest", idProfile);
 		}
 		[Puppet]
 		public void FriendsObtained(List<string> friends)
@@ -475,9 +475,9 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(FriendsNotFound));
 		}
-		public void GetFriendsRequests(int idProfile, bool status)
+		public void GetFriendsRequests(int idProfile)
 		{
-			RpcId(PEER_ID, "GetFriendsRequestsRequest", idProfile, status);
+			RpcId(PEER_ID, "GetFriendsRequestsRequest", idProfile);
 		}
 		[Puppet]
 		public void FriendsRequestsObtained(List<string> friendsRequests)
