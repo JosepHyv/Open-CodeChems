@@ -18,7 +18,7 @@ public class MasterPlayer : Control
 	private ImageTexture textureAssassin = new ImageTexture();
 	public override void _Ready()
 	{
-		
+		GD.Print("Me ejecuto primero");
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		List<string> listElements = serverClient.boardWords;
@@ -47,7 +47,7 @@ public class MasterPlayer : Control
 				masterDialog.SetText("REPEATED_WORD");
 				masterDialog.Visible = true;
 			}
-			
+			 
 		}
 		assassinBlack.Load(PATH_ASSASSIN_COLOR);
 		textureAssassin.CreateFromImage(assassinBlack);
