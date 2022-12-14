@@ -768,6 +768,7 @@ public class Network : Node
 			string nameRoom = roomOwners[senderId];
 			if(rooms[nameRoom].CanStart())
 			{
+				//rooms[nameRoom].gameStarted = true;
 				RpcId(senderId, "Start");
 			}
 			else

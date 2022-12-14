@@ -190,7 +190,7 @@ namespace OpenCodeChems.Server.Game
                 status &= !blackList.Contains(uniqueId);
             }
 
-            status &= gameStarted;
+            status &= !gameStarted;
 
             return status;
         }
