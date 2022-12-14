@@ -189,7 +189,11 @@ namespace OpenCodeChems.Server.Game
 
             if(status)
             {
+
                 status &= !blackList.Contains(uniqueId);
+
+                status = status && !blackList.Contains(uniqueId);
+
             }
 
             status &= !gameStarted;
@@ -217,8 +221,7 @@ namespace OpenCodeChems.Server.Game
             blueSpyReady = (bluePlayers.Count > 0);
 
             bool status = redMasterReady && blueMasterReady && redSpyReady && blueSpyReady;
-            //return status;
-            return true;
+            return status;
         }
 
         public void GenerateBoard()

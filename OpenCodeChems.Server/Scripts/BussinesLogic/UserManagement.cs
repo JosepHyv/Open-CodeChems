@@ -12,6 +12,12 @@ using Godot;
 
 namespace OpenCodeChems.BussinesLogic
 {
+    /// <summary>
+    /// Class that manage the users
+    /// </summary>
+    /// <remarks>
+    /// This class is in charge of handling everything related to users and making registrations, queries and deletions in the database about them.
+    /// </remarks>
 
     public class UserManagement : IUserManagement
     {
@@ -125,11 +131,11 @@ namespace OpenCodeChems.BussinesLogic
         /// evaluates if there is a profile with the specified username, if so it changes its nickname
         /// </remarks>
         /// <param name = "username"> receives an string with the username of the user </param>
-        /// <param name = "newNickname"> receives an string with the new nickname of the user </param>
+        /// <param name = "nickname"> receives an string with the new nickname of the user </param>
         /// <returns> boolean with true value if it could update the new nickname </returns>
         /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
         /// <exception cref="InvalidOperationException">throw if username or newNickname is null</exception>
-        public bool EditProfileNickname(string username, string newNickname)
+        public bool EditProfileNickname(string username, string nickname)
         {
             bool status = false;
             try
@@ -137,7 +143,7 @@ namespace OpenCodeChems.BussinesLogic
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile where Profile.username == username select Profile).First();
-                    profiles.nickname = newNickname;
+                    profiles.nickname = nickname;
                     context.SaveChanges();
                     status = true;
                 }
@@ -477,20 +483,19 @@ namespace OpenCodeChems.BussinesLogic
         /// gets the id of the profiles with wich the actual player has a friendship and the status is equal to true, replaces the id for the nicknames of the profiles
         /// </remarks>
         /// <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-        /// <param name = "status"> receives a boolean with the status of the friendship </param>
         /// <returns>List with the friends of the actual player</returns>ception>
         /// <exception cref="InvalidOperationException">throw if idProfile is null</exception>
-        public List<string> GetFriends(int idProfile, bool status)
+        public List<string> GetFriends(int idProfile)
         {
-            List<string> friendsObtained = new List<string>();;
+            List<string> friendsObtained = new List<string>();
             List<string> friendsIdFrom = new List<string>();
             List<string> friendsIdTo= new List<string>();
             try
             {
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
-                    friendsIdFrom = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileTo equals Profiles.idProfile where Friends.idProfileFrom == idProfile where Friends.status == status select Profiles.nickname).ToList();
-                    friendsIdTo = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                    friendsIdFrom = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileTo equals Profiles.idProfile where Friends.idProfileFrom == idProfile where Friends.status == true select Profiles.nickname).ToList();
+                    friendsIdTo = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == true select Profiles.nickname).ToList();
                 }
                 foreach(var friendIdFrom in friendsIdFrom)
                 {
@@ -515,17 +520,16 @@ namespace OpenCodeChems.BussinesLogic
         /// gets the id of the profiles with wich the actual player has a friendship and the status is equal to false, replaces the id for the nicknames of the profiles
         /// </remarks>
         /// <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-        /// <param name = "status"> receives a boolean with the status of the friendship </param>
         /// <returns>List with the friends requests of the actual player</returns>ception>
         /// <exception cref="InvalidOperationException">throw if idProfile is null</exception>
-        public List<string> GetFriendsRequests(int idProfile, bool status)
+        public List<string> GetFriendsRequests(int idProfile)
         {
             List<string> friendsRequests = null;
             try
             {
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
-                    friendsRequests = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == status select Profiles.nickname).ToList();
+                    friendsRequests = (from Friends in context.Friends join Profiles in context.Profile on Friends.idProfileFrom equals Profiles.idProfile where Friends.idProfileTo == idProfile where Friends.status == false select Profiles.nickname).ToList();
                 }
             }
             catch (InvalidOperationException)
@@ -582,26 +586,14 @@ namespace OpenCodeChems.BussinesLogic
             bool status = false;
             int idProfileActualPlayer = friendsForDelete.idProfileFrom;
             int idProfileFriend = friendsForDelete.idProfileTo;
-            bool statusFriends = friendsForDelete.status;
             try
             {
                 using(OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {
-                    int friendshipExist = (from Friends in context.Friends where Friends.idProfileFrom == idProfileActualPlayer && Friends.idProfileTo == idProfileFriend && Friends.status == statusFriends select Friends).Count();
-                    if(friendshipExist > 0)
-                    {
-                        var friendDeleteIdFrom = (from Friends in context.Friends where Friends.idProfileFrom == idProfileActualPlayer && Friends.idProfileTo == idProfileFriend && Friends.status == statusFriends select Friends).First();
-                        context.Friends.Remove(friendDeleteIdFrom);
-                        context.SaveChanges();
-                        status = true;
-                    }
-                    else
-                    {
-                        var friendDeleteIdTo = (from Friends in context.Friends where Friends.idProfileTo == idProfileActualPlayer && Friends.idProfileFrom == idProfileFriend && Friends.status == statusFriends select Friends).First();
-                        context.Friends.Remove(friendDeleteIdTo);
-                        context.SaveChanges();
-                        status = true;
-                    }
+                    var friendDeleteIdFrom = (from Friends in context.Friends where Friends.idProfileFrom == idProfileActualPlayer && Friends.idProfileTo == idProfileFriend && Friends.status == true select Friends).First();
+                    context.Friends.Remove(friendDeleteIdFrom);
+                    context.SaveChanges();
+                    status = true;
 
                 }
             }
@@ -739,6 +731,27 @@ namespace OpenCodeChems.BussinesLogic
             catch(InvalidOperationException)
             {
                 status = false;
+            }
+            return status;
+        }
+
+        /// <summary>
+        /// check if exist a register in Friends the object provided
+        /// </summary>
+        /// <param name = "friends"> receives an object of type Friends for search the form of friendship </param>
+        /// <returns>boolean with true value if exist a register with the friends</returns>
+        public bool SearchFriends(Friends friends)
+        {
+            bool status = false;
+            int idProfileActualPlayer = friends.idProfileFrom;
+            int idProfileFriend = friends.idProfileTo;
+            using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+            {
+                int friendshipExist = (from Friends in context.Friends where Friends.idProfileFrom == idProfileActualPlayer && Friends.idProfileTo == idProfileFriend && Friends.status == true select Friends).Count();
+                if(friendshipExist > 0)
+                {
+                    status = true;
+                }
             }
             return status;
         }

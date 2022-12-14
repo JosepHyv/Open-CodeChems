@@ -42,16 +42,16 @@ public class ConfirmRecoverPassword : Control
             }
             else
             {
-                GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetTitle("NOTIFICATION");	
-                GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetText("ERROR_CODE");
+                GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").WindowTitle = ("NOTIFICATION");	
+                GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").DialogText = ("ERROR_CODE");
                 GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").Visible = true;
             }
         }
     }   
     public void EmailSent()
 	{
-		GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetTitle("NOTIFICATION");
-		GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetText("EMAIL_SENT");
+		GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").WindowTitle = ("NOTIFICATION");
+		GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").DialogText = ("EMAIL_SENT");
 		GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").Visible = true;
 	}
     public bool validateCode(string code)
@@ -60,15 +60,15 @@ public class ConfirmRecoverPassword : Control
         Validation validator = new Validation();
         if(String.IsNullOrWhiteSpace(code))
         {
-            GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetTitle("WARNING");
-		    GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetText("VERIFY_EMPTY_FIELDS");
+            GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").WindowTitle = ("WARNING");
+		    GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").DialogText = ("VERIFY_EMPTY_FIELDS");
 		    GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").Visible = true;
             isValid = false;
         }
         if(validator.ValidateCodeRegistration(code) == false)
         {
-            GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetTitle("WARNING");
-            GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").SetText("ONLY_NUMBERS");
+            GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").WindowTitle = ("WARNING");
+            GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").DialogText = ("ONLY_NUMBERS");
             GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").Visible = true;
             isValid = false;
         }
