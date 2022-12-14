@@ -1,5 +1,6 @@
 ﻿using Godot;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using OpenCodeChems.BussinesLogic;
 using OpenCodeChems.DataAccess;
@@ -26,6 +27,8 @@ public class Network : Node
 	private Dictionary<int, string> roomOwners;
 	public List<int> clientsConected;
 	public Dictionary<int, string> playersData;
+
+	public Dictionary<int, string> playersLanguage;
 	private static Encryption PASSWORD_HASHER = new Encryption();
 
 	public override void _Ready()
@@ -33,6 +36,7 @@ public class Network : Node
 		roomOwners = new Dictionary<int, string>();
 		clientsConected = new List<int>();
 		playersData = new Dictionary<int, string>();
+		playersLanguage = new Dictionary<int, string>();
 		dialog = GetParent().GetNode<AcceptDialog>("Network/AcceptDialog");
 		rooms = new Dictionary<string, RoomGame>();
 		ipLineEdit = GetParent().GetNode<LineEdit>("Network/ip");	
@@ -50,6 +54,7 @@ public class Network : Node
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Conectado\n");
 		clientsConected.Add(peerId);
 		playersData.Add(peerId, "None");
+		playersLanguage.Add(peerId, "en");
 	}
 
 	private void PlayerDisconnected(int peerId)
@@ -68,7 +73,10 @@ public class Network : Node
 			EraseRoom(roomName);
 			roomOwners.Remove(peerId);
 			playersData.Remove(peerId);
+
 		}
+		playersData.Remove(peerId);
+		playersLanguage.Remove(peerId);
 		DisJoinPlayer(peerId);
 	}
 
@@ -341,6 +349,7 @@ public class Network : Node
 			hostRoom.AddPlayer(senderId);
 			Random randomClass = new Random();
 			hostRoom.SceneNumber =  randomClass.Next(0,4);
+			hostRoom.GenerateBoard();
 			rooms.Add(code, hostRoom);
 			roomOwners.Add(senderId, code);
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
@@ -348,6 +357,13 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
 			
 		}
+	}
+
+	[Master]
+	public void UpdateLanguage(string lang)
+	{
+		int senderId = GetTree().GetRpcSenderId();
+		playersLanguage[senderId] = lang;
 	}
 
 	[Master]
@@ -806,7 +822,48 @@ public class Network : Node
 		}
 	}
 
+	public List<string> GenerateWordsInBoard(string nameRoom, string lang)
+	{
+		string path = "";
+		bool exist = true;
+        Godot.File cardValues = new Godot.File();
+		List<string> listGameElements = new List<string>();
+		List<string> listAllElements = new List<string>();
+		if(lang == "en")
+		{
+			path = "res://Scenes/Resources/words.txt";
+		}
+		else
+		{
+			path = "res://Scenes/Resources/palabras.txt";
+		}
+		try
+		{
+			cardValues.Open(path, Godot.File.ModeFlags.Read);
+		 	while (!cardValues.EofReached())
+      		{
+         		listAllElements.Add(cardValues.GetLine().Trim());
+     	 	}
+		}
+		catch(FileNotFoundException)
+		{
+      		logBlock.InsertTextAtCursor("ERROR");
+			logBlock.InsertTextAtCursor("FILE NOT FOUND");
+		
+    	}
 
+		if(rooms.ContainsKey(nameRoom))
+		{	
+			List<int> positions = rooms[nameRoom].boardNumbers;
+			for(int c = 0 ; c<25; c++)
+			{
+				string word = listAllElements[positions[c]];
+				listGameElements.Add(word);
+			}
+		}
+
+		return listAllElements;
+	}
 
 	[Master]
 	public void BoardChange(string nameRoom)
@@ -824,8 +881,9 @@ public class Network : Node
 			for(int c = 0; c<playersInRoom.Count; c++)
 			{
 				int senderId = playersInRoom[c];
+				List<string> words = GenerateWordsInBoard(roomCode, playersLanguage[senderId]);
 				logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
-				RpcId(senderId, "UpdateBoard", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
+				RpcId(senderId, "UpdateBoard", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber, words);
 			}
 		}
 	}

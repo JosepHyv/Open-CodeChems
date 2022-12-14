@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using OpenCodeChems.Server.Utils;
 using OpenCodeChems.Server.Standar;
@@ -21,6 +22,7 @@ namespace OpenCodeChems.Server.Game
 
         public List<int> bluePlayers {get; set;} = new List<int>();
 
+        public List<int> boardNumbers {get;set;} = new List<int>();
         public int SceneNumber = -1;
 
         public string GetRol(int uniqueId)
@@ -215,9 +217,22 @@ namespace OpenCodeChems.Server.Game
             blueSpyReady = (bluePlayers.Count > 0);
 
             bool status = redMasterReady && blueMasterReady && redSpyReady && blueSpyReady;
-            return status;
+            return status = true;
         }
 
+        public void GenerateBoard()
+        {
+            Random randomClass = new Random();
+            List<int> fullList = new List<int>();
+            for(int c = 0 ; c<83; c++)
+            {
+                fullList.Add(c);
+            }
+
+            boardNumbers = fullList.OrderBy(_ => randomClass.Next()).ToList();
+
+        }
 
     }
+
 }

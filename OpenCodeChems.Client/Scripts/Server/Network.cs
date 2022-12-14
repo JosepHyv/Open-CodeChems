@@ -23,7 +23,7 @@ namespace OpenCodeChems.Client.Server
 		public List<string> friendsRequestsObtained = null;
 		public static string usernamePlayerAsInvitated = "";
 		public static string currentRoom = "None";
-		
+		public List<string> boardWords = new List<string>();
 		
 		[Signal]
 		delegate void LoggedIn();
@@ -180,6 +180,11 @@ namespace OpenCodeChems.Client.Server
 		public void UpdateServerData(string nickname)
 		{
 			RpcId(PEER_ID, "UpdateData", nickname);
+		}
+
+		public void UpdateServerLanguage(string lang)
+		{
+			RpcId(PEER_ID, "UpdateLanguage", lang);
 		}
 		public void ConnectToServer()
 		{
@@ -676,8 +681,9 @@ namespace OpenCodeChems.Client.Server
 		}
 
 		[Puppet]
-		public void UpdateBoard(string rool, int number)
+		public void UpdateBoard(string rool, int number, List<string> wordList)
 		{
+			boardWords = wordList;
 			EmitSignal(nameof(UpdateBoardSignal), rool, number);
 		}
 		public void SendEmail(string emailTo, string subject, string body)
