@@ -158,4 +158,4 @@ SENDED_WORD,SEND,ENVIAR
 WORD_PLACEHOLDER,Word,Palabra
 CODENAME_INSTRUCTION,Send a keyword and a number to create the codename,Manda una palabra clave y un número para formar el código secreto
 LOADING_GAME,Loading game…,Cargando partida…
-PLAY_INVITATED,Loading game,Jugar como invitado
+PLAY_INVITATED,Play as guest,Jugar como invitado

@@ -27,7 +27,7 @@ public class KeyController : Control
 		GD.Print("coso plis funciona");
 		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
-			LoadKey();
+			LoadKey(number);
 		}
 		else
 		{
@@ -37,7 +37,7 @@ public class KeyController : Control
 
 	
 
-	public void LoadKey()
+	public void LoadKey(int randomNumber)
 	{   
 		PackedScene packedScene;
 		if(randomNumber == 0)

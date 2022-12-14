@@ -213,8 +213,7 @@ namespace OpenCodeChems.Server.Game
             blueSpyReady = (bluePlayers.Count > 0);
 
             bool status = redMasterReady && blueMasterReady && redSpyReady && blueSpyReady;
-            //return status;
-            return true;
+            return status;
         }
 
 
