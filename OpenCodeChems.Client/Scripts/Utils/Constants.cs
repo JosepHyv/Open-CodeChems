@@ -16,5 +16,15 @@ namespace OpenCodeChems.Client.Resources
         public static int MAX_BLUE_PLAYERS = 3;
 
         public static int MAX_MEMBERS = 8;
+        public static int IMAGE_PROFILE_DEFAULT = 0;
+        public static int IMAGE_PROFILE_CHEMS_GAMER = 1;
+        public static int IMAGE_PROFILE_CHEMS_CHRISTMAS = 2;
+        public static int IMAGE_PROFILE_DRAVEN = 3;
+        public static int IMAGE_PROFILE_KITTY_MINECRAFT = 4;
+        public static int IMAGE_PROFILE_LINK = 5;
+        public static int IMAGE_PROFILE_MECH = 6;
+        public static int IMAGE_PROFILE_MECH_CHIVA = 7;
+        public static int IMAGE_PROFILE_COLD_TEAM = 8;
+        public static int IMAGE_PROFILE_WINDOWS = 9;
     }
 }

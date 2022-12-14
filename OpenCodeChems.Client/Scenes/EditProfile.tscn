@@ -265,16 +265,7 @@ margin_right = 701.0
 margin_bottom = 415.0
 window_title = "¡Alerta!"
 
-[node name="SelectImageProfileFileDialog" type="FileDialog" parent="."]
-margin_left = 250.0
-margin_top = 131.0
-margin_right = 731.0
-margin_bottom = 460.0
-rect_min_size = Vector2( 150, 52.5 )
-window_title = "Guardar un Archivo"
-
 [connection signal="pressed" from="EditProfileNinePatchRect/ProfileInformationTransparentFrame/ProfilePhotoTextureButton" to="." method="_on_ProfilePhotoTextureButton_pressed"]
 [connection signal="pressed" from="EditProfileNinePatchRect/SaveProfileInformationTextureButton" to="." method="_on_SaveProfileInformationTextureButton_pressed"]
 [connection signal="pressed" from="EditProfileNinePatchRect/SavePasswordTextureButton" to="." method="_on_SavePasswordTextureButton_pressed"]
 [connection signal="pressed" from="CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
-[connection signal="file_selected" from="SelectImageProfileFileDialog" to="." method="_on_SelectImageProfileFileDialog_file_selected"]

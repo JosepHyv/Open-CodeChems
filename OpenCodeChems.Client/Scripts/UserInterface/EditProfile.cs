@@ -9,15 +9,12 @@ using System.IO;
 public class EditProfile : Control
 {
 	
-	private string username = MainMenu.username;
+	public static string username = MainMenu.username;
 	Network serverClient;
 	int PEER_ID = 1; 
 	private Task<bool> passwordIsCorrect = Task<bool>.FromResult(false);
 	private Task<bool> editPasswordIsCorrect = Task<bool>.FromResult(false);
 	private Task<bool> editNicknameIsCorrect = Task<bool>.FromResult(false);
-	private Task<bool> editImageProfileIsCorrect = Task<bool>.FromResult(false);
-
-	
 	private bool validateOldPassword = false;
 	private string oldPassword = "";
 	private string newPassword = "";
@@ -36,8 +33,6 @@ public class EditProfile : Control
 		serverClient.Connect("EditPasswordFail", this, nameof(IncorrectEditPassword));
 		serverClient.Connect("CorrectEditNickname", this, nameof(CorrectEditNickname));
 		serverClient.Connect("EditNicknameFail", this, nameof(IncorrectEditNickname));
-		serverClient.Connect("CorrectEditImageProfile", this, nameof(CorrectEditImageProfile));
-		serverClient.Connect("EditImageProfileFail", this, nameof(IncorrectEditImageProfile));
 	}
 
 
@@ -89,15 +84,7 @@ public class EditProfile : Control
 		{
 			if(verifyNickname == true)
 			{
-				if(newImageProfile == null)
-				{
-					serverClient.EditNickname(username, newNickname);
-				}
-				else
-				{
-					serverClient.EditNickname(username, newNickname);
-					serverClient.EditImageProfile(username, newImageProfile);
-				}
+				serverClient.EditNickname(username, newNickname);
 			}
 			else
 			{
@@ -106,35 +93,12 @@ public class EditProfile : Control
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			}
 		}
-		else
-		{
-			if(newImageProfile != null)
-			{
-				serverClient.EditImageProfile(username, newImageProfile);
-			}
-			else
-			{
-				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("WARNING");
-				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("VERIFY_EDIT_PROFILE");
-				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
-			}
-		}
 	}
 	public void _on_ProfilePhotoTextureButton_pressed()
 	{
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").SetTitle("SEARCH_IMAGE_PROFILE");
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").AddFilter("*.png");
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").AddFilter("*.jpg");
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").Access = ((Godot.FileDialog.AccessEnum)2);
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").Visible = true;
+		GetTree().ChangeScene("res://Scenes/SelectImage.tscn");
+	}
 
-	}
-	public void _on_SelectImageProfileFileDialog_file_selected(string imagePath)
-	{
-		imageProfile.Load(imagePath);
-		textureImageProfile.CreateFromImage(imageProfile);
-		GetParent().GetNode<TextureButton>("EditProfile/EditProfileNinePatchRect/ProfileInformationTransparentFrame/ProfilePhotoTextureButton").SetNormalTexture(textureImageProfile);
-	}
 
 	
 	public bool ValidatePassword()
@@ -223,18 +187,5 @@ public class EditProfile : Control
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("ERROR_NICKNAME_UPDATE");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
 	}
-	public void CorrectEditImageProfile()
-	{
-		editImageProfileIsCorrect = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("NOTIFICATION");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("CORRECT_IMAGE_PROFILE_UPDATE");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
-	}
-	public void IncorrectEditImageProfile()
-	{
-		editImageProfileIsCorrect = Task<bool>.FromResult(false);
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("ERROR_IMAGE_PROFILE_UPDATE");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
-	}
+	
 }

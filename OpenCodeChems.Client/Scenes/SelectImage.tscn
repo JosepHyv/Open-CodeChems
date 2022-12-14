@@ -1,0 +1,148 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scenes/Resources/ImagesProfile/teamFrio.jpg" type="Texture" id=1]
+[ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/chemsNavidad.jpg" type="Texture" id=3]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/kittyMinecraft.jpeg" type="Texture" id=4]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/link.jpeg" type="Texture" id=5]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/mechsChivahermano.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/draven.jpeg" type="Texture" id=7]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/mech.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/chemsGamer.jpg" type="Texture" id=9]
+[ext_resource path="res://Scenes/Resources/Fonts/6680-fontps.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Scenes/Resources/ImagesProfile/windows.jpeg" type="Texture" id=11]
+[ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=12]
+[ext_resource path="res://Scripts/UserInterface/SelectImage.cs" type="Script" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 26
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 10 )
+
+[node name="SelectImage" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 13 )
+
+[node name="SelectImageNinePatchRect" type="NinePatchRect" parent="."]
+margin_right = 1025.0
+margin_bottom = 599.0
+texture = ExtResource( 2 )
+
+[node name="SelectImageLabel" type="Label" parent="SelectImageNinePatchRect"]
+margin_left = 290.0
+margin_top = 31.0
+margin_right = 706.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 1 )
+text = "SELECT_IMAGE_INSTRUCTION"
+
+[node name="ChemsGamerTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 131.0
+margin_top = 105.0
+margin_right = 243.0
+margin_bottom = 196.0
+texture_normal = ExtResource( 9 )
+expand = true
+
+[node name="ChemsChristmasTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 439.0
+margin_top = 105.0
+margin_right = 551.0
+margin_bottom = 196.0
+texture_normal = ExtResource( 3 )
+expand = true
+
+[node name="DravenTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 742.0
+margin_top = 105.0
+margin_right = 854.0
+margin_bottom = 196.0
+texture_normal = ExtResource( 7 )
+expand = true
+
+[node name="KittyMinecraftTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 131.0
+margin_top = 230.0
+margin_right = 243.0
+margin_bottom = 321.0
+texture_normal = ExtResource( 4 )
+expand = true
+
+[node name="LinkTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 439.0
+margin_top = 230.0
+margin_right = 551.0
+margin_bottom = 321.0
+texture_normal = ExtResource( 5 )
+expand = true
+
+[node name="MechTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 742.0
+margin_top = 230.0
+margin_right = 854.0
+margin_bottom = 321.0
+texture_normal = ExtResource( 8 )
+expand = true
+
+[node name="MechChivaTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 131.0
+margin_top = 359.0
+margin_right = 243.0
+margin_bottom = 450.0
+texture_normal = ExtResource( 6 )
+expand = true
+
+[node name="ColdTeamTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 439.0
+margin_top = 359.0
+margin_right = 551.0
+margin_bottom = 450.0
+texture_normal = ExtResource( 1 )
+expand = true
+
+[node name="WindowsTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 742.0
+margin_top = 359.0
+margin_right = 854.0
+margin_bottom = 450.0
+texture_normal = ExtResource( 11 )
+expand = true
+
+[node name="CancelTextureButton" type="TextureButton" parent="SelectImageNinePatchRect"]
+margin_left = 784.0
+margin_top = 507.0
+margin_right = 942.0
+margin_bottom = 572.0
+texture_normal = ExtResource( 12 )
+expand = true
+
+[node name="CancelLabel" type="Label" parent="SelectImageNinePatchRect/CancelTextureButton"]
+margin_left = 32.0
+margin_top = 18.0
+margin_right = 154.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 2 )
+text = "CANCEL_BUTTON"
+autowrap = true
+clip_text = true
+
+[node name="SelectImageAcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 332.0
+margin_top = 182.0
+margin_right = 700.0
+margin_bottom = 384.0
+window_title = "¡Alerta!"
+
+[connection signal="pressed" from="SelectImageNinePatchRect/ChemsGamerTextureButton" to="." method="_on_ChemsGamerTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/ChemsChristmasTextureButton" to="." method="_on_ChemsChristmasTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/DravenTextureButton" to="." method="_on_DravenTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/KittyMinecraftTextureButton" to="." method="_on_KittyMinecraftTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/LinkTextureButton" to="." method="_on_LinkTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/MechTextureButton" to="." method="_on_MechTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/MechChivaTextureButton" to="." method="_on_MechChivaTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/ColdTeamTextureButton" to="." method="_on_ColdTeamTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/WindowsTextureButton" to="." method="_on_WindowsTextureButton_pressed"]
+[connection signal="pressed" from="SelectImageNinePatchRect/CancelTextureButton" to="." method="_on_CancelTextureButton_pressed"]
