@@ -51,22 +51,22 @@ public class AddFriend : Control
 				}
 				else
 				{
-					GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
-					GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("VERIFY_USERNAME");
+					GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("WARNING");
+					GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText = ("VERIFY_USERNAME");
 					GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 				}
 			}
 			else
 			{
-				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("ERROR");
-				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("FRIEND_YOURSELF");
+				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("ERROR");
+				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText = ("FRIEND_YOURSELF");
 				GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 			}
 		}
 		else
 		{
-			GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("VERIFY_EMPTY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText = ("VERIFY_EMPTY_FIELDS");
 			GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 		}
 	}
@@ -74,8 +74,8 @@ public class AddFriend : Control
 	public void UsernameNotRegistered()
 	{
 		usernameRegisteredStatus = Task<bool>.FromResult(false);
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("USERNAME_NOT_FOUND");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText = ("USERNAME_NOT_FOUND");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 	}
 	public void UsernameIsRegistered()
@@ -86,15 +86,15 @@ public class AddFriend : Control
 	public void AddFriendCorrect()
 	{
 		addFriendIsCorrect = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("NOTIFICATION");
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("NOTIFICATION");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText =
 		("FRIEND_REQUEST_SENT");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 	}
 	public void AddFriendNotCorrect()
 	{
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("ERROR");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText =
 		("FRIEND_REQUEST_NOT_SENT");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 		addFriendIsCorrect = Task<bool>.FromResult(false);
@@ -115,8 +115,8 @@ public class AddFriend : Control
 	}
 	public void GetProfileByUsernameFail()
 	{
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText("ERROR_LOADING_PROFILE");
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText = ("ERROR_LOADING_PROFILE");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 	}
 	public void FriendshipNotRegistered()
@@ -127,8 +127,8 @@ public class AddFriend : Control
 	public void FriendshipIsRegistered()
 	{
 		friendshipRegisteredStatus = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").SetText
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").DialogText =
 		("FRIENDSHIP_EXIST");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 	}

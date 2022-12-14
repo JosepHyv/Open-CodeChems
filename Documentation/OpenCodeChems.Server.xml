@@ -4,6 +4,14 @@
         <name>OpenCodeChems.Server</name>
     </assembly>
     <members>
+        <member name="T:OpenCodeChems.BussinesLogic.UserManagement">
+            <summary>
+            Class that manage the users
+            </summary>
+            <remarks>
+            This class is in charge of handling everything related to users and making registrations, queries and deletions in the database about them.
+            </remarks>
+        </member>
         <member name="M:OpenCodeChems.BussinesLogic.UserManagement.RegisterUser(OpenCodeChems.DataAccess.User)">
             <summary>
             register a new user in the database
@@ -48,7 +56,7 @@
             evaluates if there is a profile with the specified username, if so it changes its nickname
             </remarks>
             <param name = "username"> receives an string with the username of the user </param>
-            <param name = "newNickname"> receives an string with the new nickname of the user </param>
+            <param name = "nickname"> receives an string with the new nickname of the user </param>
             <returns> boolean with true value if it could update the new nickname </returns>
             <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
             <exception cref="T:System.InvalidOperationException">throw if username or newNickname is null</exception>
@@ -266,7 +274,7 @@
             <param name = "friends"> receives an object of type Friends for search the form of friendship </param>
             <returns>boolean with true value if exist a register with the friends</returns>
         </member>
-        <member name="M:Network.RegisterUserRequest(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+        <member name="M:OpenCodeChems.Server.Network.Network.RegisterUserRequest(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
             call to RegisterUser and RegisterProfile method 
             </summary>

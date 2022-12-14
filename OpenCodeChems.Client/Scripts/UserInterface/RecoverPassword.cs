@@ -17,8 +17,8 @@ public class RecoverPassword : Control
         email = GetParent().GetNode<LineEdit>("RecoverPassword/RecoverPasswordNinePatchRect/EmailLineEdit").Text;
         if(validator.ValidateEmail(email) == false)
         {
-            GetParent().GetNode<AcceptDialog>("RecoverPassword/RecoverPasswordAcceptDialog").SetTitle("WARNING");
-            GetParent().GetNode<AcceptDialog>("RecoverPassword/RecoverPasswordAcceptDialog").SetText("VERIFY_EMAIL");
+            GetParent().GetNode<AcceptDialog>("RecoverPassword/RecoverPasswordAcceptDialog").WindowTitle =("WARNING");
+            GetParent().GetNode<AcceptDialog>("RecoverPassword/RecoverPasswordAcceptDialog").DialogText = ("VERIFY_EMAIL");
             GetParent().GetNode<AcceptDialog>("RecoverPassword/RecoverPasswordAcceptDialog").Visible = true;
         }
         else

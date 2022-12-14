@@ -44,8 +44,8 @@ public class LogIn : Control
 		}
 		else
 		{
-			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("VERIFY_EMPTY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").DialogText = ("VERIFY_EMPTY_FIELDS");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 		}
 		
@@ -69,8 +69,8 @@ public class LogIn : Control
 	
 	public void LoggedFailed()
 	{
-		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("WRONG_CREDENTIALS");
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").DialogText = ("WRONG_CREDENTIALS");
 		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 		loggedStatus = Task<bool>.FromResult(false);
 	}
@@ -79,8 +79,8 @@ public class LogIn : Control
 	{
 		registeredStatus = Task<bool>.FromResult(true);
 		username = Network.usernamePlayerAsInvitated;
-		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetTitle("NOTIFICATION");	
-		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").SetText("REGISTER_COMPLETE");
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").WindowTitle = ("NOTIFICATION");	
+		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").DialogText = ("REGISTER_COMPLETE");
 		GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
@@ -88,8 +88,8 @@ public class LogIn : Control
 	public void RegisteredAsInvitatedFail()
 	{
 		registeredStatus = Task<bool>.FromResult(false);
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("WRONG_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("WRONG_REGISTER");
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 	}
 }   

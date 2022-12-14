@@ -65,8 +65,8 @@ public class FriendRequests : Control
 	}
 	public void GetFriendsRequestsFail()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText("ERROR_LOADING_FRIENDS_REQUESTS");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =("ERROR_LOADING_FRIENDS_REQUESTS");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").Visible = true;
 	}
     public void GetProfileByNicknameComplete()
@@ -95,8 +95,8 @@ public class FriendRequests : Control
 	}
 	public void GetProfileByNicknameFail()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText("ERROR_LOADING_PROFILE");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText = ("ERROR_LOADING_PROFILE");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
 		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").Visible = true;
 	}
     public void AcceptFriendCorrect()
@@ -105,8 +105,8 @@ public class FriendRequests : Control
 	}
 	public void AcceptFriendNotCorrect()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =
 		("FRIEND_REQUEST_CANT_ACCEPTED");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 		addFriendIsCorrect = Task<bool>.FromResult(false);
@@ -117,8 +117,8 @@ public class FriendRequests : Control
 	}
 	public void DenyFriendNotCorrect()
 	{
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").SetText
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("ERROR");
+		GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =
 		("FRIEND_REQUEST_CANT_DENY");
 		GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
 		denyFriendIsCorrect = Task<bool>.FromResult(false);

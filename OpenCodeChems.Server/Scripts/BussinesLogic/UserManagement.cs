@@ -12,6 +12,12 @@ using Godot;
 
 namespace OpenCodeChems.BussinesLogic
 {
+    /// <summary>
+    /// Class that manage the users
+    /// </summary>
+    /// <remarks>
+    /// This class is in charge of handling everything related to users and making registrations, queries and deletions in the database about them.
+    /// </remarks>
 
     public class UserManagement : IUserManagement
     {
@@ -125,11 +131,11 @@ namespace OpenCodeChems.BussinesLogic
         /// evaluates if there is a profile with the specified username, if so it changes its nickname
         /// </remarks>
         /// <param name = "username"> receives an string with the username of the user </param>
-        /// <param name = "newNickname"> receives an string with the new nickname of the user </param>
+        /// <param name = "nickname"> receives an string with the new nickname of the user </param>
         /// <returns> boolean with true value if it could update the new nickname </returns>
         /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
         /// <exception cref="InvalidOperationException">throw if username or newNickname is null</exception>
-        public bool EditProfileNickname(string username, string newNickname)
+        public bool EditProfileNickname(string username, string nickname)
         {
             bool status = false;
             try
@@ -137,7 +143,7 @@ namespace OpenCodeChems.BussinesLogic
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile where Profile.username == username select Profile).First();
-                    profiles.nickname = newNickname;
+                    profiles.nickname = nickname;
                     context.SaveChanges();
                     status = true;
                 }
@@ -481,7 +487,7 @@ namespace OpenCodeChems.BussinesLogic
         /// <exception cref="InvalidOperationException">throw if idProfile is null</exception>
         public List<string> GetFriends(int idProfile)
         {
-            List<string> friendsObtained = new List<string>();;
+            List<string> friendsObtained = new List<string>();
             List<string> friendsIdFrom = new List<string>();
             List<string> friendsIdTo= new List<string>();
             try
@@ -580,7 +586,6 @@ namespace OpenCodeChems.BussinesLogic
             bool status = false;
             int idProfileActualPlayer = friendsForDelete.idProfileFrom;
             int idProfileFriend = friendsForDelete.idProfileTo;
-            bool statusFriends = friendsForDelete.status;
             try
             {
                 using(OpenCodeChemsContext context = new OpenCodeChemsContext())

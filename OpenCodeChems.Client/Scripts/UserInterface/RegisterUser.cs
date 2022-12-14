@@ -69,8 +69,8 @@ public class RegisterUser : Control
 		}
 		else
 		{
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_EMPTY_FIELDS");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_EMPTY_FIELDS");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 		}
 		
@@ -91,43 +91,43 @@ public class RegisterUser : Control
 		bool isValid = true;
 		if(validator.ValidateEmail(email) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_EMAIL");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_EMAIL");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			isValid = false;
 		}
 		if(validator.ValidatePassword(password) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_PASSWORD");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_PASSWORD");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			isValid = false;
 		}
 		if(validator.ValidateUsernameAndNickname(username) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_USERNAME");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_USERNAME");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			isValid = false;
 		}
 		if(validator.ValidateUsernameAndNickname(nickname) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_NICKNAME");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_NICKNAME");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			isValid = false;
 		}
 		if(validator.ValidateName(name) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_NAME");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_NAME");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			isValid = false;
 		}
 		if(confirmPassword.Equals(password) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("VERIFY_CONFIRM_PASSWORD");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_CONFIRM_PASSWORD");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			isValid = false;
 		}
@@ -142,8 +142,8 @@ public class RegisterUser : Control
 	}
 	public void EmailIsRegistered()
 	{
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("EMAIL_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("EMAIL_REGISTER");
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 		emailNotRegisteredStatus = Task<bool>.FromResult(false);
 	}
@@ -154,8 +154,8 @@ public class RegisterUser : Control
 	}
 	public void UsernameIsRegistered()
 	{
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = 
 		("USERNAME_REGISTER");
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 		usernameNotRegisteredStatus = Task<bool>.FromResult(false);
@@ -167,8 +167,8 @@ public class RegisterUser : Control
 	}
 	public void NicknameIsRegistered()
 	{
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("NICKNAME_REGISTER");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("NICKNAME_REGISTER");
 		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 		usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 	}

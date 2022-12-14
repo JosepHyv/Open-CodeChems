@@ -12,11 +12,11 @@ namespace OpenCodeChems.Test
 	[Title("UserManagement Tests")]
 	public class UserManagementTest : WAT.Test
 	{
-		private UserManagement USER_MANAGEMENT = new UserManagement();
+		private readonly UserManagement USER_MANAGEMENT = new UserManagement();
 		private static Encryption PasswordHasher = new Encryption();
 		private const string USERNAME = "UsernameTest";
-		private string PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!");
-		private string NEW_PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!2");
+		private readonly string PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!");
+		private readonly string NEW_PASSWORD = PasswordHasher.ComputeSHA256Hash("Passw0rd!2");
 		private const string NAME = "Carlos Test";
 		private const string EMAIL = "test@gmail.com";
 		private const string NICKNAME = "NicknameTest";

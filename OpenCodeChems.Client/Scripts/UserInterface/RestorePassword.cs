@@ -41,15 +41,15 @@ public class RestorePassword : Control
     public void CorrectRecoverPassword()
 	{
 		recoverPasswordIsCorrect = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").SetTitle("NOTIFICATION");
-		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").SetText("CORRECT_PASSWORD_UPDATE");
+		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").WindowTitle = ("NOTIFICATION");
+		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").DialogText =("CORRECT_PASSWORD_UPDATE");
 		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").Visible = true;
 	}
 	public void IncorrectRecoverPassword()
 	{
 		recoverPasswordIsCorrect = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").SetText("ERROR_PASSWORD_UPDATE");
+		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").WindowTitle = ("ERROR");
+		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").DialogText =("ERROR_PASSWORD_UPDATE");
 		GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").Visible = true;
 	}
 
@@ -59,15 +59,15 @@ public class RestorePassword : Control
 		bool isValid = true;
 		if(validator.ValidatePassword(password) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").SetText("VERIFY_PASSWORD");
+			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").WindowTitle = ("WARNING");
+			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").DialogText =("VERIFY_PASSWORD");
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").Visible = true;
 			isValid = false;
 		}
 		if(confirmPassword.Equals(password) == false)
 		{
-			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").SetTitle("WARNING");
-			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").SetText("VERIFY_CONFIRM_PASSWORD");
+			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").WindowTitle =("WARNING");
+			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").DialogText =("VERIFY_CONFIRM_PASSWORD");
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").Visible = true;
 			isValid = false;
 		}

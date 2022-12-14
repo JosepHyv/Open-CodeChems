@@ -187,7 +187,7 @@ namespace OpenCodeChems.Server.Game
 
             if(status)
             {
-                status = status & !blackList.Contains(uniqueId);
+                status = status && !blackList.Contains(uniqueId);
             }
 
             return status;

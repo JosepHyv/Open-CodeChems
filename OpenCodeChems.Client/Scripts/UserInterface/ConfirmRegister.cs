@@ -44,8 +44,8 @@ public class ConfirmRegister : Control
             }
             else
             {
-                GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetTitle("NOTIFICATION");	
-                GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetText("ERROR_CODE");
+                GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").WindowTitle = ("NOTIFICATION");	
+                GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").DialogText =("ERROR_CODE");
                 GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").Visible = true;
             }
         }
@@ -67,22 +67,22 @@ public class ConfirmRegister : Control
     public void RegisteredAccepted()
 	{
 		registeredStatus = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterCompleteAcceptDialog").SetTitle("NOTIFICATION");	
-		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterCompleteAcceptDialog").SetText("REGISTER_COMPLETE");
+		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterCompleteAcceptDialog").WindowTitle =("NOTIFICATION");	
+		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterCompleteAcceptDialog").DialogText =("REGISTER_COMPLETE");
 		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterCompleteAcceptDialog").Visible = true;
 	}
 	
 	public void RegisteredFail()
 	{
 		registeredStatus = Task<bool>.FromResult(false);
-		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetText("WRONG_REGISTER");
+		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").WindowTitle = ("WARNING");
+		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").DialogText =("WRONG_REGISTER");
 		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").Visible = true;
 	}
     public void EmailSent()
 	{
-		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetTitle("NOTIFICATION");
-		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetText("EMAIL_SENT");
+		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").WindowTitle =("NOTIFICATION");
+		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").DialogText = ("EMAIL_SENT");
 		GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").Visible = true;
 	}
     public bool validateCode(string code)
@@ -91,15 +91,15 @@ public class ConfirmRegister : Control
         Validation validator = new Validation();
         if(String.IsNullOrWhiteSpace(code))
         {
-            GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetTitle("WARNING");
-		    GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetText("VERIFY_EMPTY_FIELDS");
+            GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").WindowTitle = ("WARNING");
+		    GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").DialogText =("VERIFY_EMPTY_FIELDS");
 		    GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").Visible = true;
             isValid = false;
         }
         if(validator.ValidateCodeRegistration(code) == false)
         {
-            GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetTitle("WARNING");
-            GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").SetText("ONLY_NUMBERS");
+            GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").WindowTitle = ("WARNING");
+            GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").DialogText = ("ONLY_NUMBERS");
             GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").Visible = true;
             isValid = false;
         }
