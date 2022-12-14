@@ -676,10 +676,10 @@ namespace OpenCodeChems.Client.Server
 		{
 			GD.Print($"we got algo");
 			boardWords = words;
-			GetTree().ChangeScene("res://Scenes/KeyController.tscn");
+			//GetTree().ChangeScene("res://Scenes/KeyController.tscn");
 			GD.Print("Se cambio a la escena Keys Controller");
-			//RpcId(PEER_ID, "BoardChange", currentRoom);
-			EmitSignal(nameof(UpdateBoardSignal), rool, number);
+			RpcId(PEER_ID, "BoardChange", currentRoom);
+			
 		}
 
 		[Puppet]
