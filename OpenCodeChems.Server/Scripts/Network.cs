@@ -806,6 +806,7 @@ public class Network : Node
 	[Master]
 	public void BoardChange(string nameRoom)
 	{
+		rooms[nameRoom].gameStarted = true;
 		UpdateBoard(nameRoom);
 	}
 

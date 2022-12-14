@@ -9,8 +9,8 @@ namespace OpenCodeChems.Server.Game
     public class RoomGame
     {
       
-        
-        public int NumberPlayers {get;set;} = 0;
+        public bool gameStarted = false;
+        public int numberPlayers {get;set;} = 0;
         public List<int> members {get;set;} = new List<int>();
         public List<int> blackList {get;set;} = new List<int>();
         public int redSpyMaster {get; set;} = -1;
@@ -51,7 +51,7 @@ namespace OpenCodeChems.Server.Game
             if(!members.Contains(uniqueId))
             {
                 members.Add(uniqueId);
-                NumberPlayers = members.Count;
+                numberPlayers = members.Count;
             }
         }
 
@@ -187,8 +187,10 @@ namespace OpenCodeChems.Server.Game
 
             if(status)
             {
-                status = status & !blackList.Contains(uniqueId);
+                status &= !blackList.Contains(uniqueId);
             }
+
+            status &= gameStarted;
 
             return status;
         }
