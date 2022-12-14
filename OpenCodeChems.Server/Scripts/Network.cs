@@ -198,7 +198,7 @@ public class Network : Node
 	/// call to RegisterUser and RegisterProfile method 
 	/// </summary>
 	/// <remarks>
-	/// recive nine parameters because RPC with Godot Engine can't serialize objects, only it can recive primitive data, call the RegisterUser method if it completed correctly call the RegisterProfile method and send signal to client
+	/// recive nine parameters because RPC with Godot Engine can't serialize objects, only it can recive primitive data, call the RegisterUser method if it completed correctly call the RegisterProfile method and send signal to client, reference of https://docs.godotengine.org/en/stable/tutorials/io/binary_serialization_api.html
 	/// </remarks>
 	/// <param name = "name"> receives a string with the name of the new user </param>
 	/// <param name = "email"> receives a string with the email of the new user </param>
@@ -291,27 +291,19 @@ public class Network : Node
 	private void GetProfileByUsernameRequest(string username)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		try
+		Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
+		if (profileObtained != null)
 		{
-			Profile profileObtained = USER_MANAGEMENT.GetProfileByUsername(username);
-			if (profileObtained != null)
-			{
-				int idProfile = profileObtained.idProfile;
-				string nickname = profileObtained.nickname;
-				string usernameObtained = profileObtained.username;
-				int victories = profileObtained.victories;
-				int defeats = profileObtained.defeats;
-				int imageProfile = profileObtained.imageProfile;
-				RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
-				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
-			}
-			else
-			{
-				RpcId(senderId, "ProfileByUsernameNotObtained");
-				logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
-			}
+			int idProfile = profileObtained.idProfile;
+			string nickname = profileObtained.nickname;
+			string usernameObtained = profileObtained.username;
+			int victories = profileObtained.victories;
+			int defeats = profileObtained.defeats;
+			int imageProfile = profileObtained.imageProfile;
+			RpcId(senderId, "ProfileByUsernameObtained", idProfile, nickname, victories, defeats, imageProfile, usernameObtained);
+			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
 		}
-		catch(NullReferenceException)
+		else
 		{
 			RpcId(senderId, "ProfileByUsernameNotObtained");
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {username} profile\n");
@@ -563,10 +555,10 @@ public class Network : Node
 		}
 	}
 	[Master]
-	public void GetFriendsRequest(int idProfile, bool status)
+	public void GetFriendsRequest(int idProfile)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		List<string> friendsObtainded = USER_MANAGEMENT.GetFriends(idProfile, status);
+		List<string> friendsObtainded = USER_MANAGEMENT.GetFriends(idProfile);
 		if(friendsObtainded != null)
 		{
 			RpcId(senderId, "FriendsObtained", friendsObtainded);
@@ -579,10 +571,10 @@ public class Network : Node
 		}
 	}
 	[Master]
-	public void GetFriendsRequestsRequest(int idProfile, bool status)
+	public void GetFriendsRequestsRequest(int idProfile)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		List<string> friendsRequestsObtainded = USER_MANAGEMENT.GetFriendsRequests(idProfile, status);
+		List<string> friendsRequestsObtainded = USER_MANAGEMENT.GetFriendsRequests(idProfile);
 		if(friendsRequestsObtainded != null)
 		{
 			RpcId(senderId, "FriendsRequestsObtained", friendsRequestsObtainded);
@@ -598,27 +590,19 @@ public class Network : Node
 	private void GetProfileByNicknameRequest(string nickname)
 	{
 		int senderId = GetTree().GetRpcSenderId();
-		try
+		Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
+		if (profileObtained != null)
 		{
-			Profile profileObtained = USER_MANAGEMENT.GetProfileByNickname(nickname);
-			if (profileObtained != null)
-			{
-				int idProfile = profileObtained.idProfile;
-				string nicknameObtained = profileObtained.nickname;
-				string username = profileObtained.username;
-				int victories = profileObtained.victories;
-				int defeats = profileObtained.defeats;
-				int imageProfile = profileObtained.imageProfile;
-				RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
-				logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
-			}
-			else
-			{
-				RpcId(senderId, "ProfileByNicknameNotObtained");
-				logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");
-			}
+			int idProfile = profileObtained.idProfile;
+			string nicknameObtained = profileObtained.nickname;
+			string username = profileObtained.username;
+			int victories = profileObtained.victories;
+			int defeats = profileObtained.defeats;
+			int imageProfile = profileObtained.imageProfile;
+			RpcId(senderId, "ProfileByNicknameObtained", idProfile, nickname, victories, defeats, imageProfile, username);
+			logBlock.InsertTextAtCursor($"user {senderId} obtained {idProfile} profile\n");
 		}
-		catch(NullReferenceException)
+		else
 		{
 			RpcId(senderId, "ProfileByNicknameNotObtained");
 			logBlock.InsertTextAtCursor($"user {senderId} can't obtain {nickname} profile\n");
@@ -661,15 +645,34 @@ public class Network : Node
 	{
 		int senderId = GetTree().GetRpcSenderId();
 		Friends friendDelete= new Friends(idProfileActualPlayer, idProfileFriend, status);
-		if (USER_MANAGEMENT.DeleteFriend(friendDelete) == true)
+		if (USER_MANAGEMENT.SearchFriends(friendDelete) == true)
 		{
-			RpcId(senderId, "DeleteFriendSuccessful");
-			logBlock.InsertTextAtCursor($"user {senderId} delete friend {idProfileFriend}\n");
+			if(USER_MANAGEMENT.DeleteFriend(friendDelete))
+			{
+				RpcId(senderId, "DeleteFriendSuccessful");
+				logBlock.InsertTextAtCursor($"user {senderId} delete friend {idProfileFriend}\n");
+			}
+			else
+			{
+				RpcId(senderId, "DeleteFriendNotSuccessful");
+				logBlock.InsertTextAtCursor($"user {senderId} can't delete friend {idProfileFriend}\n");
+			}
 		}
 		else
 		{
-			RpcId(senderId, "DeleteFriendNotSuccessful");
-			logBlock.InsertTextAtCursor($"user {senderId} can't delete friend {idProfileFriend}\n");
+			friendDelete.idProfileFrom = idProfileFriend;
+			friendDelete.idProfileTo = idProfileActualPlayer;
+			friendDelete.status = status;
+			if(USER_MANAGEMENT.DeleteFriend(friendDelete))
+			{
+				RpcId(senderId, "DeleteFriendSuccessful");
+				logBlock.InsertTextAtCursor($"user {senderId} delete friend {idProfileFriend}\n");
+			}
+			else
+			{
+				RpcId(senderId, "DeleteFriendNotSuccessful");
+				logBlock.InsertTextAtCursor($"user {senderId} can't delete friend {idProfileFriend}\n");
+			}
 		}
 	}
 	[Master]

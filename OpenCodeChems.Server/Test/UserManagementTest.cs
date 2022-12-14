@@ -278,7 +278,7 @@ namespace OpenCodeChems.Test
 		[Test]
 		public void GetFriendsRequestCorrect()
 		{
-			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(4, false);
+			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(4);
 			bool expectedStatus = false;
 			bool obtainedStatus = true;
 			for (int i = 0; i < obtainedFriendsRequests.Count; i++) 
@@ -293,7 +293,7 @@ namespace OpenCodeChems.Test
 		[Test]
 		public void GetFriendsRequestNotCorrect()
 		{
-			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(-123, false);
+			List<string> obtainedFriendsRequests = USER_MANAGEMENT.GetFriendsRequests(-123);
 			bool expectedStatus = false;
 			bool obtainedStatus = false;
 			for (int i = 0; i < obtainedFriendsRequests.Count; i++) 
@@ -342,7 +342,7 @@ namespace OpenCodeChems.Test
 		public void GetFriendsCorrect()
 		{
 			Profile profileTest = USER_MANAGEMENT.GetProfileByUsername(USERNAME);
-			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(profileTest.idProfile, true);
+			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(profileTest.idProfile);
 			bool expectedStatus = false;
 			bool obtainedStatus = true;
 			for (int i = 0; i < obtainedFriends.Count; i++) 
@@ -357,7 +357,7 @@ namespace OpenCodeChems.Test
 		[Test]
 		public void GetFriendsNotCorrect()
 		{
-			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(-123, true);
+			List<string> obtainedFriends = USER_MANAGEMENT.GetFriends(-123);
 			bool expectedStatus = false;
 			bool obtainedStatus = false;
 			for (int i = 0; i < obtainedFriends.Count; i++) 

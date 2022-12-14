@@ -173,7 +173,7 @@
             <param name = "idProfilePlayerFound"> receives an int with the id profile of the player want to send a friend request </param>
             <returns>boolean with true value if friendship exist</returns>
         </member>
-        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.GetFriends(System.Int32,System.Boolean)">
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.GetFriends(System.Int32)">
             <summary>
             gets the friends of the actual player
             </summary>
@@ -181,11 +181,10 @@
             gets the id of the profiles with wich the actual player has a friendship and the status is equal to true, replaces the id for the nicknames of the profiles
             </remarks>
             <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-            <param name = "status"> receives a boolean with the status of the friendship </param>
             <returns>List with the friends of the actual player</returns>ception>
             <exception cref="T:System.InvalidOperationException">throw if idProfile is null</exception>
         </member>
-        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.GetFriendsRequests(System.Int32,System.Boolean)">
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.GetFriendsRequests(System.Int32)">
             <summary>
             gets the friends requests of the actual player
             </summary>
@@ -193,7 +192,6 @@
             gets the id of the profiles with wich the actual player has a friendship and the status is equal to false, replaces the id for the nicknames of the profiles
             </remarks>
             <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-            <param name = "status"> receives a boolean with the status of the friendship </param>
             <returns>List with the friends requests of the actual player</returns>ception>
             <exception cref="T:System.InvalidOperationException">throw if idProfile is null</exception>
         </member>

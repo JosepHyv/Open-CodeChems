@@ -22,13 +22,14 @@ namespace OpenCodeChems.BusinessLogic.Interface
 		bool DenyFriend(Friends friends);
 		bool DeleteFriend(Friends friends);
 		bool FriendshipExist(int idProfileActualPlayer, int idProfilePlayerFound);
-		List<string> GetFriends(int idProfile, bool status);
-		List<string> GetFriendsRequests(int idProfile, bool status);
+		List<string> GetFriends(int idProfile);
+		List<string> GetFriendsRequests(int idProfile);
 		Profile GetProfileByNickname(string nickname);
 		bool DeleteInvitatedPlayer(string username);
 		bool AddVictory(string nickname);
 		bool AddDefeat(string nickname);
 		bool RestorePassword(string username, string newHashedPassword);
+		bool SearchFriends(Friends friends);
 	}
 
 

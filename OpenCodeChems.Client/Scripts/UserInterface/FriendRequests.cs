@@ -13,9 +13,8 @@ public class FriendRequests : Control
     public static int idProfilePlayerFound = 0;
     private string nicknameFriendRequest = "";
     private List<string> friendsRequestsOfActualPlayer;
-    private bool STATUS_FRIENDS_REQUESTS = false;
-    private bool STATUS_FRIEND_ACCEPT = true;
-	private bool STATUS_FRIEND_DENY = false;
+    private const bool STATUS_FRIEND_ACCEPT = true;
+	private const bool STATUS_FRIEND_DENY = false;
     private bool statusRequest = false;
     public static Profile actualPlayer;
     private Task<bool> addFriendIsCorrect = Task<bool>.FromResult(false);
@@ -25,7 +24,7 @@ public class FriendRequests : Control
         serverClient = GetNode<Network>("/root/Network") as Network;
         serverClient.Connect("FriendsRequestsFound", this, nameof(GetFriendsRequestsComplete));
 		serverClient.Connect("FriendsRequestsNotFound", this, nameof(GetFriendsRequestsFail));
-        serverClient.GetFriendsRequests(idProfileActualPlayer, STATUS_FRIENDS_REQUESTS);
+        serverClient.GetFriendsRequests(idProfileActualPlayer);
         serverClient.Connect("ProfileByNicknameFound", this, nameof(GetProfileByNicknameComplete));
 		serverClient.Connect("ProfileByNicknameNotFound", this, nameof(GetProfileByNicknameFail));
         serverClient.Connect("CorrectAcceptFriend", this, nameof(AcceptFriendCorrect));
@@ -127,6 +126,6 @@ public class FriendRequests : Control
     public void cleanFriendsRequest()
     {
         GetParent().GetNode<ItemList>("FriendRequests/FriendRequestsNinePatchRect/FriendRequestsItemList").Clear();
-        serverClient.GetFriendsRequests(idProfileActualPlayer, STATUS_FRIENDS_REQUESTS);
+        serverClient.GetFriendsRequests(idProfileActualPlayer);
     }
 }

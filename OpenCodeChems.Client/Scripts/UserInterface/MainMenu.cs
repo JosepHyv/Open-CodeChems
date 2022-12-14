@@ -18,7 +18,6 @@ public class MainMenu : Control
 	private List<string> friendsOfActualPlayer;
 	public static int idProfile = 0; 
 	public static int imageProfile = 0;
-	private bool STATUS_FRIENDS = true;
 	public static string pathImageProfile = "";
 	private ImageTexture textureImageProfile = new ImageTexture(); 
 	private Image image = new Image();
@@ -108,7 +107,7 @@ public class MainMenu : Control
 				GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/CreateGameTextureButton").Disabled = true;
 			}
 		}
-		serverClient.GetFriends(idProfile, STATUS_FRIENDS);
+		serverClient.GetFriends(idProfile);
 	}
 
 	
