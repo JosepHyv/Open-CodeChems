@@ -381,7 +381,7 @@ namespace OpenCodeChems.Server.Network
         public void CreateRoom(string code)
         {
             int senderId = GetTree().GetRpcSenderId();
-            if (rooms.ContainsKey(code) || !ValidRoomName(code)))
+            if (rooms.ContainsKey(code) || !ValidRoomName(code))
             {
                 RpcId(senderId, "CreateRoomFail");
                 logBlock.InsertTextAtCursor($"user {senderId} can't create {code} room\n");
