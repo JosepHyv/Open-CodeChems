@@ -355,6 +355,14 @@ public class Network : Node
 			logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
 			RpcId(senderId, "CreateRoomAccepted", code);
 			logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
+
+			/// only for test 
+			logBlock.InsertTextAtCursor("positions generated\n");
+			foreach(int number in hostRoom.boardNumbers)
+			{
+				logBlock.InsertTextAtCursor($"{number}, ");
+			}
+			logBlock.InsertTextAtCursor("\n");
 			
 		}
 	}
