@@ -24,14 +24,17 @@ public class MasterPlayer : Control
 		List<string> listElements = serverClient.boardWords;
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{
-			if(c < listElements.Count)
-			{
-				GD.Print(listElements[c]);
-			}
+			
 			itemNode.SetItemText(c, listElements[c]);					
 		}
-		
-		
+
+
+		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
+	}
+
+	public void ChangeToMainMenu()
+	{
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
 
 	private void _on_EnviarTextureButton_pressed()

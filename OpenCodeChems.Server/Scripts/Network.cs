@@ -361,12 +361,33 @@ namespace OpenCodeChems.Server.Network
             }
         }
 
+        private bool ValidRoomName(string name)
+        {
+            string ivalidCharacters = " _-{}+^¿?¿ :,,;.<>|&%$/()";
+            bool status = true;
+            foreach(char character in ivalidCharacters)
+            {
+                foreach(char itemName in name)
+                {
+                    if(character == itemName)
+                    {
+                        status = false;
+                    }
+                }
+            }
+
+            if(name.Length > 10)
+            {
+                status = false;
+            }
+            return status;
+        }
 
         [Master]
         private void CreateRoom(string code)
         {
             int senderId = GetTree().GetRpcSenderId();
-            if (rooms.ContainsKey(code))
+            if (rooms.ContainsKey(code) || !ValidRoomName(code))
             {
                 RpcId(senderId, "CreateRoomFail");
                 logBlock.InsertTextAtCursor($"user {senderId} can't create {code} room\n");
@@ -877,7 +898,7 @@ namespace OpenCodeChems.Server.Network
         {
             if (rooms.ContainsKey(roomCode))
             {
-                	List<int> playersInRoom = rooms[roomCode].members;
+                List<int> playersInRoom = rooms[roomCode].members;
 				for(int c = 0; c<playersInRoom.Count; c++)
 				{
                     int senderId = playersInRoom[c];

@@ -17,9 +17,13 @@ public class KeyController : Control
 		GD.Print("Ready de Keys Controller");
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("UpdateBoardSignal", this, nameof(ChangeScreen));
+		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 	}
 
-
+	public void ChangeToMainMenu()
+	{
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+	}
 
 	public void ChangeScreen(string rool, int number)
 	{
