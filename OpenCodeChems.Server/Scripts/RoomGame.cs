@@ -14,16 +14,16 @@ namespace OpenCodeChems.Server.Game
         public int numberPlayers {get;set;} = 0;
         public List<int> members {get;set;} = new List<int>();
         public List<int> blackList {get;set;} = new List<int>();
-        public int redSpyMaster {get; set;} = -1;
+        public int redSpyMaster {get; set;} = Constants.NULL_ROL;
 
-        public int blueSpyMaster {get; set;} = -1;
+        public int blueSpyMaster {get; set;} = Constants.NULL_ROL;
 
         public List<int> redPlayers {get; set;} = new List<int>();
 
         public List<int> bluePlayers {get; set;} = new List<int>();
 
         public List<int> boardNumbers {get;set;} = new List<int>();
-        public int SceneNumber = -1;
+        public int SceneNumber = Constants.NULL_ROL;
 
         public string GetRol(int uniqueId)
         {
@@ -87,14 +87,14 @@ namespace OpenCodeChems.Server.Game
                 {
                     if(redSpyMaster == uniqueId)
                     {
-                        redSpyMaster = -1;
+                        redSpyMaster = Constants.NULL_ROL;
                     }
                 }
                 else if (rol == Constants.BLUE_SPY_MASTER )   
                 {
                     if(blueSpyMaster == uniqueId)
                     {
-                        blueSpyMaster = -1;
+                        blueSpyMaster = Constants.NULL_ROL;
                     }
                 }
                 else if (rol == Constants.RED_PLAYER)
@@ -125,7 +125,7 @@ namespace OpenCodeChems.Server.Game
             bool status = false;
             if(rol == Constants.RED_SPY_MASTER)
             {
-                if(redSpyMaster == -1)
+                if(redSpyMaster == Constants.NULL_ROL)
                 {
                     DeleteRol(uniqueId);
                     redSpyMaster = uniqueId;
@@ -134,7 +134,7 @@ namespace OpenCodeChems.Server.Game
             }
             else if(rol == Constants.BLUE_SPY_MASTER)
             {
-                if(blueSpyMaster == -1)
+                if(blueSpyMaster == Constants.NULL_ROL)
                 {
                     DeleteRol(uniqueId);
                     status = true;
@@ -169,11 +169,11 @@ namespace OpenCodeChems.Server.Game
             bool status = false;
             if(members.Count < Constants.MAX_MEMBERS)
             {   
-                if(redSpyMaster == -1)
+                if(redSpyMaster == Constants.NULL_ROL)
                 {
                     status = true;
                 }
-                else if(blueSpyMaster == -1)
+                else if(blueSpyMaster == Constants.NULL_ROL)
                 {
                     status = true;
                 }
@@ -214,8 +214,8 @@ namespace OpenCodeChems.Server.Game
             bool redSpyReady = false;
             bool blueSpyReady = false;
             
-            redMasterReady = redSpyMaster != -1;
-            blueMasterReady = blueSpyMaster != -1;
+            redMasterReady = redSpyMaster != Constants.NULL_ROL;
+            blueMasterReady = blueSpyMaster != Constants.NULL_ROL;
 
             redSpyReady = (redPlayers.Count > 0);
             blueSpyReady = (bluePlayers.Count > 0);
