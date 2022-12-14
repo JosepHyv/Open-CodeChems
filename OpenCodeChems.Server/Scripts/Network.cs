@@ -55,6 +55,11 @@ public class Network : Node
 	private void PlayerDisconnected(int peerId)
 	{
 		logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
+		Profile profileForDelete = USER_MANAGEMENT.GetProfileByUsername(peerId.ToString());
+		if(profileForDelete != null)
+		{
+			USER_MANAGEMENT.DeleteInvitatedPlayer(profileForDelete.username);
+		}
 		clientsConected.Remove(peerId);
 		if(roomOwners.ContainsKey(peerId))
 		{
@@ -65,7 +70,6 @@ public class Network : Node
 			playersData.Remove(peerId);
 		}
 		DisJoinPlayer(peerId);
-		DeleteInvitatedPlayerRequest(peerId.ToString());
 	}
 
 

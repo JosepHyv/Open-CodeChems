@@ -103,10 +103,7 @@ public class MainMenu : Control
 		serverClient.GetFriends(idProfile, STATUS_FRIENDS);
 	}
 
-	/*public Image ByteArrayToImage(byte[] data)
-	{
-		
-	}*/
+	
 	
 	public void GetProfileByUsernameFail()
 	{
