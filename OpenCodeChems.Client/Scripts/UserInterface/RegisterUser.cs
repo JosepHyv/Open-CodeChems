@@ -15,24 +15,20 @@ public class RegisterUser : Control
 	Network serverClient;
 	int PEER_ID = 1; 
 	private AcceptDialog dialogAccept = new AcceptDialog();
-	private Task<bool> registeredStatus = Task<bool>.FromResult(false);
 	private Task<bool> emailNotRegisteredStatus = Task<bool>.FromResult(false);
 	private Task<bool> usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 	private Task<bool> nicknameNotRegisteredStatus = Task<bool>.FromResult(false);
 	private bool validateRegister = false;
-	private int VICTORIES_DEFAULT = 0;
-	private int DEFEATS_DEFAULT = 0;
-	private string name = "";
-	private string email = "";
-	private string username = "";
+	public static string name = "";
+	public static string email = "";
+	public static string username = "";
 	private string password = "";
 	private string confirmPassword = "";
-	private string nickname = "";
+	public static string hashPassword = "";
+	public static string nickname = "";
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		serverClient.Connect("Registered", this, nameof(RegisteredAccepted));
-		serverClient.Connect("RegisteredFail", this, nameof(RegisteredFail));
 		serverClient.Connect("EmailRegistered", this, nameof(EmailIsRegistered));
 		serverClient.Connect("EmailNotRegistered", this, nameof(EmailNotRegistered));
 		serverClient.Connect("UsernameRegistered", this, nameof(UsernameIsRegistered));
@@ -66,9 +62,8 @@ public class RegisterUser : Control
 				if(validateRegister == true)
 				{
 					Encryption PasswordHasher = new Encryption();
-					string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
-					int imageProfile = 0; 
-					serverClient.RegisterUser(name, email, username, hashPassword, nickname, imageProfile, VICTORIES_DEFAULT, DEFEATS_DEFAULT);
+					hashPassword = PasswordHasher.ComputeSHA256Hash(password);
+					GetTree().ChangeScene("res://Scenes/ConfirmRegister.tscn");
 				}
 			}
 		}
@@ -139,34 +134,6 @@ public class RegisterUser : Control
 		return isValid;
 	}
 
-	public byte[] ImageToByte()
-	{
-
-		string pathProfileImageDefault = "Scenes/Resources/Icons/imagePerfilDefault.jpg";
-		FileStream imageProfileFileStream = new FileStream(pathProfileImageDefault, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
-		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
-		imageProfileFileStream.Close();
-		return imageProfile;
-	}
-	
-	public void RegisteredAccepted()
-	{
-		registeredStatus = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("NOTIFICATION");	
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("REGISTER_COMPLETE");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-		GetTree().ChangeScene("res://Scenes/LogIn.tscn");
-	}
-	
-	public void RegisteredFail()
-	{
-		registeredStatus = Task<bool>.FromResult(false);
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetTitle("WARNING");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").SetText("WRONG_REGISTER");
-		GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-	}
 	
 	public void EmailNotRegistered()
 	{

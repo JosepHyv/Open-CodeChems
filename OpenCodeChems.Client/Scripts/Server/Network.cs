@@ -22,7 +22,6 @@ namespace OpenCodeChems.Client.Server
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
 		public static string usernamePlayerAsInvitated = "";
-
 		public static string currentRoom = "None";
 		
 		
@@ -130,11 +129,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectDeleteInvitated();
 		[Signal]
 		delegate void DeleteInvitatedFail();
-
-
 		[Signal]
 		delegate void CanBan();
-
 		[Signal]
 		delegate void BanFail();
 		[Signal]
@@ -145,15 +141,19 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectAddDefeat();
 		[Signal]
 		delegate void AddDefeatNotCorrect();
-
 		[Signal]
 		delegate void YesStartGame();
-
 		[Signal]
 		delegate void NoStartGame();
 		
 		[Signal]
 		delegate void UpdateBoardSignal(string rool, int number);
+		[Signal]
+		delegate void EmailIsSent();
+		[Signal]
+		delegate void CorrectRestorePassword();
+		[Signal]
+		delegate void RestorePasswordFail();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -420,7 +420,7 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(EditNicknameFail));
 		}
-		public void EditImageProfile(string username, byte[] imageProfile )
+		public void EditImageProfile(string username, int imageProfile )
 		{
 			RpcId(PEER_ID, "EditImageProfileRequest", username, imageProfile);
 		}
@@ -679,6 +679,29 @@ namespace OpenCodeChems.Client.Server
 		public void UpdateBoard(string rool, int number)
 		{
 			EmitSignal(nameof(UpdateBoardSignal), rool, number);
+		}
+		public void SendEmail(string emailTo, string subject, string body)
+		{
+			RpcId(PEER_ID, "SendEmailRequest", emailTo, subject, body);
+		}
+		[Puppet]
+		public void EmailSent()
+		{
+			EmitSignal(nameof(EmailIsSent));
+		}
+		public void RestorePassword(string email, string newHashPassword)
+		{
+			RpcId(PEER_ID, "RestorePasswordRequest", email, newHashPassword);
+		}
+		[Puppet]
+		public void RestorePasswordSuccessful()
+		{
+			EmitSignal(nameof(CorrectRestorePassword));
+		}
+		[Puppet]
+		public void RestorePasswordNotSuccessful()
+		{
+			EmitSignal(nameof(RestorePasswordFail));
 		}
 
 	}

@@ -196,10 +196,10 @@ custom_fonts/font = SubResource( 11 )
 secret = true
 
 [node name="RegisterTextureButton" type="TextureButton" parent="BackgroundRegisterNinePatchRect"]
-margin_left = 622.0
-margin_top = 475.0
-margin_right = 887.0
-margin_bottom = 550.0
+margin_left = 89.0
+margin_top = 473.0
+margin_right = 354.0
+margin_bottom = 548.0
 theme = SubResource( 12 )
 shortcut_in_tooltip = false
 texture_normal = ExtResource( 3 )
@@ -221,10 +221,10 @@ clip_text = true
 
 [node name="CancelTextureButton" type="TextureButton" parent="BackgroundRegisterNinePatchRect"]
 light_mask = 431
-margin_left = 57.0
-margin_top = 479.0
-margin_right = 322.0
-margin_bottom = 554.0
+margin_left = 640.0
+margin_top = 461.0
+margin_right = 905.0
+margin_bottom = 536.0
 action_mode = 0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )

@@ -28,6 +28,7 @@ namespace OpenCodeChems.BusinessLogic.Interface
 		bool DeleteInvitatedPlayer(string username);
 		bool AddVictory(string nickname);
 		bool AddDefeat(string nickname);
+		bool RestorePassword(string username, string newHashedPassword);
 	}
 
 

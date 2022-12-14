@@ -9,24 +9,22 @@ using System.IO;
 public class EditProfile : Control
 {
 	
-	private string username = MainMenu.username;
+	public static string username = MainMenu.username;
 	Network serverClient;
 	int PEER_ID = 1; 
 	private Task<bool> passwordIsCorrect = Task<bool>.FromResult(false);
 	private Task<bool> editPasswordIsCorrect = Task<bool>.FromResult(false);
 	private Task<bool> editNicknameIsCorrect = Task<bool>.FromResult(false);
-	private Task<bool> editImageProfileIsCorrect = Task<bool>.FromResult(false);
-
-	
+	private int imageProfile = MainMenu.imageProfile;
 	private bool validateOldPassword = false;
 	private string oldPassword = "";
 	private string newPassword = "";
 	private string confirmPassword = "";
 	private string newEmail = "";
 	private string newNickname = "";
-	private byte[] newImageProfile = null;
+	private string pathImageProfile = "";
 	private ImageTexture textureImageProfile = new ImageTexture(); 
-	private Image imageProfile = new Image();
+	private Image image = new Image();
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
@@ -36,8 +34,10 @@ public class EditProfile : Control
 		serverClient.Connect("EditPasswordFail", this, nameof(IncorrectEditPassword));
 		serverClient.Connect("CorrectEditNickname", this, nameof(CorrectEditNickname));
 		serverClient.Connect("EditNicknameFail", this, nameof(IncorrectEditNickname));
-		serverClient.Connect("CorrectEditImageProfile", this, nameof(CorrectEditImageProfile));
-		serverClient.Connect("EditImageProfileFail", this, nameof(IncorrectEditImageProfile));
+		pathImageProfile = GetImageProfilePath(imageProfile);
+		image.Load(pathImageProfile);
+		textureImageProfile.CreateFromImage(image);
+		GetParent().GetNode<TextureButton>("EditProfile/EditProfileNinePatchRect/ProfileInformationTransparentFrame/ProfilePhotoTextureButton").SetNormalTexture(textureImageProfile);
 	}
 
 
@@ -89,15 +89,7 @@ public class EditProfile : Control
 		{
 			if(verifyNickname == true)
 			{
-				if(newImageProfile == null)
-				{
-					serverClient.EditNickname(username, newNickname);
-				}
-				else
-				{
-					serverClient.EditNickname(username, newNickname);
-					serverClient.EditImageProfile(username, newImageProfile);
-				}
+				serverClient.EditNickname(username, newNickname);
 			}
 			else
 			{
@@ -106,55 +98,13 @@ public class EditProfile : Control
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 			}
 		}
-		else
-		{
-			if(newImageProfile != null)
-			{
-				serverClient.EditImageProfile(username, newImageProfile);
-			}
-			else
-			{
-				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("WARNING");
-				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("VERIFY_EDIT_PROFILE");
-				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
-			}
-		}
 	}
 	public void _on_ProfilePhotoTextureButton_pressed()
 	{
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").SetTitle("SEARCH_IMAGE_PROFILE");
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").AddFilter("*.png");
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").AddFilter("*.jpg");
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").Access = ((Godot.FileDialog.AccessEnum)2);
-		GetParent().GetNode<FileDialog>("EditProfile/SelectImageProfileFileDialog").Visible = true;
-
-	}
-	public void _on_SelectImageProfileFileDialog_file_selected(string imagePath)
-	{
-		imageProfile.Load(imagePath);
-		newImageProfile = ImageToByte(imagePath);
-		textureImageProfile.CreateFromImage(imageProfile);
-		GetParent().GetNode<TextureButton>("EditProfile/EditProfileNinePatchRect/ProfileInformationTransparentFrame/ProfilePhotoTextureButton").SetNormalTexture(textureImageProfile);
+		GetTree().ChangeScene("res://Scenes/SelectImage.tscn");
 	}
 
-	public byte[] ImageToByte(string imageProfilePath)
-	{
-		FileStream imageProfileFileStream = new FileStream(imageProfilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
-		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
-		imageProfileFileStream.Close();
-		return imageProfile;
-	}
-	/*public Image ByteToImage(byte[] imageInByte)
-	{
-		FileStream imageProfileFileStream = new FileStream(imageProfilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		Byte[] imageProfile = new Byte[imageProfileFileStream.Length];
-		BinaryReader readearToBinary = new BinaryReader(imageProfileFileStream);
-		imageProfile = readearToBinary.ReadBytes(Convert.ToInt32(imageProfileFileStream.Length));
-		imageProfileFileStream.Close();
-		return imageProfile;
-	}*/
+
 	
 	public bool ValidatePassword()
 	{
@@ -242,18 +192,43 @@ public class EditProfile : Control
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("ERROR_NICKNAME_UPDATE");
 		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
 	}
-	public void CorrectEditImageProfile()
+	public string GetImageProfilePath(int imageProfile)
 	{
-		editImageProfileIsCorrect = Task<bool>.FromResult(true);
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("NOTIFICATION");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("CORRECT_IMAGE_PROFILE_UPDATE");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
+		string pathImageProfile = "";
+		switch (imageProfile) 
+		{
+			case Constants.IMAGE_PROFILE_DEFAULT:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/ImagePerfilDefault.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_CHEMS_GAMER:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/chemsGamer.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_CHEMS_CHRISTMAS:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/chemsNavidad.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_DRAVEN:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/draven.jpeg";
+			break;
+			case Constants.IMAGE_PROFILE_KITTY_MINECRAFT:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/kittyMinecraft.jpeg";
+			break;
+			case Constants.IMAGE_PROFILE_LINK:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/link.jpeg";
+			break;
+			case Constants.IMAGE_PROFILE_MECH:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/mech.png";
+			break;
+			case Constants.IMAGE_PROFILE_MECH_CHIVA:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/mechsChivahermano.png";
+			break;
+			case Constants.IMAGE_PROFILE_COLD_TEAM:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/teamFrio.jpg";
+			break;
+			case Constants.IMAGE_PROFILE_WINDOWS:
+			pathImageProfile = "res://Scenes/Resources/ImagesProfile/windows.jpeg";
+			break;
+		}
+		return pathImageProfile;
 	}
-	public void IncorrectEditImageProfile()
-	{
-		editImageProfileIsCorrect = Task<bool>.FromResult(false);
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetTitle("ERROR");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").SetText("ERROR_IMAGE_PROFILE_UPDATE");
-		GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
-	}
+	
 }
