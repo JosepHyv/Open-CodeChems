@@ -1,6 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using OpenCodeChems.Client.Server;
+using static OpenCodeChems.Client.Resources.Objects;
 using OpenCodeChems.Client.Resources;
 
 
@@ -8,31 +10,24 @@ public class KeyController : Control
 {
 
 	Network serverClient;
-	Random RandomClass = new Random();
-	private int randomNumber = 0;
+	
+	
 	public override void _Ready()
 	{   
+		GD.Print("Ready de Keys Controller");
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		randomNumber = RandomClass.Next(0,4);
-		serverClient.SendSceneToServer(randomNumber);
-		serverClient.Connect("UpdateGameClient", this, nameof(ChangeScreen));
-	
+		serverClient.Connect("UpdateBoardSignal", this, nameof(ChangeScreen));
 	}
 
 
 
 	public void ChangeScreen(string rool, int number)
 	{
-		randomNumber = number;
-		ModifyScene(rool);
-	}
-
-	public void ModifyScene(string rool)
-	{
-		GD.Print($"Changing to Scene {rool}");
+		
+		GD.Print("coso plis funciona");
 		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
-			LoadKey();
+			LoadKey(number);
 		}
 		else
 		{
@@ -40,7 +35,9 @@ public class KeyController : Control
 		}
 	}
 
-	public void LoadKey()
+	
+
+	public void LoadKey(int randomNumber)
 	{   
 		PackedScene packedScene;
 		if(randomNumber == 0)

@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using OpenCodeChems.Client.Server;
 
 public class MasterPlayer : Control
 {
+
+	Network serverClient;
 	AcceptDialog masterDialog = null;
 	private int CARD_GAME_MAX_VALUE = 25;
 	private Image agentTypeRed = new Image();
@@ -15,12 +18,16 @@ public class MasterPlayer : Control
 	private ImageTexture textureAssassin = new ImageTexture();
 	public override void _Ready()
 	{
-		
-
+		GD.Print("Me ejecuto primero");
+		serverClient = GetNode<Network>("/root/Network") as Network;
 		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
-		List<string> listElements = LoadInternacionalizedCards();
+		List<string> listElements = serverClient.boardWords;
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{
+			if(c < listElements.Count)
+			{
+				GD.Print(listElements[c]);
+			}
 			itemNode.SetItemText(c, listElements[c]);					
 		}
 		
@@ -40,7 +47,7 @@ public class MasterPlayer : Control
 				masterDialog.SetText("REPEATED_WORD");
 				masterDialog.Visible = true;
 			}
-			
+			 
 		}
 		assassinBlack.Load(PATH_ASSASSIN_COLOR);
 		textureAssassin.CreateFromImage(assassinBlack);
@@ -60,7 +67,7 @@ public class MasterPlayer : Control
         Godot.File cardValues = new Godot.File();
 		List<string> listGameElements = new List<string>();
 		List<string> listAllElements = new List<string>();
-		if(TranslationServer.GetLocale()== "en")
+		if(TranslationServer.GetLocale() == "en")
 		{
 			path = "res://Scenes/Resources/words.txt";
 		}

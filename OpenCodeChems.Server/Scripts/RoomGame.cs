@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using OpenCodeChems.Server.Utils;
 using OpenCodeChems.Server.Standar;
@@ -9,8 +10,8 @@ namespace OpenCodeChems.Server.Game
     public class RoomGame
     {
       
-        
-        public int NumberPlayers {get;set;} = 0;
+        public bool gameStarted = false;
+        public int numberPlayers {get;set;} = 0;
         public List<int> members {get;set;} = new List<int>();
         public List<int> blackList {get;set;} = new List<int>();
         public int redSpyMaster {get; set;} = -1;
@@ -21,6 +22,7 @@ namespace OpenCodeChems.Server.Game
 
         public List<int> bluePlayers {get; set;} = new List<int>();
 
+        public List<int> boardNumbers {get;set;} = new List<int>();
         public int SceneNumber = -1;
 
         public string GetRol(int uniqueId)
@@ -51,7 +53,7 @@ namespace OpenCodeChems.Server.Game
             if(!members.Contains(uniqueId))
             {
                 members.Add(uniqueId);
-                NumberPlayers = members.Count;
+                numberPlayers = members.Count;
             }
         }
 
@@ -187,8 +189,14 @@ namespace OpenCodeChems.Server.Game
 
             if(status)
             {
+
+                status &= !blackList.Contains(uniqueId);
+
                 status = status && !blackList.Contains(uniqueId);
+
             }
+
+            status &= !gameStarted;
 
             return status;
         }
@@ -216,6 +224,19 @@ namespace OpenCodeChems.Server.Game
             return status;
         }
 
+        public void GenerateBoard()
+        {
+            Random randomClass = new Random();
+            List<int> fullList = new List<int>();
+            for(int c = 0 ; c<83; c++)
+            {
+                fullList.Add(c);
+            }
+
+            boardNumbers = fullList.OrderBy(_ => randomClass.Next()).ToList();
+
+        }
 
     }
+
 }

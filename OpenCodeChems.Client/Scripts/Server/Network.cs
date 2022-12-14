@@ -23,6 +23,7 @@ namespace OpenCodeChems.Client.Server
 		public List<string> friendsRequestsObtained = null;
 		public static string usernamePlayerAsInvitated = "";
 		public static string currentRoom = "None";
+		public List<string> boardWords = new List<string>();
 		
 		[Signal]
 		delegate void LoggedIn();
@@ -144,8 +145,9 @@ namespace OpenCodeChems.Client.Server
 		delegate void YesStartGame();
 		[Signal]
 		delegate void NoStartGame();
+		
 		[Signal]
-		delegate void UpdateGameClient(string rool, int number);
+		delegate void UpdateBoardSignal(string rool, int number);
 		[Signal]
 		delegate void EmailIsSent();
 		[Signal]
@@ -178,6 +180,11 @@ namespace OpenCodeChems.Client.Server
 		public void UpdateServerData(string nickname)
 		{
 			RpcId(PEER_ID, "UpdateData", nickname);
+		}
+
+		public void UpdateServerLanguage(string lang)
+		{
+			RpcId(PEER_ID, "UpdateLanguage", lang);
 		}
 		public void ConnectToServer()
 		{
@@ -606,12 +613,6 @@ namespace OpenCodeChems.Client.Server
 		{
 			EmitSignal(nameof(CleanRoom));
 		}
-
-		public void SendSceneToServer(int number)
-		{
-			RpcId(PEER_ID, "AddSceneRoom", currentRoom, number);
-		}
-
 		
 		public void StartGame()
 		{
@@ -656,7 +657,7 @@ namespace OpenCodeChems.Client.Server
 		}
 		public void AddDefeat(string nickname)
 		{
-			RpcId(PEER_ID,"AddDefeatRequest", nickname);;
+			RpcId(PEER_ID,"AddDefeatRequest", nickname);
 			
 		}
 		[Puppet]
@@ -671,9 +672,20 @@ namespace OpenCodeChems.Client.Server
 		}
 		
 		[Puppet]
-		public void UpdateScreenClientGame(string rool, int number)
+		public void UpdateScreenClientGame(List<string> words)
 		{
-			EmitSignal(nameof(UpdateGameClient), rool, number);
+			GD.Print($"we got algo");
+			boardWords = words;
+			GetTree().ChangeScene("res://Scenes/KeyController.tscn");
+			GD.Print("Se cambio a la escena Keys Controller");
+			RpcId(PEER_ID, "BoardChange", currentRoom);
+			
+		}
+
+		[Puppet]
+		public void UpdateBoard(string rool, int number)
+		{
+			EmitSignal(nameof(UpdateBoardSignal), rool, number);
 		}
 		public void SendEmail(string emailTo, string subject, string body)
 		{

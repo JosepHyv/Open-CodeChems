@@ -74,6 +74,8 @@ REPEATED_WORD,repeated word,palabra repetida
 SENDED_WORD,SEND,ENVIAR
 WORD_PLACEHOLDER,Word,Palabra
 CODENAME_INSTRUCTION,Send a keyword and a number to create the codename,Manda una palabra clave y un número para formar el código secreto
+LOADING_GAME,Loading game…,Cargando partida…
+PLAY_INVITATED,Play as guest,Jugar como invitado
 PLAY_INVITATED,Play as a guest,Juega como invitado
 RECOVER_PASSWORD_LABEL,Did you forgot your password?,¿Olvidaste tu contraseña?
 CONFIRM_RECOVER_INSTRUCTION,An email with a code was sent to the email address you entered in order to reset your password.,Se envió un correo con un código al correo electrónico que ingresaste para poder restaurar tu contraseña
@@ -87,3 +89,4 @@ DEFEATS_TITLE_LABEL,Defeats,Derrotas
 ONLY_NUMBERS,Only numbers can be entered,Solo se pueden ingresar numeros
 EMAIL_SENT,Email sent,Email enviado
 ERROR_CODE,Incorrect code,Código incorrecto
+
