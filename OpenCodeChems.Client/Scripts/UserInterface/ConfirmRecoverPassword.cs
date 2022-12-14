@@ -9,8 +9,8 @@ public class ConfirmRecoverPassword : Control
 	int PEER_ID = 1;
     private int codeRegistration = 0;
     public static string email = RecoverPassword.email;
-    private string BODY_WITHOUT_CODE_EMAIL = "Your code for recover your password is: ";
-	private string SUBJECT_EMAIL = "Recover your password of OpenCode Chems account";
+    private const string BODY_WITHOUT_CODE_EMAIL = "Your code for recover your password is: ";
+	private const string SUBJECT_EMAIL = "Recover your password of OpenCode Chems account";
     Random newRandom = new Random();
     public override void _Ready()
     {

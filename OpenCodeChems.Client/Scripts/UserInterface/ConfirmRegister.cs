@@ -18,8 +18,8 @@ public class ConfirmRegister : Control
     private string hashPassword = RegisterUser.hashPassword;
     private string nickname = RegisterUser.nickname;
     private int codeRegistration = 0;
-    private string BODY_WITHOUT_CODE_EMAIL = "Your code for registration is: ";
-	private string SUBJECT_EMAIL = "Complete your register to OpenCode Chems";
+    private const string BODY_WITHOUT_CODE_EMAIL = "Your code for registration is: ";
+	private const string SUBJECT_EMAIL = "Complete your register to OpenCode Chems";
     Random newRandom = new Random();
 
     public override void _Ready()

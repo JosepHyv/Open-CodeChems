@@ -17,7 +17,7 @@ public class AddFriend : Control
 	private int idProfileActualPlayer = MainMenu.idProfile;
 	public int idProfilePlayerFound = 0;
 	public Profile playerFound;
-	private bool STATUS_SEND_FRIEND_REQUEST = false;
+	private const bool STATUS_SEND_FRIEND_REQUEST = false;
  	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
