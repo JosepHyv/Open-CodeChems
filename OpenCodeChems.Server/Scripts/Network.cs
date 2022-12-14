@@ -863,12 +863,15 @@ public class Network : Node
 
 		if(rooms.ContainsKey(nameRoom))
 		{	
+			logBlock.InsertTextAtCursor("\n\nIn Words Generated\n\n");
 			List<int> positions = rooms[nameRoom].boardNumbers;
 			for(int c = 0 ; c<25; c++)
 			{
 				string word = listAllElements[positions[c]];
+				logBlock.InsertTextAtCursor($"{word},");
 				listGameElements.Add(word);
 			}
+			logBlock.InsertTextAtCursor("\n\n");
 		}
 
 		return listAllElements;
