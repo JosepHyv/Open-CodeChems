@@ -24,6 +24,10 @@ public class MasterPlayer : Control
 		List<string> listElements = serverClient.boardWords;
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{
+			if(c < listElements.Count)
+			{
+				GD.Print(listElements[c]);
+			}
 			itemNode.SetItemText(c, listElements[c]);					
 		}
 		

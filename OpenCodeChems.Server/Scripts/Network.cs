@@ -874,7 +874,7 @@ public class Network : Node
 			logBlock.InsertTextAtCursor("\n\n");
 		}
 
-		return listAllElements;
+		return listGameElements;
 	}
 
 	[Master]
