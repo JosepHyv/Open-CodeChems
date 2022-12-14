@@ -11,7 +11,7 @@ public class KeyController : Control
 
 	Network serverClient;
 	
-	private int randomNumber = 0;
+	
 	public override void _Ready()
 	{   
 		GD.Print("Ready de Keys Controller");
@@ -23,7 +23,7 @@ public class KeyController : Control
 
 	public void ChangeScreen(string rool, int number)
 	{
-		randomNumber = number;
+		
 		GD.Print("coso plis funciona");
 		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
