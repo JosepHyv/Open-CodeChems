@@ -814,6 +814,21 @@ public class Network : Node
 		RpcId(senderId, "EmailSent");	
 		logBlock.InsertTextAtCursor($"sending email to  {senderId}\n");
 	}
+	[Master]
+	public void RestorePasswordRequest(string email, string newHashedPassword)
+	{
+		int senderId = GetTree().GetRpcSenderId();	
+		if (USER_MANAGEMENT.RestorePassword(email, newHashedPassword) == true)
+		{
+			RpcId(senderId, "RestorePasswordSuccessful");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} has been restore\n");
+		}
+		else
+		{
+			RpcId(senderId, "RestirePasswordNotSuccessful");
+			logBlock.InsertTextAtCursor($"the password of user {senderId} hasn't been restore\n");
+		}
+	}
 }
 
 

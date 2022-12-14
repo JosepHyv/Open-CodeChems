@@ -707,5 +707,41 @@ namespace OpenCodeChems.BussinesLogic
             }
             return status;
         }
+
+        /// <summary>
+        /// assigns a new password to the user it finds with the provided email
+        /// </summary>
+        /// <remarks>
+        /// evaluates if there is a user with the specified email, if so it changes its password
+        /// </remarks>
+        /// <param name = "email"> receives an string with the email of the user </param>
+        /// <param name = "newHashedPassword"> receives an string with the new password of the user </param>
+        /// <returns> boolean with true value if it could update the new password </returns>
+        /// <exception cref="DbUpdateException">throw if lost connection with the database</exception>
+        /// <exception cref="InvalidOperationException">throw if the username or newHashedPassword is null</exception>
+        public bool RestorePassword(string email, string newHashedPassword)
+        {
+            bool status = false;
+            try
+            {
+                using(OpenCodeChemsContext context = new OpenCodeChemsContext())
+                {
+                    var users = (from User in context.User where User.email == email  select User).First();
+                    users.password = newHashedPassword;
+                    context.SaveChanges();
+                    status = true;                           
+                }
+            }
+            catch (DbUpdateException)
+            {
+                status = false;
+            }
+            catch(InvalidOperationException)
+            {
+                status = false;
+            }
+            return status;
+        }
+        
     }
 }

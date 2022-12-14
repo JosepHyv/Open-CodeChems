@@ -237,10 +237,10 @@ autowrap = true
 clip_text = true
 
 [node name="CancelTextureButton" type="TextureButton" parent="."]
-margin_left = 70.0
-margin_top = 496.0
-margin_right = 287.0
-margin_bottom = 568.0
+margin_left = 774.0
+margin_top = 538.0
+margin_right = 976.0
+margin_bottom = 594.0
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 expand = true

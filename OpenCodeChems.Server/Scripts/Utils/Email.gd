@@ -5,7 +5,6 @@ func _ready():
 
 static func SendEmail(emailto, subject, body):
 	var emailfrom = "codechems@gmail.com"
-	print("generating email")
 	var command_body = [	"$EmailFrom = '%s'" %[emailfrom],
 	"$EmailTo = '%s'" %[emailto],
 	"$Subject = '%s'"%[subject],

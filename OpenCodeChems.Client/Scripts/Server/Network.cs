@@ -148,6 +148,10 @@ namespace OpenCodeChems.Client.Server
 		delegate void UpdateGameClient(string rool, int number);
 		[Signal]
 		delegate void EmailIsSent();
+		[Signal]
+		delegate void CorrectRestorePassword();
+		[Signal]
+		delegate void RestorePasswordFail();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -679,6 +683,20 @@ namespace OpenCodeChems.Client.Server
 		public void EmailSent()
 		{
 			EmitSignal(nameof(EmailIsSent));
+		}
+		public void RestorePassword(string email, string newHashPassword)
+		{
+			RpcId(PEER_ID, "RestorePasswordRequest", email, newHashPassword);
+		}
+		[Puppet]
+		public void RestorePasswordSuccessful()
+		{
+			EmitSignal(nameof(CorrectRestorePassword));
+		}
+		[Puppet]
+		public void RestorePasswordNotSuccessful()
+		{
+			EmitSignal(nameof(RestorePasswordFail));
 		}
 
 	}

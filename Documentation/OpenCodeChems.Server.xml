@@ -248,6 +248,19 @@
             <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
             <exception cref="T:System.InvalidOperationException">throw nickname is null</exception>
         </member>
+        <member name="M:OpenCodeChems.BussinesLogic.UserManagement.RestorePassword(System.String,System.String)">
+            <summary>
+            assigns a new password to the user it finds with the provided email
+            </summary>
+            <remarks>
+            evaluates if there is a user with the specified email, if so it changes its password
+            </remarks>
+            <param name = "email"> receives an string with the email of the user </param>
+            <param name = "newHashedPassword"> receives an string with the new password of the user </param>
+            <returns> boolean with true value if it could update the new password </returns>
+            <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
+            <exception cref="T:System.InvalidOperationException">throw if the username or newHashedPassword is null</exception>
+        </member>
         <member name="M:Network.RegisterUserRequest(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
             call to RegisterUser and RegisterProfile method 
