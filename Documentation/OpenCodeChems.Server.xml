@@ -4,6 +4,234 @@
         <name>OpenCodeChems.Server</name>
     </assembly>
     <members>
+        <member name="T:OpenCodeChems.BusinessLogic.Interface.IUserManagement">
+            <summary>
+            Interface for UserManagement methods
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.RegisterUser(OpenCodeChems.DataAccess.User)">
+            <summary>
+            register a new user in the database
+            </summary>
+            <remarks>
+            evaluates whether a new register has been successfully entered into the database
+            </remarks>
+            <param name = "user"> receives an object of type User </param>
+            <returns> boolean with true value if performed correctly </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.RegisterProfile(OpenCodeChems.DataAccess.Profile)">
+            <summary>
+            register a new profile in the database
+            </summary>
+            <remarks>
+            evaluates whether a new register has been successfully entered into the database
+            </remarks>
+            <param name = "profile"> receives an object of type Profile </param>
+            <returns> boolean with true value if performed correctly </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.Login(System.String,System.String)">
+            <summary>
+            check whether a user exists with the provided username and password
+            </summary>
+            <remarks>
+            evaluates whether the credentials entered are correct
+            </remarks>
+            <param name = "username"> receives an string with the username of the user </param>
+            <param name = "password"> receives an string with the hash password of the user </param>
+            <returns> boolean with true value if credentials match a user </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.EditProfileNickname(System.String,System.String)">
+            <summary>
+            assigns a new nickname to the user it profile with the provided username
+            </summary>
+            <remarks>
+            evaluates if there is a profile with the specified username, if so it changes its nickname
+            </remarks>
+            <param name = "username"> receives an string with the username of the user </param>
+            <param name = "nickname"> receives an string with the new nickname of the user </param>
+            <returns> boolean with true value if it could update the new nickname </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.EditProfileImage(System.String,System.Int32)">
+            <summary>
+            assigns a new image profile to the profile it finds with the provided username
+            </summary>
+            <remarks>
+            evaluates if there is a profile with the specified username, if so it changes its image profile
+            </remarks>
+            <param name = "username"> receives an string with the username of the user </param>
+            <param name = "imageProfile"> receives an array of bytes with the new image profile of the user </param>
+            <returns> boolean with true value if it could update the new image profile </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.EditUserPassword(System.String,System.String)">
+            <summary>
+            assigns a new password to the user it finds with the provided username
+            </summary>
+            <remarks>
+            evaluates if there is a user with the specified username, if so it changes its password
+            </remarks>
+            <param name = "username"> receives an string with the username of the user </param>
+            <param name = "newHashedPassword"> receives an string with the new password of the user </param>
+            <returns> boolean with true value if it could update the new password </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.PasswordExist(System.String,System.String)">
+            <summary>
+            check if exist a register with the hash password and the username
+            </summary>
+            <param name = "username"> receives an string with the username of the user </param>
+            <param name = "hashPassword"> receives an string with the password of the user </param>
+            <returns> boolean with true value if exist a register with the password </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.GetProfileByUsername(System.String)">
+            <summary>
+            gets an object of type Profile  
+            </summary>
+            <remarks>
+            evaluates if there is a Profile with the specified username, if so it gets the Profile
+            </remarks>
+            <param name = "username"> receives an string with the username of the user </param>
+            <returns> object of type Profile </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.EmailRegistered(System.String)">
+            <summary>
+            check if exist a register with the email provided 
+            </summary>
+            <param name = "email"> receives an string with the email of the user </param>
+            <returns>boolean with true value if exist a register with the email</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.UsernameRegistered(System.String)">
+            <summary>
+            check if exist a register with the username provided 
+            </summary>
+            <param name = "username"> receives an string with the username of the user </param>
+            <returns>boolean with true value if exist a register with the username</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.NicknameRegistered(System.String)">
+            <summary>
+            check if exist a register with the nickname provided 
+            </summary>
+            <param name = "nickname"> receives an string with the nickname of the user </param>
+            <returns>boolean with true value if exist a register with the nickname</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.AddFriend(OpenCodeChems.DataAccess.Friends)">
+            <summary>
+            register a new friendship in database 
+            </summary>
+            <remarks>
+            register a object of type Friends with the status false
+            </remarks>
+            <param name = "friends"> receives an object of type Friends </param>
+            <returns>boolean with true value if could register the friends</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.AcceptFriend(OpenCodeChems.DataAccess.Friends)">
+            <summary>
+            update a friendship in database 
+            </summary>
+            <remarks>
+            update a object of type Friends with the status false to status true, first check if exist a register with the idProfileFrom in the idProfileFrom column and the idProfileTo in the ifProfileTo column
+            </remarks>
+            <param name = "friends"> receives an object of type Friends </param>
+            <returns>boolean with true value if could update the new friends</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.DenyFriend(OpenCodeChems.DataAccess.Friends)">
+            <summary>
+            dalete a friendship in database 
+            </summary>
+            <remarks>
+            delete a register of Friends table if the status is equal to false
+            </remarks>
+            <param name = "friends"> receives an object of type Friends </param>
+            <returns>boolean with true value if could delete the friends registerd</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.DeleteFriend(OpenCodeChems.DataAccess.Friends)">
+            <summary>
+            dalete a friendship in database 
+            </summary>
+            <remarks>
+            delete a register of Friends table if exist a register with the idProfileFrom in the idProfileFrom column and idProfileTo in the idProfileTo column, else exist a register with the idProfileTo in the idProfileFrom column and idProfileTo in the idProfileFrom column and the status is equal to true;
+            </remarks>
+            <param name = "friendsForDelete"> receives an object of type Friends </param>
+            <returns>boolean with true value if could delete the friends registerd</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.FriendshipExist(System.Int32,System.Int32)">
+            <summary>
+            check if exist a friendship in the database
+            </summary>
+            <remarks>
+            check if the idProfileFrom column exist the idProfileActualPlayer and in the idProfileTo column exist the idProfilePlayerFound, else the the idProfileFrom column exist the idProfilePlayerFound and in the idProfileTo column exist the idProfileActualPlayer
+            </remarks>
+            <param name = "idProfileActualPlayer"> receives an int with the id profile of the actual player </param>
+            <param name = "idProfilePlayerFound"> receives an int with the id profile of the player want to send a friend request </param>
+            <returns>boolean with true value if friendship exist</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.GetFriends(System.Int32)">
+            <summary>
+            gets the friends of the actual player
+            </summary>
+            <remarks>
+            gets the id of the profiles with wich the actual player has a friendship and the status is equal to true, replaces the id for the nicknames of the profiles
+            </remarks>
+            <param name = "idProfile"> receives an int with de id profle of the actual player </param>
+            <returns>List with the friends of the actual player</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.GetFriendsRequests(System.Int32)">
+            <summary>
+            gets the friends requests of the actual player
+            </summary>
+            <remarks>
+            gets the id of the profiles with wich the actual player has a friendship and the status is equal to false, replaces the id for the nicknames of the profiles
+            </remarks>
+            <param name = "idProfile"> receives an int with de id profle of the actual player </param>
+            <returns>List with the friends requests of the actual player</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.GetProfileByNickname(System.String)">
+            <summary>
+            gets an object of type Profile  
+            </summary>
+            <remarks>
+            evaluates if there is a Profile with the specified nickname, if so it gets the Profile
+            </remarks>
+            <param name = "nickname"> receives an string with the nickname of the user </param>
+            <returns> object of type Profile </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.DeleteInvitatedPlayer(System.String)">
+            <summary>
+            dalete a user that played as invitated
+            </summary>
+            <param name = "username"> receives a string with de username of the player </param>
+            <returns>boolean with true value if could delete the user registerd</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.AddVictory(System.String)">
+            <summary>
+            add a victory to the player with de nickname provided 
+            </summary>
+            <param name = "nickname"> receives a string with the nickname of the user </param>
+            <returns>boolean with true value if could update the victories of the user</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.AddDefeat(System.String)">
+            <summary>
+            add a defeat to the player with de nickname provided 
+            </summary>
+            <param name = "nickname"> receives a string with the nickname of the user </param>
+            <returns>boolean with true value if could update the defeats of the user</returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.RestorePassword(System.String,System.String)">
+            <summary>
+            assigns a new password to the user it finds with the provided email
+            </summary>
+            <remarks>
+            evaluates if there is a user with the specified email, if so it changes its password
+            </remarks>
+            <param name = "email"> receives an string with the email of the user </param>
+            <param name = "newHashedPassword"> receives an string with the new password of the user </param>
+            <returns> boolean with true value if it could update the new password </returns>
+        </member>
+        <member name="M:OpenCodeChems.BusinessLogic.Interface.IUserManagement.SearchFriends(OpenCodeChems.DataAccess.Friends)">
+            <summary>
+            check if exist a register in Friends the object provided
+            </summary>
+            <param name = "friends"> receives an object of type Friends for search the form of friendship </param>
+            <returns>boolean with true value if exist a register with the friends</returns>
+        </member>
         <member name="T:OpenCodeChems.BussinesLogic.UserManagement">
             <summary>
             Class that manage the users
@@ -189,7 +417,7 @@
             gets the id of the profiles with wich the actual player has a friendship and the status is equal to true, replaces the id for the nicknames of the profiles
             </remarks>
             <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-            <returns>List with the friends of the actual player</returns>ception>
+            <returns>List with the friends of the actual player</returns>
             <exception cref="T:System.InvalidOperationException">throw if idProfile is null</exception>
         </member>
         <member name="M:OpenCodeChems.BussinesLogic.UserManagement.GetFriendsRequests(System.Int32)">
@@ -200,7 +428,7 @@
             gets the id of the profiles with wich the actual player has a friendship and the status is equal to false, replaces the id for the nicknames of the profiles
             </remarks>
             <param name = "idProfile"> receives an int with de id profle of the actual player </param>
-            <returns>List with the friends requests of the actual player</returns>ception>
+            <returns>List with the friends requests of the actual player</returns>
             <exception cref="T:System.InvalidOperationException">throw if idProfile is null</exception>
         </member>
         <member name="M:OpenCodeChems.BussinesLogic.UserManagement.GetProfileByNickname(System.String)">
@@ -274,6 +502,162 @@
             <param name = "friends"> receives an object of type Friends for search the form of friendship </param>
             <returns>boolean with true value if exist a register with the friends</returns>
         </member>
+        <member name="T:OpenCodeChems.DataAccess.OpenCodeChemsContext">
+            <summary>
+            Specifies the objects to be connected in the database
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.OpenCodeChemsContext.User">
+            <summary>
+            Gets and sets of the object type User
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.OpenCodeChemsContext.Profile">
+            <summary>
+            Gets and sets of the object type Profile
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.OpenCodeChemsContext.Friends">
+            <summary>
+            Gets and sets of the object type Friends
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.DataAccess.OpenCodeChemsContext.OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder)">
+            <summary>
+            configure the conection with database
+            </summary>
+            <param name="optionsBuilder"> connect with the database </param>
+        </member>
+        <member name="T:OpenCodeChems.DataAccess.User">
+            <summary>
+            class of the object type User
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.DataAccess.User.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            create the constructor of the object type User
+            </summary>
+            <param name="username"> username of the User </param>
+            <param name="password"> encrypted password of the User </param>
+            <param name="name"> name of the User </param>
+            <param name="email"> email for the User</param>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.User.username">
+            <summary>
+            Gets and sets of the username parameter
+            </summary>
+            <value>string</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.User.password">
+            <summary>
+            Gets and sets of the password parameter
+            </summary>
+            <value>string</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.User.name">
+            <summary>
+            Gets and sets of the name parameters
+            </summary>
+            <value> string </value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.User.email">
+            <summary>
+            Gets and sets of the name parameters
+            </summary>
+            <value> string </value>
+        </member>
+        <member name="T:OpenCodeChems.DataAccess.Profile">
+            <summary>
+            class of the object type Profile
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.DataAccess.Profile.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            create the constructor of the object type User
+            </summary>
+            <param name="nickname"> nickname of the Profile of the user </param>
+            <param name="victories"> number of victories of the Profile of the user </param>
+            <param name="defeats"> number of defeats of the Profile of the user </param>
+            <param name="imageProfile"> number of the image profile of the Profile of the user </param>
+            <param name="username"></param>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Profile.idProfile">
+            <summary>
+            Gets and sets of the idProfile
+            </summary>
+            <value>int</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Profile.nickname">
+            <summary>
+            Gets and sets of the nickname
+            </summary>
+            <value>string</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Profile.victories">
+            <summary>
+            Gets and sets of the victories
+            </summary>
+            <value>int</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Profile.defeats">
+            <summary>
+            Gets and sets of defeats
+            </summary>
+            <value>int</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Profile.imageProfile">
+            <summary>
+            Gets and sets of imageProfile
+            </summary>
+            <value>int</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Profile.username">
+            <summary>
+            Gets and sets of the username
+            </summary>
+            <value>string</value>
+        </member>
+        <member name="T:OpenCodeChems.DataAccess.Friends">
+            <summary>
+            class of the object type Friends
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.DataAccess.Friends.#ctor(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            create the constructorof the object tye Friends
+            </summary>
+            <param name="idProfileFrom">is the id of the profile that send the friend request</param>
+            <param name="idProfileTo">is the id of the profile that recive the friend request</param>
+            <param name="status"> is the status of the friendship</param>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Friends.idProfileFrom">
+            <summary>
+            Gets and sets idProfileFrom
+            </summary>
+            <value>int</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Friends.idProfileTo">
+            <summary>
+            Gets and sets of idProfileTo
+            </summary>
+            <value>int</value>
+        </member>
+        <member name="P:OpenCodeChems.DataAccess.Friends.status">
+            <summary>
+            Gets and sets of the status
+            </summary>
+            <value>bool</value>
+        </member>
+        <member name="T:OpenCodeChems.Server.Network.Network">
+            <summary>
+            Control the conectivity between serve and client using Rpc
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Server.Network.Network._Ready">
+            <summary>
+            Initialize the server
+            </summary>
+        </member>
         <member name="M:OpenCodeChems.Server.Network.Network.RegisterUserRequest(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
             call to RegisterUser and RegisterProfile method 
@@ -291,6 +675,457 @@
             <param name = "defeats"> receives an int with the default defeats of the new user </param>
             <returns>Signal to client</returns>
             <exception cref="T:Microsoft.EntityFrameworkCore.DbUpdateException">throw if lost connection with the database</exception>
+        </member>
+        <member name="T:OpenCodeChems.Server.Game.RoomGame">
+            <summary>
+            Control all players that connect with the rooms of the game
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Game.RoomGame.gameStarted">
+            <summary>
+            Status of a game
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.numberPlayers">
+            <summary>
+            Number total of players by game
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.members">
+            <summary>
+            Contains the members of a room, in first place the owner of room
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.blackList">
+            <summary>
+            Contains the banned members of a room
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.redSpyMaster">
+            <summary>
+            Code identifying the red spy master
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.blueSpyMaster">
+            <summary>
+            Code indentifying the blue spy master
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.redPlayers">
+            <summary>
+            Contains the players who are red spies
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.bluePlayers">
+            <summary>
+            Contains the players who are blue spies
+            </summary>
+        </member>
+        <member name="P:OpenCodeChems.Server.Game.RoomGame.boardNumbers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Game.RoomGame.SceneNumber">
+            <summary>
+            Contains the scene to be displayed
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.GetRol(System.Int32)">
+            <summary>
+            Gets the role to which a player belongs in a room.
+            </summary>
+            <param name="uniqueId">id of the player who entered a room</param>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.AddPlayer(System.Int32)">
+            <summary>
+            Add a player to a room
+            </summary>
+            <param name="uniqueId">id of the player who entered a room</param>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.AsignRandomRol(System.Int32)">
+            <summary>
+            Assigns a random role to a player who joins a room
+            </summary>
+            <param name="uniqueId"> id of the player who entered a room </param>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.RemovePlayer(System.Int32)">
+            <summary>
+            Remove a player of a room
+            </summary>
+            <param name="uniqueId">id of the player who entered a room</param>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.DeleteRol(System.Int32)">
+            <summary>
+            Remove the rol of the player who are banned
+            </summary>
+            <param name="uniqueId">id of the player who entered a room</param>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.Exist(System.Int32)">
+            <summary>
+            Evaluates the existence of a player in a room
+            </summary>
+            <param name="uniqueId">id of the player who entered a room</param>
+            <returns>bool with true value if exist a player into a room</returns>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.CanChange(System.String,System.Int32)">
+            <summary>
+            Evaluates if a player can change of rol into a room
+            </summary>
+            <param name="rol"> rol of a player in the room </param>
+            <param name="uniqueId">id of the player who entered a room</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.CanJoin(System.Int32)">
+            <summary>
+            Evaluates if a player can join a room
+            </summary>
+            <param name="uniqueId">id of the player who entered a room</param>
+            <returns>bool with true value if a player can join a room</returns>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.BanPlayer(System.Int32)">
+            <summary>
+            Ban a player of a room
+            </summary>
+            <param name="uniqueId">id of the player who entered a room</param>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.CanStart">
+            <summary>
+            Evaluates if a game can start
+            </summary>
+            <returns>bool with true value if the game can start</returns>
+        </member>
+        <member name="M:OpenCodeChems.Server.Game.RoomGame.GenerateBoard">
+            <summary>
+            Randomly selects a board
+            </summary>
+        </member>
+        <member name="T:OpenCodeChems.Server.Standar.Constants">
+            <summary>
+            Constants of the server project
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.NULL_ROL">
+            <summary>
+            Default rol of a player
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.RED_SPY_MASTER">
+            <summary>
+            Name of the red spy master rol
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.BLUE_SPY_MASTER">
+            <summary>
+            Name of the blue spy master rol
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.RED_PLAYER">
+            <summary>
+            Name of the red spy rol
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.BLUE_PLAYER">
+            <summary>
+            Name of the blue spy rol
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.ROLES">
+            <summary>
+            Array with the roles of the game
+            </summary>
+            <value>string with name of each rol</value>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.MAX_RED_PLAYERS">
+            <summary>
+            Maximum number of players who can be in the red team
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.MAX_BLUE_PLAYERS">
+            <summary>
+            Maximum number of players who can be in the blue team
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.MAX_MEMBERS">
+            <summary>
+            Maxium number of players who can join a room
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.BLUE">
+            <summary>
+            Code of the blue card
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.RED">
+            <summary>
+            Code of the red card
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.YELLOW">
+            <summary>
+            Code of the civil card
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.BLACK">
+            <summary>
+            Code of the assassin card
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.KEY_BLUE_ONE">
+            <summary>
+            Allows to check if the player hit the clue or not for the first blue team master key
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.KEY_RED_ONE">
+            <summary>
+            Allows to check if the player hit the clue or not for the first red team master key
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.KEY_RED_TWO">
+            <summary>
+            Allows to check if the player hit the clue or not for the second red team master key
+            </summary>
+        </member>
+        <member name="F:OpenCodeChems.Server.Standar.Constants.KEY_BLUE_TWO">
+            <summary>
+            Allows to check if the player hit the clue or not for the second blue team master key
+            </summary>
+        </member>
+        <member name="T:OpenCodeChems.Server.Utils.Encryption">
+            <summary>
+            This class encrypt the password
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Server.Utils.Encryption.ComputeSHA256Hash(System.String)">
+            <summary>
+            method that encrypt the password
+            </summary>
+            <param name="text"> string that encrypt</param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenCodeChems.Server.Utils.Validation">
+            <summary>
+            Validations of ip and host
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Server.Utils.Validation.ValidateIp(System.String)">
+            <summary>
+            validate that ip is a correct format
+            </summary>
+            <param name="address">ip address provided</param>
+            <returns></returns>
+        </member>
+        <member name="M:OpenCodeChems.Server.Utils.Validation.ValidatePort(System.String)">
+            <summary>
+            Validate that port is correct format
+            </summary>
+            <param name="port">port provided</param>
+            <returns></returns>
+        </member>
+        <member name="T:OpenCodeChems.Test.UserManagementTest">
+            <summary>
+            Test of methods of UserManagement class
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.RegisterUserCorrect">
+            <summary>
+            Correct flow of new user registration
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.RegisterUserInvalidOperationException">
+            <summary>
+            Incorrect flow of the register user with null values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.RegisterUserDuplicated">
+            <summary>
+            Incorrect flow of the register user with duplicate values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.RegisterProfileCorrect">
+            <summary>
+            Correct flow of new profile registration
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.RegisterProfileInvalidOperationException">
+            <summary>
+            Incorrect flow of register profile with null values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.LoginCorrect">
+            <summary>
+            Correct flow of login
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.LoginNotCorrect">
+            <summary>
+            Login with incorrect values 
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.LoginNullUsernameAndPassword">
+            <summary>
+            Login with null values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.NicknameRegisteredCorrect">
+            <summary>
+            Correct nickname search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.NicknameRegisteredNotCorrect">
+            <summary>
+            Incorrect nickname search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EditProfileNicknameCorrect">
+            <summary>
+            Correct nickname edit flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EditProfileNicknameInvalidOperationException">
+            <summary>
+            Incorrect nickname edit flow with null values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EditProfileImageCorrect">
+            <summary>
+            Correct profile image edit flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EditProfileImageInvalidOperationException">
+            <summary>
+            Incorrect profile image edit flow with null values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.PasswordExistCorrect">
+            <summary>
+            Correct password search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.PasswordExistNotCorrect">
+            <summary>
+            Incorrect password search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EditUserPasswordCorrect">
+            <summary>
+            Correct password edit flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EditUserPasswordInvalidOperationException">
+            <summary>
+            Incorrect password edit flow with null values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetProfileByUsernameCorrect">
+            <summary>
+            Correct get profile by username flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetProfileByUsernameNotCorrect">
+            <summary>
+            Incorrect get profile by username flow with username null
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetProfileByNicknameCorrect">
+            <summary>
+            Correct get profile by nickname flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetProfileByNicknameNotCorrect">
+            <summary>
+            Incorrect get profile by nickname flow with nickname null
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EmailRegisteredCorrect">
+            <summary>
+            Correct email search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.EmailRegisteredNotCorrect">
+            <summary>
+            Incorrect email search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.UsernameRegisteredCorrect">
+            <summary>
+            Correct username search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.UsernameRegisteredNotCorrect">
+            <summary>
+            Correct username search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.AddFriendCorrect">
+            <summary>
+            Correct add friend flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.AddFriendNotCorrect">
+            <summary>
+            Incorrect add friend flow with incorrect values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetFriendsRequestCorrect">
+            <summary>
+            Correct get friends request flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetFriendsRequestNotCorrect">
+            <summary>
+            Incorrect get friends request flow with incorrect id profile
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.AcceptFriendCorrect">
+            <summary>
+            Correct accept friend flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.AcceptFriendInvalidOperationException">
+            <summary>
+            Accept friend flow with invalid operation exception because set incorrect values
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.FriendshipExistCorrect">
+            <summary>
+            Correct friendship search flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.FriendshipExistNotCorrect">
+            <summary>
+            Friendship not exist flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetFriendsCorrect">
+            <summary>
+            Correct get friends flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.GetFriendsNotCorrect">
+            <summary>
+            Incorrect get friends flow with incorrect id profile 
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.DenyFriendCorrect">
+            <summary>
+            Correct deny friend flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.DenyFriendInvalidOperationException">
+            <summary>
+            Deny friend flow with invalid operation exception because values are incorrect
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.DeleteFriendCorrect">
+            <summary>
+            Correct delete friend flow
+            </summary>
+        </member>
+        <member name="M:OpenCodeChems.Test.UserManagementTest.DeleteFriendNotCorrect">
+            <summary>
+            Incorrect delete friend flow with incorrect values
+            </summary>
         </member>
     </members>
 </doc>

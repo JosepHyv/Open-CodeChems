@@ -18,9 +18,8 @@ namespace OpenCodeChems.Server.Network
     {
 
         private int DEFAULT_PORT = 6007;
-        private string ADDRESS = "localhost";
-        private int MAX_PLAYERS = 200;
-        private int PEERID = 1;
+        private string address = "localhost";
+        private readonly int MAX_PLAYERS = 200;
         private UserManagement USER_MANAGEMENT = new UserManagement();
         private LineEdit ipLineEdit;
         private LineEdit portLineEdit;
@@ -52,7 +51,7 @@ namespace OpenCodeChems.Server.Network
             logBlock = GetParent().GetNode<TextEdit>("Network/TextEdit");
             listening = GetParent().GetNode<RichTextLabel>("Network/currentDirText");
             connectButton = GetParent().GetNode<Button>("Network/Button");
-            ipLineEdit.Text = (ADDRESS);
+            ipLineEdit.Text = (address);
             portLineEdit.Text = (DEFAULT_PORT.ToString());
 
         }
@@ -100,7 +99,7 @@ namespace OpenCodeChems.Server.Network
             Validation validations = new Validation();
             if (validations.ValidateIp(ipAddress) && validations.ValidatePort(port))
             {
-                ADDRESS = ipAddress;
+                address = ipAddress;
                 DEFAULT_PORT = Int32.Parse(port);
                 connectButton.Disabled = true;
                 logBlock.InsertTextAtCursor("Entrando al server OpenCodeChems\n");
@@ -109,9 +108,9 @@ namespace OpenCodeChems.Server.Network
                 if (result == 0)
                 {
                     GetTree().NetworkPeer = server;
-                    logBlock.InsertTextAtCursor($"Hosteando server en {ADDRESS}:{DEFAULT_PORT}.\n");
+                    logBlock.InsertTextAtCursor($"Hosteando server en {address}:{DEFAULT_PORT}.\n");
                     logBlock.InsertTextAtCursor($"{GetTree().NetworkPeer}\n");
-                    listening.Text = $"{ADDRESS}:{DEFAULT_PORT}";
+                    listening.Text = $"{address}:{DEFAULT_PORT}";
                 }
                 logBlock.InsertTextAtCursor($"Estoy escuchando? {GetTree().IsNetworkServer()}\n");
                 logBlock.InsertTextAtCursor($"Mi network ID = {GetTree().GetNetworkUniqueId()}\n");
@@ -854,8 +853,6 @@ namespace OpenCodeChems.Server.Network
             int senderId = GetTree().GetRpcSenderId();
             if (rooms.ContainsKey(nameRom))
             {
-
-                //rooms[nameRoom].gameStarted = true;
                 RpcId(senderId, "Start");
                 rooms[nameRom].SceneNumber = number;
 

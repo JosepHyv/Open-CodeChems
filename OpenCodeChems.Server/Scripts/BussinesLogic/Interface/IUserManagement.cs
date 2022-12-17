@@ -15,7 +15,7 @@ namespace OpenCodeChems.BusinessLogic.Interface
         /// evaluates whether a new register has been successfully entered into the database
         /// </remarks>
         /// <param name = "user"> receives an object of type User </param>
-        /// <returns> boolean with true value if performed correctly </returns
+        /// <returns> boolean with true value if performed correctly </returns>
 		bool RegisterUser(User user);
 		
 		/// <summary>
