@@ -12,11 +12,10 @@ namespace OpenCodeChems.Client.Server
 
 		private int SERVER_ID = 1;
 		public int DEFAULT_PORT {get; set;} = 6007;
-		private int MAX_PLAYERS = 200; 
+		private readonly int MAX_PLAYERS = 200; 
 		public string ADDRESS {get; set;} = "localhost";
-		private int PEER_ID = 1;
-		private bool connected = false;
-		private bool regitered = false;
+		private readonly int PEER_ID = 1;
+		private readonly bool regitered = false;
 		public Profile profileByUsernameObtained = null;
 		public Profile profileByNicknameObtained = null;
 		public List<string> friendsObtained = null;
@@ -155,7 +154,7 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void RestorePasswordFail();
 		
-		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
+		private readonly NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
 		{
  

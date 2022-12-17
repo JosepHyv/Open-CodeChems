@@ -29,7 +29,7 @@ namespace OpenCodeChems.Server.Standar
         /// Array with the roles of the game
         /// </summary>
         /// <value>string with name of each rol</value>
-        public static string [] ROLES = {RED_SPY_MASTER, RED_PLAYER, BLUE_SPY_MASTER, BLUE_PLAYER};
+        public readonly static string [] ROLES = {RED_SPY_MASTER, RED_PLAYER, BLUE_SPY_MASTER, BLUE_PLAYER};
         /// <summary>
         /// Maximum number of players who can be in the red team
         /// </summary>

@@ -31,7 +31,6 @@ namespace OpenCodeChems.Server.Network
         private Dictionary<int, string> roomOwners;
         private List<int> clientsConected;
         private Dictionary<int, string> playersData;
-
         private Dictionary<int, string> playersLanguage;
         private static Encryption PASSWORD_HASHER = new Encryption();
 
