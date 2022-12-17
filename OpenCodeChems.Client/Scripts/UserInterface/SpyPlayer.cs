@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using OpenCodeChems.Client.Server;
+
 
 public class SpyPlayer : Control
 {
 	private LineEdit ChatLineEdit; 
 	private TextEdit ChatBlock;
+	Network serverClient;
 	private Image civilYellow = new Image();
 	private Image agentTypeRed = new Image();
 	private Image agentTypeBlue = new Image();
@@ -19,6 +23,17 @@ public class SpyPlayer : Control
 	{
 		ChatLineEdit = GetParent().GetNode<LineEdit>("SpyPlayer/ChatLineEdit");
 		ChatBlock = GetParent().GetNode<TextEdit>("SpyPlayer/ChatTextEdit");
+		serverClient = GetNode<Network>("/root/Network") as Network;
+		
+		List<string> listElements = serverClient.boardWords;
+		
+		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
+		{
+			GD.Print(itemNode.GetItemText(c));
+			itemNode.SetItemText(c, listElements[c]);					
+		}
+			
 
 	}
 
