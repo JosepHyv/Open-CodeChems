@@ -956,23 +956,23 @@ namespace OpenCodeChems.Server.Network
         [Master]
         public void BoardChange(string nameRoom)
         {
-            rooms[nameRoom].gameStarted = true;
-            UpdateBoard(nameRoom);
-        }
-
-        [Master]
-        private void UpdateBoard(string roomCode)
-        {
-            if (rooms.ContainsKey(roomCode))
+            int ownerId = GetTree().GetRpcSenderId();
+            if(roomOwners.ContainsKey(ownerId))
             {
-                List<int> playersInRoom = rooms[roomCode].members;
-                for (int c = 0; c < playersInRoom.Count; c++)
+                rooms[nameRoom].gameStarted = true;
+                logBlock.InsertTextAtCursor($"cualquier cosa 8=============================================3\n");
+                if (rooms.ContainsKey(nameRoom))
                 {
-                    int senderId = playersInRoom[c];
-                    logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
-                    RpcId(senderId, "UpdateBoard", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
+                    List<int> playersInRoom = rooms[nameRoom].members;
+                    for (int c = 0; c < playersInRoom.Count; c++)
+                    {
+                        int senderId = playersInRoom[c];
+                        logBlock.InsertTextAtCursor($"sending UpdateScreenClientGame  {senderId} with {playersInRoom.Count}\n");
+                        RpcId(senderId, "UpdateBoard", rooms[nameRoom].GetRol(senderId), rooms[nameRoom].SceneNumber);
+                    }
                 }
             }
+            
         }
         [Master]
         private void SendEmailRequest(string emailTo, string subject, string body)

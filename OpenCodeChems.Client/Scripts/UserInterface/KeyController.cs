@@ -20,6 +20,7 @@ public class KeyController : Control
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 	}
 
+	
 	public void ChangeToMainMenu()
 	{
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");

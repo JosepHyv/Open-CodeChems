@@ -25,8 +25,12 @@ public class SpyPlayer : Control
 	private void _on_ChatTextureButton_pressed()
 	{
 		string message = ChatLineEdit.GetText();
-		ChatLineEdit.Clear();
-		ChatBlock.InsertTextAtCursor($"{message}\n");
+		if(!String.IsNullOrWhiteSpace(message))
+		{
+			ChatLineEdit.Clear();
+			ChatBlock.InsertTextAtCursor($"{message}\n");
+		}
+		
 	}
 	private void _on_CodeNamesItemList_item_selected(int index)
 	{

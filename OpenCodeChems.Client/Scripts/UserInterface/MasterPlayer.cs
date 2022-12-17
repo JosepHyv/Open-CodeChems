@@ -8,6 +8,7 @@ using OpenCodeChems.Client.Server;
 public class MasterPlayer : Control
 {
 
+	private bool executed = false;
 	Network serverClient;
 	AcceptDialog masterDialog = null;
 	private int CARD_GAME_MAX_VALUE = 25;
@@ -20,12 +21,17 @@ public class MasterPlayer : Control
 	{
 		GD.Print("Me ejecuto primero");
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+		
 		List<string> listElements = serverClient.boardWords;
-		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
+		while(!executed)
 		{
-			
-			itemNode.SetItemText(c, listElements[c]);					
+			var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+			for(int c = 0 ; c<itemNode.GetItemCount(); c++)
+			{
+				GD.Print(itemNode.GetItemText(c));
+				itemNode.SetItemText(c, listElements[c]);					
+			}
+			executed = !executed;
 		}
 
 

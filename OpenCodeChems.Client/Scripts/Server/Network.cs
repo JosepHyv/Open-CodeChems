@@ -24,7 +24,8 @@ namespace OpenCodeChems.Client.Server
 		public static string usernamePlayerAsInvitated = "";
 		public static string currentRoom = "None";
 		public List<string> boardWords = new List<string>();
-		
+		[Signal]
+		delegate void LetsPlay();
 		[Signal]
 		delegate void LoggedIn();
 		[Signal]
@@ -676,8 +677,7 @@ namespace OpenCodeChems.Client.Server
 		{
 			GD.Print($"we got algo");
 			boardWords = words;
-			GetTree().ChangeScene("res://Scenes/KeyController.tscn");
-			GD.Print("Se cambio a la escena Keys Controller");
+			EmitSignal(nameof(LetsPlay));
 			RpcId(PEER_ID, "BoardChange", currentRoom);
 			
 		}

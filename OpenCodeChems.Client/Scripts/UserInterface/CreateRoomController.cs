@@ -43,6 +43,7 @@ public class CreateRoomController : Control
 		serverClient.Connect("BanFail", this, nameof(FailToBan));
 		serverClient.Connect("YesStartGame", this, nameof(AvailableToStart));
 		serverClient.Connect("NoStartGame", this, nameof(UnavailableToStart));
+		serverClient.Connect("LetsPlay", this, nameof(StartingGame));
 
 	}
 
@@ -51,6 +52,12 @@ public class CreateRoomController : Control
     //{
     //}
 
+
+	public void StartingGame()
+	{
+		GetTree().ChangeScene("res://Scenes/KeyController.tscn");
+		GD.Print("Se cambio a la escena Keys Controller");
+	}
 	public void FailToBan()
 	{
 		notificacion.SetText("CANT_BAN_USER");
