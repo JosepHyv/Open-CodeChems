@@ -12,9 +12,7 @@ namespace OpenCodeChems.Client.UserInterface
 		Network serverClient;
 		private string password = "";
 		private string confirmPassword = "";
-		private string hashPassword = "";
-		private readonly string email = ConfirmRecoverPassword.email;
-		Task<bool> recoverPasswordIsCorrect = Task<bool>.FromResult(false);
+		private string email = ConfirmRecoverPassword.email;
 		public override void _Ready()
 		{
 			serverClient = GetNode<Network>("/root/Network") as Network;
@@ -25,10 +23,10 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			password = GetParent().GetNode<LineEdit>("RestorePassword/RestorePasswordNinePatchRect/PasswordLineEdit").Text;
 			confirmPassword = GetParent().GetNode<LineEdit>("RestorePassword/RestorePasswordNinePatchRect/ConfirmPasswordLineEdit").Text;
-			if(ValidateFields() == true)
+			if(ValidateFields())
 			{
 				Encryption PasswordHasher = new Encryption();
-				hashPassword = PasswordHasher.ComputeSHA256Hash(password);
+				string hashPassword = PasswordHasher.ComputeSHA256Hash(password);
 				serverClient.RestorePassword(email, hashPassword);
 			}
 		}
@@ -42,14 +40,12 @@ namespace OpenCodeChems.Client.UserInterface
 		}
 		public void CorrectRecoverPassword()
 		{
-			recoverPasswordIsCorrect = Task<bool>.FromResult(true);
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").WindowTitle = ("NOTIFICATION");
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").DialogText =("CORRECT_PASSWORD_UPDATE");
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordCompleteAcceptDialog").Visible = true;
 		}
 		public void IncorrectRecoverPassword()
 		{
-			recoverPasswordIsCorrect = Task<bool>.FromResult(true);
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").WindowTitle = ("ERROR");
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").DialogText =("ERROR_PASSWORD_UPDATE");
 			GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").Visible = true;
@@ -59,14 +55,14 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			Validation validator = new Validation();
 			bool isValid = true;
-			if(validator.ValidatePassword(password) == false)
+			if(validator.ValidatePassword(password).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").DialogText =("VERIFY_PASSWORD");
 				GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").Visible = true;
 				isValid = false;
 			}
-			if(confirmPassword.Equals(password) == false)
+			if(confirmPassword.Equals(password).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").WindowTitle =("WARNING");
 				GetParent().GetNode<AcceptDialog>("RestorePassword/RestorePasswordNotificationAcceptDialog").DialogText =("VERIFY_CONFIRM_PASSWORD");

@@ -9,10 +9,9 @@ namespace OpenCodeChems.Client.UserInterface
 {
     public class SelectImage : Control
     {
-        public string username = EditProfile.username;
+        public static string username = MainMenu.username;
         Network serverClient;
-        private int imageProfile = 0;
-
+        public int imageProfile = 0;
         public override void _Ready()
         {
             serverClient = GetNode<Network>("/root/Network") as Network;

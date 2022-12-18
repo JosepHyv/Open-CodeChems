@@ -50,7 +50,7 @@ namespace OpenCodeChems.Client.Resources
 		public bool ValidateEmail(string email)
 		{
 			bool isValid = true;
-			isValid = isValid && !String.IsNullOrWhiteSpace(email);
+			isValid = !String.IsNullOrWhiteSpace(email);
 			isValid = isValid && (email.Length <= 255);
 			isValid = isValid && EmailValidator.Validate(email);
 			return isValid;
@@ -111,13 +111,13 @@ namespace OpenCodeChems.Client.Resources
 		public bool ValidateUsernameAndNickname(string username)
 		{
 			bool isValid = true;
-			isValid = isValid && (username.Length <= 40);
+			isValid = username.Length <= 40;
 			return isValid;
 		}
 		public bool ValidateName(string name)
 		{
 			bool isValid = true;
-			isValid = isValid && (name.Length <= 50);
+			isValid = name.Length <= 50;
 			string especialCharacters = "*#+-_;.@%&/()=!?¿¡{}[]^<>";
 			foreach(char character in name)
 			{

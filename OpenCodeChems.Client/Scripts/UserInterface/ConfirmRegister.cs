@@ -12,16 +12,15 @@ namespace OpenCodeChems.Client.UserInterface
         private readonly int VICTORIES_DEFAULT = 0;
         private readonly int DEFEATS_DEFAULT = 0;
         private readonly int IMAGE_PROFILE_DEFAULT = 0;
-        private readonly string name = RegisterUser.name;
-        private readonly string email = RegisterUser.email;
-        private readonly string username = RegisterUser.username;
-        private readonly string hashPassword = RegisterUser.hashPassword;
-        private readonly string nickname = RegisterUser.nickname;
+        private string name = RegisterUser.name;
+        private string email = RegisterUser.email;
+        private string username = RegisterUser.username;
+        private string hashPassword = RegisterUser.hashPassword;
+        private string nickname = RegisterUser.nickname;
         private int codeRegistration = 0;
         private const string BODY_WITHOUT_CODE_EMAIL = "Your code for registration is: ";
         private const string SUBJECT_EMAIL = "Complete your register to OpenCode Chems";
         Random newRandom = new Random();
-
         public override void _Ready()
         {
             serverClient = GetNode<Network>("/root/Network") as Network;
@@ -36,7 +35,7 @@ namespace OpenCodeChems.Client.UserInterface
         public void _on_AcceptTextureButton_pressed()
         {
             string codeProvided = GetParent().GetNode<LineEdit>("ConfirmRegister/ConfirmRegisterNinePatchRect/ConfirmRegisterLineEdit").Text;
-            if(validateCode(codeProvided) == true)
+            if(validateCode(codeProvided))
             {
                 if(codeProvided == codeRegistration.ToString())
                 {
@@ -94,7 +93,7 @@ namespace OpenCodeChems.Client.UserInterface
                 GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").Visible = true;
                 isValid = false;
             }
-            if(validator.ValidateCodeRegistration(code) == false)
+            if(validator.ValidateCodeRegistration(code).Equals(false))
             {
                 GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").WindowTitle = ("WARNING");
                 GetParent().GetNode<AcceptDialog>("ConfirmRegister/ConfirmRegisterNotificationAcceptDialog").DialogText = ("ONLY_NUMBERS");

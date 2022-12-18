@@ -13,10 +13,7 @@ namespace OpenCodeChems.Client.UserInterface
 	{
 
 		Network serverClient;
-		private Task<bool> loggedStatus = Task<bool>.FromResult(false);
-		private Task<bool> registeredStatus = Task<bool>.FromResult(false);
 		public static string username = "";
-		private string password = "";
 		public override void _Ready()
 		{
 			serverClient = GetNode<Network>("/root/Network") as Network;
@@ -36,7 +33,7 @@ namespace OpenCodeChems.Client.UserInterface
 		public void _on_LogInButton_pressed()
 		{
 			username = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/UsernameLineEdit").Text;
-			password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
+			string password = GetParent().GetNode<LineEdit>("LogIn/NinePatchRect/PasswordLineEdit").Text;
 			if (!String.IsNullOrWhiteSpace(username) && !String.IsNullOrWhiteSpace(password) )
 			{
 				Encryption PasswordHasher = new Encryption();
@@ -64,7 +61,6 @@ namespace OpenCodeChems.Client.UserInterface
 		
 		public void LoggedAcepted()
 		{
-			loggedStatus = Task<bool>.FromResult(true);
 			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");	
 		}
 		
@@ -73,13 +69,11 @@ namespace OpenCodeChems.Client.UserInterface
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").WindowTitle = ("WARNING");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").DialogText = ("WRONG_CREDENTIALS");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
-			loggedStatus = Task<bool>.FromResult(false);
 		}
 
 		public void RegisteredAsInvitatedAccepted()
 		{
-			registeredStatus = Task<bool>.FromResult(true);
-			username = Network.usernamePlayerAsInvitated;
+			username = serverClient.usernamePlayerAsInvitated;
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").WindowTitle = ("NOTIFICATION");	
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").DialogText = ("REGISTER_COMPLETE");
 			GetParent().GetNode<AcceptDialog>("LogIn/EmptyFieldsAcceptDialog").Visible = true;
@@ -88,7 +82,6 @@ namespace OpenCodeChems.Client.UserInterface
 		
 		public void RegisteredAsInvitatedFail()
 		{
-			registeredStatus = Task<bool>.FromResult(false);
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("WRONG_REGISTER");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;

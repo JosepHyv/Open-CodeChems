@@ -16,13 +16,13 @@ namespace OpenCodeChems.Client.UserInterface
 		Network serverClient;
 		public static Profile actualPlayer;
 		public static string nicknameFriend = "";
-		public string nicknameActualPlayer = "";
-		private List<string> friendsOfActualPlayer;
+		public static string nicknameActualPlayer = "";
 		public static int idProfile = 0; 
 		public static int imageProfile = 0;
 		public static string pathImageProfile = "";
 		private readonly ImageTexture textureImageProfile = new ImageTexture(); 
 		private readonly Image image = new Image();
+		LogIn login;
 
 
 		public override void _Ready()
@@ -44,7 +44,7 @@ namespace OpenCodeChems.Client.UserInterface
 		public void _on_LogOutTextureButton_pressed()
 		{
 			bool statusPlayer = validatePlayer();
-			if(statusPlayer == false)
+			if(statusPlayer.Equals(false))
 			{
 				serverClient.DeleteInvitatedPlayer(username);
 				serverClient.LogOut();
@@ -90,18 +90,15 @@ namespace OpenCodeChems.Client.UserInterface
 				actualPlayer = serverClient.profileByUsernameObtained;
 				idProfile = actualPlayer.idProfile;
 				nicknameActualPlayer = actualPlayer.nickname;
-				int victories = actualPlayer.victories;
-				int defeats = actualPlayer.defeats;
 				imageProfile = actualPlayer.imageProfile;
-				string usernameObtained = actualPlayer.username;
-				GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nicknameActualPlayer;
 				pathImageProfile = GetImageProfilePath(imageProfile);
 				image.Load(pathImageProfile);
 				textureImageProfile.CreateFromImage(image);
-				GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/ImageProfileTextureButton").TextureNormal = (textureImageProfile);
 				serverClient.UpdateServerData(nicknameActualPlayer);
+				GetParent().GetNode<TextureButton>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/ImageProfileTextureButton").TextureNormal = (textureImageProfile);
+				GetParent().GetNode<Label>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/NicknameLabel").Text = nicknameActualPlayer;
 				bool statusPlayer = validatePlayer();
-				if(statusPlayer == false)
+				if(statusPlayer.Equals(false))
 				{
 					GetParent().GetNode<Button>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/AddFriendButton").Disabled = true;
 					GetParent().GetNode<Button>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/FriendsRequestButton").Disabled = true;
@@ -124,7 +121,7 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			if(serverClient.friendsObtained !=null)
 			{
-				friendsOfActualPlayer = serverClient.friendsObtained;
+				List<string> friendsOfActualPlayer = serverClient.friendsObtained;
 				foreach(var friend in friendsOfActualPlayer)
 				{
 					GetParent().GetNode<ItemList>("MainMenu/BackgroundMenuNinePatchRect/MenuColorRect/FriendsItemList").AddItem(friend.ToString(), null, true);

@@ -14,17 +14,15 @@ namespace OpenCodeChems.Client.UserInterface
 	public class RegisterUser : Control
 	{
 		Network serverClient;
-		private Task<bool> emailNotRegisteredStatus = Task<bool>.FromResult(false);
-		private Task<bool> usernameNotRegisteredStatus = Task<bool>.FromResult(false);
-		private Task<bool> nicknameNotRegisteredStatus = Task<bool>.FromResult(false);
 		private bool validateRegister = false;
-		public static string name = "";
 		public static string email = "";
 		public static string username = "";
-		private string password = "";
-		private string confirmPassword = "";
+		private static string password = "";
+		private static string confirmPassword = "";
 		public static string hashPassword = "";
 		public static string nickname = "";
+		
+		public static string name = "";
 		public override void _Ready()
 		{
 			serverClient = GetNode<Network>("/root/Network") as Network;
@@ -51,14 +49,14 @@ namespace OpenCodeChems.Client.UserInterface
 			nickname = GetParent().GetNode<LineEdit>("RegisterUser/BackgroundRegisterNinePatchRect/NicknameLineEdit").Text;
 			bool noEmptyFields = ValidateEmptyFields();
 			bool verifyEmailPassword = ValidateFields();
-			if(noEmptyFields == true)
+			if(noEmptyFields)
 			{
-				if(verifyEmailPassword == true)
+				if(verifyEmailPassword)
 				{
 					serverClient.EmailRegister(email);
 					serverClient.UsernameRegister(username);
 					serverClient.NicknameRegister(nickname);
-					if(validateRegister == true)
+					if(validateRegister)
 					{
 						Encryption PasswordHasher = new Encryption();
 						hashPassword = PasswordHasher.ComputeSHA256Hash(password);
@@ -88,42 +86,42 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			Validation validator = new Validation();
 			bool isValid = true;
-			if(validator.ValidateEmail(email) == false)
+			if(validator.ValidateEmail(email).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_EMAIL");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 				isValid = false;
 			}
-			if(validator.ValidatePassword(password) == false)
+			if(validator.ValidatePassword(password).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_PASSWORD");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 				isValid = false;
 			}
-			if(validator.ValidateUsernameAndNickname(username) == false)
+			if(validator.ValidateUsernameAndNickname(username).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_USERNAME");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 				isValid = false;
 			}
-			if(validator.ValidateUsernameAndNickname(nickname) == false)
+			if(validator.ValidateUsernameAndNickname(nickname).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_NICKNAME");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 				isValid = false;
 			}
-			if(validator.ValidateName(name) == false)
+			if(validator.ValidateName(name).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_NAME");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
 				isValid = false;
 			}
-			if(confirmPassword.Equals(password) == false)
+			if(confirmPassword.Equals(password).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("VERIFY_CONFIRM_PASSWORD");
@@ -136,7 +134,6 @@ namespace OpenCodeChems.Client.UserInterface
 		
 		public void EmailNotRegistered()
 		{
-			emailNotRegisteredStatus = Task<bool>.FromResult(true);
 			validateRegister = true;
 		}
 		public void EmailIsRegistered()
@@ -144,11 +141,9 @@ namespace OpenCodeChems.Client.UserInterface
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("EMAIL_REGISTER");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-			emailNotRegisteredStatus = Task<bool>.FromResult(false);
 		}
 		public void UsernameNotRegistered()
 		{
-			usernameNotRegisteredStatus = Task<bool>.FromResult(true);
 			validateRegister = true;
 		}
 		public void UsernameIsRegistered()
@@ -157,11 +152,9 @@ namespace OpenCodeChems.Client.UserInterface
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = 
 			("USERNAME_REGISTER");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-			usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 		}
 		public void NicknameNotRegistered()
 		{
-			nicknameNotRegisteredStatus = Task<bool>.FromResult(true);
 			validateRegister = true;
 		}
 		public void NicknameIsRegistered()
@@ -169,7 +162,6 @@ namespace OpenCodeChems.Client.UserInterface
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").WindowTitle = ("WARNING");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").DialogText = ("NICKNAME_REGISTER");
 			GetParent().GetNode<AcceptDialog>("RegisterUser/RegisterUserDialog").Visible = true;
-			usernameNotRegisteredStatus = Task<bool>.FromResult(false);
 		}
 	}
 }

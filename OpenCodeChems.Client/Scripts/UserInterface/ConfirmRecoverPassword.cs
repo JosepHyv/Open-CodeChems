@@ -35,7 +35,7 @@ namespace OpenCodeChems.Client.UserInterface
         public void _on_AcceptTextureButton_pressed()
         {
             string codeProvided = GetParent().GetNode<LineEdit>("ConfirmRecoverPassword/ConfirmRecoverNinePatchRect/ConfirmRecoverLineEdit").Text;
-            if(validateCode(codeProvided) == true)
+            if(validateCode(codeProvided))
             {
                 if(codeProvided == codeRegistration.ToString())
                 {
@@ -66,7 +66,7 @@ namespace OpenCodeChems.Client.UserInterface
                 GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").Visible = true;
                 isValid = false;
             }
-            if(validator.ValidateCodeRegistration(code) == false)
+            if(validator.ValidateCodeRegistration(code).Equals(false))
             {
                 GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").WindowTitle = ("WARNING");
                 GetParent().GetNode<AcceptDialog>("ConfirmRecoverPassword/ConfirmRecoverNotificationAcceptDialog").DialogText = ("ONLY_NUMBERS");

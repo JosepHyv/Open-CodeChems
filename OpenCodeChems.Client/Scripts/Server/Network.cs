@@ -12,7 +12,6 @@ namespace OpenCodeChems.Client.Server
 
 		private int SERVER_ID = 1;
 		public int DEFAULT_PORT {get; set;} = 6007;
-		private readonly int MAX_PLAYERS = 200; 
 		public string ADDRESS {get; set;} = "localhost";
 		private readonly int PEER_ID = 1;
 		private readonly bool regitered = false;
@@ -20,7 +19,7 @@ namespace OpenCodeChems.Client.Server
 		public Profile profileByNicknameObtained = null;
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
-		public static string usernamePlayerAsInvitated = "";
+		public string usernamePlayerAsInvitated = "";
 		public static string currentRoom = "None";
 		public List<string> boardWords = new List<string>();
 		
@@ -641,7 +640,7 @@ namespace OpenCodeChems.Client.Server
 		
 		public void AddVictory(string nickname)
 		{
-			RpcId(PEER_ID,"AddVictoryRequest", nickname);;
+			RpcId(PEER_ID,"AddVictoryRequest", nickname);
 			
 		}
 		[Puppet]
@@ -673,10 +672,8 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void UpdateScreenClientGame(List<string> words)
 		{
-			GD.Print($"we got algo");
 			boardWords = words;
 			GetTree().ChangeScene("res://Scenes/KeyController.tscn");
-			GD.Print("Se cambio a la escena Keys Controller");
 			RpcId(PEER_ID, "BoardChange", currentRoom);
 			
 		}

@@ -91,7 +91,7 @@ namespace OpenCodeChems.Server.Network
 
 
 
-        private void _on_Button_pressed()
+        public void _on_Button_pressed()
         {
             string ipAddress = ipLineEdit.Text;
             string port = portLineEdit.Text;

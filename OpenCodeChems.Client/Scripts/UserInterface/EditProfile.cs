@@ -11,15 +11,15 @@ namespace OpenCodeChems.Client.UserInterface
 	public class EditProfile : Control
 	{
 		
-		public static string username = MainMenu.username;
+		private string username = MainMenu.username;
 		Network serverClient;
-		private readonly int imageProfile = MainMenu.imageProfile;
 		private bool validateOldPassword = false;
 		private string oldPassword = "";
 		private string newPassword = "";
 		private string confirmPassword = "";
 		private string newNickname = "";
 		private string pathImageProfile = "";
+		int imageProfile = MainMenu.imageProfile;
 		private readonly ImageTexture textureImageProfile = new ImageTexture(); 
 		private readonly Image image = new Image();
 		public override void _Ready()
@@ -49,16 +49,15 @@ namespace OpenCodeChems.Client.UserInterface
 			confirmPassword = GetParent().GetNode<LineEdit>("EditProfile/EditProfileNinePatchRect/ConfirmPasswordLineEdit").Text;
 			bool noEmptyFields = ValidateEmptyFields();
 			bool verifyPassword = ValidatePassword();
-			if(noEmptyFields == true)
+			if(noEmptyFields)
 			{
-				if(verifyPassword == true)
+				if(verifyPassword)
 				{
 					Encryption PasswordHasher = new Encryption();
 					string oldPasswordHashed = PasswordHasher.ComputeSHA256Hash(oldPassword);
 					string newPasswordHashed = PasswordHasher.ComputeSHA256Hash(newPassword);
-					string confirmPasswordHashed = PasswordHasher.ComputeSHA256Hash(confirmPassword);
 					serverClient.PasswordExist(username, oldPasswordHashed);
-					if(validateOldPassword == true)
+					if(validateOldPassword)
 					{
 						serverClient.EditPassword(username, newPasswordHashed);
 						CleanFields();
@@ -84,7 +83,7 @@ namespace OpenCodeChems.Client.UserInterface
 			bool verifyNickname = ValidateNickname();
 			if(!String.IsNullOrWhiteSpace(newNickname))
 			{
-				if(verifyNickname == true)
+				if(verifyNickname)
 				{
 					serverClient.EditNickname(username, newNickname);
 				}
@@ -107,14 +106,14 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			Validation validator = new Validation();
 			bool isValid = true;
-			if(validator.ValidatePassword(newPassword) == false)
+			if(validator.ValidatePassword(newPassword).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").DialogText = ("VERIFY_PASSWORD");
 				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").Visible = true;
 				isValid = false;
 			}
-			if(confirmPassword.Equals(newPassword) == false)
+			if(confirmPassword.Equals(newPassword).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").DialogText = ("VERIFY_CONFIRM_PASSWORD");
@@ -127,7 +126,7 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			Validation validator = new Validation();
 			bool isValid = true;
-			if(validator.ValidateUsernameAndNickname(newNickname) == false)
+			if(validator.ValidateUsernameAndNickname(newNickname).Equals(false))
 			{
 				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").WindowTitle = ("WARNING");
 				GetParent().GetNode<AcceptDialog>("EditProfile/EditProfileAcceptDialog").DialogText = ("VERIFY_NICKNAME");

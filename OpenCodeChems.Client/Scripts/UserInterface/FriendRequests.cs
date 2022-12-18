@@ -10,16 +10,13 @@ namespace OpenCodeChems.Client.UserInterface
 	public class FriendRequests : Control
 	{
 		Network serverClient;
-		private readonly int idProfileActualPlayer = MainMenu.idProfile;
-		public static int idProfilePlayerFound = 0;
+		private int idProfileActualPlayer = MainMenu.idProfile;
+		public int idProfilePlayerFound = 0;
 		private string nicknameFriendRequest = "";
-		private List<string> friendsRequestsOfActualPlayer;
 		private const bool STATUS_FRIEND_ACCEPT = true;
 		private const bool STATUS_FRIEND_DENY = false;
 		private bool statusRequest = false;
-		public static Profile actualPlayer;
-		private Task<bool> addFriendIsCorrect = Task<bool>.FromResult(false);
-		private Task<bool> denyFriendIsCorrect = Task<bool>.FromResult(false);
+		public Profile actualPlayer;
 		public override void _Ready()
 		{
 			serverClient = GetNode<Network>("/root/Network") as Network;
@@ -57,7 +54,7 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			if(serverClient.friendsRequestsObtained !=null)
 			{
-				friendsRequestsOfActualPlayer = serverClient.friendsRequestsObtained;
+				List<string> friendsRequestsOfActualPlayer = serverClient.friendsRequestsObtained;
 				foreach(var friend in friendsRequestsOfActualPlayer)
 				{
 					GetParent().GetNode<ItemList>("FriendRequests/FriendRequestsNinePatchRect/FriendRequestsItemList").AddItem(friend.ToString(), null, true);
@@ -76,13 +73,8 @@ namespace OpenCodeChems.Client.UserInterface
 			{
 				actualPlayer = serverClient.profileByNicknameObtained;
 				idProfilePlayerFound = actualPlayer.idProfile;
-				string nickname = actualPlayer.nickname;
-				int victories = actualPlayer.victories;
-				int defeats = actualPlayer.defeats;
-				int imageProfile = actualPlayer.imageProfile;
-				string usernameObtained = actualPlayer.username;
 			}
-			if(statusRequest == true)
+			if(statusRequest)
 			{
 				serverClient.AcceptFriend(idProfilePlayerFound, idProfileActualPlayer, STATUS_FRIEND_ACCEPT);
 				cleanFriendsRequest();
@@ -102,7 +94,9 @@ namespace OpenCodeChems.Client.UserInterface
 		}
 		public void AcceptFriendCorrect()
 		{
-			addFriendIsCorrect = Task<bool>.FromResult(true);
+			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText = ("ACCEPT_FRIEND_REQUEST");
+			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("NOTIFICATION");
+			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").Visible = true;
 		}
 		public void AcceptFriendNotCorrect()
 		{
@@ -110,11 +104,13 @@ namespace OpenCodeChems.Client.UserInterface
 			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =
 			("FRIEND_REQUEST_CANT_ACCEPTED");
 			GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
-			addFriendIsCorrect = Task<bool>.FromResult(false);
 		}
 		public void DenyFriendCorrect()
 		{
-			denyFriendIsCorrect = Task<bool>.FromResult(true);
+			
+			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText = ("DENY_FRIEND_REQUEST");
+			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").WindowTitle = ("NOTIFICATION");
+			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").Visible = true;
 		}
 		public void DenyFriendNotCorrect()
 		{
@@ -122,7 +118,6 @@ namespace OpenCodeChems.Client.UserInterface
 			GetParent().GetNode<AcceptDialog>("FriendRequests/FriendRequestAcceptDialog").DialogText =
 			("FRIEND_REQUEST_CANT_DENY");
 			GetParent().GetNode<AcceptDialog>("AddFriend/AddFriendAcceptDialog").Visible = true;
-			denyFriendIsCorrect = Task<bool>.FromResult(false);
 		}
 		public void cleanFriendsRequest()
 		{

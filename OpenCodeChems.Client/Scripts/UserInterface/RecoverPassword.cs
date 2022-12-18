@@ -13,7 +13,7 @@ namespace OpenCodeChems.Client.UserInterface
         {
             Validation validator = new Validation();
             email = GetParent().GetNode<LineEdit>("RecoverPassword/RecoverPasswordNinePatchRect/EmailLineEdit").Text;
-            if(validator.ValidateEmail(email) == false)
+            if(validator.ValidateEmail(email).Equals(false))
             {
                 GetParent().GetNode<AcceptDialog>("RecoverPassword/RecoverPasswordAcceptDialog").WindowTitle =("WARNING");
                 GetParent().GetNode<AcceptDialog>("RecoverPassword/RecoverPasswordAcceptDialog").DialogText = ("VERIFY_EMAIL");

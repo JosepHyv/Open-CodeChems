@@ -23,13 +23,13 @@ namespace OpenCodeChems.Client.UserInterface
 
 		}
 
-		private void _on_ChatTextureButton_pressed()
+		public void _on_ChatTextureButton_pressed()
 		{
 			string message = ChatLineEdit.Text;
 			ChatLineEdit.Clear();
 			ChatBlock.InsertTextAtCursor($"{message}\n");
 		}
-		private void _on_CodeNamesItemList_item_selected(int index)
+		public void _on_CodeNamesItemList_item_selected(int index)
 		{
 			
 			

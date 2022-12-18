@@ -10,11 +10,10 @@ namespace OpenCodeChems.Client.UserInterface
 	public class AddFriend : Control
 	{
 		Network serverClient;
-		private readonly string usernameActualPlayer = MainMenu.username;
+		private string usernameActualPlayer = MainMenu.username;
 		private string usernameFriend = "";
-		private readonly int idProfileActualPlayer = MainMenu.idProfile;
-		public int idProfilePlayerFound = 0;
-		public Profile playerFound;
+		private int idProfileActualPlayer = MainMenu.idProfile;
+		private int idProfilePlayerFound = 0;
 		private const bool STATUS_SEND_FRIEND_REQUEST = false;
 		public override void _Ready()
 		{
@@ -43,7 +42,7 @@ namespace OpenCodeChems.Client.UserInterface
 			{
 				if(usernameActualPlayer != usernameFriend)
 				{
-					if(validator.ValidateUsernameAndNickname(usernameFriend) == true)
+					if(validator.ValidateUsernameAndNickname(usernameFriend))
 					{
 						serverClient.UsernameRegister(usernameFriend);
 					}
@@ -97,13 +96,8 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			if(serverClient.profileByUsernameObtained != null)
 			{
-				playerFound = serverClient.profileByUsernameObtained;
+				Profile playerFound = serverClient.profileByUsernameObtained;
 				idProfilePlayerFound = playerFound.idProfile;
-				string nickname = playerFound.nickname;
-				int victories = playerFound.victories;
-				int defeats = playerFound.defeats;
-				int imageProfile = playerFound.imageProfile;
-				string usernameObtained = playerFound.username;
 			}
 			serverClient.FriendshipExist(idProfileActualPlayer, idProfilePlayerFound);
 		}

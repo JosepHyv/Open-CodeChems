@@ -11,16 +11,14 @@ namespace OpenCodeChems.Client.UserInterface
 	public class SeeFriend : Control
 	{
 		Network serverClient;
-		private readonly string nicknameFriend = MainMenu.nicknameFriend;
-		private string nicknameFriendFound = "";
+		private string nicknameFriend = "";
+		private string nicknameFriendFound = MainMenu.nicknameFriend;
 		private int victories = 0;
 		private int defeats = 0;
 		private int idProfileFound = 0;
-		private readonly int idProfileActualPlayer = MainMenu.idProfile;
-		private Profile profileObtained = null;
+		private int idProfileActualPlayer = MainMenu.idProfile;
 		private const bool STATUS_DELETE_FRIEND = true;
-		private Task<bool> deleteFriendIsCorrect = Task<bool>.FromResult(false);
-		public static string pathImageProfile = "";
+		public string pathImageProfile = "";
 		private readonly ImageTexture textureImageProfile = new ImageTexture(); 
 		private readonly Image image = new Image();
 		public override void _Ready()
@@ -54,13 +52,12 @@ namespace OpenCodeChems.Client.UserInterface
 		{
 			if(serverClient.profileByNicknameObtained != null)
 			{
-				profileObtained = serverClient.profileByNicknameObtained;
+				Profile profileObtained = serverClient.profileByNicknameObtained;
 				idProfileFound = profileObtained.idProfile;
 				nicknameFriendFound = profileObtained.nickname;
 				victories = profileObtained.victories;
 				defeats = profileObtained.defeats;
 				int imageProfile = profileObtained.imageProfile;
-				string username = profileObtained.username;
 				pathImageProfile = GetImageProfilePath(imageProfile);
 				image.Load(pathImageProfile);
 				textureImageProfile.CreateFromImage(image);
@@ -83,14 +80,12 @@ namespace OpenCodeChems.Client.UserInterface
 			GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").DialogText = ("DELETE_FRIEND_CORRECT");
 			GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").WindowTitle = ("NOTIFICATION");
 			GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").Visible = true;
-			deleteFriendIsCorrect = Task<bool>.FromResult(true);
 		}
 		public void DeleteFriendNotCorrect()
 		{
 			GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").DialogText = ("ERROR_DELETE_FRIEND");
 			GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").WindowTitle = ("ERROR");
 			GetParent().GetNode<AcceptDialog>("SeeFriend/DeleteFriendAcceptDialog").Visible = true;
-			deleteFriendIsCorrect = Task<bool>.FromResult(false);
 		}
 		public string GetImageProfilePath(int imageProfile)
 		{
