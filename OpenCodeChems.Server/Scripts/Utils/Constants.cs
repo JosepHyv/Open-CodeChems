@@ -3,7 +3,9 @@ namespace OpenCodeChems.Server.Standar
     public class Constants
     {
 
+        public const string EMPTY_ROL = "None";
         public const int NULL_ROL = -1;
+
         public const string RED_SPY_MASTER = "RedSpyMaster";
 
         public const string BLUE_SPY_MASTER = "BlueSpyMaster";
