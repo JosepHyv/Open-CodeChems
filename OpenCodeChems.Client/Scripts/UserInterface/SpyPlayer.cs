@@ -37,7 +37,7 @@ public class SpyPlayer : Control
 		List<string> listElements = serverClient.boardWords;
 		
 		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
-		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
+		for(int c = 0 ; c<listElements.Count && c < 25; c++)
 		{
 			itemNode.SetItemText(c, listElements[c]);					
 		}
@@ -75,7 +75,8 @@ public class SpyPlayer : Control
 		selectedCard.AddText(itemNode.GetItemText(SelectedIndex));
 			
 	}
-	
+
+
 	public void ClueChange(string clue)
 	{
 		var clueContainer = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/KeyNumberRichTextLabel");

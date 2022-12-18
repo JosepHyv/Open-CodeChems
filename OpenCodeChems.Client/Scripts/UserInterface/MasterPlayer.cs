@@ -22,7 +22,7 @@ public class MasterPlayer : Control
 		
 		List<string> listElements = serverClient.boardWords;
 		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
-		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
+		for(int c = 0 ; c<listElements.Count && c < 25; c++)
 		{
 			itemNode.SetItemText(c, listElements[c]);					
 		}

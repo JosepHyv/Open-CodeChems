@@ -90,4 +90,9 @@ ONLY_NUMBERS,Only numbers can be entered,Solo se pueden ingresar numeros
 EMAIL_SENT,Email sent,Email enviado
 ERROR_CODE,Incorrect code,Código incorrecto
 LEAVE_GAME,Leave Game, Dejar Juego
-
+ROOM_CODE_INVALID,The room code is invalid, El codigo de la sala es invalido
+TRYING_CONNECT_TO_SERVER, Tring connect to server, Intentando conectar al servidor
+SERVER_NOT_FOUND, Server not found, Servidor no encontrado
+CANT_BAN_USER, You cant ban to this user, No Puedes Banear a Este Usuario
+CANT_CHANGE_ROL, You cant change to this rol, No te puedes cambiar a este rol
+YOU_WANT_BAN, Do you want ban to, ¿Quieres banear a
