@@ -157,6 +157,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void RestorePasswordFail();
 		[Signal]
 		delegate void UpdateChatLog();
+		[Signal]
+		delegate void ChangeClue();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -720,6 +722,15 @@ namespace OpenCodeChems.Client.Server
 		public void UpdateChat(string message)
 		{	
 			EmitSignal(nameof(UpdateChatLog), message);
+		}
+		public void SendClue(string clue)
+		{
+			RpcId(PEER_ID, "ClueUpdate", clue, currentRoom);
+		}
+		[Puppet]
+		public void UpdateClue(string clue)
+		{
+			EmitSignal(nameof(ChangeClue), clue);
 		}
 
 

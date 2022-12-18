@@ -44,7 +44,7 @@ same_column_width = true
 fixed_column_width = 79
 icon_mode = 0
 
-[node name="EnviarTextureButton" type="TextureButton" parent="BackGroundNinePatchRect"]
+[node name="SendTextureButton" type="TextureButton" parent="BackGroundNinePatchRect"]
 margin_left = 824.0
 margin_top = 292.0
 margin_right = 954.0
@@ -53,7 +53,7 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 expand = true
 
-[node name="SendLabel" type="Label" parent="BackGroundNinePatchRect/EnviarTextureButton"]
+[node name="SendLabel" type="Label" parent="BackGroundNinePatchRect/SendTextureButton"]
 margin_left = 45.0
 margin_top = 16.0
 margin_right = 175.0
@@ -69,11 +69,12 @@ margin_bottom = 278.0
 custom_fonts/font = SubResource( 2 )
 text = "CODENAME_INSTRUCTION"
 
-[node name="SpinBox" type="SpinBox" parent="BackGroundNinePatchRect"]
+[node name="NumberSpinBox" type="SpinBox" parent="BackGroundNinePatchRect"]
 margin_left = 717.0
 margin_top = 306.0
 margin_right = 791.0
 margin_bottom = 330.0
+min_value = 1.0
 max_value = 9.0
 value = 1.0
 
@@ -91,4 +92,4 @@ margin_right = 706.0
 margin_bottom = 417.0
 window_title = "¡Alerta!"
 
-[connection signal="pressed" from="BackGroundNinePatchRect/EnviarTextureButton" to="." method="_on_EnviarTextureButton_pressed"]
+[connection signal="pressed" from="BackGroundNinePatchRect/SendTextureButton" to="." method="_on_SendTextureButton_pressed"]

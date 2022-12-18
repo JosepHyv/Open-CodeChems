@@ -56,7 +56,6 @@ public class CreateRoomController : Control
 	public void StartingGame()
 	{
 		GetTree().ChangeScene("res://Scenes/KeyController.tscn");
-		GD.Print("Se cambio a la escena Keys Controller");
 	}
 	public void FailToBan()
 	{

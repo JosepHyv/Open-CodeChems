@@ -25,6 +25,7 @@ public class SpyPlayer : Control
 		ChatBlock = GetParent().GetNode<TextEdit>("SpyPlayer/ChatTextEdit");
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("UpdateChatLog", this, nameof(AadToChat));
+		serverClient.Connect("ChangeClue", this, nameof(ClueChange));
 		
 		List<string> listElements = serverClient.boardWords;
 		
@@ -39,7 +40,7 @@ public class SpyPlayer : Control
 
 	private void _on_ChatTextureButton_pressed()
 	{
-		string message = ChatLineEdit.GetText();
+		string message = ChatLineEdit.Text;
 		if(!String.IsNullOrWhiteSpace(message))
 		{
 			ChatLineEdit.Clear();
@@ -61,6 +62,12 @@ public class SpyPlayer : Control
 		
 
 			
+	}
+	public void ClueChange(string clue)
+	{
+		var clueContainer = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/KeyNumberRichTextLabel");
+		clueContainer.Clear();
+		clueContainer.AddText(clue);
 	}
 
 

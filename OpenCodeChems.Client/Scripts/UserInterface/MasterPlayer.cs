@@ -7,8 +7,6 @@ using OpenCodeChems.Client.Server;
 
 public class MasterPlayer : Control
 {
-
-	private bool executed = false;
 	Network serverClient;
 	AcceptDialog masterDialog = null;
 	private int CARD_GAME_MAX_VALUE = 25;
@@ -17,21 +15,18 @@ public class MasterPlayer : Control
 	private Image assassinBlack = new Image();
 	private string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
 	private ImageTexture textureAssassin = new ImageTexture();
+	private bool wellDone;
 	public override void _Ready()
 	{
-		GD.Print("Me ejecuto primero");
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		
 		List<string> listElements = serverClient.boardWords;
-		while(!executed)
+		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{
-			var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
-			for(int c = 0 ; c<itemNode.GetItemCount(); c++)
-			{
-				itemNode.SetItemText(c, listElements[c]);					
-			}
-			executed = !executed;
+			itemNode.SetItemText(c, listElements[c]);					
 		}
+		
 
 
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
@@ -42,21 +37,28 @@ public class MasterPlayer : Control
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
 
-	private void _on_EnviarTextureButton_pressed()
+	private void _on_SendTextureButton_pressed()
 	{
 		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		var  pistaPalabra = GetParent().GetNode<LineEdit>("MasterPlayer/BackGroundNinePatchRect/WordLineEdit");
+		wellDone = true;
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
-		{
+		{	
 			var masterDialog = GetParent().GetNode<AcceptDialog>("MasterPlayer/MasterPlayerAcceptDialog");
-			if(pistaPalabra.GetText()== itemNode.GetItemText(c))
+			if(pistaPalabra.Text == itemNode.GetItemText(c))
 			{
-				masterDialog.SetTitle("WARNING");
-				masterDialog.SetText("REPEATED_WORD");
+				masterDialog.WindowTitle="WARNING";
+				masterDialog.DialogText="REPEATED_WORD";
 				masterDialog.Visible = true;
-			}
-			 
+				wellDone = false;
+			}				
 		}
+		string clue = GetParent().GetNode<LineEdit>("MasterPlayer/BackGroundNinePatchRect/WordLineEdit").Text + ": " + GetParent().GetNode<SpinBox>("MasterPlayer/BackGroundNinePatchRect/NumberSpinBox").Value.ToString();
+		if(wellDone)
+		{
+			serverClient.SendClue(clue);
+		}
+		
 		assassinBlack.Load(PATH_ASSASSIN_COLOR);
 		textureAssassin.CreateFromImage(assassinBlack);
 		itemNode.SetItemIcon(2, textureAssassin);
@@ -93,8 +95,8 @@ public class MasterPlayer : Control
 		}
 		catch(FileNotFoundException)
 		{
-      		masterDialog.SetTitle("ERROR");
-			masterDialog.SetText("FILE_NOT_FOUND");
+      		masterDialog.WindowTitle="ERROR";
+			masterDialog.DialogText="FILE_NOT_FOUND";
 			masterDialog.Visible = true;
     	}
 

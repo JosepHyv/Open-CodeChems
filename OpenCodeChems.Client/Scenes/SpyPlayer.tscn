@@ -54,7 +54,7 @@ margin_bottom = 547.0
 size_flags_horizontal = 5
 fit_content_height = true
 
-[node name="KeyNumberRichTextLabel2" type="RichTextLabel" parent="BackGroundNinePatchRect"]
+[node name="KeyNumberRichTextLabel" type="RichTextLabel" parent="BackGroundNinePatchRect"]
 margin_left = 246.0
 margin_top = 20.0
 margin_right = 440.0
@@ -70,7 +70,7 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="BackGroundNinePatchRect/TextureButton"]
+[node name="SendLabel" type="Label" parent="BackGroundNinePatchRect/TextureButton"]
 margin_left = 30.0
 margin_top = 14.0
 margin_right = 160.0

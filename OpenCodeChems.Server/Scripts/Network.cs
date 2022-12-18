@@ -1002,7 +1002,7 @@ namespace OpenCodeChems.Server.Network
         private void ChatUpdate(string message, string nameRoom)
         {
             int senderId = GetTree().GetRpcSenderId();
-            logBlock.InsertTextAtCursor($"the message es {message}\n");
+            logBlock.InsertTextAtCursor($"the message is {message}\n");
             string rol = rooms[nameRoom].GetRol(senderId);
             logBlock.InsertTextAtCursor($"the role of user is {rol}\n");
             List<int> players = new List<int>();
@@ -1020,6 +1020,29 @@ namespace OpenCodeChems.Server.Network
                 RpcId(players[c], "UpdateChat", message);
             } 
         }
+
+        [Master]
+        private void ClueUpdate(string clue, string nameRoom)
+        {
+            int senderId = GetTree().GetRpcSenderId();
+            logBlock.InsertTextAtCursor($"the vlue is {clue}\n");
+            string rol = rooms[nameRoom].GetRol(senderId);
+            logBlock.InsertTextAtCursor($"the role of user is {rol}\n");
+            List<int> players = new List<int>();
+            if(rol == Constants.RED_SPY_MASTER)
+            {
+                players = rooms[nameRoom].redPlayers;  
+            }
+            else
+            {
+                players = rooms[nameRoom].bluePlayers;
+            }
+            for(int c = 0; c < players.Count; c++)
+            {
+                RpcId(players[c], "UpdateClue", clue);
+            } 
+        }
+
     }
 
 }
