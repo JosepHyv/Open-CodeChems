@@ -18,7 +18,7 @@ font_data = ExtResource( 8 )
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 8 )
 
-[node name="MasterPlayer2" type="Control"]
+[node name="MasterPlayer" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
