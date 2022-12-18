@@ -79,9 +79,12 @@ namespace OpenCodeChems.Server.Network
                 playersData.Remove(peerId);
 
             }
-            playersData.Remove(peerId);
-            playersLanguage.Remove(peerId);
-            DisJoinPlayer(peerId);
+            else
+            {
+                playersData.Remove(peerId);
+                playersLanguage.Remove(peerId);
+                DisJoinPlayer(peerId);
+            }
         }
 
 
@@ -181,9 +184,22 @@ namespace OpenCodeChems.Server.Network
 
         private void DisJoinPlayer(int senderId)
         {
-            foreach (KeyValuePair<string, RoomGame> roomName in rooms)
+            
+            string nameRoom = "";
+            foreach (KeyValuePair<string, RoomGame> currentRoom in rooms)
             {
-                DeletePlayer(roomName.Key);
+                if(currentRoom.Value.Exist(senderId))
+                {
+                    nameRoom = currentRoom.Key;
+                }
+            }
+            if(nameRoom.Length > 0 )
+            {
+                rooms[nameRoom].RemovePlayer(senderId);
+                if(!rooms[nameRoom].GameCanContinue())
+                {
+                    EraseRoom(nameRoom);  
+                }
             }
         }
 
