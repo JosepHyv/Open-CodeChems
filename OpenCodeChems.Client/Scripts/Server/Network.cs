@@ -155,6 +155,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectRestorePassword();
 		[Signal]
 		delegate void RestorePasswordFail();
+		[Signal]
+		delegate void UpdateChatLog();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -675,11 +677,9 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void UpdateScreenClientGame(List<string> words)
 		{
-			GD.Print($"we got algo");
 			boardWords = words;
 			EmitSignal(nameof(LetsPlay));
 			RpcId(PEER_ID, "BoardChange", currentRoom);
-			
 		}
 
 		[Puppet]
@@ -708,8 +708,20 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void RestorePasswordNotSuccessful()
 		{
+			
 			EmitSignal(nameof(RestorePasswordFail));
 		}
+
+		public void ChatInGame(string message)
+		{
+			RpcId(PEER_ID, "ChatUpdate", message, currentRoom);
+		}
+		[Puppet]
+		public void UpdateChat(string message)
+		{	
+			EmitSignal(nameof(UpdateChatLog), message);
+		}
+
 
 	}
 }

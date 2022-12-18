@@ -14,7 +14,6 @@ public class KeyController : Control
 	
 	public override void _Ready()
 	{   
-		GD.Print("Ready de Keys Controller");
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("UpdateBoardSignal", this, nameof(ChangeScreen));
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
@@ -28,8 +27,6 @@ public class KeyController : Control
 
 	public void ChangeScreen(string rool, int number)
 	{
-		
-		GD.Print("coso plis funciona");
 		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
 			LoadKey(number);

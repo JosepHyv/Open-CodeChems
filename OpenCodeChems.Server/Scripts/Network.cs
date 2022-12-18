@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OpenCodeChems.Server.Utils;
 using OpenCodeChems.Server.Game;
+using OpenCodeChems.Server.Standar;
 
 namespace OpenCodeChems.Server.Network
 {
@@ -960,7 +961,6 @@ namespace OpenCodeChems.Server.Network
             if(roomOwners.ContainsKey(ownerId))
             {
                 rooms[nameRoom].gameStarted = true;
-                logBlock.InsertTextAtCursor($"cualquier cosa 8=============================================3\n");
                 if (rooms.ContainsKey(nameRoom))
                 {
                     List<int> playersInRoom = rooms[nameRoom].members;
@@ -997,6 +997,28 @@ namespace OpenCodeChems.Server.Network
                 RpcId(senderId, "RestirePasswordNotSuccessful");
                 logBlock.InsertTextAtCursor($"the password of user {senderId} hasn't been restore\n");
             }
+        }
+        [Master]
+        private void ChatUpdate(string message, string nameRoom)
+        {
+            int senderId = GetTree().GetRpcSenderId();
+            logBlock.InsertTextAtCursor($"the message es {message}\n");
+            string rol = rooms[nameRoom].GetRol(senderId);
+            logBlock.InsertTextAtCursor($"the role of user is {rol}\n");
+            List<int> players = new List<int>();
+            message = playersData[senderId] + ": " + message;
+            if(rol == Constants.RED_PLAYER)
+            {
+                players = rooms[nameRoom].redPlayers;  
+            }
+            else
+            {
+                players = rooms[nameRoom].bluePlayers;
+            }
+            for(int c = 0; c < players.Count; c++)
+            {
+                RpcId(players[c], "UpdateChat", message);
+            } 
         }
     }
 

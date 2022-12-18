@@ -28,7 +28,6 @@ public class MasterPlayer : Control
 			var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 			for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 			{
-				GD.Print(itemNode.GetItemText(c));
 				itemNode.SetItemText(c, listElements[c]);					
 			}
 			executed = !executed;

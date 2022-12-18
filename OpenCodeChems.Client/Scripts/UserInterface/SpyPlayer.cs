@@ -24,13 +24,13 @@ public class SpyPlayer : Control
 		ChatLineEdit = GetParent().GetNode<LineEdit>("SpyPlayer/ChatLineEdit");
 		ChatBlock = GetParent().GetNode<TextEdit>("SpyPlayer/ChatTextEdit");
 		serverClient = GetNode<Network>("/root/Network") as Network;
+		serverClient.Connect("UpdateChatLog", this, nameof(AadToChat));
 		
 		List<string> listElements = serverClient.boardWords;
 		
 		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{
-			GD.Print(itemNode.GetItemText(c));
 			itemNode.SetItemText(c, listElements[c]);					
 		}
 			
@@ -43,9 +43,12 @@ public class SpyPlayer : Control
 		if(!String.IsNullOrWhiteSpace(message))
 		{
 			ChatLineEdit.Clear();
-			ChatBlock.InsertTextAtCursor($"{message}\n");
+			serverClient.ChatInGame(message);
 		}
-		
+	}
+	public void AadToChat(string message)
+	{
+		ChatBlock.InsertTextAtCursor($"{message}\n");
 	}
 	private void _on_CodeNamesItemList_item_selected(int index)
 	{
