@@ -22,8 +22,6 @@ namespace OpenCodeChems.Client.UserInterface
 		public static string pathImageProfile = "";
 		private readonly ImageTexture textureImageProfile = new ImageTexture(); 
 		private readonly Image image = new Image();
-		LogIn login;
-
 
 		public override void _Ready()
 		{

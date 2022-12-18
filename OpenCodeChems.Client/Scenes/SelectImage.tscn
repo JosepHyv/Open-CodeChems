@@ -32,10 +32,10 @@ margin_bottom = 599.0
 texture = ExtResource( 2 )
 
 [node name="SelectImageLabel" type="Label" parent="SelectImageNinePatchRect"]
-margin_left = 290.0
-margin_top = 31.0
-margin_right = 706.0
-margin_bottom = 68.0
+margin_left = 170.0
+margin_top = 33.0
+margin_right = 586.0
+margin_bottom = 70.0
 custom_fonts/font = SubResource( 1 )
 text = "SELECT_IMAGE_INSTRUCTION"
 

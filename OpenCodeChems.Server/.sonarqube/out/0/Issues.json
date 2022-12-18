@@ -12,27 +12,6 @@
       },
       "results": [
         {
-          "ruleId": "CS0414",
-          "level": "warning",
-          "message": "El campo 'Network.PEERID' está asignado pero su valor nunca se usa",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 21,
-                  "endLine": 23,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 3
-          }
-        },
-        {
           "ruleId": "CS1591",
           "level": "warning",
           "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Assertion'",
@@ -3351,6 +3330,27 @@
           }
         },
         {
+          "ruleId": "CS1591",
+          "level": "warning",
+          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network._on_Button_pressed()'",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 21,
+                  "endLine": 94,
+                  "endColumn": 39
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 4
+          }
+        },
+        {
           "ruleId": "S125",
           "level": "warning",
           "message": "Remove this commented out code.",
@@ -3583,69 +3583,6 @@
           }
         },
         {
-          "ruleId": "S2386",
-          "level": "warning",
-          "message": "Use an immutable collection or reduce the accessibility of the public static field 'ROLES'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 32,
-                  "startColumn": 23,
-                  "endLine": 32,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2933",
-          "level": "warning",
-          "message": "Make 'MAX_PLAYERS' 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 21,
-                  "endLine": 22,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2933",
-          "level": "warning",
-          "message": "Make 'PEERID' 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 21,
-                  "endLine": 23,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S2933",
           "level": "warning",
           "message": "Make 'USER_MANAGEMENT' 'readonly'.",
@@ -3654,9 +3591,9 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 24,
+                  "startLine": 23,
                   "startColumn": 32,
-                  "endLine": 24,
+                  "endLine": 23,
                   "endColumn": 47
                 }
               }
@@ -3709,48 +3646,6 @@
           }
         },
         {
-          "ruleId": "S1144",
-          "level": "warning",
-          "message": "Remove the unused private field 'PEERID'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 9,
-                  "endLine": 23,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1144",
-          "level": "warning",
-          "message": "Remove the unused private method '_on_Button_pressed'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 96,
-                  "startColumn": 9,
-                  "endLine": 127,
-                  "endColumn": 10
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S1104",
           "level": "warning",
           "message": "Make this field 'private' and encapsulate it in a 'public' property.",
@@ -3763,48 +3658,6 @@
                   "startColumn": 20,
                   "endLine": 54,
                   "endColumn": 52
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1104",
-          "level": "warning",
-          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 32,
-                  "startColumn": 33,
-                  "endLine": 32,
-                  "endColumn": 99
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2223",
-          "level": "warning",
-          "message": "Change the visibility of 'ROLES' or make it 'const' or 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 32,
-                  "startColumn": 33,
-                  "endLine": 32,
-                  "endColumn": 38
                 }
               }
             }
@@ -3856,27 +3709,6 @@
           }
         },
         {
-          "ruleId": "S1075",
-          "level": "warning",
-          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/Test.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 65,
-                  "endLine": 23,
-                  "endColumn": 96
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S1104",
           "level": "warning",
           "message": "Make this field 'private' and encapsulate it in a 'public' property.",
@@ -3910,6 +3742,27 @@
                   "startColumn": 22,
                   "endLine": 76,
                   "endColumn": 98
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1075",
+          "level": "warning",
+          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/Test.cs",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 65,
+                  "endLine": 23,
+                  "endColumn": 96
                 }
               }
             }
@@ -4037,27 +3890,6 @@
           }
         },
         {
-          "ruleId": "S1075",
-          "level": "warning",
-          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/GDScriptWrapper.cs",
-                "region": {
-                  "startLine": 41,
-                  "startColumn": 39,
-                  "endLine": 41,
-                  "endColumn": 70
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S2245",
           "level": "warning",
           "message": "Make sure that using this pseudorandom number generator is safe here.",
@@ -4070,27 +3902,6 @@
                   "startColumn": 38,
                   "endLine": 100,
                   "endColumn": 50
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1186",
-          "level": "warning",
-          "message": "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/Test.cs",
-                "region": {
-                  "startLine": 30,
-                  "startColumn": 15,
-                  "endLine": 30,
-                  "endColumn": 20
                 }
               }
             }
@@ -4273,6 +4084,69 @@
           "locations": [
             {
               "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/GDScriptWrapper.cs",
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 39,
+                  "endLine": 41,
+                  "endColumn": 70
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1186",
+          "level": "warning",
+          "message": "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/Test.cs",
+                "region": {
+                  "startLine": 30,
+                  "startColumn": 15,
+                  "endLine": 30,
+                  "endColumn": 20
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2245",
+          "level": "warning",
+          "message": "Make sure that using this pseudorandom number generator is safe here.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 294,
+                  "startColumn": 34,
+                  "endLine": 294,
+                  "endColumn": 46
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1075",
+          "level": "warning",
+          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+          "locations": [
+            {
+              "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/Test.cs",
                 "region": {
                   "startLine": 35,
@@ -4317,9 +4191,9 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 141,
+                  "startLine": 139,
                   "startColumn": 25,
-                  "endLine": 141,
+                  "endLine": 139,
                   "endColumn": 27
                 }
               }
@@ -4330,9 +4204,9 @@
               "physicalLocation": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 139,
+                  "startLine": 137,
                   "startColumn": 21,
-                  "endLine": 139,
+                  "endLine": 137,
                   "endColumn": 23
                 }
               }
@@ -4343,18 +4217,31 @@
           }
         },
         {
-          "ruleId": "S2245",
+          "ruleId": "S1066",
           "level": "warning",
-          "message": "Make sure that using this pseudorandom number generator is safe here.",
+          "message": "Merge this if statement with the enclosing one.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 294,
-                  "startColumn": 34,
-                  "endLine": 294,
-                  "endColumn": 46
+                  "startLine": 205,
+                  "startColumn": 17,
+                  "endLine": 205,
+                  "endColumn": 19
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
+                "region": {
+                  "startLine": 203,
+                  "startColumn": 13,
+                  "endLine": 203,
+                  "endColumn": 15
                 }
               }
             }
@@ -4372,9 +4259,9 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 187,
+                  "startLine": 185,
                   "startColumn": 36,
-                  "endLine": 187,
+                  "endLine": 185,
                   "endColumn": 48
                 }
               }
@@ -4388,40 +4275,6 @@
           }
         },
         {
-          "ruleId": "S1066",
-          "level": "warning",
-          "message": "Merge this if statement with the enclosing one.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 207,
-                  "startColumn": 17,
-                  "endLine": 207,
-                  "endColumn": 19
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 205,
-                  "startColumn": 13,
-                  "endLine": 205,
-                  "endColumn": 15
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S107",
           "level": "warning",
           "message": "Method has 8 parameters, which is greater than the 7 authorized.",
@@ -4430,9 +4283,9 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 232,
+                  "startLine": 230,
                   "startColumn": 41,
-                  "endLine": 232,
+                  "endLine": 230,
                   "endColumn": 169
                 }
               }
@@ -4451,9 +4304,9 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 399,
+                  "startLine": 397,
                   "startColumn": 38,
-                  "endLine": 399,
+                  "endLine": 397,
                   "endColumn": 50
                 }
               }
@@ -4472,9 +4325,9 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 451,
+                  "startLine": 449,
                   "startColumn": 17,
-                  "endLine": 451,
+                  "endLine": 449,
                   "endColumn": 19
                 }
               }
@@ -4485,9 +4338,9 @@
               "physicalLocation": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 449,
+                  "startLine": 447,
                   "startColumn": 13,
-                  "endLine": 449,
+                  "endLine": 447,
                   "endColumn": 15
                 }
               }
@@ -4504,24 +4357,24 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 464,
-                  "startColumn": 17,
-                  "endLine": 464,
-                  "endColumn": 19
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
                   "startLine": 462,
-                  "startColumn": 13,
+                  "startColumn": 17,
                   "endLine": 462,
+                  "endColumn": 19
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
+                "region": {
+                  "startLine": 460,
+                  "startColumn": 13,
+                  "endLine": 460,
                   "endColumn": 15
                 }
               }
@@ -4540,9 +4393,9 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 887,
+                  "startLine": 885,
                   "startColumn": 17,
-                  "endLine": 887,
+                  "endLine": 885,
                   "endColumn": 19
                 }
               }
@@ -4553,94 +4406,10 @@
               "physicalLocation": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 885,
+                  "startLine": 883,
                   "startColumn": 13,
-                  "endLine": 885,
+                  "endLine": 883,
                   "endColumn": 15
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 497,
-                  "startColumn": 214,
-                  "endLine": 497,
-                  "endColumn": 221
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 498,
-                  "startColumn": 212,
-                  "endLine": 498,
-                  "endColumn": 219
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 532,
-                  "startColumn": 219,
-                  "endLine": 532,
-                  "endColumn": 224
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 593,
-                  "startColumn": 192,
-                  "endLine": 593,
-                  "endColumn": 199
                 }
               }
             }
@@ -4658,31 +4427,10 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 981,
+                  "startLine": 979,
                   "startColumn": 38,
-                  "endLine": 981,
+                  "endLine": 979,
                   "endColumn": 68
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 750,
-                  "startColumn": 185,
-                  "endLine": 750,
-                  "endColumn": 192
                 }
               }
             }
@@ -4693,20 +4441,6 @@
         }
       ],
       "rules": {
-        "CS0414": {
-          "id": "CS0414",
-          "shortDescription": "El campo está asignado pero nunca se usa su valor",
-          "defaultLevel": "warning",
-          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0414)",
-          "properties": {
-            "category": "Compiler",
-            "isEnabledByDefault": true,
-            "tags": [
-              "Compiler",
-              "Telemetry"
-            ]
-          }
-        },
         "CS1591": {
           "id": "CS1591",
           "shortDescription": "Falta el comentario XML para el tipo o miembro visible públicamente",
@@ -4796,23 +4530,6 @@
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1118",
           "properties": {
             "category": "Major Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "TestSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
-        "S1125": {
-          "id": "S1125",
-          "shortDescription": "Boolean literals should not be redundant",
-          "fullDescription": "Redundant Boolean literals should be removed from expressions to improve readability.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1125",
-          "properties": {
-            "category": "Minor Code Smell",
             "isEnabledByDefault": true,
             "tags": [
               "C#",
@@ -4924,22 +4641,6 @@
             ]
           }
         },
-        "S2223": {
-          "id": "S2223",
-          "shortDescription": "Non-constant static fields should not be visible",
-          "fullDescription": "A static field that is neither constant nor read-only is not thread-safe. Correctly accessing these fields from different threads needs synchronization with locks. Improper synchronization may lead to unexpected results, thus publicly visible static fields are best suited for storing non-changing data shared by many consumers. To enforce this intent, these fields should be marked readonly or converted to constants.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2223",
-          "properties": {
-            "category": "Critical Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
         "S2245": {
           "id": "S2245",
           "shortDescription": "Using pseudorandom number generators (PRNGs) is security-sensitive",
@@ -4948,22 +4649,6 @@
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2245",
           "properties": {
             "category": "Critical Security Hotspot",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
-        "S2386": {
-          "id": "S2386",
-          "shortDescription": "Mutable fields should not be \"public static\"",
-          "fullDescription": "public static mutable fields of classes which are accessed directly should be protected to the degree possible. This can be done by reducing the accessibility of the field or by changing the return type to an immutable type.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2386",
-          "properties": {
-            "category": "Minor Code Smell",
             "isEnabledByDefault": true,
             "tags": [
               "C#",

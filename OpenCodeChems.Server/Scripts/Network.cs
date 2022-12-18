@@ -90,7 +90,9 @@ namespace OpenCodeChems.Server.Network
 
 
 
-
+        /// <summary>
+        /// Button event to start the server
+        /// </summary>
         public void _on_Button_pressed()
         {
             string ipAddress = ipLineEdit.Text;

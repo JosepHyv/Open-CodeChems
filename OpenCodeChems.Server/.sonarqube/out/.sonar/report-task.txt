@@ -2,5 +2,5 @@ projectKey=OpenCodeChems.Server
 serverUrl=http://localhost:9000
 serverVersion=9.7.1.62043
 dashboardUrl=http://localhost:9000/dashboard?id=OpenCodeChems.Server
-ceTaskId=AYUeM4FwPmegXSNOIznG
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYUeM4FwPmegXSNOIznG
+ceTaskId=AYUmwYIg7PY42HF2wrM5
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYUmwYIg7PY42HF2wrM5
