@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using OpenCodeChems.Client.Server;
+using OpenCodeChems.Client.Resources;
 
 
 public class SpyPlayer : Control
@@ -17,6 +18,11 @@ public class SpyPlayer : Control
 	private ImageTexture textureCivil = new ImageTexture();
 	private string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
 	private ImageTexture textureAssassin = new ImageTexture();
+	private string PATH_RED_COLOR = "Scenes/Resources/Icons/squareRed.png";
+	private ImageTexture textureRed = new ImageTexture();
+	private string PATH_BLUE_COLOR = "Scenes/Resources/Icons/squareBlue.png";
+	private ImageTexture textureBlue = new ImageTexture();
+	private int SelectedIndex = Constants.NULL_INDEX;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -26,6 +32,7 @@ public class SpyPlayer : Control
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		serverClient.Connect("UpdateChatLog", this, nameof(AadToChat));
 		serverClient.Connect("ChangeClue", this, nameof(ClueChange));
+		serverClient.Connect("UpdateCard",this, nameof(ChangeColor));
 		
 		List<string> listElements = serverClient.boardWords;
 		
@@ -54,11 +61,11 @@ public class SpyPlayer : Control
 	private void _on_CodeNamesItemList_item_selected(int index)
 	{
 		
-		
+		SelectedIndex = index;
 		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		var  selectedCard = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/SelectedCardRichTextLabel");
 		selectedCard.Clear();
-		selectedCard.AddText(itemNode.GetItemText(index));
+		selectedCard.AddText(itemNode.GetItemText(SelectedIndex));
 		
 
 			
@@ -68,6 +75,62 @@ public class SpyPlayer : Control
 		var clueContainer = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/KeyNumberRichTextLabel");
 		clueContainer.Clear();
 		clueContainer.AddText(clue);
+	}
+
+	public void _on_SendWordTextureButton_pressed()
+	{
+		if(SelectedIndex != Constants.NULL_INDEX) 
+		{
+			serverClient.VerifySelectedCard(SelectedIndex);
+		}
+	}
+
+	public void ChangeColor(int color, int index)
+	{
+		if(color == 0)
+		{
+			ChangeBlue(index);
+		}
+		else if(color == 1)
+		{
+			ChangeRed(index);
+		}
+		else if(color == 2)
+		{
+			changeYellow(index);
+		}
+		else if(color == 3)
+		{
+			ChangeBlack(index);
+		}
+	}
+	public void ChangeBlack(int index)
+	{	
+		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+		assassinBlack.Load(PATH_ASSASSIN_COLOR);
+		textureAssassin.CreateFromImage(assassinBlack);
+		itemNode.SetItemIcon(index, textureAssassin);
+	}
+	public void ChangeBlue(int index)
+	{
+		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+		agentTypeBlue.Load(PATH_BLUE_COLOR);
+		textureBlue.CreateFromImage(agentTypeBlue);
+		itemNode.SetItemIcon(index, textureBlue);
+	}
+	public void ChangeRed(int index)
+	{
+		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+		agentTypeRed.Load(PATH_RED_COLOR);
+		textureRed.CreateFromImage(agentTypeRed);
+		itemNode.SetItemIcon(index, textureRed);
+	}
+	public void changeYellow(int index)
+	{
+		var  itemNode = GetParent().GetNode<ItemList>("SpyPlayer/BackGroundNinePatchRect/CodeNamesItemList");
+		civilYellow.Load(PATH_CIVIL_COLOR);
+		textureCivil.CreateFromImage(civilYellow);
+		itemNode.SetItemIcon(index, textureCivil);
 	}
 
 

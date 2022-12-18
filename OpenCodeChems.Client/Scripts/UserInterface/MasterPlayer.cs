@@ -59,10 +59,7 @@ public class MasterPlayer : Control
 			serverClient.SendClue(clue);
 		}
 		
-		assassinBlack.Load(PATH_ASSASSIN_COLOR);
-		textureAssassin.CreateFromImage(assassinBlack);
-		itemNode.SetItemIcon(2, textureAssassin);
-		itemNode.SetItemIcon(9, itemNode.GetItemIcon(0));
+		
 		
 	}
 	/// <summary>

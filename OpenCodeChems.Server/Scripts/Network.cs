@@ -1042,6 +1042,17 @@ namespace OpenCodeChems.Server.Network
                 RpcId(players[c], "UpdateClue", clue);
             } 
         }
+        [Master]
+        private void VerifyCard(int index, string nameRoom)
+        {
+            int color = rooms[nameRoom].GetColor(index);
+            List<int> players = rooms[nameRoom].members;
+            for(int c = 0; c < players.Count; c++)
+            {
+                RpcId(players[c], "VerifiedCard", color, index);
+            } 
+                       
+        }
 
     }
 

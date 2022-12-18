@@ -61,7 +61,7 @@ margin_right = 440.0
 margin_bottom = 60.0
 fit_content_height = true
 
-[node name="TextureButton" type="TextureButton" parent="BackGroundNinePatchRect"]
+[node name="SendWordTextureButton" type="TextureButton" parent="BackGroundNinePatchRect"]
 margin_left = 368.0
 margin_top = 493.0
 margin_right = 498.0
@@ -70,7 +70,7 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 expand = true
 
-[node name="SendLabel" type="Label" parent="BackGroundNinePatchRect/TextureButton"]
+[node name="SendLabel" type="Label" parent="BackGroundNinePatchRect/SendWordTextureButton"]
 margin_left = 30.0
 margin_top = 14.0
 margin_right = 160.0
@@ -113,4 +113,5 @@ custom_fonts/font = SubResource( 3 )
 text = "chat"
 
 [connection signal="item_selected" from="BackGroundNinePatchRect/CodeNamesItemList" to="." method="_on_CodeNamesItemList_item_selected"]
+[connection signal="pressed" from="BackGroundNinePatchRect/SendWordTextureButton" to="." method="_on_SendWordTextureButton_pressed"]
 [connection signal="pressed" from="ChatLineEdit/ChatTextureButton" to="." method="_on_ChatTextureButton_pressed"]
