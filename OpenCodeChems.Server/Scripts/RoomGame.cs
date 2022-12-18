@@ -259,6 +259,17 @@ namespace OpenCodeChems.Server.Game
             }
             return color;
         }
+
+        public bool GameCanContinue()
+        {
+            bool can = false;
+            if(gameStarted && redSpyMaster != Constants.NULL_ROL && blueSpyMaster != Constants.NULL_ROL 
+            && redPlayers.Count > 0  && bluePlayers.Count > 0 )
+            {
+                can = true;
+            } 
+            return can;
+        }
         
 
     }

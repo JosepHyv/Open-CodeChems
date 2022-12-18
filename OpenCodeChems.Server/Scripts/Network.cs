@@ -202,7 +202,14 @@ namespace OpenCodeChems.Server.Network
                 if (rooms[nameRoom].Exist(senderId))
                 {
                     rooms[nameRoom].RemovePlayer(senderId);
-                    UpdateClientsRoom(nameRoom);
+                    if(!rooms[nameRoom].gameStarted)
+                    {
+                        UpdateClientsRoom(nameRoom);
+                    }
+                    else if(!rooms[nameRoom].GameCanContinue())
+                    {
+                        EraseRoom(nameRoom);
+                    }
                 }
             }
         }

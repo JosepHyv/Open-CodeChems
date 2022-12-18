@@ -26,10 +26,12 @@ public class MasterPlayer : Control
 		{
 			itemNode.SetItemText(c, listElements[c]);					
 		}
-		
-
-
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
+	}
+
+	public void _on_LeaveGameTextureButton_pressed()
+	{
+		serverClient.LeftRoom();
 	}
 
 	public void ChangeToMainMenu()

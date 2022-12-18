@@ -41,11 +41,18 @@ public class SpyPlayer : Control
 		{
 			itemNode.SetItemText(c, listElements[c]);					
 		}
+
+		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 			
 
 	}
 
-	private void _on_ChatTextureButton_pressed()
+	public void ChangeToMainMenu()
+	{
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+	}
+
+	public void _on_ChatTextureButton_pressed()
 	{
 		string message = ChatLineEdit.Text;
 		if(!String.IsNullOrWhiteSpace(message))
@@ -58,7 +65,7 @@ public class SpyPlayer : Control
 	{
 		ChatBlock.InsertTextAtCursor($"{message}\n");
 	}
-	private void _on_CodeNamesItemList_item_selected(int index)
+	public void _on_CodeNamesItemList_item_selected(int index)
 	{
 		
 		SelectedIndex = index;
@@ -66,10 +73,9 @@ public class SpyPlayer : Control
 		var  selectedCard = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/SelectedCardRichTextLabel");
 		selectedCard.Clear();
 		selectedCard.AddText(itemNode.GetItemText(SelectedIndex));
-		
-
 			
 	}
+	
 	public void ClueChange(string clue)
 	{
 		var clueContainer = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/KeyNumberRichTextLabel");
@@ -133,5 +139,10 @@ public class SpyPlayer : Control
 		itemNode.SetItemIcon(index, textureCivil);
 	}
 
+
+	public void _on_LeaveGameTextureButton_pressed()
+	{
+		serverClient.LeftRoom();
+	}
 
 }
