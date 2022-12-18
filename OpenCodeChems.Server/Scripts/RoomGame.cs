@@ -23,7 +23,99 @@ namespace OpenCodeChems.Server.Game
         public List<int> bluePlayers {get; set;} = new List<int>();
 
         public List<int> boardNumbers {get;set;} = new List<int>();
-        public int SceneNumber = Constants.NULL_ROL;
+        
+        public int sceneNumber = Constants.NULL_ROL;
+
+        private int  blueTurn = Constants.NULL_ROL;
+
+        private int redTurn = Constants.NULL_ROL;
+
+        private string rolTurn = Constants.EMPTY_ROL;
+
+        private bool  spyMasterTurn = false;
+
+        public void StartTurn()
+        {
+            blueTurn = redTurn = 0;
+            spyMasterTurn = true;
+            if(sceneNumber == 1 || sceneNumber == 2)
+            {
+                rolTurn = Constants.RED_SPY_MASTER;
+            }
+            else
+            {
+                rolTurn = Constants.BLUE_SPY_MASTER;
+            }
+        }
+
+        public string GetTurnRol()
+        {
+            return rolTurn;
+        }
+        public int GetTurnId()
+        {
+            int turnId = Constants.NULL_ROL;
+            if(rolTurn == Constants.RED_SPY_MASTER)
+            {
+                turnId = redSpyMaster;
+            }
+            else if (rolTurn == Constants.RED_PLAYER)
+            {
+                int position = redTurn % redPlayers.Count;
+                turnId = redPlayers[position];
+            }
+            else if (rolTurn == Constants.BLUE_SPY_MASTER)
+            {
+                turnId = blueSpyMaster;
+            }
+            else
+            {
+                int position = blueTurn % bluePlayers.Count;
+                turnId = bluePlayers[position];
+            }
+
+            return turnId;
+        }
+
+        public void NextTurn()
+        {
+            if(spyMasterTurn)
+            {
+                spyMasterTurn = false;
+                
+                if(rolTurn == Constants.RED_SPY_MASTER)
+                {
+                    rolTurn = Constants.RED_PLAYER;
+                }
+                else 
+                {
+                    rolTurn = Constants.BLUE_PLAYER;
+                }
+            }
+            else if(rolTurn == Constants.RED_PLAYER)
+            {
+                int mod = redPlayers.Count;
+                redTurn = (redTurn + 1 ) % mod;
+            }
+            else if(rolTurn == Constants.BLUE_PLAYER)
+            {
+                int mod = bluePlayers.Count;
+                blueTurn = (blueTurn + 1 ) % mod;
+            }
+        }
+
+        public void ChangeTeamTurn()
+        {
+            spyMasterTurn = true;
+            if(rolTurn == Constants.RED_PLAYER)
+            {
+                rolTurn = Constants.BLUE_SPY_MASTER;
+            }
+            else
+            {
+                rolTurn = Constants.RED_SPY_MASTER;
+            }
+        }
 
         public string GetRol(int uniqueId)
         {
