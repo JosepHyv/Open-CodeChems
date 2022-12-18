@@ -133,4 +133,5 @@ text = "chat"
 
 [connection signal="item_selected" from="BackGroundNinePatchRect/CodeNamesItemList" to="." method="_on_CodeNamesItemList_item_selected"]
 [connection signal="pressed" from="BackGroundNinePatchRect/SendWordTextureButton" to="." method="_on_SendWordTextureButton_pressed"]
+[connection signal="pressed" from="BackGroundNinePatchRect/LeaveGameTextureButton" to="." method="_on_LeaveGameTextureButton_pressed"]
 [connection signal="pressed" from="ChatLineEdit/ChatTextureButton" to="." method="_on_ChatTextureButton_pressed"]

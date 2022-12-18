@@ -70,7 +70,7 @@ FRIEND_REQUEST_CANT_DENY,"Unable to reject the friend request at this time, try 
 ERROR_LOADING_FRIENDS,"There was an error loading your friends, try again later.","Hubo un error al cargar tus amigos, inténtalo más tarde"
 DELETE_FRIEND_CORRECT,Friend successfully deleted,Amigo eliminado correctamente
 ERROR_DELETE_FRIEND,"There was an error deleting this friend, try again later.","Hubo un error al eliminar este amigo, inténtalo más tarde"
-REPEATED_WORD,repeated word,palabra repetida
+INVALID_WORD,Invalid or repeated word,Palabra repetida o invalida
 SENDED_WORD,SEND,ENVIAR
 WORD_PLACEHOLDER,Word,Palabra
 CODENAME_INSTRUCTION,Send a keyword and a number to create the codename,Manda una palabra clave y un número para formar el código secreto

@@ -112,3 +112,4 @@ margin_bottom = 410.0
 window_title = "¡Alerta!"
 
 [connection signal="pressed" from="BackGroundNinePatchRect/SendTextureButton" to="." method="_on_SendTextureButton_pressed"]
+[connection signal="pressed" from="BackGroundNinePatchRect/LeaveGameTextureButton" to="." method="_on_LeaveGameTextureButton_pressed"]
