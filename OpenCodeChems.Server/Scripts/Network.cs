@@ -415,8 +415,9 @@ namespace OpenCodeChems.Server.Network
                 RoomGame hostRoom = new RoomGame();
                 hostRoom.AddPlayer(senderId);
                 Random randomClass = new Random();
-                hostRoom.SceneNumber = randomClass.Next(0, 4);
+                hostRoom.sceneNumber = randomClass.Next(0, 4);
                 hostRoom.GenerateBoard();
+                hostRoom.StartTurn();
                 rooms.Add(code, hostRoom);
                 roomOwners.Add(senderId, code);
                 logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
@@ -877,7 +878,7 @@ namespace OpenCodeChems.Server.Network
 
                 //rooms[nameRoom].gameStarted = true;
                 RpcId(senderId, "Start");
-                rooms[nameRom].SceneNumber = number;
+                rooms[nameRom].sceneNumber = number;
 
             }
         }
@@ -991,7 +992,7 @@ namespace OpenCodeChems.Server.Network
                     {
                         int senderId = playersInRoom[c];
                         logBlock.InsertTextAtCursor($"sending UpdateScreenClientGame  {senderId} with {playersInRoom.Count}\n");
-                        RpcId(senderId, "UpdateBoard", rooms[nameRoom].GetRol(senderId), rooms[nameRoom].SceneNumber);
+                        RpcId(senderId, "UpdateBoard", rooms[nameRoom].GetRol(senderId), rooms[nameRoom].sceneNumber);
                     }
                 }
             }
