@@ -12,16 +12,14 @@ namespace OpenCodeChems.Client.Server
 
 		private int SERVER_ID = 1;
 		public int DEFAULT_PORT {get; set;} = 6007;
-		private int MAX_PLAYERS = 200; 
 		public string ADDRESS {get; set;} = "localhost";
-		private int PEER_ID = 1;
-		private bool connected = false;
-		private bool regitered = false;
+		private readonly int PEER_ID = 1;
+		private readonly bool regitered = false;
 		public Profile profileByUsernameObtained = null;
 		public Profile profileByNicknameObtained = null;
 		public List<string> friendsObtained = null;
 		public List<string> friendsRequestsObtained = null;
-		public static string usernamePlayerAsInvitated = "";
+		public string usernamePlayerAsInvitated = "";
 		public static string currentRoom = "None";
 		public List<string> boardWords = new List<string>();
 		[Signal]
@@ -168,7 +166,7 @@ namespace OpenCodeChems.Client.Server
 		[Signal]
 		delegate void WriteTurnIndicator();
 		
-		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
+		private readonly NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
 		{
  
@@ -655,7 +653,7 @@ namespace OpenCodeChems.Client.Server
 		
 		public void AddVictory(string nickname)
 		{
-			RpcId(PEER_ID,"AddVictoryRequest", nickname);;
+			RpcId(PEER_ID,"AddVictoryRequest", nickname);
 			
 		}
 		[Puppet]

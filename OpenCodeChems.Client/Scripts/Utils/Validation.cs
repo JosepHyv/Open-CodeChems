@@ -13,8 +13,8 @@ namespace OpenCodeChems.Client.Resources
 		public bool ValidatePassword(string password)
 		{
 			bool isValid = true;
-			isValid = isValid & !String.IsNullOrWhiteSpace(password);
-			isValid = isValid & (password.Length >= 8);
+			isValid = isValid && !String.IsNullOrWhiteSpace(password);
+			isValid = isValid && (password.Length >= 8);
 
 			string especialCharacters = "*#+-_;.@%&/()=!?¿¡{}[]^<>";
 
@@ -44,15 +44,15 @@ namespace OpenCodeChems.Client.Resources
 				
 			}
 			
-			return isValid & probeNumber & probeEspecial & probeLowerCase & probeUpperCase;
+			return isValid && probeNumber && probeEspecial && probeLowerCase && probeUpperCase;
 		}
 
 		public bool ValidateEmail(string email)
 		{
 			bool isValid = true;
-			isValid = isValid & !String.IsNullOrWhiteSpace(email);
-			isValid = isValid & (email.Length <= 255);
-			isValid = isValid & EmailValidator.Validate(email);
+			isValid = !String.IsNullOrWhiteSpace(email);
+			isValid = isValid && (email.Length <= 255);
+			isValid = isValid && EmailValidator.Validate(email);
 			return isValid;
 		}
 		
@@ -80,7 +80,6 @@ namespace OpenCodeChems.Client.Resources
 
 				int number;
 				var result = Int32.TryParse(part, out number);
-				//GD.Print($"result = {result} part = {part} part.trim {part.Trim().Length} number = {number}\n");
 				if (!result || number > 255 || number < 0)
 				{
 					status =  false;
@@ -112,13 +111,13 @@ namespace OpenCodeChems.Client.Resources
 		public bool ValidateUsernameAndNickname(string username)
 		{
 			bool isValid = true;
-			isValid = isValid & (username.Length <= 40);
+			isValid = username.Length <= 40;
 			return isValid;
 		}
 		public bool ValidateName(string name)
 		{
 			bool isValid = true;
-			isValid = isValid & (name.Length <= 50);
+			isValid = name.Length <= 50;
 			string especialCharacters = "*#+-_;.@%&/()=!?¿¡{}[]^<>";
 			foreach(char character in name)
 			{

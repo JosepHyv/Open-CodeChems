@@ -1,6 +1,6 @@
 namespace OpenCodeChems.Client.Resources
 {
-    public class Constants
+    public static class Constants
     {
         public const int NULL_INDEX = -1;
         public const string RED_SPY_MASTER = "RedSpyMaster";

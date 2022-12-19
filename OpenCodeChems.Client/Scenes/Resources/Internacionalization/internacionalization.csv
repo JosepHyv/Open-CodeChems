@@ -105,3 +105,7 @@ WRONG_ANSWER, Wrong answer, Respuesta equivocada
 YOU_WON, You won!, ¡Has ganado!
 YOU_LOSE, You loose dont get anxious, Perdiste no tengas amsiedad
 TURN_OF, Turn of , Turno de 
+SELECT_IMAGE_INSTRUCTION,Click on an image to make it your new profile picture,Haz clic en una imagen para que sea tu nueva foto de perfil
+ACCEPT_FRIEND_REQUEST,Friend request accepted,Solicitud de amistad aceptada
+DENY_FRIEND_REQUEST,Friend request deny,Solicitud de amistad rechazada
+

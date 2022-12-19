@@ -5,20 +5,24 @@ using OpenCodeChems.Client.Server;
 using OpenCodeChems.Client.Resources;
 
 
-public class SpyPlayer : Control
+namespace OpenCodeChems.Client.UserInterface
 {
+
+  public class SpyPlayer : Control
+  {
+  
 	private LineEdit ChatLineEdit; 
 	private RichTextLabel turnIndicator;
 	private TextEdit ChatBlock;
 	Network serverClient;
-	private Image civilYellow = new Image();
-	private Image agentTypeRed = new Image();
-	private Image agentTypeBlue = new Image();
-	private Image assassinBlack = new Image();
-	private string PATH_CIVIL_COLOR = "Scenes/Resources/Icons/square-64.png";
-	private ImageTexture textureCivil = new ImageTexture();
-	private string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
-	private ImageTexture textureAssassin = new ImageTexture();
+  private readonly Image civilYellow = new Image();
+  private readonly Image agentTypeRed = new Image();
+  private readonly Image agentTypeBlue = new Image();
+  private readonly Image assassinBlack = new Image();
+  private readonly string PATH_CIVIL_COLOR = "Scenes/Resources/Icons/square-64.png";
+  private readonly ImageTexture textureCivil = new ImageTexture();
+  private readonly string PATH_ASSASSIN_COLOR = "Scenes/Resources/Icons/ssquareBlack.png";
+  private readonly ImageTexture textureAssassin = new ImageTexture();
 	private string PATH_RED_COLOR = "Scenes/Resources/Icons/squareRed.png";
 	private ImageTexture textureRed = new ImageTexture();
 	private string PATH_BLUE_COLOR = "Scenes/Resources/Icons/squareBlue.png";
@@ -198,5 +202,5 @@ public class SpyPlayer : Control
 	{
 		turnIndicator.Text = turnName;
 	}
-
+ }
 }
