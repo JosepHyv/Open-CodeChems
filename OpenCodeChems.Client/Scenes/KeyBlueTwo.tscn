@@ -15,7 +15,7 @@ font_data = ExtResource( 8 )
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 18
 font_data = ExtResource( 8 )
 
@@ -109,14 +109,13 @@ margin_bottom = 39.0
 custom_fonts/font = SubResource( 1 )
 text = "LEAVE_GAME"
 
-[node name="TurnRichTextLabel" type="RichTextLabel" parent="BackGroundNinePatchRect"]
+[node name="TurnRichTextLabel" type="Label" parent="BackGroundNinePatchRect"]
 margin_left = 580.0
 margin_top = 15.0
 margin_right = 774.0
 margin_bottom = 55.0
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "TURN_OF"
-fit_content_height = true
 
 [node name="TurnMessageRichTextLabel" type="RichTextLabel" parent="BackGroundNinePatchRect"]
 margin_left = 788.0
