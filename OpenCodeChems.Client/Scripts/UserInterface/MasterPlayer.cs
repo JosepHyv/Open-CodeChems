@@ -9,6 +9,7 @@ public class MasterPlayer : Control
 {
 	Network serverClient;
 	private AcceptDialog masterDialog;
+	private RichTextLabel turnIndicator;
 	private ItemList itemNode;
 	private int CARD_GAME_MAX_VALUE = 25;
 	private Image agentTypeRed = new Image();
@@ -22,6 +23,7 @@ public class MasterPlayer : Control
 		serverClient = GetNode<Network>("/root/Network") as Network;
 		masterDialog = GetParent().GetNode<AcceptDialog>("MasterPlayer/MasterPlayerAcceptDialog");
 		itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");	
+		turnIndicator = GetParent().GetNode<RichTextLabel>("MasterPlayer/BackGroundNinePatchRect/TurnMessageRichTextLabel");
 		List<string> listElements = serverClient.boardWords;
 		for(int c = 0 ; c<listElements.Count && c < 25; c++)
 		{
@@ -29,6 +31,7 @@ public class MasterPlayer : Control
 		}
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 		serverClient.Connect("FinishGame", this, nameof(FinishMessage));
+		serverClient.Connect("WriteTurnIndicator", this, nameof(UpdateTurnIndicator));
 	}
 
 	public void FinishMessage(bool status)
@@ -77,6 +80,11 @@ public class MasterPlayer : Control
 		
 		
 		
+	}
+
+	private void UpdateTurnIndicator(string turnName)
+	{
+		turnIndicator.Text = turnName;
 	}
 	
 }

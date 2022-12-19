@@ -8,6 +8,7 @@ using OpenCodeChems.Client.Resources;
 public class SpyPlayer : Control
 {
 	private LineEdit ChatLineEdit; 
+	private RichTextLabel turnIndicator;
 	private TextEdit ChatBlock;
 	Network serverClient;
 	private Image civilYellow = new Image();
@@ -41,6 +42,7 @@ public class SpyPlayer : Control
 		turnDialog.GetCancel().Connect("pressed", this, nameof(TurnCancelDialog));
 		serverClient.Connect("FinishGame", this, nameof(FinishMessage));
 		notification = GetParent().GetNode<AcceptDialog>("SpyPlayer/AnswareAcceptDialog");
+		turnIndicator = GetParent().GetNode<RichTextLabel>("SpyPlayer/BackGroundNinePatchRect/TurnRichTextLabel");
 		
 		List<string> listElements = serverClient.boardWords;
 		
@@ -51,6 +53,7 @@ public class SpyPlayer : Control
 		}
 
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
+		serverClient.Connect("WriteTurnIndicator", this, nameof(UpdateTurnIndicator));
 			
 
 	}
@@ -137,12 +140,12 @@ public class SpyPlayer : Control
 	{
 		if(guessAnswer)
 		{
-			turnDialog.SetText("RIGHT_ANSWER");
+			turnDialog.DialogText = "RIGHT_ANSWER";
 			turnDialog.Visible = true;
 		}
 		else
 		{
-			notification.SetText("WRONG_ANSWER");
+			notification.DialogText = "WRONG_ANSWER";
 			notification.Visible = true;
 			serverClient.skipTurn();
 		}
@@ -190,6 +193,10 @@ public class SpyPlayer : Control
 	{
 		serverClient.LeftRoom();
 		ChangeToMainMenu();
+	}
+	private void UpdateTurnIndicator(string turnName)
+	{
+		turnIndicator.Text = turnName;
 	}
 
 }

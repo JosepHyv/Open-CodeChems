@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/UserInterface/SpyPlayer.cs" type="Script" id=2]
@@ -9,6 +9,14 @@
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/square-64.png-3dc0a3093351be644ac426b182f49d15.stex"
+
+[sub_resource type="DynamicFont" id=5]
+size = 18
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 18
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 5 )
@@ -55,6 +63,7 @@ margin_top = 507.0
 margin_right = 343.0
 margin_bottom = 547.0
 size_flags_horizontal = 5
+custom_fonts/normal_font = SubResource( 5 )
 fit_content_height = true
 
 [node name="KeyNumberRichTextLabel" type="RichTextLabel" parent="BackGroundNinePatchRect"]
@@ -62,6 +71,15 @@ margin_left = 246.0
 margin_top = 20.0
 margin_right = 440.0
 margin_bottom = 60.0
+custom_fonts/normal_font = SubResource( 6 )
+fit_content_height = true
+
+[node name="TurnRichTextLabel" type="RichTextLabel" parent="BackGroundNinePatchRect"]
+margin_left = 804.0
+margin_top = 17.0
+margin_right = 998.0
+margin_bottom = 57.0
+custom_fonts/normal_font = SubResource( 6 )
 fit_content_height = true
 
 [node name="SendWordTextureButton" type="TextureButton" parent="BackGroundNinePatchRect"]
@@ -96,6 +114,15 @@ margin_right = 145.0
 margin_bottom = 39.0
 custom_fonts/font = SubResource( 4 )
 text = "LEAVE_GAME"
+
+[node name="TurnMessageRichTextLabel" type="RichTextLabel" parent="BackGroundNinePatchRect"]
+margin_left = 546.0
+margin_top = 14.0
+margin_right = 740.0
+margin_bottom = 54.0
+custom_fonts/normal_font = SubResource( 6 )
+text = "TURN_OF"
+fit_content_height = true
 
 [node name="ChatTextEdit" type="TextEdit" parent="."]
 margin_left = 665.0

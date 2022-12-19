@@ -918,6 +918,8 @@ namespace OpenCodeChems.Server.Network
                 if (rooms[nameRoom].CanStart())
                 {
                     RpcId(senderId, "Start");
+                    TurnIndicator(nameRoom);
+
                 }
                 else
                 {
@@ -1166,6 +1168,7 @@ namespace OpenCodeChems.Server.Network
             {
                 rooms[nameRoom].NextTurn();
                 logBlock.InsertTextAtCursor($"new turn for {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
+                TurnIndicator(nameRoom);
             }
         }
         [Master]
@@ -1175,8 +1178,22 @@ namespace OpenCodeChems.Server.Network
             {
                 rooms[nameRoom].ChangeTeamTurn();
                 logBlock.InsertTextAtCursor($"changing team, and new turn for {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
-
+                TurnIndicator(nameRoom);
             }
+        }
+        private void TurnIndicator(string nameRoom)
+        {
+            List<int> players = rooms[nameRoom].members;
+            int idTurn = rooms[nameRoom].GetTurnId();
+            if(playersData.ContainsKey(idTurn))
+            {
+                string namePlayer = playersData[idTurn];
+                for(int c = 0; c < players.Count; c++)
+                {
+                    RpcId(players[c], "UpdateTurnIndicator", namePlayer);
+                } 
+            }
+
         }
 
     }

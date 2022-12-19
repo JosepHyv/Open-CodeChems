@@ -165,6 +165,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void AnswerValue();
 		[Signal]
 		delegate void FinishGame();
+		[Signal]
+		delegate void WriteTurnIndicator();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -764,6 +766,11 @@ namespace OpenCodeChems.Client.Server
 		public void GameOver(bool status)
 		{
 			EmitSignal(nameof(FinishGame), status);
+		}
+		[Puppet]
+		public void UpdateTurnIndicator(string turnName)
+		{
+			EmitSignal(nameof(WriteTurnIndicator), turnName);
 		}
 
 		
