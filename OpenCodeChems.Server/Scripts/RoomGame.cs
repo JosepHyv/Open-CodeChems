@@ -13,6 +13,10 @@ namespace OpenCodeChems.Server.Game
     public class RoomGame
     {
         /// <summary>
+        /// Status of board
+        /// </summary>
+        public bool [] selectedCards = new bool[25];
+        /// <summary>
         /// Status of a game
         /// </summary>
         public bool gameStarted = false;
@@ -45,13 +49,119 @@ namespace OpenCodeChems.Server.Game
         /// </summary>
         public List<int> bluePlayers {get; set;} = new List<int>();
         /// <summary>
-        /// 
+        /// number of board
         /// </summary>
         public List<int> boardNumbers {get;set;} = new List<int>();
         /// <summary>
         /// Contains the scene to be displayed
         /// </summary>
-        public int SceneNumber = Constants.NULL_ROL;
+        public int sceneNumber = Constants.NULL_ROL;
+
+        private int  blueTurn = Constants.NULL_ROL;
+
+        private int redTurn = Constants.NULL_ROL;
+
+        private string rolTurn = Constants.EMPTY_ROL;
+
+        private bool  spyMasterTurn = false;
+
+        private bool blackCard = false;
+
+        private int maxBlueCards = Constants.EMPTY_COUNTER;
+
+        private int maxRedCards = Constants.EMPTY_COUNTER;
+        private int blueCards = Constants.EMPTY_COUNTER;
+
+        private int redCards = Constants.EMPTY_COUNTER;
+
+        private string teamWon = Constants.TEAM_WON;
+        public void StartTurn()
+        {
+            blueTurn = redTurn = 0;
+            spyMasterTurn = true;
+            if(sceneNumber == 1 || sceneNumber == 2)
+            {
+                rolTurn = Constants.RED_SPY_MASTER;
+                maxRedCards = 9;
+                maxBlueCards = 8;
+            }
+            else
+            {
+                maxRedCards = 8;
+                maxBlueCards = 9;
+                rolTurn = Constants.BLUE_SPY_MASTER;
+            }
+        }
+
+        public string GetTurnRol()
+        {
+            return rolTurn;
+        }
+        public int GetTurnId()
+        {
+            int turnId = Constants.NULL_ROL;
+            if(rolTurn == Constants.RED_SPY_MASTER)
+            {
+                turnId = redSpyMaster;
+            }
+            else if (rolTurn == Constants.RED_PLAYER)
+            {
+                int position = redTurn % redPlayers.Count;
+                turnId = redPlayers[position];
+            }
+            else if (rolTurn == Constants.BLUE_SPY_MASTER)
+            {
+                turnId = blueSpyMaster;
+            }
+            else
+            {
+                int position = blueTurn % bluePlayers.Count;
+                turnId = bluePlayers[position];
+            }
+
+            return turnId;
+        }
+
+        public void NextTurn()
+        {
+            if(spyMasterTurn)
+            {
+                spyMasterTurn = false;
+                
+                if(rolTurn == Constants.RED_SPY_MASTER)
+                {
+                    rolTurn = Constants.RED_PLAYER;
+                }
+                else 
+                {
+                    rolTurn = Constants.BLUE_PLAYER;
+                }
+            }
+            else if(rolTurn == Constants.RED_PLAYER)
+            {
+                int mod = redPlayers.Count;
+                redTurn = (redTurn + 1 ) % mod;
+            }
+            else if(rolTurn == Constants.BLUE_PLAYER)
+            {
+                int mod = bluePlayers.Count;
+                blueTurn = (blueTurn + 1 ) % mod;
+            }
+        }
+
+        public void ChangeTeamTurn()
+        {
+            spyMasterTurn = true;
+            if(rolTurn == Constants.RED_PLAYER)
+            {
+                rolTurn = Constants.BLUE_SPY_MASTER;
+            }
+            else
+            {
+                rolTurn = Constants.RED_SPY_MASTER;
+            }
+        }
+
 
         /// <summary>
         /// Gets the role to which a player belongs in a room.
@@ -284,7 +394,8 @@ namespace OpenCodeChems.Server.Game
             blueSpyReady = (bluePlayers.Count > 0);
 
             bool status = redMasterReady && blueMasterReady && redSpyReady && blueSpyReady;
-            return status;
+            //return status;
+            return true;
         }
         /// <summary>
         /// Randomly selects a board
@@ -301,6 +412,138 @@ namespace OpenCodeChems.Server.Game
             boardNumbers = fullList.OrderBy(_ => randomClass.Next()).ToList();
 
         }
+
+        public int GetColor(int index)
+        {
+            int color = 0;
+            if(sceneNumber == 0)
+            {
+                color = Constants.KeyBlueOne[index];
+            }
+            else if(sceneNumber == 1)
+            {
+                color = Constants.KeyRedOne[index];
+            }
+            else if(sceneNumber == 2)
+            {
+                color = Constants.KeyRedTwo[index];
+            }
+            else if(sceneNumber == 3)
+            {
+                color = Constants.KeyBlueTwo[index];
+            }
+            return color;
+        }
+
+        public bool GameCanContinue()
+        {
+            bool can = false;
+            if(gameStarted && redSpyMaster != Constants.NULL_ROL && blueSpyMaster != Constants.NULL_ROL 
+            && redPlayers.Count > 0  && bluePlayers.Count > 0 )
+            {
+                can = true;
+            } 
+            return can;
+        }
+        
+        public void CountCard(int color)
+        {
+            if(color == Constants.BLUE)
+            {
+                blueCards++;
+            }
+            else if (color == Constants.RED)
+            {
+                redCards++;
+            }
+
+            if(blueCards >= maxBlueCards)
+            {
+                teamWon = Constants.BLUE_WON;
+            }
+            else if(redCards >= maxRedCards)
+            {
+                teamWon = Constants.RED_WON;
+            }
+        }
+
+        public bool GameEnd()
+        {
+            bool status = false;
+            status = blackCard || blueCards >= maxBlueCards || redCards >= maxRedCards;
+            return status;
+        }
+
+        public void SelectedBlack()
+        {
+            blackCard = true;
+            if(GetTurnRol() == Constants.BLUE_PLAYER || GetTurnRol() == Constants.BLUE_SPY_MASTER )
+            {
+                teamWon = Constants.RED_WON;
+            }
+            else
+            {
+                teamWon = Constants.BLUE_WON;
+            }
+        }
+
+        public string WhoWon()
+        {
+            return teamWon;
+        }
+
+        public List<int> GetListWinners()
+        {
+            List<int> answare = new List<int>();
+            if(teamWon != Constants.TEAM_WON)
+            {
+                if(teamWon == Constants.BLUE_WON)
+                {
+                    answare.Add(blueSpyMaster);
+                    foreach(int id in bluePlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+                else
+                {
+                    answare.Add(redSpyMaster);
+                    foreach(int id in redPlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+            }
+            return answare;
+        }
+
+        public List<int> GetListLosers()
+        {
+            List<int> answare = new List<int>();
+            if(teamWon != Constants.TEAM_WON)
+            {
+                if(teamWon == Constants.BLUE_WON)
+                {
+                    answare.Add(redSpyMaster);
+                    foreach(int id in redPlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+                else
+                {
+                    answare.Add(blueSpyMaster);
+                    foreach(int id in bluePlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+            }
+            return answare;
+        }
+
+
+
 
     }
 

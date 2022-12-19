@@ -653,7 +653,7 @@ namespace OpenCodeChems.BussinesLogic
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile where Profile.nickname == nickname select Profile).First();
-                    profiles.victories = profiles.victories ++;
+                    profiles.victories = profiles.victories + 1;
                     context.SaveChanges();
                     status = true;
                 }
@@ -684,7 +684,7 @@ namespace OpenCodeChems.BussinesLogic
                 using (OpenCodeChemsContext context = new OpenCodeChemsContext())
                 {   
                     var profiles = (from Profile in context.Profile where Profile.nickname == nickname select Profile).First();
-                    profiles.defeats = profiles.defeats ++;
+                    profiles.defeats = profiles.defeats + 1;
                     context.SaveChanges();
                     status = true;
                 }

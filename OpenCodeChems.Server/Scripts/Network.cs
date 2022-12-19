@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OpenCodeChems.Server.Utils;
 using OpenCodeChems.Server.Game;
+using OpenCodeChems.Server.Standar;
 
 namespace OpenCodeChems.Server.Network
 {
@@ -78,13 +79,15 @@ namespace OpenCodeChems.Server.Network
                 string roomName = roomOwners[peerId];
                 logBlock.InsertTextAtCursor($"{peerId} left the room {roomName}\n");
                 EraseRoom(roomName);
-                roomOwners.Remove(peerId);
                 playersData.Remove(peerId);
 
             }
-            playersData.Remove(peerId);
-            playersLanguage.Remove(peerId);
-            DisJoinPlayer(peerId);
+            else
+            {
+                playersData.Remove(peerId);
+                playersLanguage.Remove(peerId);
+                DisJoinPlayer(peerId);
+            }
         }
 
 
@@ -162,8 +165,39 @@ namespace OpenCodeChems.Server.Network
                     logBlock.InsertTextAtCursor($"player {senderId} exiting room {code}\n");
                     RpcId(senderId, "ExitRoom");
                 }
-                rooms.Remove(code);
+
+                DeleteRoom(code);
+               
             }
+        }
+
+         private void DeleteRoom(string nameRoom)
+        {
+            if(rooms.ContainsKey(nameRoom))
+            {
+                rooms.Remove(nameRoom);
+                int idOwner = GetOwnerByRoomName(nameRoom);
+                if(idOwner != Constants.NULL_ROL && roomOwners.ContainsKey(idOwner))
+                {
+                    roomOwners.Remove(idOwner);
+                }
+            }
+        }
+
+        public int GetOwnerByRoomName(string roomName)
+        {
+            int id = Constants.NULL_ROL;
+            if(roomOwners.Count > 0)
+            {
+                foreach(KeyValuePair<int, string> owner in roomOwners)
+                {
+                    if(owner.Value == roomName)
+                    {
+                        id = owner.Key;
+                    }
+                }
+            }
+            return id;
         }
 
         [Master]
@@ -186,9 +220,22 @@ namespace OpenCodeChems.Server.Network
 
         private void DisJoinPlayer(int senderId)
         {
-            foreach (KeyValuePair<string, RoomGame> roomName in rooms)
+            
+            string nameRoom = "";
+            foreach (KeyValuePair<string, RoomGame> currentRoom in rooms)
             {
-                DeletePlayer(roomName.Key);
+                if(currentRoom.Value.Exist(senderId))
+                {
+                    nameRoom = currentRoom.Key;
+                }
+            }
+            if(nameRoom.Length > 0 )
+            {
+                rooms[nameRoom].RemovePlayer(senderId);
+                if(!rooms[nameRoom].GameCanContinue())
+                {
+                    EraseRoom(nameRoom);  
+                }
             }
         }
 
@@ -198,16 +245,18 @@ namespace OpenCodeChems.Server.Network
             int senderId = GetTree().GetRpcSenderId();
             if (roomOwners.ContainsKey(senderId))
             {
-                EraseRoom(roomOwners[senderId]);
-                roomOwners.Remove(senderId);
-
+                EraseRoom(nameRoom);
             }
-            if (rooms.ContainsKey(nameRoom))
+            else if (rooms.ContainsKey(nameRoom) && rooms[nameRoom].Exist(senderId))
             {
-                if (rooms[nameRoom].Exist(senderId))
+                rooms[nameRoom].RemovePlayer(senderId);
+                if(!rooms[nameRoom].gameStarted)
                 {
-                    rooms[nameRoom].RemovePlayer(senderId);
                     UpdateClientsRoom(nameRoom);
+                }
+                else if(!rooms[nameRoom].GameCanContinue())
+                {
+                    EraseRoom(nameRoom);
                 }
             }
         }
@@ -387,7 +436,7 @@ namespace OpenCodeChems.Server.Network
         private void CreateRoom(string code)
         {
             int senderId = GetTree().GetRpcSenderId();
-            if (rooms.ContainsKey(code) || !ValidRoomName(code))
+            if (rooms.ContainsKey(code) || !ValidRoomName(code) || roomOwners.ContainsKey(senderId))
             {
                 RpcId(senderId, "CreateRoomFail");
                 logBlock.InsertTextAtCursor($"user {senderId} can't create {code} room\n");
@@ -397,8 +446,9 @@ namespace OpenCodeChems.Server.Network
                 RoomGame hostRoom = new RoomGame();
                 hostRoom.AddPlayer(senderId);
                 Random randomClass = new Random();
-                hostRoom.SceneNumber = randomClass.Next(0, 4);
+                hostRoom.sceneNumber = randomClass.Next(0, 4);
                 hostRoom.GenerateBoard();
+                hostRoom.StartTurn();
                 rooms.Add(code, hostRoom);
                 roomOwners.Add(senderId, code);
                 logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
@@ -497,7 +547,7 @@ namespace OpenCodeChems.Server.Network
             if (rooms.ContainsKey(roomName))
             {
                 int uniqueId = GetPlayerIdInRoom(roomName, playerName);
-                if (uniqueId != -1 && !roomOwners.ContainsKey(uniqueId))
+                if (uniqueId != Constants.NULL_ROL && !roomOwners.ContainsKey(uniqueId))
                 {
                     rooms[roomName].BanPlayer(uniqueId);
                     RpcId(uniqueId, "IAmBan");
@@ -855,7 +905,7 @@ namespace OpenCodeChems.Server.Network
             if (rooms.ContainsKey(nameRom))
             {
                 RpcId(senderId, "Start");
-                rooms[nameRom].SceneNumber = number;
+                rooms[nameRom].sceneNumber = number;
 
             }
         }
@@ -870,6 +920,8 @@ namespace OpenCodeChems.Server.Network
                 if (rooms[nameRoom].CanStart())
                 {
                     RpcId(senderId, "Start");
+                    TurnIndicator(nameRoom);
+
                 }
                 else
                 {
@@ -956,23 +1008,22 @@ namespace OpenCodeChems.Server.Network
         [Master]
         private void BoardChange(string nameRoom)
         {
-            rooms[nameRoom].gameStarted = true;
-            UpdateBoard(nameRoom);
-        }
-
-        [Master]
-        private void UpdateBoard(string roomCode)
-        {
-            if (rooms.ContainsKey(roomCode))
+            int ownerId = GetTree().GetRpcSenderId();
+            if(roomOwners.ContainsKey(ownerId))
             {
-                List<int> playersInRoom = rooms[roomCode].members;
-                for (int c = 0; c < playersInRoom.Count; c++)
+                rooms[nameRoom].gameStarted = true;
+                if (rooms.ContainsKey(nameRoom))
                 {
-                    int senderId = playersInRoom[c];
-                    logBlock.InsertTextAtCursor($"sending request  UpdateScreenClientGame  {senderId}\n");
-                    RpcId(senderId, "UpdateBoard", rooms[roomCode].GetRol(senderId), rooms[roomCode].SceneNumber);
+                    List<int> playersInRoom = rooms[nameRoom].members;
+                    for (int c = 0; c < playersInRoom.Count; c++)
+                    {
+                        int senderId = playersInRoom[c];
+                        logBlock.InsertTextAtCursor($"sending UpdateScreenClientGame  {senderId} with {playersInRoom.Count}\n");
+                        RpcId(senderId, "UpdateBoard", rooms[nameRoom].GetRol(senderId), rooms[nameRoom].sceneNumber);
+                    }
                 }
             }
+            
         }
         [Master]
         private void SendEmailRequest(string emailTo, string subject, string body)
@@ -998,6 +1049,153 @@ namespace OpenCodeChems.Server.Network
                 logBlock.InsertTextAtCursor($"the password of user {senderId} hasn't been restore\n");
             }
         }
+        [Master]
+        private void ChatUpdate(string message, string nameRoom)
+        {
+            int senderId = GetTree().GetRpcSenderId();
+            logBlock.InsertTextAtCursor($"the message is {message}\n");
+            string rol = rooms[nameRoom].GetRol(senderId);
+            logBlock.InsertTextAtCursor($"the role of user is {rol}\n");
+            List<int> players = new List<int>();
+            message = playersData[senderId] + ": " + message;
+            if(rol == Constants.RED_PLAYER)
+            {
+                players = rooms[nameRoom].redPlayers;  
+            }
+            else
+            {
+                players = rooms[nameRoom].bluePlayers;
+            }
+            for(int c = 0; c < players.Count; c++)
+            {
+                RpcId(players[c], "UpdateChat", message);
+            } 
+        }
+
+        [Master]
+        private void ClueUpdate(string clue, string nameRoom)
+        {
+            int senderId = GetTree().GetRpcSenderId();
+            logBlock.InsertTextAtCursor($"turn of {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
+            if(senderId == rooms[nameRoom].GetTurnId())
+            {
+                logBlock.InsertTextAtCursor($"the vlue is {clue}\n");
+                string rol = rooms[nameRoom].GetRol(senderId);
+                logBlock.InsertTextAtCursor($"the role of user is {rol}\n");
+                List<int> players = new List<int>();
+                if(rol == Constants.RED_SPY_MASTER)
+                {
+                    players = rooms[nameRoom].redPlayers;  
+                }
+                else
+                {
+                    players = rooms[nameRoom].bluePlayers;
+                }
+                for(int c = 0; c < players.Count; c++)
+                {
+                    RpcId(players[c], "UpdateClue", clue);
+                } 
+                rooms[nameRoom].NextTurn();
+            }
+            
+            
+        }
+        [Master]
+        private void VerifyCard(int index, string nameRoom)
+        {   
+            int senderId = GetTree().GetRpcSenderId();
+            if(senderId == rooms[nameRoom].GetTurnId() && !rooms[nameRoom].selectedCards[index])
+            {
+                int color = rooms[nameRoom].GetColor(index);
+                string rol = rooms[nameRoom].GetRol(senderId);
+                bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
+                List<int> players = rooms[nameRoom].members;
+                rooms[nameRoom].selectedCards[index] = true;
+                rooms[nameRoom].CountCard(color);
+                if(color == Constants.BLACK)
+                {
+                    rooms[nameRoom].SelectedBlack();
+                }
+                if(rooms[nameRoom].GameEnd())
+                {
+                    SendEndGame(nameRoom);
+                }
+                else 
+                {
+                    RpcId(senderId, "VerifiedAnswer", guessAnswer);
+                    for(int c = 0; c < players.Count; c++)
+                    {
+                        RpcId(players[c], "VerifiedCard", color, index);
+                    } 
+                }
+            }
+                       
+        }
+
+       
+        private void SendEndGame(string nameRoom)
+        {
+            List<int> winners = rooms[nameRoom].GetListWinners();
+            List<int> losers = rooms[nameRoom].GetListLosers();
+            for(int c = 0; c < winners.Count; c++)
+            {
+                if(playersData.ContainsKey(winners[c]))
+                {
+                    logBlock.InsertTextAtCursor($"it found some winners as {winners[c]}\n");
+                    string nickname = playersData[winners[c]];
+                    USER_MANAGEMENT.AddVictory(nickname);
+                    logBlock.InsertTextAtCursor($"the nickname for winners is {nickname}\n");
+                }
+                    RpcId(winners[c], "GameOver", true);
+            }
+            for(int c = 0; c < losers.Count; c++)
+            {
+                if(playersData.ContainsKey(losers[c]))
+                {
+                    string nickname = playersData[losers[c]];
+                    USER_MANAGEMENT.AddDefeat(nickname);
+                    logBlock.InsertTextAtCursor($"the nickname for losers is {nickname}\n");
+                }
+                    RpcId(losers[c], "GameOver", false);
+            }
+
+            DeleteRoom(nameRoom);
+        }
+        [Master]
+        private void UpdateTurn(string nameRoom)
+        {
+            if(rooms.ContainsKey(nameRoom) && rooms[nameRoom].gameStarted)
+            {
+                rooms[nameRoom].NextTurn();
+                logBlock.InsertTextAtCursor($"new turn for {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
+                TurnIndicator(nameRoom);
+            }
+        }
+        [Master]
+        private void ChangeTurn(string nameRoom)
+        {
+            if(rooms.ContainsKey(nameRoom) && rooms[nameRoom].gameStarted)
+            {
+                rooms[nameRoom].ChangeTeamTurn();
+                logBlock.InsertTextAtCursor($"changing team, and new turn for {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
+                TurnIndicator(nameRoom);
+            }
+        }
+        private void TurnIndicator(string nameRoom)
+        {
+            List<int> players = rooms[nameRoom].members;
+            int idTurn = rooms[nameRoom].GetTurnId();
+            if(playersData.ContainsKey(idTurn))
+            {
+                string namePlayer = playersData[idTurn];
+                for(int c = 0; c < players.Count; c++)
+                {
+                    RpcId(players[c], "UpdateTurnIndicator", namePlayer);
+                } 
+            }
+
+        }
+
     }
 
 }

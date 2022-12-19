@@ -22,7 +22,8 @@ namespace OpenCodeChems.Client.Server
 		public string usernamePlayerAsInvitated = "";
 		public static string currentRoom = "None";
 		public List<string> boardWords = new List<string>();
-		
+		[Signal]
+		delegate void LetsPlay();
 		[Signal]
 		delegate void LoggedIn();
 		[Signal]
@@ -152,6 +153,18 @@ namespace OpenCodeChems.Client.Server
 		delegate void CorrectRestorePassword();
 		[Signal]
 		delegate void RestorePasswordFail();
+		[Signal]
+		delegate void UpdateChatLog();
+		[Signal]
+		delegate void ChangeClue();
+		[Signal]
+		delegate void UpdateCard();
+		[Signal]
+		delegate void AnswerValue();
+		[Signal]
+		delegate void FinishGame();
+		[Signal]
+		delegate void WriteTurnIndicator();
 		
 		private readonly NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -673,9 +686,8 @@ namespace OpenCodeChems.Client.Server
 		public void UpdateScreenClientGame(List<string> words)
 		{
 			boardWords = words;
-			GetTree().ChangeScene("res://Scenes/KeyController.tscn");
+			EmitSignal(nameof(LetsPlay));
 			RpcId(PEER_ID, "BoardChange", currentRoom);
-			
 		}
 
 		[Puppet]
@@ -704,8 +716,61 @@ namespace OpenCodeChems.Client.Server
 		[Puppet]
 		public void RestorePasswordNotSuccessful()
 		{
+			
 			EmitSignal(nameof(RestorePasswordFail));
 		}
 
+		public void ChatInGame(string message)
+		{
+			RpcId(PEER_ID, "ChatUpdate", message, currentRoom);
+		}
+		[Puppet]
+		public void UpdateChat(string message)
+		{	
+			EmitSignal(nameof(UpdateChatLog), message);
+		}
+		public void SendClue(string clue)
+		{
+			RpcId(PEER_ID, "ClueUpdate", clue, currentRoom);
+		}
+		[Puppet]
+		public void UpdateClue(string clue)
+		{
+			EmitSignal(nameof(ChangeClue), clue);
+		}
+		public void VerifySelectedCard(int CardIndex)
+		{
+			RpcId(PEER_ID, "VerifyCard", CardIndex, currentRoom);
+		}
+		[Puppet]
+		public void VerifiedCard(int color, int index)
+		{
+			EmitSignal(nameof(UpdateCard), color, index);
+		}
+		[Puppet]
+		public void VerifiedAnswer(bool guessAnswer)
+		{
+			EmitSignal(nameof(AnswerValue),guessAnswer);
+		}
+		public void keepTurn()
+		{
+			RpcId(PEER_ID, "UpdateTurn", currentRoom);
+		}
+		public void skipTurn()
+		{
+			RpcId(PEER_ID, "ChangeTurn", currentRoom);
+		}
+		[Puppet]
+		public void GameOver(bool status)
+		{
+			EmitSignal(nameof(FinishGame), status);
+		}
+		[Puppet]
+		public void UpdateTurnIndicator(string turnName)
+		{
+			EmitSignal(nameof(WriteTurnIndicator), turnName);
+		}
+
+		
 	}
 }

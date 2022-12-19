@@ -5,6 +5,17 @@ namespace OpenCodeChems.Server.Standar
     /// </summary>
     public class Constants
     {
+
+
+        public const string RED_WON = "RED_TEAM";
+
+        public const string BLUE_WON = "BLUE_TEAM";
+        public const string EMPTY_ROL = "None";
+
+        public const string TEAM_WON = "None";
+
+        public const int EMPTY_COUNTER = 0 ;
+
         /// <summary>
         /// Default rol of a player
         /// </summary>
@@ -58,22 +69,24 @@ namespace OpenCodeChems.Server.Standar
         /// Code of the assassin card
         /// </summary>
         public const int BLACK = 3;
+
         /// <summary>
         /// Allows to check if the player hit the clue or not for the first blue team master key
         /// </summary>
-        public int[] KEY_BLUE_ONE = new int[] {0,2,2,2,0,1,0,0,0,1,0,2,1,0,3,2,1,1,2,1,1,0,2,1,0}; //0
+        public static int[] KeyBlueOne = new int[] {0,2,2,2,0,1,0,0,0,1,0,2,1,0,3,2,1,1,2,1,1,0,2,1,0}; 
         /// <summary>
         /// Allows to check if the player hit the clue or not for the first red team master key
         /// </summary>
-        public int[] KEY_RED_ONE = new int[] {1,2,2,2,0,1,0,0,0,1,0,2,1,0,3,2,1,1,2,1,1,0,2,1,0}; //1
+        public static int[] KeyRedOne = new int[] {1,2,2,2,0,1,0,0,0,1,0,2,1,0,3,2,1,1,2,1,1,0,2,1,0}; 
         /// <summary>
         /// Allows to check if the player hit the clue or not for the second red team master key
         /// </summary>
-        public int[] KEY_RED_TWO = new int[] {0,2,2,3,0,1,0,0,1,1,0,2,1,0,2,2,1,1,2,1,1,0,2,1,0}; //2
+        public static int[] KeyRedTwo = new int[] {0,2,2,3,0,1,0,0,1,1,0,2,1,0,2,2,1,1,2,1,1,0,2,1,0}; 
         /// <summary>
         /// Allows to check if the player hit the clue or not for the second blue team master key
         /// </summary>
-        public int[] KEY_BLUE_TWO = new int[] {3,2,2,0,0,1,0,0,0,1,0,2,1,0,2,2,1,1,2,1,1,0,2,1,0}; //3
+        public static int[] KeyBlueTwo = new int[] {3,2,2,0,0,1,0,0,0,1,0,2,1,0,2,2,1,1,2,1,1,0,2,1,0}; 
+
     }
     
 }
