@@ -162,17 +162,29 @@ namespace OpenCodeChems.Server.Network
 
                 rooms.Remove(code);
 
+                int idOwner = GetOwnerByRoomName(code);
+                if(idOwner != Constants.NULL_ROL && roomOwners.ContainsKey(idOwner))
+                {
+                    roomOwners.Remove(idOwner);
+                }
+               
+            }
+        }
+
+        public int GetOwnerByRoomName(string roomName)
+        {
+            int id = Constants.NULL_ROL;
+            if(roomOwners.Count > 0)
+            {
                 foreach(KeyValuePair<int, string> owner in roomOwners)
                 {
-                    if(owner.Value == code)
+                    if(owner.Value == roomName)
                     {
-                        if(roomOwners.ContainsKey(owner.Key))
-                        {
-                            roomOwners.Remove(owner.Key);
-                        }
+                        id = owner.Key;
                     }
                 }
             }
+            return id;
         }
 
         [Master]
