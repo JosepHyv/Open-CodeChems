@@ -39,7 +39,7 @@ public class MasterPlayer : Control
 		}
 		else
 		{
-			GetTree().ChangeScene("res://Scenes/res://Scenes/DefeatScreen.tscn");
+			GetTree().ChangeScene("res://Scenes/DefeatScreen.tscn");
 		}
 	}
 

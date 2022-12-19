@@ -63,7 +63,7 @@ public class SpyPlayer : Control
 		}
 		else
 		{
-			GetTree().ChangeScene("res://Scenes/res://Scenes/DefeatScreen.tscn");
+			GetTree().ChangeScene("res://Scenes/DefeatScreen.tscn");
 		}
 	}
 	public void ChangeToMainMenu()
