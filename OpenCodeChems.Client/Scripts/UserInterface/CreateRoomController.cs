@@ -18,58 +18,58 @@ namespace OpenCodeChems.Client.UserInterface
 		private AcceptDialog notificacion;
 		private ConfirmationDialog banPlayerDialog;	
    
-    private String nameRoom = Network.currentRoom;
+		private String nameRoom = Network.currentRoom;
 
-    private string banName = null;
-    public override void _Ready()
-    {  		
-      serverClient = GetNode<Network>("/root/Network") as Network;
-      banPlayerDialog = GetParent().GetNode<ConfirmationDialog>("Control/BanPlayerConfirmationDialog");
-      redMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpyMasteRedrItemList");
-      redUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
-      blueMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpyMasterBlueItemList");
-      blueUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList");
-      notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
+		private string banName = null;
+		public override void _Ready()
+		{  		
+		serverClient = GetNode<Network>("/root/Network") as Network;
+		banPlayerDialog = GetParent().GetNode<ConfirmationDialog>("Control/BanPlayerConfirmationDialog");
+		redMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpyMasteRedrItemList");
+		redUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamRedColorRect/SpiesRedItemList");
+		blueMasterList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpyMasterBlueItemList");
+		blueUsersList = GetParent().GetNode<ItemList>("Control/RoomNinePatchRect/TeamBlueColorRect/SpiesBlueItemList");
+		notificacion = GetParent().GetNode<AcceptDialog>("Control/Notificacion");
 
-      banPlayerDialog.GetCancel().Connect("pressed", this, nameof(CancelBan));
+		banPlayerDialog.GetCancel().Connect("pressed", this, nameof(CancelBan));
 
-      GetParent().GetNode<Label>("Control/RoomNinePatchRect/NameRoomLabel").SetText(nameRoom);
-      serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
-      serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
-      serverClient.Connect("CantChangeRol", this, nameof(NoRolChange));
-      serverClient.Connect("CanBan", this, nameof(AvailableToBan));
-      serverClient.Connect("BanFail", this, nameof(FailToBan));
-      serverClient.Connect("YesStartGame", this, nameof(AvailableToStart));
-      serverClient.Connect("NoStartGame", this, nameof(UnavailableToStart));
-      serverClient.Connect("LetsPlay", this, nameof(StartingGame));
+		GetParent().GetNode<Label>("Control/RoomNinePatchRect/NameRoomLabel").Text = nameRoom;
+		serverClient.Connect("UpdatePlayersScreen", this, nameof(AddToList));
+		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
+		serverClient.Connect("CantChangeRol", this, nameof(NoRolChange));
+		serverClient.Connect("CanBan", this, nameof(AvailableToBan));
+		serverClient.Connect("BanFail", this, nameof(FailToBan));
+		serverClient.Connect("YesStartGame", this, nameof(AvailableToStart));
+		serverClient.Connect("NoStartGame", this, nameof(UnavailableToStart));
+		serverClient.Connect("LetsPlay", this, nameof(StartingGame));
 
-    }
+		}
 
-    public void StartingGame()
-    {
-      GetTree().ChangeScene("res://Scenes/KeyController.tscn");
-    }
-    public void FailToBan()
-    {
-      notificacion.SetText("CANT_BAN_USER");
-      notificacion.Visible = true;
-    }
-
-	public void AvailableToBan()
-	{
-		string translatedText = "";
-		banPlayerDialog.SetText("YOU_WANT_BAN");
-		translatedText = banPlayerDialog.GetText();
-		translatedText = translatedText + " " + banName + "?";
-		banPlayerDialog.SetText(translatedText);
-		banPlayerDialog.Visible = true;
-	}
-
-	public void NoRolChange()
-	{
-		notificacion.SetText("CANT_CHANGE_ROL");
+		public void StartingGame()
+		{
+		GetTree().ChangeScene("res://Scenes/KeyController.tscn");
+		}
+		public void FailToBan()
+		{
+		notificacion.DialogText = "CANT_BAN_USER";
 		notificacion.Visible = true;
-	}
+		}
+
+		public void AvailableToBan()
+		{
+			string translatedText = "";
+			banPlayerDialog.DialogText = "YOU_WANT_BAN";
+			translatedText = banPlayerDialog.DialogText;
+			translatedText = translatedText + " " + banName + "?";
+			banPlayerDialog.DialogText = translatedText;
+			banPlayerDialog.Visible = true;
+		}
+
+		public void NoRolChange()
+		{
+			notificacion.DialogText = "CANT_CHANGE_ROL";
+			notificacion.Visible = true;
+		}
 
 
 		public void CancelBan()
@@ -83,18 +83,6 @@ namespace OpenCodeChems.Client.UserInterface
 			{
 				serverClient.BanPlayer(banName);
 			}
-		}
-
-		public void AvailableToBan()
-		{
-			banPlayerDialog.DialogText = ($"Do You Want Ban To {banName}");
-			banPlayerDialog.Visible = true;
-		}
-
-		public void NoRolChange()
-		{
-			notificacion.DialogText = ("CANT_CHANGE_ROL");
-			notificacion.Visible = true;
 		}
 
 		public void ChangeToMainMenu()
@@ -193,9 +181,6 @@ namespace OpenCodeChems.Client.UserInterface
 			{
 				blueUsersList.AddItem(name);
 			}
-
-			
-			
 		}
 
 	}

@@ -5,9 +5,6 @@
     <DocumentationFile>C:\Tecnologias\Open-CodeChems\Documentation\OpenCodeChems.Server.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.31" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.10">
