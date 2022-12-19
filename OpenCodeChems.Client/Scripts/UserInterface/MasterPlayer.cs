@@ -35,11 +35,11 @@ public class MasterPlayer : Control
 	{
 		if(status)
 		{
-			GetTree().ChangeScene();
+			GetTree().ChangeScene("res://Scenes/VictoryScreen.tscn");
 		}
 		else
 		{
-			GetTree().ChangeScene();
+			GetTree().ChangeScene("res://Scenes/res://Scenes/DefeatScreen.tscn");
 		}
 	}
 

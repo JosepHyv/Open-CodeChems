@@ -761,9 +761,9 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID, "ChangeTurn", currentRoom);
 		}
 		[Puppet]
-		public void GameOver(string statusMessage)
+		public void GameOver(bool status)
 		{
-			EmitSignal(nameof(FinishGame), statusMessage);
+			EmitSignal(nameof(FinishGame), status);
 		}
 
 		

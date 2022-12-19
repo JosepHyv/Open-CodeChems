@@ -55,10 +55,16 @@ public class SpyPlayer : Control
 
 	}
 
-	public void FinishMessage(string message)
+	public void FinishMessage(bool status)
 	{
-		notification.SetText(message);
-		notification.Visible = true;
+		if(status)
+		{
+			GetTree().ChangeScene("res://Scenes/VictoryScreen.tscn");
+		}
+		else
+		{
+			GetTree().ChangeScene("res://Scenes/res://Scenes/DefeatScreen.tscn");
+		}
 	}
 	public void ChangeToMainMenu()
 	{

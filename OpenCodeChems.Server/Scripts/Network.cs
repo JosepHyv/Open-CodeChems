@@ -1135,7 +1135,7 @@ namespace OpenCodeChems.Server.Network
                     USER_MANAGEMENT.AddVictory(nickname);
                     logBlock.InsertTextAtCursor($"the nickname for winners is {nickname}\n");
                 }
-                    RpcId(winners[c], "GameOver", "YOU_WON");
+                    RpcId(winners[c], "GameOver", true);
             }
             for(int c = 0; c < losers.Count; c++)
             {
@@ -1145,7 +1145,7 @@ namespace OpenCodeChems.Server.Network
                     USER_MANAGEMENT.AddDefeat(nickname);
                     logBlock.InsertTextAtCursor($"the nickname for losers is {nickname}\n");
                 }
-                    RpcId(losers[c], "GameOver", "YOU_LOSE");
+                    RpcId(losers[c], "GameOver", false);
             }
         }
         [Master]
