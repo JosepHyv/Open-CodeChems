@@ -1080,9 +1080,10 @@ namespace OpenCodeChems.Server.Network
             string rol = rooms[nameRoom].GetRol(senderId);
             bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
             List<int> players = rooms[nameRoom].members;
+            RpcId(senderId, "VerifiedAnswer", guessAnswer);
             for(int c = 0; c < players.Count; c++)
             {
-                RpcId(players[c], "VerifiedCard", color, index, guessAnswer);
+                RpcId(players[c], "VerifiedCard", color, index);
             } 
                        
         }

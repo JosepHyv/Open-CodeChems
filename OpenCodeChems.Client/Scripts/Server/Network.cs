@@ -161,6 +161,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void ChangeClue();
 		[Signal]
 		delegate void UpdateCard();
+		[Signal]
+		delegate void AnswerValue();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -739,9 +741,14 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID, "VerifyCard", CardIndex, currentRoom);
 		}
 		[Puppet]
-		public void VerifiedCard(int color, int index, bool guessAnswer)
+		public void VerifiedCard(int color, int index)
 		{
-			EmitSignal(nameof(UpdateCard), color, index, guessAnswer);
+			EmitSignal(nameof(UpdateCard), color, index);
+		}
+		[Puppet]
+		public void VerifiedAnswer(bool guessAnswer)
+		{
+			EmitSignal(nameof(AnswerValue),guessAnswer);
 		}
 		public void keepTurn()
 		{

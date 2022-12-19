@@ -34,6 +34,7 @@ public class SpyPlayer : Control
 		serverClient.Connect("UpdateChatLog", this, nameof(AadToChat));
 		serverClient.Connect("ChangeClue", this, nameof(ClueChange));
 		serverClient.Connect("UpdateCard",this, nameof(ChangeColor));
+		serverClient.Connect("AnswerValue", this, nameof(ValidatedAnswer));
 		turnDialog = GetParent().GetNode<ConfirmationDialog>("SpyPlayer/TurnConfirmationDialog");
 		turnDialog.GetCancel().Connect("pressed", this, nameof(TurnCancelDialog));
 		
@@ -114,13 +115,17 @@ public class SpyPlayer : Control
 		{
 			ChangeBlack(index);
 		}
+		
+	}
+
+	public void ValidatedAnswer(bool guessAnswer)
+	{
 		if(guessAnswer)
 		{
 			turnDialog.SetText("RIGHT_ANSWER");
 			turnDialog.Visible = true;
 		}
 	}
-
 	public void TurnAcceptDialog()
 	{
 		serverClient.keepTurn();
