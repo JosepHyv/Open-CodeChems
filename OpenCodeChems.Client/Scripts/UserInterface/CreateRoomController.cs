@@ -91,7 +91,7 @@ namespace OpenCodeChems.Client.UserInterface
 		}
 		public void _on_CancelTextureButton_pressed()
 		{
-			GetTree().ChangeScene("res://Scenes/RoomSettings.tscn");
+			ChangeToMainMenu();
 			serverClient.LeftRoom();
 		}
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Resources/Icons/image.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Resources/Icons/buttonTexture.png" type="Texture" id=2]
@@ -55,14 +55,6 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=15]
 size = 13
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=17]
-size = 20
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=18]
-size = 26
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=19]
@@ -260,9 +252,9 @@ text = "Name room"
 
 [node name="StartGameTextureButton" type="TextureButton" parent="RoomNinePatchRect"]
 margin_left = 418.0
-margin_top = 437.0
+margin_top = 299.0
 margin_right = 594.0
-margin_bottom = 496.0
+margin_bottom = 358.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 2 )
 expand = true
@@ -276,25 +268,6 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 15 )
 text = "START_BUTTON"
 clip_text = true
-
-[node name="InvitationCodeLabel" type="Label" parent="RoomNinePatchRect"]
-margin_left = 414.0
-margin_top = 252.0
-margin_right = 605.0
-margin_bottom = 288.0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 17 )
-text = "INVITATIONCODE_LABEL"
-clip_text = true
-
-[node name="CodeLabel" type="Label" parent="RoomNinePatchRect"]
-margin_left = 467.0
-margin_top = 324.0
-margin_right = 526.0
-margin_bottom = 361.0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 18 )
-text = "Code"
 
 [node name="CancelTextureButton" type="TextureButton" parent="RoomNinePatchRect"]
 margin_left = 66.0
