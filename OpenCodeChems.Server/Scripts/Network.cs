@@ -160,14 +160,21 @@ namespace OpenCodeChems.Server.Network
                     RpcId(senderId, "ExitRoom");
                 }
 
-                rooms.Remove(code);
+                DeleteRoom(code);
+               
+            }
+        }
 
-                int idOwner = GetOwnerByRoomName(code);
+         private void DeleteRoom(string nameRoom)
+        {
+            if(rooms.ContainsKey(nameRoom))
+            {
+                rooms.Remove(nameRoom);
+                int idOwner = GetOwnerByRoomName(nameRoom);
                 if(idOwner != Constants.NULL_ROL && roomOwners.ContainsKey(idOwner))
                 {
                     roomOwners.Remove(idOwner);
                 }
-               
             }
         }
 
@@ -1122,6 +1129,8 @@ namespace OpenCodeChems.Server.Network
             }
                        
         }
+
+       
         private void SendEndGame(string nameRoom)
         {
             List<int> winners = rooms[nameRoom].GetListWinners();
@@ -1147,6 +1156,8 @@ namespace OpenCodeChems.Server.Network
                 }
                     RpcId(losers[c], "GameOver", false);
             }
+
+            DeleteRoom(nameRoom);
         }
         [Master]
         private void UpdateTurn(string nameRoom)
