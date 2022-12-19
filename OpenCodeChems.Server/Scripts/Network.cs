@@ -1091,16 +1091,19 @@ namespace OpenCodeChems.Server.Network
         private void VerifyCard(int index, string nameRoom)
         {   
             int senderId = GetTree().GetRpcSenderId();
-            int color = rooms[nameRoom].GetColor(index);
-            string rol = rooms[nameRoom].GetRol(senderId);
-            bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
-            List<int> players = rooms[nameRoom].members;
-            RpcId(senderId, "VerifiedAnswer", guessAnswer);
-            for(int c = 0; c < players.Count; c++)
+            if(senderId == rooms[nameRoom].GetTurnId())
             {
-                logBlock.InsertTextAtCursor("Entre a mandar los RPCID\n");
-                RpcId(players[c], "VerifiedCard", color, index);
-            } 
+                int color = rooms[nameRoom].GetColor(index);
+                string rol = rooms[nameRoom].GetRol(senderId);
+                bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
+                List<int> players = rooms[nameRoom].members;
+                RpcId(senderId, "VerifiedAnswer", guessAnswer);
+                for(int c = 0; c < players.Count; c++)
+                {
+                    logBlock.InsertTextAtCursor("Entre a mandar los RPCID\n");
+                    RpcId(players[c], "VerifiedCard", color, index);
+                } 
+            }
                        
         }
         [Master]
