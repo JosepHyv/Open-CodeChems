@@ -2,51 +2,53 @@ using Godot;
 using System;
 using OpenCodeChems.Client.Server;
 
-public class JoinGame : Control
+namespace OpenCodeChems.Client.UserInterface
 {
-	
-	Network serverClient = null;
-	LineEdit code  = null;
-	AcceptDialog notification = null;
-	
-	public override void _Ready()
+	public class JoinGame : Control
 	{
-		notification = GetParent().GetNode<AcceptDialog>("JoinGame/NotificationAcceptDialog");
-		code = GetParent().GetNode<LineEdit>("JoinGame/JoinGameNinePatchRect/CodeLineEdit");
-		serverClient = GetNode<Network>("/root/Network") as Network;
-		serverClient.Connect("RoomJoinFail", this, nameof(FailJoin));
-		serverClient.Connect("RoomJoin", this, nameof(ChangeScene));
-	}
-	public void _on_CancelTextureButton_pressed()
-	{
-		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-	}
-	public void _on_JoinTextureButton_pressed()
-	{
-		string roomCode = code.GetText();
-		if(!String.IsNullOrWhiteSpace(roomCode))
+		
+		Network serverClient = null;
+		LineEdit code  = null;
+		AcceptDialog notification = null;
+		
+		public override void _Ready()
 		{
-			serverClient.ClientJoinRoom(roomCode);
-			//GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
+			notification = GetParent().GetNode<AcceptDialog>("JoinGame/NotificationAcceptDialog");
+			code = GetParent().GetNode<LineEdit>("JoinGame/JoinGameNinePatchRect/CodeLineEdit");
+			serverClient = GetNode<Network>("/root/Network") as Network;
+			serverClient.Connect("RoomJoinFail", this, nameof(FailJoin));
+			serverClient.Connect("RoomJoin", this, nameof(ChangeScene));
 		}
-		else
+		public void _on_CancelTextureButton_pressed()
 		{
-			notification.SetText("ROOM_CODE_INVALID");
-			notification.Visible = true;	
+			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+		}
+		public void _on_JoinTextureButton_pressed()
+		{
+			string roomCode = code.Text;
+			if(!String.IsNullOrWhiteSpace(roomCode))
+			{
+				serverClient.ClientJoinRoom(roomCode);
+			}
+			else
+			{
+				notification.DialogText = ("ROOM_CODE_INVALID");
+				notification.Visible = true;	
+			}
+			
+		}
+
+		public void ChangeScene()
+		{
+			GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
+			serverClient.RoomCreated();
 		}
 		
-	}
+		public void FailJoin()
+		{
+			notification.DialogText = ("IMPOSSIBLE_TO_CONNECT");
+			notification.Visible = true;
+		}
 
-	public void ChangeScene()
-	{
-		GetTree().ChangeScene("res://Scenes/CreateRoom.tscn");
-		serverClient.RoomCreated();
 	}
-	
-	public void FailJoin()
-	{
-		notification.SetText("IMPOSSIBLE_TO_CONNECT");
-		notification.Visible = true;
-	}
-
 }

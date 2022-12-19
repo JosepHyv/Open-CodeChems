@@ -6,8 +6,16 @@ using System.Collections.Generic;
 
 namespace OpenCodeChems.Server.Utils
 {
+	/// <summary>
+	/// Validations of ip and host
+	/// </summary>
 	public class Validation
 	{
+		/// <summary>
+		/// validate that ip is a correct format
+		/// </summary>
+		/// <param name="address">ip address provided</param>
+		/// <returns></returns>
 		public bool ValidateIp(string address)
 		{
 			bool status = true;
@@ -45,7 +53,11 @@ namespace OpenCodeChems.Server.Utils
 		
 			return status;
 		}
-		
+		/// <summary>
+		/// Validate that port is correct format
+		/// </summary>
+		/// <param name="port">port provided</param>
+		/// <returns></returns>
 		public bool ValidatePort(string port)
 		{
 			if(String.IsNullOrWhiteSpace(port))

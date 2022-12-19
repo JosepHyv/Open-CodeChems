@@ -5,70 +5,70 @@ using OpenCodeChems.Client.Server;
 using static OpenCodeChems.Client.Resources.Objects;
 using OpenCodeChems.Client.Resources;
 
-
-public class KeyController : Control
+namespace OpenCodeChems.Client.UserInterface
 {
-
-	Network serverClient;
-	
-	
-	public override void _Ready()
-	{   
-		GD.Print("Ready de Keys Controller");
-		serverClient = GetNode<Network>("/root/Network") as Network;
-		serverClient.Connect("UpdateBoardSignal", this, nameof(ChangeScreen));
-		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
-	}
-
-	public void ChangeToMainMenu()
+	public class KeyController : Control
 	{
-		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-	}
 
-	public void ChangeScreen(string rool, int number)
-	{
+		Network serverClient;
 		
-		GD.Print("coso plis funciona");
-		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
-		{
-			LoadKey(number);
+		
+		public override void _Ready()
+		{   
+			GD.Print("Ready de Keys Controller");
+			serverClient = GetNode<Network>("/root/Network") as Network;
+			serverClient.Connect("UpdateBoardSignal", this, nameof(ChangeScreen));
+			serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
 		}
-		else
+
+		public void ChangeToMainMenu()
 		{
-			GetTree().ChangeScene("res://Scenes/SpyPlayer.tscn");
+			GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 		}
+
+		public void ChangeScreen(string rool, int number)
+		{
+			if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
+			{
+				LoadKey(number);
+			}
+			else
+			{
+				GetTree().ChangeScene("res://Scenes/SpyPlayer.tscn");
+			}
+		}
+
+		
+
+		public void LoadKey(int randomNumber)
+		{   
+			PackedScene packedScene;
+			if(randomNumber == 0)
+			{
+				packedScene = (PackedScene)GD.Load("res://Scenes/MasterPlayer.tscn");
+				Control key = (Control)packedScene.Instance();
+				this.AddChild(key);
+			}
+			if(randomNumber == 1)
+			{
+				packedScene = (PackedScene)GD.Load("res://Scenes/KeyRedOne.tscn");
+				Control key = (Control)packedScene.Instance();
+				this.AddChild(key);
+			}
+			if(randomNumber == 2)
+			{
+				packedScene = (PackedScene)GD.Load("res://Scenes/KeyRedTwo.tscn");
+				Control key = (Control)packedScene.Instance();
+				this.AddChild(key);
+			}
+			if(randomNumber == 3)
+			{
+				packedScene = (PackedScene)GD.Load("res://Scenes/KeyBlueTwo.tscn");
+				Control key = (Control)packedScene.Instance();
+				this.AddChild(key);
+			}
+		}
+
+		
 	}
-
-	
-
-	public void LoadKey(int randomNumber)
-	{   
-		PackedScene packedScene;
-		if(randomNumber == 0)
-		{
-			packedScene = (PackedScene)GD.Load("res://Scenes/MasterPlayer.tscn");
-			Control key = (Control)packedScene.Instance();
-			this.AddChild(key);
-		}
-		 if(randomNumber == 1)
-		{
-			packedScene = (PackedScene)GD.Load("res://Scenes/KeyRedOne.tscn");
-			Control key = (Control)packedScene.Instance();
-			this.AddChild(key);
-		}
-		 if(randomNumber == 2)
-		{
-			packedScene = (PackedScene)GD.Load("res://Scenes/KeyRedTwo.tscn");
-			Control key = (Control)packedScene.Instance();
-			this.AddChild(key);
-		}
-		 if(randomNumber == 3)
-		{
-			packedScene = (PackedScene)GD.Load("res://Scenes/KeyBlueTwo.tscn");
-			Control key = (Control)packedScene.Instance();
-			this.AddChild(key);
-		}
-	}
-
-	
 }

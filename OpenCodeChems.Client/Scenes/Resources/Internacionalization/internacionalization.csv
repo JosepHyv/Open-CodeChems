@@ -89,4 +89,6 @@ DEFEATS_TITLE_LABEL,Defeats,Derrotas
 ONLY_NUMBERS,Only numbers can be entered,Solo se pueden ingresar numeros
 EMAIL_SENT,Email sent,Email enviado
 ERROR_CODE,Incorrect code,Código incorrecto
-
+SELECT_IMAGE_INSTRUCTION,Click on an image to make it your new profile picture,Haz clic en una imagen para que sea tu nueva foto de perfil
+ACCEPT_FRIEND_REQUEST,Friend request accepted,Solicitud de amistad aceptada
+DENY_FRIEND_REQUEST,Friend request deny,Solicitud de amistad rechazada

@@ -6,7 +6,7 @@
       "tool": {
         "name": "Compilador de Microsoft (R) Visual C#",
         "version": "4.4.0.0",
-        "fileVersion": "4.4.0-4.22520.11 (9e075f03)",
+        "fileVersion": "4.4.0-6.22565.8 (53091686)",
         "semanticVersion": "4.4.0",
         "language": "es-MX"
       },
@@ -3332,1884 +3332,15 @@
         {
           "ruleId": "CS1591",
           "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement'",
+          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network._on_Button_pressed()'",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 7,
-                  "startColumn": 19,
-                  "endLine": 7,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.RegisterUser(User)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 8,
-                  "endLine": 9,
-                  "endColumn": 20
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.RegisterProfile(Profile)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 10,
-                  "startColumn": 8,
-                  "endLine": 10,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.Login(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 11,
-                  "startColumn": 8,
-                  "endLine": 11,
-                  "endColumn": 13
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.EditProfileNickname(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 12,
-                  "startColumn": 8,
-                  "endLine": 12,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.EditProfileImage(string, int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 8,
-                  "endLine": 13,
-                  "endColumn": 24
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.EditUserPassword(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 14,
-                  "startColumn": 8,
-                  "endLine": 14,
-                  "endColumn": 24
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.PasswordExist(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 15,
-                  "startColumn": 8,
-                  "endLine": 15,
-                  "endColumn": 21
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.GetProfileByUsername(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 11,
-                  "endLine": 16,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.EmailRegistered(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 17,
-                  "startColumn": 8,
-                  "endLine": 17,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.UsernameRegistered(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 18,
-                  "startColumn": 8,
-                  "endLine": 18,
-                  "endColumn": 26
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.NicknameRegistered(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 19,
-                  "startColumn": 8,
-                  "endLine": 19,
-                  "endColumn": 26
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.AddFriend(Friends)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 20,
-                  "startColumn": 8,
-                  "endLine": 20,
-                  "endColumn": 17
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.AcceptFriend(Friends)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 21,
-                  "startColumn": 8,
-                  "endLine": 21,
-                  "endColumn": 20
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.DenyFriend(Friends)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 8,
-                  "endLine": 22,
-                  "endColumn": 18
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.DeleteFriend(Friends)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 8,
-                  "endLine": 23,
-                  "endColumn": 20
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.FriendshipExist(int, int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 8,
-                  "endLine": 24,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.GetFriends(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 25,
-                  "startColumn": 16,
-                  "endLine": 25,
-                  "endColumn": 26
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.GetFriendsRequests(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 26,
-                  "startColumn": 16,
-                  "endLine": 26,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.GetProfileByNickname(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 27,
-                  "startColumn": 11,
-                  "endLine": 27,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.DeleteInvitatedPlayer(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 8,
-                  "endLine": 28,
-                  "endColumn": 29
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.AddVictory(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 8,
-                  "endLine": 29,
-                  "endColumn": 18
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.AddDefeat(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 30,
-                  "startColumn": 8,
-                  "endLine": 30,
-                  "endColumn": 17
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.RestorePassword(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 31,
-                  "startColumn": 8,
-                  "endLine": 31,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'IUserManagement.SearchFriends(Friends)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/Interface/IUserManagement.cs",
-                "region": {
-                  "startLine": 32,
-                  "startColumn": 8,
-                  "endLine": 32,
-                  "endColumn": 21
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'OpenCodeChemsContext'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 15,
-                  "endLine": 13,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'OpenCodeChemsContext.User'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 17,
-                  "startColumn": 22,
-                  "endLine": 17,
-                  "endColumn": 26
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'OpenCodeChemsContext.Profile'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 18,
-                  "startColumn": 25,
-                  "endLine": 18,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'OpenCodeChemsContext.Friends'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 19,
-                  "startColumn": 25,
-                  "endLine": 19,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'OpenCodeChemsContext.OnConfiguring(DbContextOptionsBuilder)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 23,
-                  "startColumn": 27,
-                  "endLine": 23,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'User'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 15,
-                  "endLine": 29,
-                  "endColumn": 19
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'User.User(string, string, string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 32,
-                  "startColumn": 10,
-                  "endLine": 32,
-                  "endColumn": 14
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'User.username'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 41,
-                  "startColumn": 17,
-                  "endLine": 41,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'User.password'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 42,
-                  "startColumn": 17,
-                  "endLine": 42,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'User.name'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 43,
-                  "startColumn": 17,
-                  "endLine": 43,
-                  "endColumn": 21
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'User.email'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 44,
-                  "startColumn": 17,
-                  "endLine": 44,
-                  "endColumn": 22
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 49,
-                  "startColumn": 16,
-                  "endLine": 49,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile.Profile(string, int, int, int, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 51,
-                  "startColumn": 14,
-                  "endLine": 51,
-                  "endColumn": 21
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile.idProfile'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 62,
-                  "startColumn": 18,
-                  "endLine": 62,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile.nickname'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 63,
+                  "startLine": 94,
                   "startColumn": 21,
-                  "endLine": 63,
-                  "endColumn": 29
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile.victories'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 64,
-                  "startColumn": 18,
-                  "endLine": 64,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile.defeats'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 65,
-                  "startColumn": 18,
-                  "endLine": 65,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile.imageProfile'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 66,
-                  "startColumn": 18,
-                  "endLine": 66,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Profile.username'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 67,
-                  "startColumn": 21,
-                  "endLine": 67,
-                  "endColumn": 29
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Friends'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 70,
-                  "startColumn": 15,
-                  "endLine": 70,
-                  "endColumn": 22
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Friends.Friends(int, int, bool)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 72,
-                  "startColumn": 10,
-                  "endLine": 72,
-                  "endColumn": 17
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Friends.idProfileFrom'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 79,
-                  "startColumn": 14,
-                  "endLine": 79,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Friends.idProfileTo'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 80,
-                  "startColumn": 14,
-                  "endLine": 80,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Friends.status'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
-                "region": {
-                  "startLine": 81,
-                  "startColumn": 15,
-                  "endLine": 81,
-                  "endColumn": 21
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 15,
-                  "endLine": 13,
-                  "endColumn": 22
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network._Ready()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 31,
-                  "startColumn": 24,
-                  "endLine": 31,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.UpdateData(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 314,
-                  "startColumn": 15,
-                  "endLine": 314,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.CreateRoom(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 322,
-                  "startColumn": 15,
-                  "endLine": 322,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.UpdateRol(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 344,
-                  "startColumn": 15,
-                  "endLine": 344,
-                  "endColumn": 24
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.UpdateClientsRoom(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 361,
-                  "startColumn": 15,
-                  "endLine": 361,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.BanPlayerInRoom(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 405,
-                  "startColumn": 15,
-                  "endLine": 405,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.BanPermission()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 429,
-                  "startColumn": 15,
-                  "endLine": 429,
-                  "endColumn": 28
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.JoinRoom(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 439,
-                  "startColumn": 15,
-                  "endLine": 439,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.PasswordExistRequest(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 465,
-                  "startColumn": 15,
-                  "endLine": 465,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.EditUserPasswordRequest(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 481,
-                  "startColumn": 15,
-                  "endLine": 481,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.EditNicknameRequest(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 496,
-                  "startColumn": 15,
-                  "endLine": 496,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.EditImageProfileRequest(string, int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 511,
-                  "startColumn": 15,
-                  "endLine": 511,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.AddFriendRequest(int, int, bool)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 526,
-                  "startColumn": 15,
-                  "endLine": 526,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.FriendshipExistRequest(int, int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 543,
-                  "startColumn": 15,
-                  "endLine": 543,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.GetFriendsRequest(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 558,
-                  "startColumn": 15,
-                  "endLine": 558,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.GetFriendsRequestsRequest(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 574,
-                  "startColumn": 15,
-                  "endLine": 574,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Network.RestorePasswordRequest(string, string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 825,
-                  "startColumn": 15,
-                  "endLine": 825,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 18,
-                  "endLine": 9,
-                  "endColumn": 26
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.NumberPlayers'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 20,
-                  "endLine": 13,
-                  "endColumn": 33
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.members'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 14,
-                  "startColumn": 26,
-                  "endLine": 14,
-                  "endColumn": 33
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.blackList'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 15,
-                  "startColumn": 26,
-                  "endLine": 15,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.redSpyMaster'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 20,
-                  "endLine": 16,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.blueSpyMaster'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 18,
-                  "startColumn": 20,
-                  "endLine": 18,
-                  "endColumn": 33
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.redPlayers'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 20,
-                  "startColumn": 26,
-                  "endLine": 20,
-                  "endColumn": 36
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.bluePlayers'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 26,
-                  "endLine": 22,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.SceneNumber'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 20,
-                  "endLine": 24,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.GetRol(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 26,
-                  "startColumn": 23,
-                  "endLine": 26,
-                  "endColumn": 29
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.AddPlayer(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 48,
-                  "startColumn": 21,
-                  "endLine": 48,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.AsignRandomRol(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 58,
-                  "startColumn": 21,
-                  "endLine": 58,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.RemovePlayer(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 70,
-                  "startColumn": 21,
-                  "endLine": 70,
-                  "endColumn": 33
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.DeleteRol(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 79,
-                  "startColumn": 21,
-                  "endLine": 79,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.Exist(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 116,
-                  "startColumn": 21,
-                  "endLine": 116,
-                  "endColumn": 26
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.CanChange(string, int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 121,
-                  "startColumn": 21,
-                  "endLine": 121,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.CanJoin(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 165,
-                  "startColumn": 21,
-                  "endLine": 165,
-                  "endColumn": 28
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.BanPlayer(int)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 196,
-                  "startColumn": 21,
-                  "endLine": 196,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'RoomGame.CanStart()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 202,
-                  "startColumn": 21,
-                  "endLine": 202,
-                  "endColumn": 29
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 3,
-                  "startColumn": 18,
-                  "endLine": 3,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.RED_SPY_MASTER'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 5,
-                  "startColumn": 29,
-                  "endLine": 5,
-                  "endColumn": 43
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.BLUE_SPY_MASTER'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 7,
-                  "startColumn": 29,
-                  "endLine": 7,
-                  "endColumn": 44
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.RED_PLAYER'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 29,
-                  "endLine": 9,
+                  "endLine": 94,
                   "endColumn": 39
                 }
               }
@@ -5217,1266 +3348,6 @@
           ],
           "properties": {
             "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.BLUE_PLAYER'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 11,
-                  "startColumn": 29,
-                  "endLine": 11,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.ROLES'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 33,
-                  "endLine": 13,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.MAX_RED_PLAYERS'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 14,
-                  "startColumn": 26,
-                  "endLine": 14,
-                  "endColumn": 41
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.MAX_BLUE_PLAYERS'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 16,
-                  "startColumn": 26,
-                  "endLine": 16,
-                  "endColumn": 42
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.MAX_MEMBERS'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 18,
-                  "startColumn": 26,
-                  "endLine": 18,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.BLUE'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 20,
-                  "startColumn": 26,
-                  "endLine": 20,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.RED'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 22,
-                  "startColumn": 26,
-                  "endLine": 22,
-                  "endColumn": 29
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.YELLOW'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 24,
-                  "startColumn": 26,
-                  "endLine": 24,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.BLACK'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 26,
-                  "startColumn": 26,
-                  "endLine": 26,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.KeyBlueOne'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 22,
-                  "endLine": 28,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.KeyBlueTwo'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 22,
-                  "endLine": 29,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.KeyRedOne'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 30,
-                  "startColumn": 22,
-                  "endLine": 30,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Constants.KeyRedTwo'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 31,
-                  "startColumn": 22,
-                  "endLine": 31,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Encryption'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Encryption.cs",
-                "region": {
-                  "startLine": 7,
-                  "startColumn": 18,
-                  "endLine": 7,
-                  "endColumn": 28
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Encryption.ComputeSHA256Hash(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Encryption.cs",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 23,
-                  "endLine": 9,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Validation'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Validation.cs",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 15,
-                  "endLine": 9,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Validation.ValidateIp(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Validation.cs",
-                "region": {
-                  "startLine": 11,
-                  "startColumn": 15,
-                  "endLine": 11,
-                  "endColumn": 25
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'Validation.ValidatePort(string)'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Validation.cs",
-                "region": {
-                  "startLine": 49,
-                  "startColumn": 15,
-                  "endLine": 49,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 15,
-                  "endLine": 13,
-                  "endColumn": 33
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.RegisterUserCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 32,
-                  "startColumn": 15,
-                  "endLine": 32,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.RegisterUserInvalidOperationException()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 40,
-                  "startColumn": 15,
-                  "endLine": 40,
-                  "endColumn": 52
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.RegisterUserDuplicated()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 48,
-                  "startColumn": 15,
-                  "endLine": 48,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.RegisterProfileCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 56,
-                  "startColumn": 15,
-                  "endLine": 56,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.RegisterProfileInvalidOperationException()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 64,
-                  "startColumn": 15,
-                  "endLine": 64,
-                  "endColumn": 55
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.LoginCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 72,
-                  "startColumn": 15,
-                  "endLine": 72,
-                  "endColumn": 27
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.LoginNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 79,
-                  "startColumn": 15,
-                  "endLine": 79,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.LoginNullUsernameAndPassword()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 86,
-                  "startColumn": 15,
-                  "endLine": 86,
-                  "endColumn": 43
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.NicknameRegisteredCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 93,
-                  "startColumn": 15,
-                  "endLine": 93,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.NicknameRegisteredNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 100,
-                  "startColumn": 15,
-                  "endLine": 100,
-                  "endColumn": 43
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EditProfileNicknameCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 107,
-                  "startColumn": 15,
-                  "endLine": 107,
-                  "endColumn": 41
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EditProfileNicknameInvalidOperationException()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 114,
-                  "startColumn": 15,
-                  "endLine": 114,
-                  "endColumn": 59
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EditProfileImageCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 121,
-                  "startColumn": 15,
-                  "endLine": 121,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EditProfileImageInvalidOperationException()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 129,
-                  "startColumn": 15,
-                  "endLine": 129,
-                  "endColumn": 56
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.PasswordExistCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 136,
-                  "startColumn": 15,
-                  "endLine": 136,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.PasswordExistNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 143,
-                  "startColumn": 15,
-                  "endLine": 143,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EditUserPasswordCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 150,
-                  "startColumn": 15,
-                  "endLine": 150,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EditUserPasswordInvalidOperationException()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 157,
-                  "startColumn": 15,
-                  "endLine": 157,
-                  "endColumn": 56
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetProfileByUsernameCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 164,
-                  "startColumn": 15,
-                  "endLine": 164,
-                  "endColumn": 42
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetProfileByUsernameNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 178,
-                  "startColumn": 15,
-                  "endLine": 178,
-                  "endColumn": 45
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetProfileByNicknameCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 199,
-                  "startColumn": 15,
-                  "endLine": 199,
-                  "endColumn": 42
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetProfileByNicknameNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 213,
-                  "startColumn": 15,
-                  "endLine": 213,
-                  "endColumn": 45
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EmailRegisteredCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 234,
-                  "startColumn": 15,
-                  "endLine": 234,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.EmailRegisteredNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 241,
-                  "startColumn": 15,
-                  "endLine": 241,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.UsernameRegisteredCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 249,
-                  "startColumn": 15,
-                  "endLine": 249,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.UsernameRegisteredNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 256,
-                  "startColumn": 15,
-                  "endLine": 256,
-                  "endColumn": 43
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.AddFriendCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 264,
-                  "startColumn": 15,
-                  "endLine": 264,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.AddFriendNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 273,
-                  "startColumn": 15,
-                  "endLine": 273,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetFriendsRequestCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 281,
-                  "startColumn": 15,
-                  "endLine": 281,
-                  "endColumn": 39
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetFriendsRequestNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 296,
-                  "startColumn": 15,
-                  "endLine": 296,
-                  "endColumn": 42
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.AcceptFriendCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 311,
-                  "startColumn": 15,
-                  "endLine": 311,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.AcceptFriendInvalidOperationException()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 320,
-                  "startColumn": 15,
-                  "endLine": 320,
-                  "endColumn": 52
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.FriendshipExistCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 328,
-                  "startColumn": 15,
-                  "endLine": 328,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.FriendshipExistNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 336,
-                  "startColumn": 15,
-                  "endLine": 336,
-                  "endColumn": 40
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetFriendsCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 344,
-                  "startColumn": 15,
-                  "endLine": 344,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.GetFriendsNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 360,
-                  "startColumn": 15,
-                  "endLine": 360,
-                  "endColumn": 35
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.DenyFriendCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 375,
-                  "startColumn": 15,
-                  "endLine": 375,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.DenyFriendInvalidOperationException()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 384,
-                  "startColumn": 15,
-                  "endLine": 384,
-                  "endColumn": 50
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.DeleteFriendCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 392,
-                  "startColumn": 15,
-                  "endLine": 392,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "CS1591",
-          "level": "warning",
-          "message": "Falta el comentario XML para el tipo o miembro visible de forma pública 'UserManagementTest.DeleteFriendNotCorrect()'",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Test/UserManagementTest.cs",
-                "region": {
-                  "startLine": 402,
-                  "startColumn": 15,
-                  "endLine": 402,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 4
-          }
-        },
-        {
-          "ruleId": "S1118",
-          "level": "warning",
-          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/assertions/Assertion.cs",
-                "region": {
-                  "startLine": 8,
-                  "startColumn": 15,
-                  "endLine": 8,
-                  "endColumn": 24
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
           }
         },
         {
@@ -6492,6 +3363,27 @@
                   "startColumn": 5,
                   "endLine": 19,
                   "endColumn": 37
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1118",
+          "level": "warning",
+          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/assertions/Assertion.cs",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 15,
+                  "endLine": 8,
+                  "endColumn": 24
                 }
               }
             }
@@ -6596,27 +3488,6 @@
           }
         },
         {
-          "ruleId": "S2386",
-          "level": "warning",
-          "message": "Use an immutable collection or reduce the accessibility of the public static field 'ROLES'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 23,
-                  "endLine": 13,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S4136",
           "level": "warning",
           "message": "All 'Throws' method overloads should be adjacent.",
@@ -6697,54 +3568,12 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 33,
-                  "endLine": 13,
-                  "endColumn": 99
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2223",
-          "level": "warning",
-          "message": "Change the visibility of 'ROLES' or make it 'const' or 'readonly'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 13,
-                  "startColumn": 33,
-                  "endLine": 13,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1104",
-          "level": "warning",
-          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
-          "locations": [
-            {
-              "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
                 "region": {
-                  "startLine": 24,
-                  "startColumn": 20,
-                  "endLine": 24,
-                  "endColumn": 36
+                  "startLine": 18,
+                  "startColumn": 21,
+                  "endLine": 18,
+                  "endColumn": 40
                 }
               }
             }
@@ -6754,102 +3583,18 @@
           }
         },
         {
-          "ruleId": "S1104",
+          "ruleId": "S2933",
           "level": "warning",
-          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
+          "message": "Make 'USER_MANAGEMENT' 'readonly'.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 30,
-                  "startColumn": 22,
-                  "endLine": 30,
-                  "endColumn": 95
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1104",
-          "level": "warning",
-          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 29,
-                  "startColumn": 22,
-                  "endLine": 29,
-                  "endColumn": 96
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1104",
-          "level": "warning",
-          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 31,
-                  "startColumn": 22,
-                  "endLine": 31,
-                  "endColumn": 95
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1104",
-          "level": "warning",
-          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
-                "region": {
-                  "startLine": 28,
-                  "startColumn": 22,
-                  "endLine": 28,
-                  "endColumn": 96
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1075",
-          "level": "warning",
-          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/Test.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
                   "startLine": 23,
-                  "startColumn": 65,
+                  "startColumn": 32,
                   "endLine": 23,
-                  "endColumn": 96
+                  "endColumn": 47
                 }
               }
             }
@@ -6901,6 +3646,132 @@
           }
         },
         {
+          "ruleId": "S1104",
+          "level": "warning",
+          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 20,
+                  "endLine": 54,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1104",
+          "level": "warning",
+          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 22,
+                  "endLine": 64,
+                  "endColumn": 98
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1104",
+          "level": "warning",
+          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 22,
+                  "endLine": 68,
+                  "endColumn": 97
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1104",
+          "level": "warning",
+          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
+                "region": {
+                  "startLine": 72,
+                  "startColumn": 22,
+                  "endLine": 72,
+                  "endColumn": 97
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1104",
+          "level": "warning",
+          "message": "Make this field 'private' and encapsulate it in a 'public' property.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Utils/Constants.cs",
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 22,
+                  "endLine": 76,
+                  "endColumn": 98
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1075",
+          "level": "warning",
+          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/Test.cs",
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 65,
+                  "endLine": 23,
+                  "endColumn": 96
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
           "ruleId": "S3887",
           "level": "warning",
           "message": "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Arguments'.",
@@ -6943,18 +3814,18 @@
           }
         },
         {
-          "ruleId": "S1144",
+          "ruleId": "S2068",
           "level": "warning",
-          "message": "Remove the unused private method '_on_Button_pressed'.",
+          "message": "\"password\" detected here, make sure this is not a hard-coded credential.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
                 "region": {
-                  "startLine": 78,
-                  "startColumn": 3,
-                  "endLine": 109,
-                  "endColumn": 4
+                  "startLine": 41,
+                  "startColumn": 32,
+                  "endLine": 41,
+                  "endColumn": 278
                 }
               }
             }
@@ -6964,18 +3835,31 @@
           }
         },
         {
-          "ruleId": "S2068",
+          "ruleId": "S3267",
           "level": "warning",
-          "message": "\"password\" detected here, make sure this is not a hard-coded credential.",
+          "message": "Loops should be simplified with \"LINQ\" expressions",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Models/OpenCodeCHemsContext.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/assertions/Signal.cs",
                 "region": {
-                  "startLine": 25,
-                  "startColumn": 32,
-                  "endLine": 25,
-                  "endColumn": 278
+                  "startLine": 81,
+                  "startColumn": 33,
+                  "endLine": 81,
+                  "endColumn": 38
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/assertions/Signal.cs",
+                "region": {
+                  "startLine": 83,
+                  "startColumn": 9,
+                  "endLine": 83,
+                  "endColumn": 42
                 }
               }
             }
@@ -6996,6 +3880,194 @@
                   "startLine": 35,
                   "startColumn": 18,
                   "endLine": 35,
+                  "endColumn": 24
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2245",
+          "level": "warning",
+          "message": "Make sure that using this pseudorandom number generator is safe here.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 100,
+                  "startColumn": 38,
+                  "endLine": 100,
+                  "endColumn": 50
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3776",
+          "level": "warning",
+          "message": "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 125,
+                  "startColumn": 21,
+                  "endLine": 125,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 13,
+                  "endLine": 127,
+                  "endColumn": 15
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 130,
+                  "startColumn": 17,
+                  "endLine": 130,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 132,
+                  "startColumn": 21,
+                  "endLine": 132,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 137,
+                  "startColumn": 17,
+                  "endLine": 137,
+                  "endColumn": 21
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 139,
+                  "startColumn": 21,
+                  "endLine": 139,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 144,
+                  "startColumn": 17,
+                  "endLine": 144,
+                  "endColumn": 21
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 146,
+                  "startColumn": 21,
+                  "endLine": 146,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 151,
+                  "startColumn": 17,
+                  "endLine": 151,
+                  "endColumn": 21
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 153,
+                  "startColumn": 21,
+                  "endLine": 153,
+                  "endColumn": 23
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "+1",
+              "1": "+2 (incl 1 for nesting)",
+              "2": "+3 (incl 2 for nesting)",
+              "3": "+1",
+              "4": "+3 (incl 2 for nesting)",
+              "5": "+1",
+              "6": "+3 (incl 2 for nesting)",
+              "7": "+1",
+              "8": "+3 (incl 2 for nesting)"
+            }
+          }
+        },
+        {
+          "ruleId": "S1066",
+          "level": "warning",
+          "message": "Merge this if statement with the enclosing one.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 153,
+                  "startColumn": 21,
+                  "endLine": 153,
+                  "endColumn": 23
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "region": {
+                  "startLine": 151,
+                  "startColumn": 22,
+                  "endLine": 151,
                   "endColumn": 24
                 }
               }
@@ -7056,149 +4128,16 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
                 "region": {
-                  "startLine": 60,
-                  "startColumn": 38,
-                  "endLine": 60,
-                  "endColumn": 50
+                  "startLine": 294,
+                  "startColumn": 34,
+                  "endLine": 294,
+                  "endColumn": 46
                 }
               }
             }
           ],
           "properties": {
             "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S3776",
-          "level": "warning",
-          "message": "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 79,
-                  "startColumn": 21,
-                  "endLine": 79,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 81,
-                  "startColumn": 13,
-                  "endLine": 81,
-                  "endColumn": 15
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 84,
-                  "startColumn": 17,
-                  "endLine": 84,
-                  "endColumn": 19
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 86,
-                  "startColumn": 21,
-                  "endLine": 86,
-                  "endColumn": 23
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 91,
-                  "startColumn": 17,
-                  "endLine": 91,
-                  "endColumn": 21
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 93,
-                  "startColumn": 21,
-                  "endLine": 93,
-                  "endColumn": 23
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 98,
-                  "startColumn": 17,
-                  "endLine": 98,
-                  "endColumn": 21
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 100,
-                  "startColumn": 21,
-                  "endLine": 100,
-                  "endColumn": 23
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 105,
-                  "startColumn": 17,
-                  "endLine": 105,
-                  "endColumn": 21
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 107,
-                  "startColumn": 21,
-                  "endLine": 107,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "0": "+1",
-              "1": "+2 (incl 1 for nesting)",
-              "2": "+3 (incl 2 for nesting)",
-              "3": "+1",
-              "4": "+3 (incl 2 for nesting)",
-              "5": "+1",
-              "6": "+3 (incl 2 for nesting)",
-              "7": "+1",
-              "8": "+3 (incl 2 for nesting)"
-            }
           }
         },
         {
@@ -7250,12 +4189,12 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 107,
-                  "startColumn": 21,
-                  "endLine": 107,
-                  "endColumn": 23
+                  "startLine": 139,
+                  "startColumn": 25,
+                  "endLine": 139,
+                  "endColumn": 27
                 }
               }
             }
@@ -7263,33 +4202,12 @@
           "relatedLocations": [
             {
               "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 105,
-                  "startColumn": 22,
-                  "endLine": 105,
-                  "endColumn": 24
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2589",
-          "level": "warning",
-          "message": "Change this condition so that it does not always evaluate to 'true'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/RoomGame.cs",
-                "region": {
-                  "startLine": 190,
-                  "startColumn": 26,
-                  "endLine": 190,
-                  "endColumn": 32
+                  "startLine": 137,
+                  "startColumn": 21,
+                  "endLine": 137,
+                  "endColumn": 23
                 }
               }
             }
@@ -7307,10 +4225,10 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 123,
-                  "startColumn": 7,
-                  "endLine": 123,
-                  "endColumn": 9
+                  "startLine": 205,
+                  "startColumn": 17,
+                  "endLine": 205,
+                  "endColumn": 19
                 }
               }
             }
@@ -7320,10 +4238,10 @@
               "physicalLocation": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 121,
-                  "startColumn": 6,
-                  "endLine": 121,
-                  "endColumn": 8
+                  "startLine": 203,
+                  "startColumn": 13,
+                  "endLine": 203,
+                  "endColumn": 15
                 }
               }
             }
@@ -7341,10 +4259,10 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 169,
-                  "startColumn": 30,
-                  "endLine": 169,
-                  "endColumn": 42
+                  "startLine": 185,
+                  "startColumn": 36,
+                  "endLine": 185,
+                  "endColumn": 48
                 }
               }
             }
@@ -7357,40 +4275,6 @@
           }
         },
         {
-          "ruleId": "S1066",
-          "level": "warning",
-          "message": "Merge this if statement with the enclosing one.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 189,
-                  "startColumn": 5,
-                  "endLine": 189,
-                  "endColumn": 7
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 187,
-                  "startColumn": 4,
-                  "endLine": 187,
-                  "endColumn": 6
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S107",
           "level": "warning",
           "message": "Method has 8 parameters, which is greater than the 7 authorized.",
@@ -7399,10 +4283,10 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 214,
-                  "startColumn": 35,
-                  "endLine": 214,
-                  "endColumn": 163
+                  "startLine": 230,
+                  "startColumn": 41,
+                  "endLine": 230,
+                  "endColumn": 169
                 }
               }
             }
@@ -7412,194 +4296,18 @@
           }
         },
         {
-          "ruleId": "S3267",
+          "ruleId": "S2245",
           "level": "warning",
-          "message": "Loops should be simplified with \"LINQ\" expressions",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/assertions/Signal.cs",
-                "region": {
-                  "startLine": 81,
-                  "startColumn": 33,
-                  "endLine": 81,
-                  "endColumn": 38
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/addons/WAT/mono/assertions/Signal.cs",
-                "region": {
-                  "startLine": 83,
-                  "startColumn": 9,
-                  "endLine": 83,
-                  "endColumn": 42
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S3776",
-          "level": "warning",
-          "message": "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
+          "message": "Make sure that using this pseudorandom number generator is safe here.",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 361,
-                  "startColumn": 15,
-                  "endLine": 361,
-                  "endColumn": 32
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 363,
-                  "startColumn": 4,
-                  "endLine": 363,
-                  "endColumn": 6
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 366,
-                  "startColumn": 5,
-                  "endLine": 366,
-                  "endColumn": 8
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 370,
-                  "startColumn": 6,
-                  "endLine": 370,
-                  "endColumn": 9
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 372,
-                  "startColumn": 56,
-                  "endLine": 372,
-                  "endColumn": 57
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 378,
-                  "startColumn": 6,
-                  "endLine": 378,
-                  "endColumn": 8
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 383,
-                  "startColumn": 6,
-                  "endLine": 383,
-                  "endColumn": 8
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 390,
-                  "startColumn": 6,
-                  "endLine": 390,
-                  "endColumn": 13
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
-                "region": {
-                  "startLine": 394,
-                  "startColumn": 6,
-                  "endLine": 394,
-                  "endColumn": 13
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "0": "+1",
-              "1": "+2 (incl 1 for nesting)",
-              "2": "+3 (incl 2 for nesting)",
-              "3": "+4 (incl 3 for nesting)",
-              "4": "+3 (incl 2 for nesting)",
-              "5": "+3 (incl 2 for nesting)",
-              "6": "+3 (incl 2 for nesting)",
-              "7": "+3 (incl 2 for nesting)"
-            }
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 497,
-                  "startColumn": 214,
-                  "endLine": 497,
-                  "endColumn": 221
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 498,
-                  "startColumn": 212,
-                  "endLine": 498,
-                  "endColumn": 219
+                  "startLine": 397,
+                  "startColumn": 38,
+                  "endLine": 397,
+                  "endColumn": 50
                 }
               }
             }
@@ -7617,10 +4325,10 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 794,
-                  "startColumn": 5,
-                  "endLine": 794,
-                  "endColumn": 7
+                  "startLine": 449,
+                  "startColumn": 17,
+                  "endLine": 449,
+                  "endColumn": 19
                 }
               }
             }
@@ -7630,10 +4338,10 @@
               "physicalLocation": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 792,
-                  "startColumn": 4,
-                  "endLine": 792,
-                  "endColumn": 6
+                  "startLine": 447,
+                  "startColumn": 13,
+                  "endLine": 447,
+                  "endColumn": 15
                 }
               }
             }
@@ -7643,18 +4351,31 @@
           }
         },
         {
-          "ruleId": "S1125",
+          "ruleId": "S1066",
           "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
+          "message": "Merge this if statement with the enclosing one.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 532,
-                  "startColumn": 219,
-                  "endLine": 532,
-                  "endColumn": 224
+                  "startLine": 462,
+                  "startColumn": 17,
+                  "endLine": 462,
+                  "endColumn": 19
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
+                "region": {
+                  "startLine": 460,
+                  "startColumn": 13,
+                  "endLine": 460,
+                  "endColumn": 15
                 }
               }
             }
@@ -7664,39 +4385,31 @@
           }
         },
         {
-          "ruleId": "S1125",
+          "ruleId": "S1066",
           "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
+          "message": "Merge this if statement with the enclosing one.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 593,
-                  "startColumn": 192,
-                  "endLine": 593,
-                  "endColumn": 199
+                  "startLine": 885,
+                  "startColumn": 17,
+                  "endLine": 885,
+                  "endColumn": 19
                 }
               }
             }
           ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S927",
-          "level": "warning",
-          "message": "Rename parameter 'friendsForDelete' to 'friends' to match the interface declaration.",
-          "locations": [
+          "relatedLocations": [
             {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
+              "physicalLocation": {
+                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 584,
-                  "startColumn": 42,
-                  "endLine": 584,
-                  "endColumn": 58
+                  "startLine": 883,
+                  "startColumn": 13,
+                  "endLine": 883,
+                  "endColumn": 15
                 }
               }
             }
@@ -7714,52 +4427,10 @@
               "resultFile": {
                 "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/Network.cs",
                 "region": {
-                  "startLine": 819,
-                  "startColumn": 29,
-                  "endLine": 819,
-                  "endColumn": 59
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1125",
-          "level": "warning",
-          "message": "Remove the unnecessary Boolean literal(s).",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 750,
-                  "startColumn": 185,
-                  "endLine": 750,
-                  "endColumn": 192
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S927",
-          "level": "warning",
-          "message": "Rename parameter 'email' to 'username' to match the interface declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Tecnologias/Open-CodeChems/OpenCodeChems.Server/Scripts/BussinesLogic/UserManagement.cs",
-                "region": {
-                  "startLine": 714,
-                  "startColumn": 44,
-                  "endLine": 714,
-                  "endColumn": 49
+                  "startLine": 979,
+                  "startColumn": 38,
+                  "endLine": 979,
+                  "endColumn": 68
                 }
               }
             }
@@ -7859,23 +4530,6 @@
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1118",
           "properties": {
             "category": "Major Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "TestSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
-        "S1125": {
-          "id": "S1125",
-          "shortDescription": "Boolean literals should not be redundant",
-          "fullDescription": "Redundant Boolean literals should be removed from expressions to improve readability.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1125",
-          "properties": {
-            "category": "Minor Code Smell",
             "isEnabledByDefault": true,
             "tags": [
               "C#",
@@ -7987,22 +4641,6 @@
             ]
           }
         },
-        "S2223": {
-          "id": "S2223",
-          "shortDescription": "Non-constant static fields should not be visible",
-          "fullDescription": "A static field that is neither constant nor read-only is not thread-safe. Correctly accessing these fields from different threads needs synchronization with locks. Improper synchronization may lead to unexpected results, thus publicly visible static fields are best suited for storing non-changing data shared by many consumers. To enforce this intent, these fields should be marked readonly or converted to constants.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2223",
-          "properties": {
-            "category": "Critical Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
         "S2245": {
           "id": "S2245",
           "shortDescription": "Using pseudorandom number generators (PRNGs) is security-sensitive",
@@ -8019,28 +4657,12 @@
             ]
           }
         },
-        "S2386": {
-          "id": "S2386",
-          "shortDescription": "Mutable fields should not be \"public static\"",
-          "fullDescription": "public static mutable fields of classes which are accessed directly should be protected to the degree possible. This can be done by reducing the accessibility of the field or by changing the return type to an immutable type.",
+        "S2933": {
+          "id": "S2933",
+          "shortDescription": "Fields that are only assigned in the constructor should be \"readonly\"",
+          "fullDescription": "readonly fields can only be assigned in a class constructor. If a class has a field that’s not marked readonly but is only set in the constructor, it could cause confusion about the field’s intended use. To avoid confusion, such fields should be marked readonly to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.",
           "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2386",
-          "properties": {
-            "category": "Minor Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
-        "S2589": {
-          "id": "S2589",
-          "shortDescription": "Boolean expressions should not be gratuitous",
-          "fullDescription": "If a boolean expression doesn’t change the evaluation of the condition, then it is entirely unnecessary, and can be removed. If it is gratuitous because it does not match the programmer’s intent, then it’s a bug and the expression should be fixed.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2589",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2933",
           "properties": {
             "category": "Major Code Smell",
             "isEnabledByDefault": true,
@@ -8143,23 +4765,6 @@
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-4136",
           "properties": {
             "category": "Minor Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "TestSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
-        "S927": {
-          "id": "S927",
-          "shortDescription": "Parameter names should match base declaration and other partial definitions",
-          "fullDescription": "The name of a parameter in an externally visible. This rule raises an issue when method override does not match the name of the parameter in the base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other partial definition.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-927",
-          "properties": {
-            "category": "Critical Code Smell",
             "isEnabledByDefault": true,
             "tags": [
               "C#",
