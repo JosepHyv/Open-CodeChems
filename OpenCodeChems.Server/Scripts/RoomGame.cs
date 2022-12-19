@@ -377,14 +377,13 @@ namespace OpenCodeChems.Server.Game
             return can;
         }
         
-        public void CountCard()
+        public void CountCard(int color)
         {
-            string turn = GetTurnRol();
-            if(turn == Constants.BLUE_PLAYER || turn == Constants.BLUE_SPY_MASTER)
+            if(color == Constants.BLUE)
             {
                 blueCards++;
             }
-            else
+            else if (color == Constants.RED)
             {
                 redCards++;
             }
