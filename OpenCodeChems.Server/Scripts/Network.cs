@@ -1102,29 +1102,32 @@ namespace OpenCodeChems.Server.Network
         private void VerifyCard(int index, string nameRoom)
         {   
             int senderId = GetTree().GetRpcSenderId();
-            if(senderId == rooms[nameRoom].GetTurnId() && !rooms[nameRoom].selectedCards[index])
+            if(rooms.ContainsKey(nameRoom))
             {
-                int color = rooms[nameRoom].GetColor(index);
-                string rol = rooms[nameRoom].GetRol(senderId);
-                bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
-                List<int> players = rooms[nameRoom].members;
-                rooms[nameRoom].selectedCards[index] = true;
-                rooms[nameRoom].CountCard(color);
-                if(color == Constants.BLACK)
+                if(senderId == rooms[nameRoom].GetTurnId() && !rooms[nameRoom].selectedCards[index])
                 {
-                    rooms[nameRoom].SelectedBlack();
-                }
-                if(rooms[nameRoom].GameEnd())
-                {
-                    SendEndGame(nameRoom);
-                }
-                else 
-                {
-                    RpcId(senderId, "VerifiedAnswer", guessAnswer);
-                    for(int c = 0; c < players.Count; c++)
+                    int color = rooms[nameRoom].GetColor(index);
+                    string rol = rooms[nameRoom].GetRol(senderId);
+                    bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
+                    List<int> players = rooms[nameRoom].members;
+                    rooms[nameRoom].selectedCards[index] = true;
+                    rooms[nameRoom].CountCard(color);
+                    if(color == Constants.BLACK)
                     {
-                        RpcId(players[c], "VerifiedCard", color, index);
-                    } 
+                        rooms[nameRoom].SelectedBlack();
+                    }
+                    if(rooms[nameRoom].GameEnd())
+                    {
+                        SendEndGame(nameRoom);
+                    }
+                    else 
+                    {
+                        RpcId(senderId, "VerifiedAnswer", guessAnswer);
+                        for(int c = 0; c < players.Count; c++)
+                        {
+                            RpcId(players[c], "VerifiedCard", color, index);
+                        } 
+                    }
                 }
             }
                        
