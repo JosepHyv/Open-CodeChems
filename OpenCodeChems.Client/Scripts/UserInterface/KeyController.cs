@@ -27,6 +27,7 @@ public class KeyController : Control
 
 	public void ChangeScreen(string rool, int number)
 	{
+		GD.Print("Llegué aqui");
 		if(rool == Constants.BLUE_SPY_MASTER || rool == Constants.RED_SPY_MASTER)
 		{
 			LoadKey(number);

@@ -160,7 +160,7 @@ namespace OpenCodeChems.Server.Network
                     logBlock.InsertTextAtCursor($"player {senderId} exiting room {code}\n");
                     RpcId(senderId, "ExitRoom");
                 }
-                
+
                 rooms.Remove(code);
 
                 foreach(KeyValuePair<int, string> owner in roomOwners)
@@ -1058,6 +1058,7 @@ namespace OpenCodeChems.Server.Network
         private void ClueUpdate(string clue, string nameRoom)
         {
             int senderId = GetTree().GetRpcSenderId();
+            logBlock.InsertTextAtCursor($"turn of {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
             if(senderId == rooms[nameRoom].GetTurnId())
             {
                 logBlock.InsertTextAtCursor($"the vlue is {clue}\n");
@@ -1092,6 +1093,7 @@ namespace OpenCodeChems.Server.Network
             RpcId(senderId, "VerifiedAnswer", guessAnswer);
             for(int c = 0; c < players.Count; c++)
             {
+                logBlock.InsertTextAtCursor("Entre a mandar los RPCID\n");
                 RpcId(players[c], "VerifiedCard", color, index);
             } 
                        
@@ -1099,12 +1101,21 @@ namespace OpenCodeChems.Server.Network
         [Master]
         private void UpdateTurn(string nameRoom)
         {
-            rooms[nameRoom].NextTurn();
+            if(rooms.ContainsKey(nameRoom) && rooms[nameRoom].gameStarted)
+            {
+                rooms[nameRoom].NextTurn();
+                logBlock.InsertTextAtCursor($"new turn for {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
+            }
         }
         [Master]
         private void ChangeTurn(string nameRoom)
         {
-            rooms[nameRoom].ChangeTeamTurn();
+            if(rooms.ContainsKey(nameRoom) && rooms[nameRoom].gameStarted)
+            {
+                rooms[nameRoom].ChangeTeamTurn();
+                logBlock.InsertTextAtCursor($"changing team, and new turn for {playersData[rooms[nameRoom].GetTurnId()]} to rol {rooms[nameRoom].GetTurnRol()}\n");
+
+            }
         }
 
     }
