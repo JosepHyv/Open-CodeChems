@@ -1101,18 +1101,49 @@ namespace OpenCodeChems.Server.Network
                 string rol = rooms[nameRoom].GetRol(senderId);
                 bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
                 List<int> players = rooms[nameRoom].members;
-                RpcId(senderId, "VerifiedAnswer", guessAnswer);
-                for(int c = 0; c < players.Count; c++)
-                {
-                    RpcId(players[c], "VerifiedCard", color, index);
-                } 
                 rooms[nameRoom].selectedCards[index] = true;
+                rooms[nameRoom].CountCard(color);
                 if(color == Constants.BLACK)
                 {
                     rooms[nameRoom].SelectedBlack();
                 }
+                if(rooms[nameRoom].GameEnd())
+                {
+                    SendEndGame(nameRoom);
+                }
+                else 
+                {
+                    RpcId(senderId, "VerifiedAnswer", guessAnswer);
+                    for(int c = 0; c < players.Count; c++)
+                    {
+                        RpcId(players[c], "VerifiedCard", color, index);
+                    } 
+                }
             }
                        
+        }
+        private void SendEndGame(string nameRoom)
+        {
+            List<int> winners = rooms[nameRoom].GetListWinners();
+            List<int> losers = rooms[nameRoom].GetListLosers();
+            for(int c = 0; c < winners.Count; c++)
+            {
+                if(playersData.ContainsKey(losers[c]))
+                {
+                    string nickname = playersData[winners[c]];
+                    AddVictoryRequest(nickname);
+                }
+                    RpcId(winners[c], "GameOver", "YOU_WON");
+            }
+            for(int c = 0; c < losers.Count; c++)
+            {
+                if(playersData.ContainsKey(losers[c]))
+                {
+                    string nickname = playersData[losers[c]];
+                    AddDefeatRequest(nickname);
+                }
+                    RpcId(losers[c], "GameOver", "YOU_LOSE");
+            }
         }
         [Master]
         private void UpdateTurn(string nameRoom)

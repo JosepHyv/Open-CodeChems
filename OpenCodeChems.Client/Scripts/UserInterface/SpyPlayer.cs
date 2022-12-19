@@ -39,6 +39,7 @@ public class SpyPlayer : Control
 		serverClient.Connect("AnswerValue", this, nameof(ValidatedAnswer));
 		turnDialog = GetParent().GetNode<ConfirmationDialog>("SpyPlayer/TurnConfirmationDialog");
 		turnDialog.GetCancel().Connect("pressed", this, nameof(TurnCancelDialog));
+		serverClient.Connect("FinishGame", this, nameof(FinishMessage));
 		notification = GetParent().GetNode<AcceptDialog>("SpyPlayer/AnswareAcceptDialog");
 		
 		List<string> listElements = serverClient.boardWords;
@@ -54,6 +55,11 @@ public class SpyPlayer : Control
 
 	}
 
+	public void FinishMessage(string message)
+	{
+		notification.SetText(message);
+		notification.Visible = true;
+	}
 	public void ChangeToMainMenu()
 	{
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");

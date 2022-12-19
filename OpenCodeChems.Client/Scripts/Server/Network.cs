@@ -163,6 +163,8 @@ namespace OpenCodeChems.Client.Server
 		delegate void UpdateCard();
 		[Signal]
 		delegate void AnswerValue();
+		[Signal]
+		delegate void FinishGame();
 		
 		private NetworkedMultiplayerENet networkPeer = new NetworkedMultiplayerENet();
 		public override void _Ready()
@@ -757,6 +759,11 @@ namespace OpenCodeChems.Client.Server
 		public void skipTurn()
 		{
 			RpcId(PEER_ID, "ChangeTurn", currentRoom);
+		}
+		[Puppet]
+		public void GameOver(string statusMessage)
+		{
+			EmitSignal(nameof(FinishGame), statusMessage);
 		}
 
 		

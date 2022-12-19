@@ -8,7 +8,8 @@ using OpenCodeChems.Client.Server;
 public class MasterPlayer : Control
 {
 	Network serverClient;
-	AcceptDialog masterDialog = null;
+	private AcceptDialog masterDialog;
+	private ItemList itemNode;
 	private int CARD_GAME_MAX_VALUE = 25;
 	private Image agentTypeRed = new Image();
 	private Image agentTypeBlue = new Image();
@@ -19,14 +20,21 @@ public class MasterPlayer : Control
 	public override void _Ready()
 	{
 		serverClient = GetNode<Network>("/root/Network") as Network;
-		
+		masterDialog = GetParent().GetNode<AcceptDialog>("MasterPlayer/MasterPlayerAcceptDialog");
+		itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");	
 		List<string> listElements = serverClient.boardWords;
-		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		for(int c = 0 ; c<listElements.Count && c < 25; c++)
 		{
 			itemNode.SetItemText(c, listElements[c]);					
 		}
 		serverClient.Connect("CleanRoom", this, nameof(ChangeToMainMenu));
+		serverClient.Connect("FinishGame", this, nameof(FinishMessage));
+	}
+
+	public void FinishMessage(string message)
+	{
+		masterDialog.SetText(message);
+		masterDialog.Visible = true;
 	}
 
 	public void _on_LeaveGameTextureButton_pressed()
@@ -42,12 +50,11 @@ public class MasterPlayer : Control
 
 	private void _on_SendTextureButton_pressed()
 	{
-		var  itemNode = GetParent().GetNode<ItemList>("MasterPlayer/BackGroundNinePatchRect/CodeNamesItemList");
 		var  pistaPalabra = GetParent().GetNode<LineEdit>("MasterPlayer/BackGroundNinePatchRect/WordLineEdit");
 		wellDone = true;
 		for(int c = 0 ; c<itemNode.GetItemCount(); c++)
 		{	
-			var masterDialog = GetParent().GetNode<AcceptDialog>("MasterPlayer/MasterPlayerAcceptDialog");
+			
 			if(pistaPalabra.Text.ToLower() == itemNode.GetItemText(c) || pistaPalabra.Text.Length > 10 || pistaPalabra.Text.Any(Char.IsWhiteSpace))
 			{
 				masterDialog.WindowTitle="WARNING";
