@@ -160,7 +160,16 @@ namespace OpenCodeChems.Server.Network
                     logBlock.InsertTextAtCursor($"player {senderId} exiting room {code}\n");
                     RpcId(senderId, "ExitRoom");
                 }
+                
                 rooms.Remove(code);
+
+                foreach(KeyValuePair<int, string> owner in roomOwners)
+                {
+                    if(owner.Value == code)
+                    {
+                        roomOwners.Remove(owner.Key);
+                    }
+                }
             }
         }
 
