@@ -744,6 +744,6 @@ namespace OpenCodeChems.Client.Server
 			EmitSignal(nameof(UpdateCard), color, index);
 		}
 
-
+		
 	}
 }

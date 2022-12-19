@@ -3,9 +3,15 @@ namespace OpenCodeChems.Server.Standar
     public class Constants
     {
 
+        public const string RED_WON = "RED_TEAM";
+
+        public const string BLUE_WON = "BLUE_TEAM";
         public const string EMPTY_ROL = "None";
+
+        public const string TEAM_WON = "None";
         public const int NULL_ROL = -1;
 
+        public const int EMPTY_COUNTER = 0 ;
         public const string RED_SPY_MASTER = "RedSpyMaster";
 
         public const string BLUE_SPY_MASTER = "BlueSpyMaster";

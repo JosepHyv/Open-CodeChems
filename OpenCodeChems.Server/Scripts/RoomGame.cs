@@ -34,6 +34,16 @@ namespace OpenCodeChems.Server.Game
 
         private bool  spyMasterTurn = false;
 
+        private bool blackCard = false;
+
+        private int maxBlueCards = Constants.EMPTY_COUNTER;
+
+        private int maxRedCards = Constants.EMPTY_COUNTER;
+        private int blueCards = Constants.EMPTY_COUNTER;
+
+        private int redCards = Constants.EMPTY_COUNTER;
+
+        private string teamWon = Constants.TEAM_WON;
         public void StartTurn()
         {
             blueTurn = redTurn = 0;
@@ -41,9 +51,13 @@ namespace OpenCodeChems.Server.Game
             if(sceneNumber == 1 || sceneNumber == 2)
             {
                 rolTurn = Constants.RED_SPY_MASTER;
+                maxRedCards = 9;
+                maxBlueCards = 8;
             }
             else
             {
+                maxRedCards = 8;
+                maxBlueCards = 9;
                 rolTurn = Constants.BLUE_SPY_MASTER;
             }
         }
@@ -333,25 +347,135 @@ namespace OpenCodeChems.Server.Game
         public int GetColor(int index)
         {
             int color = 0;
-            if(SceneNumber == 0)
+            if(sceneNumber == 0)
             {
                 color = Constants.KeyBlueOne[index];
             }
-            else if(SceneNumber == 1)
+            else if(sceneNumber == 1)
             {
                 color = Constants.KeyRedOne[index];
             }
-            else if(SceneNumber == 2)
+            else if(sceneNumber == 2)
             {
                 color = Constants.KeyRedTwo[index];
             }
-            else if(SceneNumber == 3)
+            else if(sceneNumber == 3)
             {
                 color = Constants.KeyBlueTwo[index];
             }
             return color;
         }
+
+        public bool GameCanContinue()
+        {
+            bool can = false;
+            if(gameStarted && redSpyMaster != Constants.NULL_ROL && blueSpyMaster != Constants.NULL_ROL 
+            && redPlayers.Count > 0  && bluePlayers.Count > 0 )
+            {
+                can = true;
+            } 
+            return can;
+        }
         
+        public void CountCard()
+        {
+            string turn = GetTurnRol();
+            if(turn == Constants.BLUE_PLAYER || turn == Constants.BLUE_SPY_MASTER)
+            {
+                blueCards++;
+            }
+            else
+            {
+                redCards++;
+            }
+
+            if(blueCards >= maxBlueCards)
+            {
+                teamWon = Constants.BLUE_WON;
+            }
+            else if(redCards >= maxRedCards)
+            {
+                teamWon = Constants.RED_WON;
+            }
+        }
+
+        public bool GameEnd()
+        {
+            bool status = false;
+            status = blackCard || blueCards >= maxBlueCards || redCards >= maxRedCards;
+            return status;
+        }
+
+        public void SelectedBlack()
+        {
+            blackCard = true;
+            if(GetTurnRol() == Constants.BLUE_PLAYER || GetTurnRol() == Constants.BLUE_SPY_MASTER )
+            {
+                teamWon = Constants.RED_WON;
+            }
+            else
+            {
+                teamWon = Constants.BLUE_WON;
+            }
+        }
+
+        public string WhoWon()
+        {
+            return teamWon;
+        }
+
+        public List<int> GetListWinners()
+        {
+            List<int> answare = new List<int>();
+            if(teamWon != Constants.TEAM_WON)
+            {
+                if(teamWon == Constants.BLUE_WON)
+                {
+                    answare.Add(blueSpyMaster);
+                    foreach(int id in bluePlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+                else
+                {
+                    answare.Add(redSpyMaster);
+                    foreach(int id in redPlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+            }
+            return answare;
+        }
+
+        public List<int> GetListLosers()
+        {
+            List<int> answare = new List<int>();
+            if(teamWon != Constants.TEAM_WON)
+            {
+                if(teamWon == Constants.BLUE_WON)
+                {
+                    answare.Add(redSpyMaster);
+                    foreach(int id in redPlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+                else
+                {
+                    answare.Add(blueSpyMaster);
+                    foreach(int id in bluePlayers)
+                    {
+                        answare.Add(id);
+                    }
+                }
+            }
+            return answare;
+        }
+
+
+
 
     }
 
