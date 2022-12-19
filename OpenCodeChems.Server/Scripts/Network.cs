@@ -1021,6 +1021,8 @@ namespace OpenCodeChems.Server.Network
                         logBlock.InsertTextAtCursor($"sending UpdateScreenClientGame  {senderId} with {playersInRoom.Count}\n");
                         RpcId(senderId, "UpdateBoard", rooms[nameRoom].GetRol(senderId), rooms[nameRoom].sceneNumber);
                     }
+
+                    TurnIndicator(nameRoom);                    
                 }
             }
             
