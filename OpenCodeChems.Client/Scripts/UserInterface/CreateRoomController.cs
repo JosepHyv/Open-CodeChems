@@ -78,7 +78,11 @@ public class CreateRoomController : Control
 
 	public void AvailableToBan()
 	{
-		banPlayerDialog.SetText($"Do You Want Ban To {banName}");
+		string translatedText = "";
+		banPlayerDialog.SetText("YOU_WANT_BAN");
+		translatedText = banPlayerDialog.GetText();
+		translatedText = translatedText + " " + banName + "?";
+		banPlayerDialog.SetText(translatedText);
 		banPlayerDialog.Visible = true;
 	}
 

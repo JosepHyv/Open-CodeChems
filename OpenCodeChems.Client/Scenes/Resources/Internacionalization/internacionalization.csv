@@ -70,7 +70,7 @@ FRIEND_REQUEST_CANT_DENY,"Unable to reject the friend request at this time, try 
 ERROR_LOADING_FRIENDS,"There was an error loading your friends, try again later.","Hubo un error al cargar tus amigos, inténtalo más tarde"
 DELETE_FRIEND_CORRECT,Friend successfully deleted,Amigo eliminado correctamente
 ERROR_DELETE_FRIEND,"There was an error deleting this friend, try again later.","Hubo un error al eliminar este amigo, inténtalo más tarde"
-REPEATED_WORD,repeated word,palabra repetida
+INVALID_WORD,Invalid or repeated word,Palabra repetida o invalida
 SENDED_WORD,SEND,ENVIAR
 WORD_PLACEHOLDER,Word,Palabra
 CODENAME_INSTRUCTION,Send a keyword and a number to create the codename,Manda una palabra clave y un número para formar el código secreto
@@ -89,4 +89,14 @@ DEFEATS_TITLE_LABEL,Defeats,Derrotas
 ONLY_NUMBERS,Only numbers can be entered,Solo se pueden ingresar numeros
 EMAIL_SENT,Email sent,Email enviado
 ERROR_CODE,Incorrect code,Código incorrecto
-
+LEAVE_GAME,Leave Game, Dejar Juego
+ROOM_CODE_INVALID,The room code is invalid, El codigo de la sala es invalido
+TRYING_CONNECT_TO_SERVER, Tring connect to server, Intentando conectar al servidor
+SERVER_NOT_FOUND, Server not found, Servidor no encontrado
+CANT_BAN_USER, You cant ban to this user, No Puedes Banear a Este Usuario
+CANT_CHANGE_ROL, You cant change to this rol, No te puedes cambiar a este rol
+YOU_WANT_BAN, Do you want ban to, ¿Quieres banear a
+CANT_START_GAME, Game cant start, El juego no puede Iniciar
+IMPOSSIBLE_TO_CONNECT, Impossible to connect to room, Imposible conectar a la sala
+INVALID_ADDRESS_OR_PORT, Invalid ip address or port, direccion ip o puerto invalidos
+SERVER_NOT_FOUND, Server not found, Servidor no encontrado
