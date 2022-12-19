@@ -1026,33 +1026,51 @@ namespace OpenCodeChems.Server.Network
         private void ClueUpdate(string clue, string nameRoom)
         {
             int senderId = GetTree().GetRpcSenderId();
-            logBlock.InsertTextAtCursor($"the vlue is {clue}\n");
-            string rol = rooms[nameRoom].GetRol(senderId);
-            logBlock.InsertTextAtCursor($"the role of user is {rol}\n");
-            List<int> players = new List<int>();
-            if(rol == Constants.RED_SPY_MASTER)
+            if(senderId == rooms[nameRoom].GetTurnId())
             {
-                players = rooms[nameRoom].redPlayers;  
+                logBlock.InsertTextAtCursor($"the vlue is {clue}\n");
+                string rol = rooms[nameRoom].GetRol(senderId);
+                logBlock.InsertTextAtCursor($"the role of user is {rol}\n");
+                List<int> players = new List<int>();
+                if(rol == Constants.RED_SPY_MASTER)
+                {
+                    players = rooms[nameRoom].redPlayers;  
+                }
+                else
+                {
+                    players = rooms[nameRoom].bluePlayers;
+                }
+                for(int c = 0; c < players.Count; c++)
+                {
+                    RpcId(players[c], "UpdateClue", clue);
+                } 
+                rooms[nameRoom].NextTurn();
             }
-            else
-            {
-                players = rooms[nameRoom].bluePlayers;
-            }
-            for(int c = 0; c < players.Count; c++)
-            {
-                RpcId(players[c], "UpdateClue", clue);
-            } 
+            
+            
         }
         [Master]
         private void VerifyCard(int index, string nameRoom)
-        {
+        {   
+            int senderId = GetTree().GetRpcSenderId();
             int color = rooms[nameRoom].GetColor(index);
+            string rol = rooms[nameRoom].GetRol(senderId);
+            bool guessAnswer = (rol == "BluePlayer" && color == Constants.BLUE) ||(rol == "RedPlayer" && color == Constants.RED);
             List<int> players = rooms[nameRoom].members;
             for(int c = 0; c < players.Count; c++)
             {
-                RpcId(players[c], "VerifiedCard", color, index);
+                RpcId(players[c], "VerifiedCard", color, index, guessAnswer);
             } 
                        
+        }
+        [Master]
+        private void UpdateTurn(string nameRoom)
+        {
+            rooms[nameRoom].NextTurn();
+        }
+        private void ChangeTurn(string nameRoom)
+        {
+            rooms[nameRoom].ChangeTeamTurn();
         }
 
     }

@@ -333,19 +333,19 @@ namespace OpenCodeChems.Server.Game
         public int GetColor(int index)
         {
             int color = 0;
-            if(SceneNumber == 0)
+            if(sceneNumber == 0)
             {
                 color = Constants.KeyBlueOne[index];
             }
-            else if(SceneNumber == 1)
+            else if(sceneNumber == 1)
             {
                 color = Constants.KeyRedOne[index];
             }
-            else if(SceneNumber == 2)
+            else if(sceneNumber == 2)
             {
                 color = Constants.KeyRedTwo[index];
             }
-            else if(SceneNumber == 3)
+            else if(sceneNumber == 3)
             {
                 color = Constants.KeyBlueTwo[index];
             }

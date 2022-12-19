@@ -23,6 +23,7 @@ public class SpyPlayer : Control
 	private string PATH_BLUE_COLOR = "Scenes/Resources/Icons/squareBlue.png";
 	private ImageTexture textureBlue = new ImageTexture();
 	private int SelectedIndex = Constants.NULL_INDEX;
+	private ConfirmationDialog turnDialog;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -33,6 +34,8 @@ public class SpyPlayer : Control
 		serverClient.Connect("UpdateChatLog", this, nameof(AadToChat));
 		serverClient.Connect("ChangeClue", this, nameof(ClueChange));
 		serverClient.Connect("UpdateCard",this, nameof(ChangeColor));
+		turnDialog = GetParent().GetNode<ConfirmationDialog>("SpyPlayer/TurnConfirmationDialog");
+		turnDialog.GetCancel().Connect("pressed", this, nameof(TurnCancelDialog));
 		
 		List<string> listElements = serverClient.boardWords;
 		
@@ -85,7 +88,8 @@ public class SpyPlayer : Control
 		}
 	}
 
-	public void ChangeColor(int color, int index)
+    [Obsolete]
+    public void ChangeColor(int color, int index, bool guessAnswer)
 	{
 		if(color == 0)
 		{
@@ -103,6 +107,21 @@ public class SpyPlayer : Control
 		{
 			ChangeBlack(index);
 		}
+		if(guessAnswer)
+		{
+			turnDialog.SetText("RIGHT_ANSWER");
+			turnDialog.Visible = true;
+		}
+	}
+
+	public void TurnAcceptDialog()
+	{
+		serverClient.keepTurn();
+	}
+	public void TurnCancelDialog()
+	{
+		serverClient.skipTurn();
+		turnDialog.Visible = false;
 	}
 	public void ChangeBlack(int index)
 	{	

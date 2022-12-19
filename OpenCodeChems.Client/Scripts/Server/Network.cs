@@ -739,9 +739,17 @@ namespace OpenCodeChems.Client.Server
 			RpcId(PEER_ID, "VerifyCard", CardIndex, currentRoom);
 		}
 		[Puppet]
-		public void VerifiedCard(int color, int index)
+		public void VerifiedCard(int color, int index, bool guessAnswer)
 		{
-			EmitSignal(nameof(UpdateCard), color, index);
+			EmitSignal(nameof(UpdateCard), color, index, guessAnswer);
+		}
+		public void keepTurn()
+		{
+			RpcId(PEER_ID, "UpdateTurn", currentRoom);
+		}
+		public void skipTurn()
+		{
+			RpcId(PEER_ID, "ChangeTurn", currentRoom);
 		}
 
 

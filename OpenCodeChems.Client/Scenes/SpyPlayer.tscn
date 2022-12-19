@@ -112,6 +112,14 @@ margin_bottom = 10.0
 custom_fonts/font = SubResource( 3 )
 text = "chat"
 
+[node name="TurnConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_left = 368.0
+margin_top = 231.0
+margin_right = 673.0
+margin_bottom = 366.0
+window_title = "Por favor, Confirma..."
+
 [connection signal="item_selected" from="BackGroundNinePatchRect/CodeNamesItemList" to="." method="_on_CodeNamesItemList_item_selected"]
 [connection signal="pressed" from="BackGroundNinePatchRect/SendWordTextureButton" to="." method="_on_SendWordTextureButton_pressed"]
 [connection signal="pressed" from="ChatLineEdit/ChatTextureButton" to="." method="_on_ChatTextureButton_pressed"]
+[connection signal="confirmed" from="TurnConfirmationDialog" to="." method="TurnAcceptDialog"]
