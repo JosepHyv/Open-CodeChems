@@ -168,6 +168,7 @@ public class SpyPlayer : Control
 	public void _on_LeaveGameTextureButton_pressed()
 	{
 		serverClient.LeftRoom();
+		ChangeToMainMenu();
 	}
 
 }

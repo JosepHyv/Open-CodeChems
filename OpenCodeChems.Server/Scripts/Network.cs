@@ -1092,6 +1092,7 @@ namespace OpenCodeChems.Server.Network
         {
             rooms[nameRoom].NextTurn();
         }
+        [Master]
         private void ChangeTurn(string nameRoom)
         {
             rooms[nameRoom].ChangeTeamTurn();
