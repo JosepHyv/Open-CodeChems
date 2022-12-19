@@ -31,10 +31,16 @@ public class MasterPlayer : Control
 		serverClient.Connect("FinishGame", this, nameof(FinishMessage));
 	}
 
-	public void FinishMessage(string message)
+	public void FinishMessage(bool status)
 	{
-		masterDialog.SetText(message);
-		masterDialog.Visible = true;
+		if(status)
+		{
+			GetTree().ChangeScene();
+		}
+		else
+		{
+			GetTree().ChangeScene();
+		}
 	}
 
 	public void _on_LeaveGameTextureButton_pressed()
