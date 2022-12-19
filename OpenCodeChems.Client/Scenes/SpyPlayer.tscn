@@ -139,6 +139,13 @@ margin_bottom = 366.0
 rect_min_size = Vector2( 150, 52.5 )
 window_title = "Por favor, Confirma..."
 
+[node name="AnswareAcceptDialog" type="AcceptDialog" parent="."]
+margin_left = 392.0
+margin_top = 197.0
+margin_right = 649.0
+margin_bottom = 358.0
+window_title = "¡Alerta!"
+
 [connection signal="item_selected" from="BackGroundNinePatchRect/CodeNamesItemList" to="." method="_on_CodeNamesItemList_item_selected"]
 [connection signal="pressed" from="BackGroundNinePatchRect/SendWordTextureButton" to="." method="_on_SendWordTextureButton_pressed"]
 [connection signal="pressed" from="BackGroundNinePatchRect/LeaveGameTextureButton" to="." method="_on_LeaveGameTextureButton_pressed"]

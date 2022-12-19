@@ -24,6 +24,8 @@ public class SpyPlayer : Control
 	private ImageTexture textureBlue = new ImageTexture();
 	private int SelectedIndex = Constants.NULL_INDEX;
 	private ConfirmationDialog turnDialog;
+
+	private AcceptDialog notification;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -37,6 +39,7 @@ public class SpyPlayer : Control
 		serverClient.Connect("AnswerValue", this, nameof(ValidatedAnswer));
 		turnDialog = GetParent().GetNode<ConfirmationDialog>("SpyPlayer/TurnConfirmationDialog");
 		turnDialog.GetCancel().Connect("pressed", this, nameof(TurnCancelDialog));
+		notification = GetParent().GetNode<AcceptDialog>("SpyPlayer/AnswareAcceptDialog");
 		
 		List<string> listElements = serverClient.boardWords;
 		
@@ -97,7 +100,7 @@ public class SpyPlayer : Control
 	}
 
     [Obsolete]
-    public void ChangeColor(int color, int index, bool guessAnswer)
+    public void ChangeColor(int color, int index)
 	{
 		if(color == 0)
 		{
@@ -124,6 +127,11 @@ public class SpyPlayer : Control
 		{
 			turnDialog.SetText("RIGHT_ANSWER");
 			turnDialog.Visible = true;
+		}
+		else
+		{
+			notification.SetText("WRONG_ANSWER");
+			notification.Visible = true;
 		}
 	}
 	public void TurnAcceptDialog()
