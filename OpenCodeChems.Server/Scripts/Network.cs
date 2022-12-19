@@ -75,7 +75,6 @@ namespace OpenCodeChems.Server.Network
                 string roomName = roomOwners[peerId];
                 logBlock.InsertTextAtCursor($"{peerId} left the room {roomName}\n");
                 EraseRoom(roomName);
-                roomOwners.Remove(peerId);
                 playersData.Remove(peerId);
 
             }
@@ -167,7 +166,10 @@ namespace OpenCodeChems.Server.Network
                 {
                     if(owner.Value == code)
                     {
-                        roomOwners.Remove(owner.Key);
+                        if(roomOwners.ContainsKey(owner.Key))
+                        {
+                            roomOwners.Remove(owner.Key);
+                        }
                     }
                 }
             }
@@ -219,22 +221,18 @@ namespace OpenCodeChems.Server.Network
             if (roomOwners.ContainsKey(senderId))
             {
                 EraseRoom(roomOwners[senderId]);
-                roomOwners.Remove(senderId);
 
             }
-            if (rooms.ContainsKey(nameRoom))
+            else if (rooms.ContainsKey(nameRoom) && rooms[nameRoom].Exist(senderId))
             {
-                if (rooms[nameRoom].Exist(senderId))
+                rooms[nameRoom].RemovePlayer(senderId);
+                if(!rooms[nameRoom].gameStarted)
                 {
-                    rooms[nameRoom].RemovePlayer(senderId);
-                    if(!rooms[nameRoom].gameStarted)
-                    {
-                        UpdateClientsRoom(nameRoom);
-                    }
-                    else if(!rooms[nameRoom].GameCanContinue())
-                    {
-                        EraseRoom(nameRoom);
-                    }
+                    UpdateClientsRoom(nameRoom);
+                }
+                else if(!rooms[nameRoom].GameCanContinue())
+                {
+                    EraseRoom(nameRoom);
                 }
             }
         }
@@ -428,7 +426,14 @@ namespace OpenCodeChems.Server.Network
                 hostRoom.GenerateBoard();
                 hostRoom.StartTurn();
                 rooms.Add(code, hostRoom);
-                roomOwners.Add(senderId, code);
+                if(roomOwners.ContainsKey(senderId))
+                {
+                    RpcId(senderId, "CreateRoomFail");
+                }
+                else
+                {
+                    roomOwners.Add(senderId, code);
+                }
                 logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
                 RpcId(senderId, "CreateRoomAccepted", code);
                 logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
@@ -527,7 +532,7 @@ namespace OpenCodeChems.Server.Network
             if (rooms.ContainsKey(roomName))
             {
                 int uniqueId = GetPlayerIdInRoom(roomName, playerName);
-                if (uniqueId != -1 && !roomOwners.ContainsKey(uniqueId))
+                if (uniqueId != Constants.NULL_ROL && !roomOwners.ContainsKey(uniqueId))
                 {
                     rooms[roomName].BanPlayer(uniqueId);
                     RpcId(uniqueId, "IAmBan");
