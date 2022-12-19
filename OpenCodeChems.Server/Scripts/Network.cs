@@ -220,8 +220,7 @@ namespace OpenCodeChems.Server.Network
             int senderId = GetTree().GetRpcSenderId();
             if (roomOwners.ContainsKey(senderId))
             {
-                EraseRoom(roomOwners[senderId]);
-
+                EraseRoom(nameRoom);
             }
             else if (rooms.ContainsKey(nameRoom) && rooms[nameRoom].Exist(senderId))
             {
@@ -412,7 +411,7 @@ namespace OpenCodeChems.Server.Network
         public void CreateRoom(string code)
         {
             int senderId = GetTree().GetRpcSenderId();
-            if (rooms.ContainsKey(code) || !ValidRoomName(code))
+            if (rooms.ContainsKey(code) || !ValidRoomName(code) || roomOwners.ContainsKey(senderId))
             {
                 RpcId(senderId, "CreateRoomFail");
                 logBlock.InsertTextAtCursor($"user {senderId} can't create {code} room\n");
@@ -426,14 +425,7 @@ namespace OpenCodeChems.Server.Network
                 hostRoom.GenerateBoard();
                 hostRoom.StartTurn();
                 rooms.Add(code, hostRoom);
-                if(roomOwners.ContainsKey(senderId))
-                {
-                    RpcId(senderId, "CreateRoomFail");
-                }
-                else
-                {
-                    roomOwners.Add(senderId, code);
-                }
+                roomOwners.Add(senderId, code);
                 logBlock.InsertTextAtCursor($"user {senderId} created {code} room\n");
                 RpcId(senderId, "CreateRoomAccepted", code);
                 logBlock.InsertTextAtCursor($"Response CreateRoomAccepted to id {senderId}\n");
