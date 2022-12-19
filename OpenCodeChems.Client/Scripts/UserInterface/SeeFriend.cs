@@ -92,7 +92,7 @@ namespace OpenCodeChems.Client.UserInterface
 			switch (imageProfile) 
 			{
 				case Constants.IMAGE_PROFILE_DEFAULT:
-				pathImageProfile = "res://Scenes/Resources/ImagesProfile/ImagePerfilDefault.jpg";
+				pathImageProfile = "res://Scenes/Resources/ImagesProfile/imagePerfilDefault.jpg";
 				break;
 				case Constants.IMAGE_PROFILE_CHEMS_GAMER:
 				pathImageProfile = "res://Scenes/Resources/ImagesProfile/chemsGamer.jpg";
