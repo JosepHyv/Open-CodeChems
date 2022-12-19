@@ -67,12 +67,8 @@ namespace OpenCodeChems.Server.Network
 
         private void PlayerDisconnected(int peerId)
         {
-            logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n");
-            Profile profileForDelete = USER_MANAGEMENT.GetProfileByUsername(peerId.ToString());
-            if (profileForDelete != null)
-            {
-                USER_MANAGEMENT.DeleteInvitatedPlayer(profileForDelete.username);
-            }
+            logBlock.InsertTextAtCursor($"Jugador = {peerId} Desconectado\n"); 
+            USER_MANAGEMENT.DeleteInvitatedPlayer(peerId.ToString());
             clientsConected.Remove(peerId);
             if (roomOwners.ContainsKey(peerId))
             {
@@ -1021,6 +1017,8 @@ namespace OpenCodeChems.Server.Network
                         logBlock.InsertTextAtCursor($"sending UpdateScreenClientGame  {senderId} with {playersInRoom.Count}\n");
                         RpcId(senderId, "UpdateBoard", rooms[nameRoom].GetRol(senderId), rooms[nameRoom].sceneNumber);
                     }
+
+                    TurnIndicator(nameRoom);                    
                 }
             }
             

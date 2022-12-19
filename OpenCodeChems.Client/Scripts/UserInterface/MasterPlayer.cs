@@ -66,7 +66,7 @@ namespace OpenCodeChems.Client.UserInterface
       for(int c = 0 ; c<itemNode.GetItemCount(); c++)
       {	
 
-        if(pistaPalabra.Text.ToLower() == itemNode.GetItemText(c) || pistaPalabra.Text.Length > 10 || pistaPalabra.Text.Any(Char.IsWhiteSpace))
+        if(pistaPalabra.Text.ToLower() == itemNode.GetItemText(c) || pistaPalabra.Text.Length > 15 || pistaPalabra.Text.Any(Char.IsWhiteSpace))
         {
           masterDialog.WindowTitle="WARNING";
           masterDialog.DialogText="INVALID_WORD";
