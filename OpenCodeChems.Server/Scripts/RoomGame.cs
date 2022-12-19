@@ -9,7 +9,7 @@ namespace OpenCodeChems.Server.Game
 {
     public class RoomGame
     {
-      
+        public bool [] selectedCards = new bool[25];
         public bool gameStarted = false;
         public int numberPlayers {get;set;} = 0;
         public List<int> members {get;set;} = new List<int>();
