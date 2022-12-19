@@ -132,6 +132,7 @@ public class SpyPlayer : Control
 		{
 			notification.SetText("WRONG_ANSWER");
 			notification.Visible = true;
+			serverClient.skipTurn();
 		}
 	}
 	public void TurnAcceptDialog()
