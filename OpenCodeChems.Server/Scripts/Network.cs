@@ -1128,10 +1128,12 @@ namespace OpenCodeChems.Server.Network
             List<int> losers = rooms[nameRoom].GetListLosers();
             for(int c = 0; c < winners.Count; c++)
             {
-                if(playersData.ContainsKey(losers[c]))
+                if(playersData.ContainsKey(winners[c]))
                 {
+                    logBlock.InsertTextAtCursor($"it found some winners as {winners[c]}\n");
                     string nickname = playersData[winners[c]];
-                    AddVictoryRequest(nickname);
+                    USER_MANAGEMENT.AddVictory(nickname);
+                    logBlock.InsertTextAtCursor($"the nickname for winners is {nickname}\n");
                 }
                     RpcId(winners[c], "GameOver", "YOU_WON");
             }
@@ -1140,7 +1142,8 @@ namespace OpenCodeChems.Server.Network
                 if(playersData.ContainsKey(losers[c]))
                 {
                     string nickname = playersData[losers[c]];
-                    AddDefeatRequest(nickname);
+                    USER_MANAGEMENT.AddDefeat(nickname);
+                    logBlock.InsertTextAtCursor($"the nickname for losers is {nickname}\n");
                 }
                     RpcId(losers[c], "GameOver", "YOU_LOSE");
             }
