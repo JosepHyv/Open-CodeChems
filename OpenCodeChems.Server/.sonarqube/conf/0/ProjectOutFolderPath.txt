@@ -1,1 +1,0 @@
-C:\Tecnologias\Open-CodeChems\OpenCodeChems.Server\.sonarqube\out\0
